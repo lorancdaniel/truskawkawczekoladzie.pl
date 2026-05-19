@@ -4,11 +4,22 @@ async function fillLeadForm(page: import('@playwright/test').Page) {
   await page.getByLabel(/imię i nazwisko/i).fill('Anna Kowalska');
   await page.getByLabel(/^email/i).fill('anna@example.com');
   await page.getByLabel(/^telefon$/i).fill('+48 600 700 800');
-  await page.getByLabel(/data wydarzenia/i).fill('2026-08-22');
-  await page.getByLabel(/typ wydarzenia/i).selectOption({ label: 'Event firmowy' });
+  
+  // Customowy datepicker
+  await page.getByRole('button', { name: /data wydarzenia/i }).click();
+  await page.locator('.choice-modal__panel').getByRole('button', { name: /dziś/i }).click();
+  
+  // Customowy select typ wydarzenia
+  await page.getByRole('button', { name: /typ wydarzenia/i }).click();
+  await page.locator('.choice-modal__panel').getByRole('button', { name: /event firmowy/i }).click();
+  
   await page.getByLabel(/miasto/i).fill('Warszawa');
   await page.getByLabel(/liczba gości/i).fill('450');
-  await page.getByLabel(/preferowany pakiet/i).selectOption({ label: 'Gold' });
+  
+  // Customowy select preferowany pakiet
+  await page.getByRole('button', { name: /preferowany pakiet/i }).click();
+  await page.locator('.choice-modal__panel').getByRole('button', { name: /gold/i }).click();
+  
   await page.getByLabel(/informacje dodatkowe/i).fill('Event plenerowy, proszę o wycenę.');
   await page.getByLabel(/zgadzam się/i).check();
 }

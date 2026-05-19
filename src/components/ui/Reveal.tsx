@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from 'react';
+import type { PropsWithChildren, HTMLAttributes } from 'react';
 import { useInView } from '../../hooks/useInView';
 
 type RevealProps = PropsWithChildren<{
@@ -7,8 +7,8 @@ type RevealProps = PropsWithChildren<{
   delay?: number;
   duration?: number;
   animationType?: 'fade-in-up' | 'fade-in' | 'scale-up' | 'reveal-3d' | 'slide-in-left' | 'slide-in-right';
-  as?: 'div' | 'section' | 'article' | 'span';
-}>;
+  as?: 'div' | 'section' | 'article' | 'span' | 'aside' | 'header' | 'footer' | 'nav';
+}> & HTMLAttributes<HTMLElement>;
 
 export function Reveal({
   className = '',
@@ -18,22 +18,25 @@ export function Reveal({
   animationType = 'fade-in-up',
   as: Component = 'section',
   children,
+  ...rest
 }: RevealProps) {
   const { ref, isVisible, canAnimate } = useInView<HTMLElement>();
 
   const style = {
     ...(delay !== undefined ? { '--reveal-delay': `${delay}ms` } : {}),
     ...(duration !== undefined ? { '--reveal-duration': `${duration}ms` } : {}),
+    ...rest.style,
   } as React.CSSProperties;
 
   const animationClass = `reveal--${animationType}`;
 
   return (
     <Component
-      ref={ref}
+      ref={ref as any}
       id={id}
       style={style}
       className={`${className} reveal ${animationClass} ${canAnimate ? 'reveal--ready' : ''} ${isVisible ? 'is-visible' : ''}`.trim()}
+      {...rest}
     >
       {children}
     </Component>

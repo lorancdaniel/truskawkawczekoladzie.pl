@@ -15,7 +15,13 @@ export function Process() {
         </div>
         <div className="process-grid">
           {processSteps.map(({ title, text, Icon }, index) => (
-            <article key={title}>
+            <Reveal
+              as="article"
+              key={title}
+              delay={index * 120}
+              duration={1300}
+              animationType="reveal-3d"
+            >
               <div className="process-step__meta">
                 <span>{String(index + 1).padStart(2, '0')}</span>
                 <Icon aria-hidden="true" size={24} />
@@ -24,7 +30,7 @@ export function Process() {
                 <h3>{title}</h3>
                 <p>{text}</p>
               </div>
-            </article>
+            </Reveal>
           ))}
         </div>
       </div>

@@ -67,8 +67,12 @@ export function Packages() {
         </div>
         <div className="packages-stack">
           {dessertPackages.map((pkg, index) => (
-            <article
+            <Reveal
+              as="article"
               key={pkg.id}
+              delay={index * 160}
+              duration={1400}
+              animationType="reveal-3d"
               data-package-card={pkg.id}
               className={`package-card ${pkg.highlighted ? 'package-card--featured' : ''} ${
                 activePackageId === pkg.id ? 'is-active' : ''
@@ -103,7 +107,7 @@ export function Packages() {
                   Zapytaj o {pkg.name}
                 </Button>
               </div>
-            </article>
+            </Reveal>
           ))}
         </div>
       </div>

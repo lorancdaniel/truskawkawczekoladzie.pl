@@ -5,9 +5,17 @@ import { Reveal } from '../ui/Reveal';
 
 export function ContactSection() {
   return (
-    <Reveal className="contact-section" id="kontakt">
+    <Reveal className="contact-section" id="kontakt" animationType="fade-in" duration={1400}>
       <div className="contact-section__inner">
-        <aside className="contact-panel" aria-labelledby="contact-heading">
+        <Reveal
+          as="aside"
+          className="contact-panel"
+          id="contact-panel-aside"
+          animationType="fade-in-up"
+          delay={100}
+          duration={1300}
+          aria-labelledby="contact-heading"
+        >
           <p className="eyebrow">Wycena</p>
           <h2 id="contact-heading">Sprawdź dostępność terminu i orientacyjny koszt stoiska.</h2>
           <p>
@@ -42,8 +50,16 @@ export function ContactSection() {
               </span>
             </a>
           </div>
-        </aside>
-        <LeadForm />
+        </Reveal>
+        <Reveal
+          as="div"
+          className="contact-form-wrapper"
+          animationType="fade-in-up"
+          delay={250}
+          duration={1300}
+        >
+          <LeadForm />
+        </Reveal>
       </div>
     </Reveal>
   );

@@ -33,13 +33,20 @@ export function Logistics() {
         </div>
         <div className="logistics-stack" aria-label="Zakres organizacji i logistyki">
           {logistics.map((item, index) => (
-            <article className="logistics-stack__item" key={item}>
+            <Reveal
+              as="article"
+              className="logistics-stack__item"
+              key={item}
+              delay={index * 120}
+              duration={1300}
+              animationType="reveal-3d"
+            >
               <b aria-hidden="true">{String(index + 1).padStart(2, '0')}</b>
               <div>
                 <h3>{item}</h3>
                 <p>{logisticsDetails[index]}</p>
               </div>
-            </article>
+            </Reveal>
           ))}
         </div>
       </div>

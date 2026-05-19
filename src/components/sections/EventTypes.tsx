@@ -14,14 +14,21 @@ export function EventTypes() {
           </p>
         </div>
         <div className="event-map" aria-label="Typy wydarzeń dla stoiska Strawberry Group">
-          {eventTypes.map(({ title, text, Icon }) => (
-            <article className="event-map__card" key={title}>
+          {eventTypes.map(({ title, text, Icon }, index) => (
+            <Reveal
+              as="article"
+              className="event-map__card"
+              key={title}
+              delay={index * 100}
+              duration={1300}
+              animationType="reveal-3d"
+            >
               <Icon aria-hidden="true" size={24} />
               <div>
                 <h3>{title}</h3>
                 <p>{text}</p>
               </div>
-            </article>
+            </Reveal>
           ))}
         </div>
       </div>

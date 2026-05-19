@@ -21,25 +21,31 @@ const aboutProofs = [
 
 export function About() {
   return (
-    <Reveal className="split-section split-section--proof">
+    <Reveal className="split-section split-section--proof" animationType="fade-in" duration={1400}>
       <div className="about-proof-header">
         <SectionHeading
           eyebrow="O nas"
           title="Deserowa atrakcja obsłużona jak pełny serwis."
           text="Tworzymy punkt, przy którym goście zatrzymują się, wybierają dodatki i dostają deser przygotowany na miejscu."
         />
-        <aside className="about-quality-mark">
+        <Reveal as="aside" className="about-quality-mark" animationType="fade-in-up" delay={200} duration={1200}>
           <strong>Świeżość. Jakość. Doświadczenie.</strong>
           <p>Krótki podpis marki wzmacnia zaufanie bez budowania osobnej, pustej karty.</p>
-        </aside>
+        </Reveal>
       </div>
       <div className="about-board" aria-label="Jak wypełniamy obsługę atrakcji">
-        {aboutProofs.map(({ kicker, title, text }) => (
-          <article key={kicker}>
+        {aboutProofs.map(({ kicker, title, text }, index) => (
+          <Reveal
+            as="article"
+            key={kicker}
+            delay={index * 120}
+            duration={1300}
+            animationType="reveal-3d"
+          >
             <span>{kicker}</span>
             <h3>{title}</h3>
             <p>{text}</p>
-          </article>
+          </Reveal>
         ))}
       </div>
     </Reveal>

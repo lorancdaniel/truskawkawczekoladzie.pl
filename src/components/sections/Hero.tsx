@@ -17,26 +17,26 @@ export function Hero() {
     const ctx = gsap.context(() => {
       const isMobile = window.innerWidth <= 768;
 
-      // Budżety czasowe: desktop 850ms, mobile 780ms
-      const d = isMobile ? 0.28 : 0.32;
-      const lineD = isMobile ? 0.40 : 0.45;
+      // Wydłużone budżety czasowe dla luksusowego, spowolnionego efektu
+      const d = isMobile ? 0.6 : 0.8;
+      const lineD = isMobile ? 0.8 : 1.1;
       
       const timeline = gsap.timeline({
-        defaults: { ease: 'power3.out' },
+        defaults: { ease: 'power4.out' },
       });
 
       timeline
-        .from('.hero .eyebrow', { opacity: 0, y: 12, duration: d })
-        .from('.hero .hero-line-inner', { yPercent: 100, stagger: 0.08, duration: lineD }, isMobile ? 0.06 : 0.08)
-        .from('.hero__lead', { opacity: 0, y: 14, duration: isMobile ? 0.35 : 0.40 }, isMobile ? 0.16 : 0.20)
-        .from('.hero__actions > *', { opacity: 0, stagger: 0.05, y: 10, duration: d }, isMobile ? 0.28 : 0.32)
-        .from('.hero__facts div', { opacity: 0, stagger: 0.05, y: 8, duration: d }, isMobile ? 0.36 : 0.42)
-        .from('.hero__hint div', { opacity: 0, stagger: 0.05, y: 8, duration: d }, isMobile ? 0.36 : 0.42);
+        .from('.hero .eyebrow', { opacity: 0, y: 16, duration: d })
+        .from('.hero .hero-line-inner', { yPercent: 105, stagger: 0.14, duration: lineD }, isMobile ? 0.15 : 0.2)
+        .from('.hero__lead', { opacity: 0, y: 20, duration: isMobile ? 0.7 : 0.9 }, isMobile ? 0.35 : 0.45)
+        .from('.hero__actions > *', { opacity: 0, stagger: 0.1, y: 15, duration: d }, isMobile ? 0.55 : 0.65)
+        .from('.hero__facts div', { opacity: 0, stagger: 0.08, y: 12, duration: d }, isMobile ? 0.7 : 0.8)
+        .from('.hero__hint div', { opacity: 0, stagger: 0.08, y: 12, duration: d }, isMobile ? 0.7 : 0.8);
 
       gsap.fromTo(
         '.hero__motion-path',
         { opacity: 0, strokeDashoffset: 760 },
-        { opacity: 0.56, strokeDashoffset: 0, duration: 1.1, ease: 'power2.out', delay: 0.15 },
+        { opacity: 0.56, strokeDashoffset: 0, duration: 2.2, ease: 'power3.out', delay: 0.3 },
       );
     }, root);
 

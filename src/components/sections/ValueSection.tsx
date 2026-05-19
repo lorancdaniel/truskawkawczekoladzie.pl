@@ -117,8 +117,8 @@ export function ValueSection() {
   const previousStep = () => setStep((current) => Math.max(1, current - 1));
 
   return (
-    <Reveal className="value-section" id="kalkulator">
-      <div className="value-section__copy">
+    <Reveal className="value-section" id="kalkulator" animationType="fade-in" duration={1400}>
+      <Reveal className="value-section__copy" animationType="fade-in-up" delay={100} duration={1300}>
         <div>
           <p className="eyebrow">Dlaczego to się opłaca</p>
           <h2>Policz zakres zanim zapytasz o termin.</h2>
@@ -145,8 +145,8 @@ export function ValueSection() {
             <small>orientacyjnie za osobę</small>
           </span>
         </div>
-      </div>
-      <div className="value-card" aria-label="Kalkulator kosztu wydarzenia">
+      </Reveal>
+      <Reveal className="value-card" animationType="reveal-3d" delay={300} duration={1400} aria-label="Kalkulator kosztu wydarzenia">
         <div>
           <p>Panel orientacyjnej kalkulacji</p>
           <h3>Pakiet, goście, wynik.</h3>
@@ -165,7 +165,7 @@ export function ValueSection() {
             <small>typowa atrakcja eventowa tej skali</small>
           </div>
         </div>
-      </div>
+      </Reveal>
        {isPackagesOpen && typeof document !== 'undefined' ? createPortal(
         <div className="calculator-modal package-modal" role="presentation">
           <div
