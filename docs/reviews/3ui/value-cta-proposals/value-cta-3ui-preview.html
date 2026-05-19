@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>3UI Value CTA Proposals - Strawberry Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --cream: #fff7ec;
+        --paper: #fdfbf6;
+        --cocoa: #211716;
+        --cocoa-2: #2c1716;
+        --muted: #75665f;
+        --strawberry: #c93445;
+        --strawberry-2: #dc394c;
+        --gold: #c59a52;
+        --line: rgba(106, 61, 44, 0.14);
+        --display: "Cormorant Garamond", Georgia, serif;
+        --body: "Manrope", system-ui, sans-serif;
+        --edge: clamp(24px, 3.2vw, 64px);
+        --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        background: #fffaf3;
+        color: var(--cocoa);
+        font-family: var(--body);
+        margin: 0;
+      }
+
+      button { font: inherit; }
+
+      .preview-nav {
+        align-items: center;
+        background: #190d0c;
+        border-top: 2px solid var(--gold);
+        color: var(--cream);
+        display: flex;
+        gap: 28px;
+        min-height: 72px;
+        padding: 0 var(--edge);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+
+      .preview-nav strong {
+        font-size: 0.78rem;
+        line-height: 0.95;
+        margin-right: auto;
+        text-transform: uppercase;
+      }
+
+      .preview-nav a {
+        color: rgba(255, 247, 236, 0.78);
+        font-size: 0.82rem;
+        font-weight: 900;
+        text-decoration: none;
+      }
+
+      .preview-option {
+        background:
+          radial-gradient(circle at 78% 22%, rgba(201, 52, 69, 0.18), transparent 36rem),
+          linear-gradient(135deg, #1d0f0f 0%, #261514 54%, #160b0b 100%);
+        border-bottom: 1px solid rgba(217, 158, 92, 0.24);
+        color: var(--cream);
+        min-height: 860px;
+        padding: clamp(92px, 10vw, 148px) var(--edge);
+        position: relative;
+      }
+
+      .option-label {
+        align-items: center;
+        background: var(--paper);
+        border: 1px solid rgba(197, 154, 82, 0.34);
+        border-radius: 999px;
+        color: var(--cocoa);
+        display: inline-flex;
+        font-size: 0.72rem;
+        font-weight: 900;
+        gap: 8px;
+        min-height: 34px;
+        padding: 0 14px;
+        position: absolute;
+        right: var(--edge);
+        text-transform: uppercase;
+        top: 24px;
+      }
+
+      .option-label span { color: var(--strawberry); }
+
+      h2,
+      h3,
+      p { margin: 0; }
+
+      h2,
+      h3,
+      .price {
+        font-family: var(--display);
+        letter-spacing: 0;
+      }
+
+      .eyebrow {
+        color: currentColor;
+        font-size: 0.74rem;
+        font-weight: 900;
+        margin-bottom: 16px;
+        opacity: 0.72;
+        text-transform: uppercase;
+      }
+
+      .value-shell {
+        display: grid;
+        gap: 0;
+        grid-template-columns: minmax(360px, 0.78fr) minmax(0, 1.22fr);
+        margin-inline: auto;
+        max-width: 1480px;
+      }
+
+      .value-copy {
+        background: rgba(255, 247, 236, 0.055);
+        border: 1px solid rgba(217, 158, 92, 0.28);
+        border-radius: 8px 0 0 8px;
+        min-height: 520px;
+        padding: clamp(34px, 5vw, 62px);
+      }
+
+      .value-copy h2 {
+        color: var(--cream);
+        font-size: clamp(3.2rem, 5.2vw, 6rem);
+        line-height: 0.9;
+        max-width: 10.5ch;
+      }
+
+      .value-copy .lead {
+        color: rgba(255, 247, 236, 0.78);
+        line-height: 1.7;
+        margin-top: 20px;
+        max-width: 58ch;
+      }
+
+      .value-card {
+        background: var(--paper);
+        border: 1px solid rgba(217, 158, 92, 0.38);
+        border-left: 0;
+        border-radius: 0 8px 8px 0;
+        box-shadow: 0 28px 80px rgba(0, 0, 0, 0.22);
+        color: var(--cocoa);
+        min-height: 520px;
+        padding: clamp(30px, 4vw, 50px);
+      }
+
+      .value-card h3 {
+        color: var(--cocoa);
+        font-size: clamp(2.6rem, 4.4vw, 5.2rem);
+        line-height: 0.92;
+      }
+
+      .lead {
+        color: var(--muted);
+        line-height: 1.68;
+        margin-top: 18px;
+      }
+
+      .button {
+        align-items: center;
+        background: var(--strawberry);
+        border: 0;
+        border-radius: 999px;
+        box-shadow: 0 18px 44px rgba(201, 52, 69, 0.26);
+        color: #fff;
+        cursor: pointer;
+        display: inline-flex;
+        font-weight: 900;
+        gap: 12px;
+        justify-content: center;
+        min-height: 56px;
+        padding: 0 26px;
+        transition: background 180ms var(--ease), box-shadow 180ms var(--ease), transform 180ms var(--ease);
+      }
+
+      .button:hover {
+        background: var(--strawberry-2);
+        box-shadow: 0 22px 56px rgba(201, 52, 69, 0.34);
+        transform: translateY(-2px);
+      }
+
+      .button.secondary {
+        background: transparent;
+        border: 1px solid rgba(106, 61, 44, 0.16);
+        box-shadow: none;
+        color: var(--cocoa);
+      }
+
+      .price {
+        color: var(--strawberry);
+        display: block;
+        font-size: clamp(2rem, 3vw, 3rem);
+        line-height: 0.95;
+      }
+
+      .metric-grid {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-top: 28px;
+      }
+
+      .metric-grid div {
+        background: var(--cream);
+        border: 1px solid rgba(106, 61, 44, 0.12);
+        border-radius: 8px;
+        padding: 18px;
+      }
+
+      .metric-grid small {
+        color: var(--muted);
+        display: block;
+        margin-top: 5px;
+      }
+
+      .option-1 .action-box {
+        background:
+          radial-gradient(circle at 85% 20%, rgba(255, 247, 236, 0.16), transparent 14rem),
+          rgba(255, 247, 236, 0.08);
+        border: 1px solid rgba(255, 247, 236, 0.18);
+        border-radius: 8px;
+        display: grid;
+        gap: 18px;
+        margin-top: 34px;
+        padding: 22px;
+      }
+
+      .option-1 .action-box .button {
+        min-height: 64px;
+        width: 100%;
+      }
+
+      .option-1 .action-points {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .option-1 .action-points span {
+        border-top: 1px solid rgba(255, 247, 236, 0.16);
+        color: rgba(255, 247, 236, 0.72);
+        font-size: 0.78rem;
+        font-weight: 900;
+        padding-top: 10px;
+        text-transform: uppercase;
+      }
+
+      .option-1 .value-card {
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+      }
+
+      .option-1 .quote-total {
+        align-self: center;
+        border-bottom: 1px solid var(--line);
+        border-top: 1px solid var(--line);
+        display: grid;
+        gap: 18px;
+        grid-template-columns: minmax(0, 1fr) auto;
+        margin-block: 34px;
+        padding-block: 26px;
+      }
+
+      .option-1 .quote-total .price {
+        font-size: clamp(3.2rem, 5vw, 5.7rem);
+      }
+
+      .option-2 .value-shell {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .option-2 .value-copy {
+        border-radius: 8px 8px 0 0;
+        min-height: 0;
+      }
+
+      .option-2 .value-copy h2 {
+        max-width: 13ch;
+      }
+
+      .option-2 .value-card {
+        border-left: 1px solid rgba(217, 158, 92, 0.38);
+        border-radius: 0 0 8px 8px;
+        display: grid;
+        gap: 22px;
+        grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1.28fr);
+        min-height: 0;
+      }
+
+      .estimator-board {
+        background:
+          radial-gradient(circle at 92% 0%, rgba(201, 52, 69, 0.1), transparent 18rem),
+          var(--cream);
+        border: 1px solid rgba(106, 61, 44, 0.14);
+        border-radius: 8px;
+        display: grid;
+        gap: 14px;
+        padding: 24px;
+      }
+
+      .estimator-row {
+        align-items: center;
+        border-top: 1px solid rgba(106, 61, 44, 0.12);
+        display: grid;
+        gap: 18px;
+        grid-template-columns: 1fr auto;
+        padding-top: 16px;
+      }
+
+      .estimator-row:first-child {
+        border-top: 0;
+        padding-top: 0;
+      }
+
+      .estimator-row span {
+        color: var(--muted);
+        font-size: 0.8rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .option-2 .button {
+        min-height: 64px;
+      }
+
+      .option-3 .value-shell {
+        position: relative;
+      }
+
+      .option-3 .value-copy {
+        padding-bottom: 142px;
+      }
+
+      .option-3 .value-card {
+        display: grid;
+        gap: 22px;
+        grid-template-columns: 0.9fr 1.1fr;
+        padding-bottom: 142px;
+      }
+
+      .command-bar {
+        align-items: center;
+        background:
+          linear-gradient(90deg, rgba(255, 247, 236, 0.96), #fffaf3),
+          var(--paper);
+        border: 1px solid rgba(217, 158, 92, 0.34);
+        border-radius: 8px;
+        bottom: 32px;
+        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.24);
+        color: var(--cocoa);
+        display: grid;
+        gap: 18px;
+        grid-template-columns: minmax(0, 0.72fr) auto minmax(0, 0.64fr);
+        left: 32px;
+        padding: 18px;
+        position: absolute;
+        right: 32px;
+      }
+
+      .command-bar p {
+        color: var(--muted);
+        line-height: 1.45;
+      }
+
+      .command-bar .button {
+        min-width: 250px;
+      }
+
+      .mini-calc {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .mini-calc div {
+        background: rgba(255, 247, 236, 0.75);
+        border: 1px solid rgba(106, 61, 44, 0.1);
+        border-radius: 8px;
+        padding: 12px;
+      }
+
+      @media (max-width: 980px) {
+        .value-shell,
+        .option-2 .value-card,
+        .option-3 .value-card,
+        .command-bar {
+          grid-template-columns: 1fr;
+        }
+
+        .value-copy,
+        .value-card,
+        .option-2 .value-copy,
+        .option-2 .value-card {
+          border: 1px solid rgba(217, 158, 92, 0.34);
+          border-radius: 8px;
+        }
+
+        .value-card {
+          border-top: 0;
+        }
+
+        .command-bar {
+          position: static;
+          margin-top: -104px;
+          margin-inline: 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="preview-nav">
+      <strong>Strawberry<br />Group S.C.</strong>
+      <a href="#option-1">Option 1</a>
+      <a href="#option-2">Option 2</a>
+      <a href="#option-3">Option 3</a>
+    </nav>
+
+    <section class="preview-option option-1" id="option-1">
+      <div class="option-label"><span>Option 1</span> Primary Action Block</div>
+      <div class="value-shell">
+        <div class="value-copy">
+          <p class="eyebrow">Dlaczego to się opłaca</p>
+          <h2>Kalkulator jako główny argument.</h2>
+          <p class="lead">Lewa część zostaje narracyjna, ale CTA dostaje własny blok i nie ginie pod tekstem. Działa jak wyraźne zaproszenie do policzenia wydarzenia.</p>
+          <div class="action-box">
+            <button class="button" type="button">Policz wydarzenie →</button>
+            <div class="action-points">
+              <span>3 kroki</span>
+              <span>wynik od razu</span>
+            </div>
+          </div>
+        </div>
+        <div class="value-card">
+          <div>
+            <p>Orientacyjna kalkulacja</p>
+            <h3>Pakiet, goście, wynik.</h3>
+            <p class="lead">Najpierw duży zakres kosztu, potem porównanie z typową atrakcją eventową.</p>
+          </div>
+          <div class="quote-total">
+            <div>
+              <span class="price">6 000–6 500 zł</span>
+              <p class="lead">przykład dla Gold i 500 gości</p>
+            </div>
+            <button class="button secondary" type="button">Zmień dane</button>
+          </div>
+          <div class="metric-grid">
+            <div><span class="price">10–17 zł</span><small>za osobę w pakietach</small></div>
+            <div><span class="price">22–35 zł</span><small>typowy koszt alternatywny</small></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="preview-option option-2" id="option-2">
+      <div class="option-label"><span>Option 2</span> Live Quote Board</div>
+      <div class="value-shell">
+        <div class="value-copy">
+          <p class="eyebrow">Dlaczego to się opłaca</p>
+          <h2>Kalkulator, który od razu pokazuje skalę.</h2>
+          <p class="lead">Wariant mocniej eksponuje kalkulację niż samą narrację. CTA jest obok wyniku, więc użytkownik naturalnie przechodzi do modalu.</p>
+        </div>
+        <div class="value-card">
+          <div>
+            <p>Orientacyjna kalkulacja</p>
+            <h3>Sprawdź, ile realnie kosztuje stoisko.</h3>
+            <p class="lead">Dobre, jeśli chcemy, żeby prawa część była mini-narzędziem, nie tylko kartą informacyjną.</p>
+            <button class="button" type="button" style="margin-top: 24px">Otwórz kalkulator →</button>
+          </div>
+          <div class="estimator-board">
+            <div class="estimator-row"><span>Pakiet</span><strong>Gold</strong></div>
+            <div class="estimator-row"><span>Goście</span><strong>500</strong></div>
+            <div class="estimator-row"><span>Wynik</span><span class="price">6 000–6 500 zł</span></div>
+            <div class="estimator-row"><span>Oszczędność vs typowa atrakcja</span><strong>do 11 000 zł</strong></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="preview-option option-3" id="option-3">
+      <div class="option-label"><span>Option 3</span> Command Bar</div>
+      <div class="value-shell">
+        <div class="value-copy">
+          <p class="eyebrow">Dlaczego to się opłaca</p>
+          <h2>Kalkulator jako główny argument.</h2>
+          <p class="lead">Treść zachowuje premium ton, ale decyzja zostaje przeniesiona do wspólnego paska na dole obu paneli.</p>
+        </div>
+        <div class="value-card">
+          <div>
+            <p>Orientacyjna kalkulacja</p>
+            <h3>Pakiet, goście, wynik.</h3>
+            <p class="lead">Karta zostaje spokojna, a najważniejsza akcja i liczby są spięte w jednym command barze.</p>
+          </div>
+          <div class="metric-grid">
+            <div><span class="price">10–17 zł</span><small>za osobę w pakietach</small></div>
+            <div><span class="price">22–35 zł</span><small>typowy koszt alternatywny</small></div>
+          </div>
+        </div>
+        <div class="command-bar">
+          <div>
+            <strong>Gotowy zakres w mniej niż minutę.</strong>
+            <p>Wybierz pakiet, wpisz liczbę gości i przejdź do formularza z gotowym kontekstem.</p>
+          </div>
+          <button class="button" type="button">Policz wydarzenie →</button>
+          <div class="mini-calc">
+            <div><span class="price">6 500 zł</span><small>Gold / 500 gości</small></div>
+            <div><span class="price">3 kroki</span><small>pakiet, dane, wynik</small></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

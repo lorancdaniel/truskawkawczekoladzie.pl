@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>3UI Events Section Regeneration - Strawberry Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --cream: #fff7ec;
+        --warm-white: #fdfbf6;
+        --chocolate: #211716;
+        --cocoa: #6a3d2c;
+        --muted: #75665f;
+        --border: #e6d8cb;
+        --strawberry: #c93445;
+        --gold: #c59a52;
+        --leaf: #2f5d45;
+        --edge: clamp(24px, 3.2vw, 64px);
+        --section-y: clamp(76px, 9vw, 132px);
+        --display: "Cormorant Garamond", Georgia, serif;
+        --body: "Manrope", system-ui, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #fffaf3;
+        color: var(--chocolate);
+        font-family: var(--body);
+        margin: 0;
+      }
+
+      .proposal-note {
+        background: #1b100f;
+        border: 1px solid rgba(197, 154, 82, 0.34);
+        border-radius: 8px;
+        bottom: 18px;
+        box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28);
+        color: rgba(255, 247, 236, 0.78);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px 24px;
+        justify-content: space-between;
+        left: var(--edge);
+        max-width: min(820px, calc(100vw - (var(--edge) * 2)));
+        padding: 12px 14px;
+        position: fixed;
+        z-index: 60;
+      }
+
+      .proposal-note strong {
+        color: var(--cream);
+      }
+
+      .context {
+        background:
+          radial-gradient(circle at 78% 18%, rgba(201, 52, 69, 0.18), transparent 34rem),
+          linear-gradient(135deg, #1d0f0f, #261514 55%, #160b0b);
+        color: var(--cream);
+        padding: 84px var(--edge);
+      }
+
+      .context h1 {
+        font-family: var(--display);
+        font-size: clamp(3.1rem, 5vw, 5.6rem);
+        line-height: 0.88;
+        margin: 0;
+        max-width: 13ch;
+      }
+
+      .preview-section {
+        border-top: 1px solid rgba(106, 61, 44, 0.12);
+        padding: var(--section-y) var(--edge);
+        position: relative;
+      }
+
+      .preview-section:nth-of-type(odd) {
+        background: #fffaf3;
+      }
+
+      .preview-section:nth-of-type(even) {
+        background: #fbf1e7;
+      }
+
+      .option-label {
+        align-items: center;
+        background: #1b100f;
+        border: 1px solid rgba(197, 154, 82, 0.32);
+        border-radius: 999px;
+        color: var(--cream);
+        display: inline-flex;
+        font-size: 0.72rem;
+        font-weight: 900;
+        gap: 8px;
+        min-height: 34px;
+        padding: 0 14px;
+        position: absolute;
+        right: var(--edge);
+        text-transform: uppercase;
+        top: 28px;
+      }
+
+      .option-label span {
+        color: #ffcbd1;
+      }
+
+      .eyebrow {
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 900;
+        margin: 0 0 12px;
+        text-transform: uppercase;
+      }
+
+      h2 {
+        font-family: var(--display);
+        font-size: clamp(3rem, 5.2vw, 5.5rem);
+        line-height: 0.9;
+        margin: 0;
+      }
+
+      h3,
+      p {
+        margin: 0;
+      }
+
+      .event-icon {
+        align-items: center;
+        background: rgba(201, 52, 69, 0.08);
+        border-radius: 10px;
+        color: var(--strawberry);
+        display: inline-flex;
+        font-size: 1.05rem;
+        font-weight: 900;
+        height: 44px;
+        justify-content: center;
+        width: 44px;
+      }
+
+      .option-1 .topline {
+        align-items: end;
+        display: grid;
+        gap: clamp(28px, 5vw, 76px);
+        grid-template-columns: minmax(320px, 0.86fr) minmax(0, 1.14fr);
+        margin-bottom: 46px;
+      }
+
+      .option-1 h2 {
+        max-width: 11.5ch;
+      }
+
+      .option-1 .lead {
+        color: var(--muted);
+        line-height: 1.68;
+        max-width: 62ch;
+      }
+
+      .occasion-groups {
+        display: grid;
+        gap: 18px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .occasion-group {
+        background: rgba(253, 251, 246, 0.72);
+        border: 1px solid rgba(106, 61, 44, 0.16);
+        border-radius: 8px;
+        display: grid;
+        gap: 18px;
+        padding: 22px;
+      }
+
+      .occasion-group > span {
+        color: var(--strawberry);
+        font-size: 0.76rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .occasion-item {
+        border-top: 1px solid rgba(106, 61, 44, 0.12);
+        display: grid;
+        gap: 14px;
+        grid-template-columns: 44px minmax(0, 1fr);
+        padding-top: 18px;
+      }
+
+      .occasion-item h3 {
+        font-family: var(--display);
+        font-size: clamp(1.45rem, 1.8vw, 1.9rem);
+        line-height: 0.98;
+      }
+
+      .occasion-item p {
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.55;
+        margin-top: 8px;
+      }
+
+      .option-2 .event-stage {
+        display: grid;
+        gap: clamp(26px, 4vw, 54px);
+        grid-template-columns: minmax(300px, 0.72fr) minmax(0, 1.28fr);
+      }
+
+      .option-2 .stage-copy {
+        align-self: center;
+      }
+
+      .option-2 h2 {
+        max-width: 10.8ch;
+      }
+
+      .option-2 .stage-copy p {
+        color: var(--muted);
+        line-height: 1.68;
+        margin-top: 22px;
+        max-width: 42ch;
+      }
+
+      .event-map {
+        aspect-ratio: 1.55;
+        background:
+          radial-gradient(circle at 48% 50%, rgba(201, 52, 69, 0.1), transparent 18rem),
+          rgba(253, 251, 246, 0.74);
+        border: 1px solid rgba(106, 61, 44, 0.16);
+        border-radius: 8px;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-rows: repeat(2, minmax(0, 1fr));
+        overflow: hidden;
+      }
+
+      .map-card {
+        border-bottom: 1px solid rgba(106, 61, 44, 0.12);
+        border-right: 1px solid rgba(106, 61, 44, 0.12);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: clamp(20px, 2.4vw, 34px);
+      }
+
+      .map-card:nth-child(3n) {
+        border-right: 0;
+      }
+
+      .map-card:nth-last-child(-n + 3) {
+        border-bottom: 0;
+      }
+
+      .map-card h3 {
+        font-family: var(--display);
+        font-size: clamp(1.55rem, 2vw, 2.25rem);
+        line-height: 0.95;
+        max-width: 9ch;
+      }
+
+      .map-card p {
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.55;
+        margin-top: 12px;
+      }
+
+      .option-3 {
+        background:
+          radial-gradient(circle at 74% 20%, rgba(201, 52, 69, 0.13), transparent 32rem),
+          linear-gradient(180deg, #fffaf3 0%, #fbf1e7 100%);
+      }
+
+      .option-3 .title-row {
+        align-items: end;
+        border-bottom: 1px solid rgba(106, 61, 44, 0.14);
+        display: grid;
+        gap: 36px;
+        grid-template-columns: minmax(360px, 0.9fr) minmax(0, 1.1fr);
+        padding-bottom: 34px;
+      }
+
+      .option-3 h2 {
+        max-width: 12ch;
+      }
+
+      .option-3 .title-row p {
+        color: var(--muted);
+        line-height: 1.68;
+        max-width: 60ch;
+      }
+
+      .event-lines {
+        display: grid;
+      }
+
+      .event-line {
+        align-items: center;
+        border-bottom: 1px solid rgba(106, 61, 44, 0.12);
+        display: grid;
+        gap: clamp(18px, 3vw, 44px);
+        grid-template-columns: 58px minmax(190px, 0.44fr) minmax(0, 1fr) 72px;
+        min-height: 112px;
+      }
+
+      .event-line h3 {
+        font-family: var(--display);
+        font-size: clamp(1.55rem, 2.1vw, 2.3rem);
+        line-height: 0.95;
+      }
+
+      .event-line p {
+        color: var(--muted);
+        font-size: 0.94rem;
+        line-height: 1.58;
+      }
+
+      .event-line small {
+        color: rgba(106, 61, 44, 0.5);
+        font-size: 0.74rem;
+        font-weight: 900;
+        justify-self: end;
+        text-transform: uppercase;
+      }
+
+      .next {
+        background: linear-gradient(180deg, #fbf1e7, #fffaf3);
+        padding: 72px var(--edge) 110px;
+      }
+
+      .next h2 {
+        max-width: 10ch;
+      }
+
+      @media (max-width: 1100px) {
+        .option-1 .topline,
+        .option-2 .event-stage,
+        .option-3 .title-row {
+          grid-template-columns: 1fr;
+        }
+
+        .occasion-groups {
+          grid-template-columns: 1fr;
+        }
+
+        .event-map {
+          aspect-ratio: auto;
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      @media (max-width: 700px) {
+        .preview-section,
+        .context,
+        .next {
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+
+        .proposal-note {
+          display: none;
+        }
+
+        .option-label {
+          left: 16px;
+          right: auto;
+        }
+
+        h2,
+        .context h1 {
+          font-size: clamp(3rem, 13vw, 4.4rem);
+        }
+
+        .event-map,
+        .event-line {
+          grid-template-columns: 1fr;
+        }
+
+        .event-line {
+          gap: 12px;
+          padding-block: 22px;
+        }
+
+        .event-line small {
+          justify-self: start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="proposal-note">
+      <strong>3UI events regeneration</strong>
+      <span>Nowy zestaw po odrzuceniu poprzednich 3 wariantów.</span>
+    </div>
+
+    <section class="context">
+      <h1>Jeden prosty proces od zapytania do ostatniego kubka.</h1>
+    </section>
+
+    <section class="preview-section option-1" id="option-1">
+      <span class="option-label"><span>Option 1</span> Occasion Groups</span>
+      <div class="topline">
+        <div>
+          <p class="eyebrow">Dla jakich wydarzeń</p>
+          <h2>Wydarzenia pogrupowane według rytmu obsługi.</h2>
+        </div>
+        <p class="lead">Zamiast sześciu równych kafli: trzy sensowne grupy. Lepiej tłumaczy, gdzie stoisko pasuje i porządkuje przestrzeń bez ciężkiego panelu.</p>
+      </div>
+      <div class="occasion-groups">
+        <div class="occasion-group">
+          <span>Prywatne</span>
+          <article class="occasion-item"><span class="event-icon">♡</span><div><h3>Wesela i poprawiny</h3><p>Deserowa atrakcja, która dobrze wygląda na zdjęciach.</p></div></article>
+          <article class="occasion-item"><span class="event-icon">✦</span><div><h3>Strefy VIP</h3><p>Personalizacja dodatków, podania i wyglądu stoiska.</p></div></article>
+        </div>
+        <div class="occasion-group">
+          <span>Firmowe</span>
+          <article class="occasion-item"><span class="event-icon">◇</span><div><h3>Eventy firmowe</h3><p>Szybki, elegancki punkt dla pracowników, klientów i partnerów.</p></div></article>
+          <article class="occasion-item"><span class="event-icon">✧</span><div><h3>Integracje</h3><p>Lekka forma interakcji, która nie wymaga scenariusza.</p></div></article>
+        </div>
+        <div class="occasion-group">
+          <span>Duża skala</span>
+          <article class="occasion-item"><span class="event-icon">♨</span><div><h3>Gale i bankiety</h3><p>Premium detal, który mieści się w rytmie eleganckiego wydarzenia.</p></div></article>
+          <article class="occasion-item"><span class="event-icon">⌖</span><div><h3>Festiwale i plener</h3><p>Sprawny proces i czytelna obsługa przy większym ruchu.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="preview-section option-2" id="option-2">
+      <span class="option-label"><span>Option 2</span> Occasion Map</span>
+      <div class="event-stage">
+        <div class="stage-copy">
+          <p class="eyebrow">Dla jakich wydarzeń</p>
+          <h2>Jedna mapa zastosowań, sześć gotowych kontekstów.</h2>
+          <p>Więcej powietrza i mocniejsze pozycjonowanie: heading nie walczy z kartami, a typy wydarzeń tworzą elegancką planszę.</p>
+        </div>
+        <div class="event-map">
+          <article class="map-card"><span class="event-icon">♡</span><div><h3>Wesela i poprawiny</h3><p>Deserowa atrakcja, która dobrze wygląda na zdjęciach.</p></div></article>
+          <article class="map-card"><span class="event-icon">◇</span><div><h3>Eventy firmowe</h3><p>Szybki, elegancki punkt dla pracowników, klientów i partnerów.</p></div></article>
+          <article class="map-card"><span class="event-icon">✧</span><div><h3>Integracje</h3><p>Lekka forma interakcji, która nie wymaga scenariusza.</p></div></article>
+          <article class="map-card"><span class="event-icon">♨</span><div><h3>Gale i bankiety</h3><p>Premium detal, który mieści się w rytmie eleganckiego wydarzenia.</p></div></article>
+          <article class="map-card"><span class="event-icon">⌖</span><div><h3>Festiwale i plener</h3><p>Sprawny proces i czytelna obsługa przy większym ruchu.</p></div></article>
+          <article class="map-card"><span class="event-icon">✦</span><div><h3>Strefy VIP</h3><p>Personalizacja dodatków, podania i wyglądu stoiska.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="preview-section option-3" id="option-3">
+      <span class="option-label"><span>Option 3</span> Editorial Event Lines</span>
+      <div class="title-row">
+        <div>
+          <p class="eyebrow">Dla jakich wydarzeń</p>
+          <h2>Stoisko tam, gdzie liczy się tempo, obraz i interakcja.</h2>
+        </div>
+        <p>Najczystszy układ: duży editorial heading, potem sześć spokojnych wierszy. Bardzo dobre pozycjonowanie, mało wizualnego hałasu, łatwe skanowanie.</p>
+      </div>
+      <div class="event-lines">
+        <article class="event-line"><span class="event-icon">♡</span><h3>Wesela i poprawiny</h3><p>Deserowa atrakcja, która dobrze wygląda na zdjęciach.</p><small>private</small></article>
+        <article class="event-line"><span class="event-icon">◇</span><h3>Eventy firmowe</h3><p>Szybki, elegancki punkt dla pracowników, klientów i partnerów.</p><small>business</small></article>
+        <article class="event-line"><span class="event-icon">✧</span><h3>Integracje</h3><p>Lekka forma interakcji, która nie wymaga scenariusza.</p><small>team</small></article>
+        <article class="event-line"><span class="event-icon">♨</span><h3>Gale i bankiety</h3><p>Premium detal, który mieści się w rytmie eleganckiego wydarzenia.</p><small>formal</small></article>
+        <article class="event-line"><span class="event-icon">⌖</span><h3>Festiwale i plener</h3><p>Sprawny proces i czytelna obsługa przy większym ruchu.</p><small>scale</small></article>
+        <article class="event-line"><span class="event-icon">✦</span><h3>Strefy VIP</h3><p>Personalizacja dodatków, podania i wyglądu stoiska.</p><small>vip</small></article>
+      </div>
+    </section>
+
+    <section class="next">
+      <p class="eyebrow">Organizacja i logistyka</p>
+      <h2>Przywozimy kompletny proces, nie tylko składniki.</h2>
+    </section>
+  </body>
+</html>

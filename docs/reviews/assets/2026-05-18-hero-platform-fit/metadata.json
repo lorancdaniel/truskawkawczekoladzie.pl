@@ -1,0 +1,382 @@
+[
+  {
+    "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-hero-platform-fit/desktop-fullhd-1920x1080.png",
+    "viewport": {
+      "width": 1920,
+      "height": 1080,
+      "name": "desktop-fullhd-1920x1080"
+    },
+    "metrics": {
+      "viewport": "1920x1080",
+      "scrollWidth": 1920,
+      "clientWidth": 1920,
+      "h1Font": "131.76px",
+      "header": {
+        "top": 22,
+        "bottom": 129,
+        "height": 107,
+        "width": 1320,
+        "left": 300,
+        "right": 1620
+      },
+      "eyebrow": {
+        "top": 162,
+        "bottom": 179,
+        "height": 17,
+        "width": 1320,
+        "left": 300,
+        "right": 1620
+      },
+      "h1": {
+        "top": 193,
+        "bottom": 646,
+        "height": 453,
+        "width": 666,
+        "left": 300,
+        "right": 966
+      },
+      "lead": {
+        "top": 668,
+        "bottom": 725,
+        "height": 58,
+        "width": 620,
+        "left": 300,
+        "right": 920
+      },
+      "actions": {
+        "top": 753,
+        "bottom": 799,
+        "height": 46,
+        "width": 1320,
+        "left": 300,
+        "right": 1620
+      },
+      "facts": {
+        "top": 831,
+        "bottom": 905,
+        "height": 74,
+        "width": 1320,
+        "left": 300,
+        "right": 1620
+      },
+      "hint": {
+        "top": 1001,
+        "bottom": 1080,
+        "height": 79,
+        "width": 1320,
+        "left": 300,
+        "right": 1620
+      },
+      "clearances": {
+        "headerToEyebrow": 33,
+        "actionsToViewport": 281,
+        "factsToHint": 96
+      }
+    },
+    "capturedAt": "2026-05-18T10:37:17.491Z"
+  },
+  {
+    "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-hero-platform-fit/mac-fullhd-browser-1920x860.png",
+    "viewport": {
+      "width": 1920,
+      "height": 860,
+      "name": "mac-fullhd-browser-1920x860"
+    },
+    "metrics": {
+      "viewport": "1920x860",
+      "scrollWidth": 1920,
+      "clientWidth": 1920,
+      "h1Font": "104.92px",
+      "header": {
+        "top": 22,
+        "bottom": 129,
+        "height": 107,
+        "width": 1320,
+        "left": 300,
+        "right": 1620
+      },
+      "eyebrow": {
+        "top": 142,
+        "bottom": 159,
+        "height": 17,
+        "width": 1320,
+        "left": 300,
+        "right": 1620
+      },
+      "h1": {
+        "top": 173,
+        "bottom": 534,
+        "height": 361,
+        "width": 530,
+        "left": 300,
+        "right": 830
+      },
+      "lead": {
+        "top": 551,
+        "bottom": 609,
+        "height": 58,
+        "width": 620,
+        "left": 300,
+        "right": 920
+      },
+      "actions": {
+        "top": 631,
+        "bottom": 677,
+        "height": 46,
+        "width": 1320,
+        "left": 300,
+        "right": 1620
+      },
+      "facts": {
+        "top": 703,
+        "bottom": 776,
+        "height": 74,
+        "width": 1320,
+        "left": 300,
+        "right": 1620
+      },
+      "hint": {
+        "top": 781,
+        "bottom": 860,
+        "height": 79,
+        "width": 1320,
+        "left": 300,
+        "right": 1620
+      },
+      "clearances": {
+        "headerToEyebrow": 13,
+        "actionsToViewport": 183,
+        "factsToHint": 5
+      }
+    },
+    "capturedAt": "2026-05-18T10:37:19.582Z"
+  },
+  {
+    "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-hero-platform-fit/windows-scale-1536x864.png",
+    "viewport": {
+      "width": 1536,
+      "height": 864,
+      "name": "windows-scale-1536x864"
+    },
+    "metrics": {
+      "viewport": "1536x864",
+      "scrollWidth": 1536,
+      "clientWidth": 1536,
+      "h1Font": "105.408px",
+      "header": {
+        "top": 22,
+        "bottom": 129,
+        "height": 107,
+        "width": 1320,
+        "left": 108,
+        "right": 1428
+      },
+      "eyebrow": {
+        "top": 142,
+        "bottom": 159,
+        "height": 17,
+        "width": 1320,
+        "left": 108,
+        "right": 1428
+      },
+      "h1": {
+        "top": 173,
+        "bottom": 536,
+        "height": 363,
+        "width": 533,
+        "left": 108,
+        "right": 641
+      },
+      "lead": {
+        "top": 553,
+        "bottom": 607,
+        "height": 54,
+        "width": 620,
+        "left": 108,
+        "right": 728
+      },
+      "actions": {
+        "top": 630,
+        "bottom": 676,
+        "height": 46,
+        "width": 1320,
+        "left": 108,
+        "right": 1428
+      },
+      "facts": {
+        "top": 702,
+        "bottom": 775,
+        "height": 74,
+        "width": 1320,
+        "left": 108,
+        "right": 1428
+      },
+      "hint": {
+        "top": 785,
+        "bottom": 864,
+        "height": 79,
+        "width": 1320,
+        "left": 108,
+        "right": 1428
+      },
+      "clearances": {
+        "headerToEyebrow": 13,
+        "actionsToViewport": 188,
+        "factsToHint": 10
+      }
+    },
+    "capturedAt": "2026-05-18T10:37:21.595Z"
+  },
+  {
+    "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-hero-platform-fit/windows-laptop-1366x768.png",
+    "viewport": {
+      "width": 1366,
+      "height": 768,
+      "name": "windows-laptop-1366x768"
+    },
+    "metrics": {
+      "viewport": "1366x768",
+      "scrollWidth": 1366,
+      "clientWidth": 1366,
+      "h1Font": "86.016px",
+      "header": {
+        "top": 22,
+        "bottom": 129,
+        "height": 107,
+        "width": 1320,
+        "left": 23,
+        "right": 1343
+      },
+      "eyebrow": {
+        "top": 138,
+        "bottom": 155,
+        "height": 17,
+        "width": 1320,
+        "left": 23,
+        "right": 1343
+      },
+      "h1": {
+        "top": 165,
+        "bottom": 468,
+        "height": 303,
+        "width": 435,
+        "left": 23,
+        "right": 458
+      },
+      "lead": {
+        "top": 482,
+        "bottom": 505,
+        "height": 23,
+        "width": 620,
+        "left": 23,
+        "right": 643
+      },
+      "actions": {
+        "top": 523,
+        "bottom": 567,
+        "height": 44,
+        "width": 1320,
+        "left": 23,
+        "right": 1343
+      },
+      "facts": {
+        "top": 585,
+        "bottom": 652,
+        "height": 67,
+        "width": 1320,
+        "left": 23,
+        "right": 1343
+      },
+      "hint": {
+        "top": 689,
+        "bottom": 768,
+        "height": 79,
+        "width": 1320,
+        "left": 23,
+        "right": 1343
+      },
+      "clearances": {
+        "headerToEyebrow": 9,
+        "actionsToViewport": 201,
+        "factsToHint": 37
+      }
+    },
+    "capturedAt": "2026-05-18T10:37:23.646Z"
+  },
+  {
+    "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-hero-platform-fit/mobile-390x844.png",
+    "viewport": {
+      "width": 390,
+      "height": 844,
+      "name": "mobile-390x844"
+    },
+    "metrics": {
+      "viewport": "390x844",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "h1Font": "58.5px",
+      "header": {
+        "top": 28,
+        "bottom": 94,
+        "height": 66,
+        "width": 362,
+        "left": 14,
+        "right": 376
+      },
+      "eyebrow": {
+        "top": 130,
+        "bottom": 147,
+        "height": 17,
+        "width": 358,
+        "left": 16,
+        "right": 374
+      },
+      "h1": {
+        "top": 161,
+        "bottom": 358,
+        "height": 197,
+        "width": 296,
+        "left": 16,
+        "right": 312
+      },
+      "lead": {
+        "top": 380,
+        "bottom": 431,
+        "height": 52,
+        "width": 358,
+        "left": 16,
+        "right": 374
+      },
+      "actions": {
+        "top": 459,
+        "bottom": 565,
+        "height": 106,
+        "width": 358,
+        "left": 16,
+        "right": 374
+      },
+      "facts": {
+        "top": 599,
+        "bottom": 840,
+        "height": 241,
+        "width": 358,
+        "left": 16,
+        "right": 374
+      },
+      "hint": {
+        "top": 897,
+        "bottom": 1180,
+        "height": 283,
+        "width": 362,
+        "left": 14,
+        "right": 376
+      },
+      "clearances": {
+        "headerToEyebrow": 36,
+        "actionsToViewport": 279,
+        "factsToHint": 57
+      }
+    },
+    "capturedAt": "2026-05-18T10:37:25.556Z"
+  }
+]

@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>3UI Contact Height - Strawberry Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --cream: #fff7ec;
+        --paper: #fffaf3;
+        --warm-white: #fdf8ef;
+        --cocoa: #1d0f0f;
+        --cocoa-soft: #291615;
+        --ink: #241815;
+        --muted: #75665f;
+        --strawberry: #cf3447;
+        --gold: #c69b55;
+        --line: rgba(106, 61, 44, 0.14);
+        --edge: clamp(28px, 3.2vw, 64px);
+        --display: "Cormorant Garamond", Georgia, serif;
+        --body: "Manrope", system-ui, sans-serif;
+        --radius: 8px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--paper);
+        color: var(--ink);
+        font-family: var(--body);
+        margin: 0;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      p {
+        margin: 0;
+      }
+
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+
+      .prelude,
+      .footer-hint {
+        padding: 56px var(--edge);
+      }
+
+      .prelude {
+        background:
+          radial-gradient(circle at 76% 20%, rgba(201, 52, 69, 0.12), transparent 30rem),
+          linear-gradient(135deg, #1d0f0f 0%, #2a1514 64%, #140808 100%);
+        color: var(--cream);
+      }
+
+      .prelude__card {
+        border: 1px solid rgba(217, 158, 92, 0.28);
+        border-radius: var(--radius);
+        display: grid;
+        gap: 22px;
+        grid-template-columns: minmax(0, 0.7fr) minmax(320px, 0.3fr);
+        padding: 34px;
+      }
+
+      .prelude h2,
+      .footer-hint h2 {
+        font-family: var(--display);
+        font-size: clamp(3rem, 4.8vw, 5.5rem);
+        line-height: 0.92;
+      }
+
+      .prelude p,
+      .footer-hint p {
+        color: rgba(255, 247, 236, 0.72);
+        line-height: 1.6;
+        max-width: 58ch;
+      }
+
+      .footer-hint {
+        background: linear-gradient(135deg, #1b0c0c, #321314);
+        color: var(--cream);
+      }
+
+      .option {
+        background:
+          radial-gradient(circle at 78% 16%, rgba(201, 52, 69, 0.08), transparent 34rem),
+          linear-gradient(180deg, #fffaf3 0%, #f7ecdf 100%);
+        padding: clamp(70px, 8vw, 116px) var(--edge);
+        position: relative;
+      }
+
+      .option + .option {
+        border-top: 1px solid rgba(106, 61, 44, 0.12);
+      }
+
+      .option-label {
+        align-items: center;
+        background: var(--warm-white);
+        border: 1px solid rgba(198, 155, 85, 0.34);
+        border-radius: 999px;
+        color: var(--ink);
+        display: inline-flex;
+        font-size: 0.72rem;
+        font-weight: 900;
+        gap: 8px;
+        min-height: 34px;
+        padding: 0 14px;
+        position: absolute;
+        right: var(--edge);
+        text-transform: uppercase;
+        top: 22px;
+      }
+
+      .option-label b {
+        color: var(--strawberry);
+      }
+
+      .contact-shell {
+        border: 1px solid rgba(106, 61, 44, 0.2);
+        border-radius: var(--radius);
+        box-shadow: 0 32px 100px rgba(73, 42, 24, 0.14);
+        overflow: hidden;
+      }
+
+      .dark-panel {
+        background:
+          radial-gradient(circle at 20% 0%, rgba(201, 52, 69, 0.26), transparent 22rem),
+          linear-gradient(145deg, #321615 0%, #211716 58%, #160b0b 100%);
+        color: var(--cream);
+      }
+
+      .eyebrow {
+        color: var(--strawberry);
+        font-size: 0.72rem;
+        font-weight: 900;
+        line-height: 1;
+        margin-bottom: 12px;
+        text-transform: uppercase;
+      }
+
+      .dark-panel .eyebrow {
+        color: #efbcc4;
+      }
+
+      .title {
+        font-family: var(--display);
+        font-size: clamp(3rem, 4.6vw, 5.4rem);
+        line-height: 0.92;
+      }
+
+      .copy {
+        color: var(--muted);
+        line-height: 1.6;
+        margin-top: 14px;
+        max-width: 58ch;
+      }
+
+      .dark-panel .copy {
+        color: rgba(255, 247, 236, 0.74);
+      }
+
+      .form-card {
+        background:
+          radial-gradient(circle at 96% 8%, rgba(201, 52, 69, 0.045), transparent 22rem),
+          rgba(255, 252, 247, 0.98);
+      }
+
+      .form-head {
+        border-bottom: 1px solid var(--line);
+        display: grid;
+        gap: 10px;
+      }
+
+      .form-head h3 {
+        color: var(--ink);
+        font-family: var(--display);
+        font-size: clamp(2.2rem, 3.1vw, 3.6rem);
+        line-height: 0.95;
+      }
+
+      .field-grid {
+        display: grid;
+        gap: 14px 16px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .group-title {
+        align-items: center;
+        color: var(--ink);
+        display: flex;
+        font-size: 0.72rem;
+        font-weight: 900;
+        gap: 10px;
+        grid-column: 1 / -1;
+        line-height: 1;
+        margin-top: 4px;
+        text-transform: uppercase;
+      }
+
+      .group-title::after {
+        background: var(--line);
+        content: "";
+        flex: 1;
+        height: 1px;
+      }
+
+      label {
+        color: var(--ink);
+        display: grid;
+        font-size: 0.82rem;
+        font-weight: 800;
+        gap: 7px;
+      }
+
+      input,
+      select,
+      textarea {
+        background: rgba(255, 247, 236, 0.72);
+        border: 1px solid rgba(106, 61, 44, 0.16);
+        border-radius: var(--radius);
+        min-height: 48px;
+        padding: 10px 13px;
+        width: 100%;
+      }
+
+      textarea {
+        min-height: 94px;
+        resize: vertical;
+      }
+
+      .wide {
+        grid-column: 1 / -1;
+      }
+
+      .consent {
+        align-items: start;
+        background: rgba(255, 247, 236, 0.5);
+        border: 1px solid rgba(106, 61, 44, 0.12);
+        border-radius: var(--radius);
+        display: grid;
+        gap: 10px;
+        grid-column: 1 / -1;
+        grid-template-columns: 22px minmax(0, 1fr);
+        padding: 12px 14px;
+      }
+
+      .consent input {
+        height: 20px;
+        min-height: 20px;
+        width: 20px;
+      }
+
+      .consent span {
+        font-size: 0.84rem;
+        font-weight: 800;
+        line-height: 1.45;
+      }
+
+      .submit-row {
+        border-top: 1px solid var(--line);
+        display: grid;
+        gap: 12px;
+        margin-top: 18px;
+        padding-top: 18px;
+      }
+
+      .button {
+        align-items: center;
+        background: linear-gradient(180deg, #e04455, #c93145);
+        border: 0;
+        border-radius: 12px;
+        box-shadow: 0 18px 38px rgba(201, 52, 69, 0.25);
+        color: white;
+        cursor: pointer;
+        display: inline-flex;
+        font-weight: 900;
+        gap: 10px;
+        justify-content: center;
+        min-height: 56px;
+        padding: 0 22px;
+      }
+
+      .meta-row {
+        align-items: center;
+        color: var(--muted);
+        display: flex;
+        font-size: 0.82rem;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .meta-row a,
+      .contact-link {
+        color: var(--strawberry);
+        font-weight: 900;
+      }
+
+      .contact-link {
+        background: rgba(255, 247, 236, 0.08);
+        border: 1px solid rgba(245, 239, 228, 0.14);
+        border-radius: var(--radius);
+        color: var(--cream);
+        display: grid;
+        gap: 2px;
+        min-height: 58px;
+        padding: 12px 14px;
+        text-decoration: none;
+      }
+
+      .contact-link small {
+        color: rgba(255, 247, 236, 0.58);
+        font-size: 0.66rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .option-1 .contact-shell {
+        display: grid;
+        grid-template-columns: minmax(360px, 0.62fr) minmax(620px, 1.38fr);
+      }
+
+      .option-1 .dark-panel {
+        display: grid;
+        gap: 28px;
+        padding: clamp(34px, 4vw, 52px);
+      }
+
+      .option-1 .dark-panel .title {
+        font-size: clamp(3.2rem, 4.4vw, 5.2rem);
+        max-width: 10ch;
+      }
+
+      .option-1 .contact-stack {
+        align-self: end;
+        border-top: 1px solid rgba(245, 239, 228, 0.14);
+        display: grid;
+        gap: 10px;
+        padding-top: 22px;
+      }
+
+      .option-1 .form-card {
+        padding: clamp(28px, 3.2vw, 42px);
+      }
+
+      .option-1 .form-head {
+        margin-bottom: 22px;
+        padding-bottom: 20px;
+      }
+
+      .option-2 .contact-shell {
+        background: rgba(255, 252, 247, 0.98);
+        display: grid;
+      }
+
+      .option-2 .contact-top {
+        align-items: center;
+        display: grid;
+        gap: 24px;
+        grid-template-columns: minmax(0, 0.8fr) minmax(460px, 1.2fr);
+        padding: clamp(28px, 3.4vw, 44px);
+      }
+
+      .option-2 .contact-top .title {
+        max-width: 13ch;
+      }
+
+      .option-2 .top-actions {
+        align-items: end;
+        display: grid;
+        gap: 14px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .option-2 .top-pill {
+        background: #fff3e5;
+        border: 1px solid rgba(106, 61, 44, 0.13);
+        border-radius: var(--radius);
+        color: var(--ink);
+        min-height: 74px;
+        padding: 16px;
+      }
+
+      .option-2 .top-pill small {
+        color: var(--muted);
+        display: block;
+        font-size: 0.68rem;
+        font-weight: 900;
+        margin-bottom: 5px;
+        text-transform: uppercase;
+      }
+
+      .option-2 .form-card {
+        border-top: 1px solid var(--line);
+        padding: clamp(24px, 3vw, 34px) clamp(28px, 3.4vw, 44px) clamp(28px, 3.4vw, 44px);
+      }
+
+      .option-2 .form-head {
+        align-items: end;
+        grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+        margin-bottom: 20px;
+        padding-bottom: 18px;
+      }
+
+      .option-2 .form-head p {
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .option-2 .field-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .option-2 .span-2 {
+        grid-column: span 2;
+      }
+
+      .option-3 .contact-shell {
+        display: grid;
+        grid-template-columns: 270px minmax(0, 1fr);
+      }
+
+      .option-3 .dark-panel {
+        padding: 28px;
+      }
+
+      .option-3 .brand-rail {
+        display: grid;
+        gap: 18px;
+        height: 100%;
+      }
+
+      .option-3 .brand-rail h2 {
+        font-family: var(--display);
+        font-size: clamp(2.6rem, 3.2vw, 4rem);
+        line-height: 0.94;
+      }
+
+      .option-3 .rail-list {
+        border-top: 1px solid rgba(245, 239, 228, 0.14);
+        display: grid;
+        gap: 10px;
+        margin-top: auto;
+        padding-top: 18px;
+      }
+
+      .option-3 .rail-list span {
+        color: rgba(255, 247, 236, 0.8);
+        font-size: 0.82rem;
+        font-weight: 800;
+      }
+
+      .option-3 .form-card {
+        padding: clamp(24px, 2.8vw, 36px);
+      }
+
+      .option-3 .compact-board {
+        align-items: start;
+        display: grid;
+        gap: 26px;
+        grid-template-columns: minmax(0, 0.55fr) minmax(0, 1.45fr);
+      }
+
+      .option-3 .form-head {
+        border-bottom: 0;
+        padding: 0;
+      }
+
+      .option-3 .field-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .option-3 .span-2 {
+        grid-column: span 2;
+      }
+
+      .option-3 textarea {
+        min-height: 84px;
+      }
+
+      @media (max-width: 1100px) {
+        .prelude__card,
+        .option-1 .contact-shell,
+        .option-2 .contact-top,
+        .option-2 .form-head,
+        .option-3 .contact-shell,
+        .option-3 .compact-board {
+          grid-template-columns: 1fr;
+        }
+
+        .option-2 .field-grid,
+        .option-3 .field-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 720px) {
+        .field-grid,
+        .option-2 .field-grid,
+        .option-3 .field-grid,
+        .option-2 .top-actions {
+          grid-template-columns: 1fr;
+        }
+
+        .wide,
+        .option-2 .span-2,
+        .option-3 .span-2 {
+          grid-column: auto;
+        }
+
+        .meta-row {
+          align-items: stretch;
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="prelude" aria-label="Kontekst poprzedniej sekcji">
+      <div class="prelude__card">
+        <div>
+          <h2>Kalkulator jako główny argument.</h2>
+          <p>Poprzednia sekcja kończy się mocnym CTA, więc kontakt poniżej powinien być krótszy, rzeczowy i gotowy do szybkiego wypełnienia.</p>
+        </div>
+        <p>Cel redesignu: mniej pionowego balastu, stała wysokość paneli i wyraźny rytm pól bez utraty premium charakteru.</p>
+      </div>
+    </section>
+
+    <section class="option option-1" id="option-1" aria-label="Option 1">
+      <div class="option-label"><b>Option 1</b> Compact Split</div>
+      <div class="contact-shell">
+        <aside class="dark-panel">
+          <div>
+            <p class="eyebrow">Wycena</p>
+            <h2 class="title">Sprawdź termin i zakres obsługi.</h2>
+            <p class="copy">Krótki panel sprzedażowy zostaje po lewej, ale bez ogromnej pustej wysokości.</p>
+          </div>
+          <div class="contact-stack">
+            <a class="contact-link" href="#"><small>Telefon bezpośredni</small><strong>+48 514 214 567</strong></a>
+            <a class="contact-link" href="#"><small>Email</small><strong>strawberrygroupsc@gmail.com</strong></a>
+          </div>
+        </aside>
+        <form class="form-card">
+          <div class="form-head">
+            <p class="eyebrow">Formularz</p>
+            <h3>Szczegóły wydarzenia</h3>
+          </div>
+          <div class="field-grid">
+            <h4 class="group-title">Kontakt</h4>
+            <label>Imię i nazwisko<input /></label>
+            <label>Email<input /></label>
+            <label>Telefon<input /></label>
+            <label>Data wydarzenia<input placeholder="dd/mm/yyyy" /></label>
+            <h4 class="group-title">Wydarzenie</h4>
+            <label>Typ wydarzenia<select><option>Wybierz typ</option></select></label>
+            <label>Miasto / lokalizacja<input /></label>
+            <label>Liczba gości<input /></label>
+            <label>Preferowany pakiet<select><option>Wybierz pakiet</option></select></label>
+            <label class="wide">Informacje dodatkowe<textarea></textarea></label>
+            <label class="consent"><input type="checkbox" /><span>Zgadzam się na kontakt w sprawie wyceny i dostępności terminu.</span></label>
+          </div>
+          <div class="submit-row">
+            <button class="button" type="button">Wyślij zapytanie</button>
+            <div class="meta-row"><span>Wracamy z terminem i orientacyjną wyceną.</span><a href="#">Pilne sprawy: +48 514 214 567</a></div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="option option-2" id="option-2" aria-label="Option 2">
+      <div class="option-label"><b>Option 2</b> Header Board</div>
+      <div class="contact-shell">
+        <header class="contact-top">
+          <div>
+            <p class="eyebrow">Wycena</p>
+            <h2 class="title">Jeden krótki formularz do pierwszej wyceny.</h2>
+          </div>
+          <div class="top-actions">
+            <div class="top-pill"><small>Telefon bezpośredni</small><strong>+48 514 214 567</strong></div>
+            <div class="top-pill"><small>Co przygotujemy</small><strong>Termin, pakiet i orientacyjny koszt</strong></div>
+          </div>
+        </header>
+        <form class="form-card">
+          <div class="form-head">
+            <div>
+              <p class="eyebrow">Formularz</p>
+              <h3>Szczegóły wydarzenia</h3>
+            </div>
+            <p>Najbardziej niski wariant: pitch idzie do górnego pasa, a formularz staje się szerokim, zwartym boardem.</p>
+          </div>
+          <div class="field-grid">
+            <label class="span-2">Imię i nazwisko<input /></label>
+            <label>Email<input /></label>
+            <label>Telefon<input /></label>
+            <label>Data wydarzenia<input placeholder="dd/mm/yyyy" /></label>
+            <label>Typ wydarzenia<select><option>Wybierz typ</option></select></label>
+            <label>Miasto / lokalizacja<input /></label>
+            <label>Liczba gości<input /></label>
+            <label class="span-2">Preferowany pakiet<select><option>Wybierz pakiet</option></select></label>
+            <label class="span-2">Informacje dodatkowe<textarea></textarea></label>
+            <label class="consent span-2"><input type="checkbox" /><span>Zgadzam się na kontakt w sprawie wyceny i dostępności terminu.</span></label>
+          </div>
+          <div class="submit-row">
+            <button class="button" type="button">Wyślij zapytanie</button>
+            <div class="meta-row"><span>Po wysłaniu sprawdzamy termin.</span><a href="#">Pilne sprawy: +48 514 214 567</a></div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="option option-3" id="option-3" aria-label="Option 3">
+      <div class="option-label"><b>Option 3</b> Slim Rail</div>
+      <div class="contact-shell">
+        <aside class="dark-panel">
+          <div class="brand-rail">
+            <p class="eyebrow">Wycena</p>
+            <h2>Termin, pakiet, koszt.</h2>
+            <p class="copy">Najbardziej kompaktowy split: lewa strona jest wąską szyną z kontaktem, a treść formularza pracuje szerzej.</p>
+            <div class="rail-list">
+              <span>Termin i skala</span>
+              <span>Pakiet i dodatki</span>
+              <span>Kontakt bezpośredni</span>
+            </div>
+          </div>
+        </aside>
+        <form class="form-card">
+          <div class="compact-board">
+            <div class="form-head">
+              <p class="eyebrow">Formularz</p>
+              <h3>Szczegóły wydarzenia</h3>
+              <p class="copy">Zwięzły układ, mniejsza wysokość, stały rytm sekcji.</p>
+            </div>
+            <div>
+              <div class="field-grid">
+                <label>Imię i nazwisko<input /></label>
+                <label>Email<input /></label>
+                <label>Telefon<input /></label>
+                <label>Data wydarzenia<input placeholder="dd/mm/yyyy" /></label>
+                <label>Typ wydarzenia<select><option>Wybierz typ</option></select></label>
+                <label>Liczba gości<input /></label>
+                <label class="span-2">Miasto / lokalizacja<input /></label>
+                <label>Pakiet<select><option>Wybierz pakiet</option></select></label>
+                <label class="span-2">Informacje dodatkowe<textarea></textarea></label>
+                <label class="consent"><input type="checkbox" /><span>Zgadzam się na kontakt w sprawie wyceny.</span></label>
+              </div>
+              <div class="submit-row">
+                <button class="button" type="button">Wyślij zapytanie</button>
+                <div class="meta-row"><span>Wracamy z wyceną.</span><a href="#">+48 514 214 567</a></div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="footer-hint" aria-label="Kontekst stopki">
+      <h2>Strawberry Group S.C.</h2>
+      <p>Stopka zaczyna się od razu po kontakcie, więc sekcja wyceny nie powinna optycznie wisieć nad nią jako zbyt wysoki blok.</p>
+    </section>
+  </body>
+</html>

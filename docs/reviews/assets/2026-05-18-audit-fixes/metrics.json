@@ -1,0 +1,286 @@
+[
+  {
+    "viewport": "desktop-1920x1080",
+    "shot": "/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-audit-fixes/desktop-1920x1080.png",
+    "metrics": {
+      "viewport": "1920x1080",
+      "overflow": 0,
+      "scrollHeight": 9666,
+      "h1": {
+        "top": 193,
+        "bottom": 490,
+        "left": 300,
+        "right": 1300,
+        "width": 1000,
+        "height": 297
+      },
+      "h1Font": "115.2px",
+      "h1LineHeight": "99.072px",
+      "h1Lines": 3,
+      "actions": {
+        "top": 597,
+        "bottom": 643,
+        "left": 300,
+        "right": 1620,
+        "width": 1320,
+        "height": 46
+      },
+      "facts": {
+        "top": 675,
+        "bottom": 749,
+        "left": 300,
+        "right": 1620,
+        "width": 1320,
+        "height": 74
+      },
+      "hint": {
+        "top": 1001,
+        "bottom": 1080,
+        "left": 300,
+        "right": 1620,
+        "width": 1320,
+        "height": 79
+      },
+      "firstSection": {
+        "top": 1098,
+        "bottom": 1357,
+        "left": 0,
+        "right": 1920,
+        "width": 1920,
+        "height": 259
+      },
+      "hiddenReveal": 0,
+      "smallFocusables": [
+        "input.:consent:24x24",
+        "a.:+48 514 214 567:119x22"
+      ]
+    }
+  },
+  {
+    "viewport": "mac-short-1920x860",
+    "shot": "/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-audit-fixes/mac-short-1920x860.png",
+    "metrics": {
+      "viewport": "1920x860",
+      "overflow": 0,
+      "scrollHeight": 9446,
+      "h1": {
+        "top": 173,
+        "bottom": 413,
+        "left": 300,
+        "right": 1106,
+        "width": 806,
+        "height": 240
+      },
+      "h1Font": "92.88px",
+      "h1LineHeight": "79.8768px",
+      "h1Lines": 3,
+      "actions": {
+        "top": 510,
+        "bottom": 556,
+        "left": 300,
+        "right": 1620,
+        "width": 1320,
+        "height": 46
+      },
+      "facts": {
+        "top": 582,
+        "bottom": 655,
+        "left": 300,
+        "right": 1620,
+        "width": 1320,
+        "height": 74
+      },
+      "hint": {
+        "top": 781,
+        "bottom": 860,
+        "left": 300,
+        "right": 1620,
+        "width": 1320,
+        "height": 79
+      },
+      "firstSection": {
+        "top": 878,
+        "bottom": 1137,
+        "left": 0,
+        "right": 1920,
+        "width": 1920,
+        "height": 259
+      },
+      "hiddenReveal": 0,
+      "smallFocusables": [
+        "input.:consent:24x24",
+        "a.:+48 514 214 567:119x22"
+      ]
+    }
+  },
+  {
+    "viewport": "windows-scale-1536x864",
+    "shot": "/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-audit-fixes/windows-scale-1536x864.png",
+    "metrics": {
+      "viewport": "1536x864",
+      "overflow": 0,
+      "scrollHeight": 9450,
+      "h1": {
+        "top": 173,
+        "bottom": 411,
+        "left": 108,
+        "right": 908,
+        "width": 800,
+        "height": 238
+      },
+      "h1Font": "92.16px",
+      "h1LineHeight": "79.2576px",
+      "h1Lines": 3,
+      "actions": {
+        "top": 505,
+        "bottom": 551,
+        "left": 108,
+        "right": 1428,
+        "width": 1320,
+        "height": 46
+      },
+      "facts": {
+        "top": 577,
+        "bottom": 650,
+        "left": 108,
+        "right": 1428,
+        "width": 1320,
+        "height": 74
+      },
+      "hint": {
+        "top": 785,
+        "bottom": 864,
+        "left": 108,
+        "right": 1428,
+        "width": 1320,
+        "height": 79
+      },
+      "firstSection": {
+        "top": 882,
+        "bottom": 1141,
+        "left": 0,
+        "right": 1536,
+        "width": 1536,
+        "height": 259
+      },
+      "hiddenReveal": 0,
+      "smallFocusables": [
+        "input.:consent:24x24",
+        "a.:+48 514 214 567:119x22"
+      ]
+    }
+  },
+  {
+    "viewport": "mobile-390x844",
+    "shot": "/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-audit-fixes/mobile-390x844.png",
+    "metrics": {
+      "viewport": "390x844",
+      "overflow": 0,
+      "scrollHeight": 13600,
+      "h1": {
+        "top": 153,
+        "bottom": 330,
+        "left": 16,
+        "right": 297,
+        "width": 281,
+        "height": 177
+      },
+      "h1Font": "52.65px",
+      "h1LineHeight": "44.226px",
+      "h1Lines": 4,
+      "actions": {
+        "top": 432,
+        "bottom": 538,
+        "left": 16,
+        "right": 374,
+        "width": 358,
+        "height": 106
+      },
+      "facts": {
+        "top": 572,
+        "bottom": 812,
+        "left": 16,
+        "right": 374,
+        "width": 358,
+        "height": 241
+      },
+      "hint": {
+        "top": 847,
+        "bottom": 1030,
+        "left": 14,
+        "right": 376,
+        "width": 362,
+        "height": 183
+      },
+      "firstSection": {
+        "top": 1048,
+        "bottom": 1887,
+        "left": 0,
+        "right": 390,
+        "width": 390,
+        "height": 839
+      },
+      "hiddenReveal": 0,
+      "smallFocusables": [
+        "input.:consent:24x24",
+        "a.:+48 514 214 567:119x22"
+      ]
+    }
+  },
+  {
+    "viewport": "mobile-small-360x740",
+    "shot": "/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-audit-fixes/mobile-small-360x740.png",
+    "metrics": {
+      "viewport": "360x740",
+      "overflow": 0,
+      "scrollHeight": 13966,
+      "h1": {
+        "top": 153,
+        "bottom": 316,
+        "left": 16,
+        "right": 276,
+        "width": 260,
+        "height": 163
+      },
+      "h1Font": "48.6px",
+      "h1LineHeight": "40.824px",
+      "h1Lines": 4,
+      "actions": {
+        "top": 418,
+        "bottom": 524,
+        "left": 16,
+        "right": 344,
+        "width": 328,
+        "height": 106
+      },
+      "facts": {
+        "top": 558,
+        "bottom": 799,
+        "left": 16,
+        "right": 344,
+        "width": 328,
+        "height": 241
+      },
+      "hint": {
+        "top": 847,
+        "bottom": 1030,
+        "left": 14,
+        "right": 346,
+        "width": 332,
+        "height": 183
+      },
+      "firstSection": {
+        "top": 1048,
+        "bottom": 1911,
+        "left": 0,
+        "right": 360,
+        "width": 360,
+        "height": 863
+      },
+      "hiddenReveal": 0,
+      "smallFocusables": [
+        "input.:consent:24x24"
+      ]
+    }
+  }
+]

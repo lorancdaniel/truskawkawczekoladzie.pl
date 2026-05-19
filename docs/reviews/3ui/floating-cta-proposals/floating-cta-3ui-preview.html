@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>3UI Floating CTA Proposals</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@500;700;800;900&display=swap');
+
+      :root {
+        --cream: #fff7ec;
+        --paper: #fdfbf6;
+        --ink: #201b18;
+        --muted: #75665f;
+        --cocoa: #1b100f;
+        --cocoa-2: #2a1715;
+        --red: #c93445;
+        --red-2: #db3d51;
+        --gold: #c59a52;
+        --line: rgba(197, 154, 82, 0.24);
+        --display: 'Cormorant Garamond', Georgia, serif;
+        --body: Manrope, ui-sans-serif, system-ui, sans-serif;
+        --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #fffaf3;
+        color: var(--ink);
+        font-family: var(--body);
+        margin: 0;
+      }
+
+      button,
+      a {
+        font: inherit;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .reference {
+        background:
+          radial-gradient(circle at 84% 6%, rgba(201, 52, 69, 0.22), transparent 30rem),
+          linear-gradient(135deg, #1d0f0f 0%, #321615 58%, #160b0b 100%);
+        color: var(--cream);
+        padding: 54px clamp(26px, 5vw, 72px);
+      }
+
+      .reference h1 {
+        color: var(--cream);
+        font-family: var(--display);
+        font-size: clamp(3rem, 7vw, 7rem);
+        line-height: 0.86;
+        margin: 0;
+        max-width: 12ch;
+      }
+
+      .reference p {
+        color: rgba(255, 247, 236, 0.76);
+        line-height: 1.65;
+        margin: 18px 0 0;
+        max-width: 68ch;
+      }
+
+      .option {
+        border-top: 1px solid rgba(106, 61, 44, 0.14);
+        padding: clamp(54px, 7vw, 92px) clamp(22px, 4vw, 64px);
+      }
+
+      .option__label {
+        align-items: center;
+        display: flex;
+        gap: 14px;
+        margin-bottom: 24px;
+      }
+
+      .option__label span {
+        background: rgba(201, 52, 69, 0.1);
+        border: 1px solid rgba(201, 52, 69, 0.2);
+        border-radius: 999px;
+        color: var(--red);
+        font-size: 0.76rem;
+        font-weight: 900;
+        padding: 8px 12px;
+        text-transform: uppercase;
+      }
+
+      .option__label strong {
+        color: var(--cocoa);
+        font-size: 0.94rem;
+      }
+
+      .frame {
+        background:
+          linear-gradient(90deg, rgba(27, 16, 15, 0.78) 0%, rgba(27, 16, 15, 0.48) 37%, rgba(27, 16, 15, 0.06) 74%),
+          url('/images/hero-strawberry-stand.png') center / cover;
+        border: 1px solid rgba(106, 61, 44, 0.16);
+        border-radius: 22px;
+        box-shadow: 0 30px 100px rgba(73, 42, 24, 0.14);
+        min-height: 680px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .mock-header {
+        align-items: center;
+        background: rgba(27, 16, 15, 0.94);
+        border-bottom: 1px solid rgba(197, 154, 82, 0.38);
+        display: grid;
+        grid-template-columns: minmax(220px, 0.7fr) minmax(420px, 1fr);
+        min-height: 78px;
+        padding: 0 24px;
+      }
+
+      .mock-brand {
+        align-items: center;
+        color: var(--cream);
+        display: flex;
+        gap: 12px;
+        font-size: 0.82rem;
+        font-weight: 900;
+        line-height: 1;
+        text-transform: uppercase;
+      }
+
+      .mock-brand img {
+        display: block;
+        height: 54px;
+        width: auto;
+      }
+
+      .mock-nav {
+        color: rgba(255, 247, 236, 0.76);
+        display: flex;
+        gap: clamp(18px, 3vw, 44px);
+        justify-content: center;
+        font-size: 0.84rem;
+        font-weight: 900;
+      }
+
+      .mock-content {
+        padding: 90px clamp(28px, 5vw, 70px);
+      }
+
+      .mock-content .eyebrow {
+        color: #ffcbd1;
+        font-size: 0.76rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .mock-content h2 {
+        color: var(--cream);
+        font-family: var(--display);
+        font-size: clamp(4.2rem, 9vw, 8.6rem);
+        line-height: 0.84;
+        margin: 14px 0 0;
+        max-width: 14ch;
+      }
+
+      .mock-content p {
+        color: rgba(255, 247, 236, 0.86);
+        line-height: 1.6;
+        max-width: 52ch;
+      }
+
+      .floating-demo {
+        position: absolute;
+        z-index: 10;
+      }
+
+      .demo-phone,
+      .demo-cta {
+        align-items: center;
+        border: 0;
+        cursor: pointer;
+        display: inline-flex;
+        justify-content: center;
+        white-space: nowrap;
+      }
+
+      .demo-cta {
+        background: var(--red);
+        box-shadow: 0 16px 38px rgba(201, 52, 69, 0.28);
+        color: var(--paper);
+        font-weight: 900;
+      }
+
+      .demo-phone {
+        color: var(--paper);
+        position: relative;
+      }
+
+      .demo-phone svg,
+      .demo-cta svg {
+        flex: 0 0 auto;
+        height: 18px;
+        width: 18px;
+      }
+
+      .demo-phone__copy {
+        display: grid;
+        line-height: 1.05;
+        overflow: hidden;
+        transition:
+          opacity 320ms var(--ease),
+          transform 320ms var(--ease),
+          width 320ms var(--ease);
+      }
+
+      .demo-phone__copy small {
+        color: rgba(255, 247, 236, 0.62);
+        font-size: 0.58rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .demo-phone__copy strong {
+        font-size: 0.9rem;
+        font-weight: 900;
+      }
+
+      .option-1 .floating-demo {
+        align-items: center;
+        display: flex;
+        gap: 10px;
+        right: 30px;
+        top: 26px;
+      }
+
+      .option-1 .demo-phone {
+        background: rgba(255, 247, 236, 0.1);
+        border: 1px solid rgba(255, 247, 236, 0.24);
+        border-radius: 999px;
+        gap: 10px;
+        height: 50px;
+        min-width: 178px;
+        padding: 0 16px;
+        transition:
+          background 220ms var(--ease),
+          border-color 220ms var(--ease),
+          min-width 420ms var(--ease),
+          padding 420ms var(--ease);
+      }
+
+      .option-1 .demo-cta {
+        border-radius: 999px;
+        gap: 9px;
+        height: 50px;
+        padding: 0 22px;
+      }
+
+      .option-1 .floating-demo::after {
+        background: rgba(255, 247, 236, 0.12);
+        border-radius: 999px;
+        content: '';
+        inset: -6px;
+        pointer-events: none;
+        position: absolute;
+        z-index: -1;
+      }
+
+      .option-1 .floating-demo {
+        animation: option-one-collapse 5.2s ease-in-out infinite;
+      }
+
+      .option-1 .demo-phone {
+        animation: phone-pill-collapse 5.2s ease-in-out infinite;
+      }
+
+      .option-1 .demo-phone__copy {
+        animation: phone-copy-collapse 5.2s ease-in-out infinite;
+        width: 116px;
+      }
+
+      .option-2 .floating-demo {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        right: 22px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .option-2 .demo-phone {
+        background: #1b100f;
+        border: 1px solid rgba(197, 154, 82, 0.42);
+        border-radius: 999px;
+        box-shadow: 0 18px 44px rgba(27, 16, 15, 0.28);
+        height: 58px;
+        overflow: hidden;
+        width: 58px;
+      }
+
+      .option-2 .demo-phone::after {
+        border: 1px solid rgba(255, 247, 236, 0.32);
+        border-radius: inherit;
+        content: '';
+        inset: 5px;
+        opacity: 0;
+        position: absolute;
+        transform: scale(0.82);
+        animation: phone-ring 2.4s ease-in-out infinite;
+      }
+
+      .option-2 .demo-cta {
+        border-radius: 999px;
+        min-height: 162px;
+        padding: 18px 14px;
+        writing-mode: vertical-rl;
+      }
+
+      .option-3 .floating-demo {
+        align-items: center;
+        background: rgba(27, 16, 15, 0.92);
+        border: 1px solid rgba(197, 154, 82, 0.28);
+        border-radius: 999px;
+        bottom: 28px;
+        box-shadow: 0 24px 60px rgba(27, 16, 15, 0.34);
+        display: flex;
+        gap: 10px;
+        padding: 8px;
+        right: 28px;
+      }
+
+      .option-3 .demo-phone {
+        background: rgba(255, 247, 236, 0.1);
+        border: 1px solid rgba(255, 247, 236, 0.18);
+        border-radius: 999px;
+        height: 48px;
+        overflow: hidden;
+        padding: 0;
+        width: 48px;
+        transition:
+          background 220ms var(--ease),
+          width 520ms var(--ease);
+      }
+
+      .option-3 .demo-phone__copy {
+        opacity: 0;
+        transform: translateX(8px);
+        width: 0;
+      }
+
+      .option-3 .demo-phone:hover,
+      .option-3 .demo-phone:focus-visible {
+        background: rgba(255, 247, 236, 0.16);
+        gap: 10px;
+        padding: 0 16px;
+        width: 188px;
+      }
+
+      .option-3 .demo-phone:hover .demo-phone__copy,
+      .option-3 .demo-phone:focus-visible .demo-phone__copy {
+        opacity: 1;
+        transform: translateX(0);
+        width: 112px;
+      }
+
+      .option-3 .demo-cta {
+        border-radius: 999px;
+        gap: 8px;
+        height: 48px;
+        padding: 0 18px;
+      }
+
+      .notes {
+        color: var(--muted);
+        display: grid;
+        gap: 6px;
+        line-height: 1.55;
+        margin: 18px 0 0;
+      }
+
+      .notes strong {
+        color: var(--cocoa);
+      }
+
+      @keyframes option-one-collapse {
+        0%,
+        45% {
+          transform: translateY(0);
+        }
+
+        60%,
+        100% {
+          transform: translateY(-1px);
+        }
+      }
+
+      @keyframes phone-pill-collapse {
+        0%,
+        45% {
+          min-width: 178px;
+          padding-inline: 16px;
+        }
+
+        60%,
+        100% {
+          min-width: 50px;
+          padding-inline: 0;
+        }
+      }
+
+      @keyframes phone-copy-collapse {
+        0%,
+        45% {
+          opacity: 1;
+          transform: translateX(0);
+          width: 116px;
+        }
+
+        60%,
+        100% {
+          opacity: 0;
+          transform: translateX(10px);
+          width: 0;
+        }
+      }
+
+      @keyframes phone-ring {
+        0% {
+          opacity: 0;
+          transform: scale(0.72);
+        }
+
+        44% {
+          opacity: 0.86;
+        }
+
+        100% {
+          opacity: 0;
+          transform: scale(1.22);
+        }
+      }
+
+      @media (max-width: 900px) {
+        .frame {
+          min-height: 760px;
+        }
+
+        .mock-header {
+          grid-template-columns: 1fr;
+        }
+
+        .mock-nav {
+          display: none;
+        }
+
+        .mock-content {
+          padding-top: 112px;
+        }
+
+        .mock-content h2 {
+          font-size: clamp(3.6rem, 15vw, 5.8rem);
+          max-width: 10ch;
+        }
+
+        .option-1 .floating-demo {
+          right: 14px;
+          top: 86px;
+        }
+
+        .option-1 .demo-cta {
+          height: 46px;
+          padding-inline: 16px;
+        }
+
+        .option-2 .floating-demo {
+          bottom: 20px;
+          flex-direction: row;
+          right: 18px;
+          top: auto;
+          transform: none;
+        }
+
+        .option-2 .demo-cta {
+          min-height: 50px;
+          padding: 0 18px;
+          writing-mode: initial;
+        }
+
+        .option-3 .floating-demo {
+          bottom: 18px;
+          left: 14px;
+          right: 14px;
+        }
+
+        .option-3 .demo-cta {
+          flex: 1 1 auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="reference">
+      <h1>Pływające akcje na bazie LSW.</h1>
+      <p>
+        Referencja ma stałą grupę akcji przy prawej krawędzi. Warianty poniżej zachowują kontekst Strawberry Group:
+        czerwony przycisk terminu zostaje czytelny, a kontakt bezpośredni animuje się do ikony telefonu.
+      </p>
+    </section>
+
+    <section class="option option-1" id="option-1">
+      <div class="option__label">
+        <span>Option 1</span>
+        <strong>LSW Corner Float</strong>
+      </div>
+      <div class="frame">
+        <div class="mock-header">
+          <div class="mock-brand">
+            <img src="/brand/strawberry-group-generated-logo.png" alt="" />
+            <span>Strawberry<br />Group S.C.</span>
+          </div>
+          <nav class="mock-nav" aria-label="Preview navigation">
+            <a>Oferta</a>
+            <a>Pakiety</a>
+            <a>Jak działamy</a>
+            <a>Eventy</a>
+            <a>Kontakt</a>
+          </nav>
+        </div>
+        <div class="floating-demo" aria-label="Floating actions option 1">
+          <a class="demo-phone" href="tel:+48514214567">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.92.33 1.81.62 2.66a2 2 0 0 1-.45 2.11L8 9.77a16 16 0 0 0 6.22 6.22l1.28-1.28a2 2 0 0 1 2.11-.45c.85.29 1.74.5 2.66.62A2 2 0 0 1 22 16.92Z" />
+            </svg>
+            <span class="demo-phone__copy">
+              <small>kontakt bezpośredni</small>
+              <strong>+48 514 214 567</strong>
+            </span>
+          </a>
+          <button class="demo-cta" type="button">
+            Sprawdź termin
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
+              <path d="M5 12h14" />
+              <path d="m13 6 6 6-6 6" />
+            </svg>
+          </button>
+        </div>
+        <div class="mock-content">
+          <span class="eyebrow">Interaktywne stoisko deserowe</span>
+          <h2>Truskawki w czekoladzie jako atrakcja wydarzenia.</h2>
+          <p>Stały panel działa jak lekka warstwa nad headerem. Kontakt zwęża się w ikonę telefonu po wejściu w stan scroll.</p>
+        </div>
+      </div>
+      <p class="notes">
+        <strong>Najbliżej LSW.</strong>
+        Najmniej ingeruje w layout: desktop top-right, mobile pod headerem. Ryzyko: trzeba dobrze odsunąć od menu i przycisku hamburgera.
+      </p>
+    </section>
+
+    <section class="option option-2" id="option-2">
+      <div class="option__label">
+        <span>Option 2</span>
+        <strong>Right Edge Rail</strong>
+      </div>
+      <div class="frame">
+        <div class="mock-header">
+          <div class="mock-brand">
+            <img src="/brand/strawberry-group-generated-logo.png" alt="" />
+            <span>Strawberry<br />Group S.C.</span>
+          </div>
+          <nav class="mock-nav" aria-label="Preview navigation">
+            <a>Oferta</a>
+            <a>Pakiety</a>
+            <a>Jak działamy</a>
+            <a>Eventy</a>
+            <a>Kontakt</a>
+          </nav>
+        </div>
+        <div class="floating-demo" aria-label="Floating actions option 2">
+          <a class="demo-phone" href="tel:+48514214567" aria-label="Kontakt telefoniczny +48 514 214 567">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.92.33 1.81.62 2.66a2 2 0 0 1-.45 2.11L8 9.77a16 16 0 0 0 6.22 6.22l1.28-1.28a2 2 0 0 1 2.11-.45c.85.29 1.74.5 2.66.62A2 2 0 0 1 22 16.92Z" />
+            </svg>
+          </a>
+          <button class="demo-cta" type="button">Sprawdź termin</button>
+        </div>
+        <div class="mock-content">
+          <span class="eyebrow">Interaktywne stoisko deserowe</span>
+          <h2>Truskawki w czekoladzie jako atrakcja wydarzenia.</h2>
+          <p>Panel jest niezależny od headera i zostaje widoczny podczas przewijania całej strony.</p>
+        </div>
+      </div>
+      <p class="notes">
+        <strong>Najbardziej pływające.</strong>
+        Mocno widoczne na długiej stronie. Ryzyko: bardziej narzędziowy wygląd, trzeba pilnować zasłaniania treści po prawej.
+      </p>
+    </section>
+
+    <section class="option option-3" id="option-3">
+      <div class="option__label">
+        <span>Option 3</span>
+        <strong>Premium Bottom Command</strong>
+      </div>
+      <div class="frame">
+        <div class="mock-header">
+          <div class="mock-brand">
+            <img src="/brand/strawberry-group-generated-logo.png" alt="" />
+            <span>Strawberry<br />Group S.C.</span>
+          </div>
+          <nav class="mock-nav" aria-label="Preview navigation">
+            <a>Oferta</a>
+            <a>Pakiety</a>
+            <a>Jak działamy</a>
+            <a>Eventy</a>
+            <a>Kontakt</a>
+          </nav>
+        </div>
+        <div class="floating-demo" aria-label="Floating actions option 3">
+          <a class="demo-phone" href="tel:+48514214567">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.92.33 1.81.62 2.66a2 2 0 0 1-.45 2.11L8 9.77a16 16 0 0 0 6.22 6.22l1.28-1.28a2 2 0 0 1 2.11-.45c.85.29 1.74.5 2.66.62A2 2 0 0 1 22 16.92Z" />
+            </svg>
+            <span class="demo-phone__copy">
+              <small>kontakt</small>
+              <strong>+48 514 214 567</strong>
+            </span>
+          </a>
+          <button class="demo-cta" type="button">
+            Sprawdź termin
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
+              <path d="M5 12h14" />
+              <path d="m13 6 6 6-6 6" />
+            </svg>
+          </button>
+        </div>
+        <div class="mock-content">
+          <span class="eyebrow">Interaktywne stoisko deserowe</span>
+          <h2>Truskawki w czekoladzie jako atrakcja wydarzenia.</h2>
+          <p>Akcje są zawsze pod ręką, ale nie konkurują z headerem. Telefon rozwija numer po hover/focus.</p>
+        </div>
+      </div>
+      <p class="notes">
+        <strong>Najbezpieczniejsze dla nawigacji.</strong>
+        Dobry wariant mobile/desktop, ale najmniej podobny do LSW, bo siedzi niżej.
+      </p>
+    </section>
+  </body>
+</html>

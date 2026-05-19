@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 132" role="img" aria-labelledby="title desc">
+  <title id="title">Strawberry Group premium logo</title>
+  <desc id="desc">Transparent premium Strawberry Group logo for dark photographic hero headers.</desc>
+  <defs>
+    <linearGradient id="sg-gold" x1="20" x2="110" y1="12" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f6df9f"/>
+      <stop offset="0.48" stop-color="#c69b52"/>
+      <stop offset="1" stop-color="#8a5c28"/>
+    </linearGradient>
+    <linearGradient id="sg-berry" x1="49" x2="83" y1="42" y2="103" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f04b5d"/>
+      <stop offset="0.62" stop-color="#c93445"/>
+      <stop offset="1" stop-color="#7e1220"/>
+    </linearGradient>
+  </defs>
+
+  <g>
+    <path
+      d="M66 10.5c18.5 0 36.3 6.2 50.7 17.7v37.3c0 31.6-18.8 49.6-50.7 60.9-31.9-11.3-50.7-29.3-50.7-60.9V28.2C29.7 16.7 47.5 10.5 66 10.5Z"
+      fill="#1f1211"
+      opacity=".92"
+    />
+    <path
+      d="M66 14.3c17.3 0 33.9 5.7 47.2 16.2v35c0 29.1-16.8 46.1-47.2 57.1-30.4-11-47.2-28-47.2-57.1v-35C32.1 20 48.7 14.3 66 14.3Z"
+      fill="none"
+      stroke="url(#sg-gold)"
+      stroke-width="2.3"
+    />
+    <path
+      d="M66 36.7c12.7 0 27.1 13.8 29.8 30.3 3.1 19.5-12.1 43.7-29.8 43.7S33.1 86.5 36.2 67c2.7-16.5 17.1-30.3 29.8-30.3Z"
+      fill="url(#sg-berry)"
+    />
+    <path
+      d="M47 57.1c5.5 3 12.2 4.7 20 5 8.8.4 17.3-1 25.5-4 1.7 3.8 3 8.3 3.7 13.1.1 1 .2 2 .3 2.9-4.3 2.5-7.6 2.2-10-1-3.2 5.2-7.5 5.8-13.1 1.7-3.8 5.1-8.7 5.2-14.9.1-3.9 3.5-8.3 3.3-13.2-.7-2.5 2.1-5.1 2.8-8 .9.1-1.6.3-3.2.5-4.8.8-5.5 2.9-10.2 5.5-14.4 1.2.4 2.5.8 3.7 1.2Z"
+      fill="#2a1715"
+      opacity=".9"
+    />
+    <path
+      d="M66 30.4c-2.2 6.8-6.3 10.7-14.1 12.8 7.8 2 11.9 6 14.1 13 2.2-7 6.3-11 14.1-13-7.8-2.1-11.9-6-14.1-12.8Z"
+      fill="#396a49"
+    />
+    <path
+      d="M66 28.8c4.7 5.3 9.8 8.2 17.5 7.2-5.6 5.2-11 6.9-17.5 5.8-6.5 1.1-11.9-.6-17.5-5.8 7.7 1 12.8-1.9 17.5-7.2Z"
+      fill="#8dae6d"
+    />
+    <path d="M66 27.6v15.8" fill="none" stroke="#d6ad63" stroke-linecap="round" stroke-width="2.2"/>
+    <g fill="#f4d794">
+      <path d="M55.5 68.6c1.8-1.7 3.6-1.7 5.4 0-1.8 1.8-3.6 1.8-5.4 0Z"/>
+      <path d="M72.9 68.2c1.8-1.7 3.6-1.7 5.4 0-1.8 1.8-3.6 1.8-5.4 0Z"/>
+      <path d="M49.8 85.3c1.8-1.7 3.6-1.7 5.4 0-1.8 1.8-3.6 1.8-5.4 0Z"/>
+      <path d="M64.1 88.6c1.8-1.7 3.6-1.7 5.4 0-1.8 1.8-3.6 1.8-5.4 0Z"/>
+      <path d="M77.8 85.3c1.8-1.7 3.6-1.7 5.4 0-1.8 1.8-3.6 1.8-5.4 0Z"/>
+    </g>
+  </g>
+
+  <g transform="translate(154 34)">
+    <text
+      x="0"
+      y="35"
+      fill="#fff7ec"
+      font-family="'Cormorant Garamond', Georgia, serif"
+      font-size="42"
+      font-weight="700"
+      letter-spacing="2.4"
+    >
+      STRAWBERRY
+    </text>
+    <line x1="2" y1="56" x2="84" y2="56" stroke="#c69b52" stroke-linecap="round" stroke-width="2"/>
+    <text
+      x="102"
+      y="64"
+      fill="#fff7ec"
+      font-family="Manrope, Arial, sans-serif"
+      font-size="20"
+      font-weight="800"
+      letter-spacing="10"
+    >
+      GROUP
+    </text>
+    <line x1="270" y1="56" x2="352" y2="56" stroke="#c69b52" stroke-linecap="round" stroke-width="2"/>
+    <text
+      x="0"
+      y="94"
+      fill="#f0cbd0"
+      font-family="'Cormorant Garamond', Georgia, serif"
+      font-size="22"
+      font-style="italic"
+      font-weight="600"
+      letter-spacing=".7"
+    >
+      Świeżość. Jakość. Doświadczenie.
+    </text>
+  </g>
+</svg>

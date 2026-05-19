@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>3UI Process Section Redesign - Strawberry Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --cream: #fff7ec;
+        --warm-white: #fdfbf6;
+        --chocolate: #211716;
+        --cocoa: #6a3d2c;
+        --muted: #75665f;
+        --border: #e6d8cb;
+        --strawberry: #c93445;
+        --gold: #c59a52;
+        --edge: clamp(24px, 3.2vw, 64px);
+        --section-y: clamp(72px, 9vw, 128px);
+        --display: "Cormorant Garamond", Georgia, serif;
+        --body: "Manrope", system-ui, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        background: #fffaf3;
+        color: var(--chocolate);
+        font-family: var(--body);
+      }
+
+      body {
+        margin: 0;
+      }
+
+      .proposal-note {
+        background: #1b100f;
+        border: 1px solid rgba(197, 154, 82, 0.34);
+        border-radius: 8px;
+        bottom: 18px;
+        box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28);
+        color: rgba(255, 247, 236, 0.78);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px 24px;
+        justify-content: space-between;
+        left: var(--edge);
+        max-width: min(780px, calc(100vw - (var(--edge) * 2)));
+        padding: 12px 14px;
+        position: fixed;
+        z-index: 60;
+      }
+
+      .proposal-note strong {
+        color: var(--cream);
+      }
+
+      .context-strip {
+        background:
+          linear-gradient(90deg, rgba(18, 6, 5, 0.9), rgba(18, 6, 5, 0.48)),
+          url("/images/hero-strawberry-stand.png") center / cover;
+        color: var(--cream);
+        min-height: 220px;
+        padding: 88px var(--edge) 34px;
+      }
+
+      .context-strip h1 {
+        font-family: var(--display);
+        font-size: clamp(3.2rem, 5vw, 5.8rem);
+        line-height: 0.88;
+        margin: 0;
+        max-width: 11ch;
+      }
+
+      .context-strip p {
+        color: rgba(255, 247, 236, 0.76);
+        margin: 14px 0 0;
+        max-width: 58ch;
+      }
+
+      .preview-section {
+        border-top: 1px solid rgba(106, 61, 44, 0.12);
+        padding: var(--section-y) var(--edge);
+        position: relative;
+      }
+
+      .preview-section:nth-of-type(odd) {
+        background: #fffaf3;
+      }
+
+      .preview-section:nth-of-type(even) {
+        background: #fbf1e7;
+      }
+
+      .option-label {
+        align-items: center;
+        background: #1b100f;
+        border: 1px solid rgba(197, 154, 82, 0.32);
+        border-radius: 999px;
+        color: var(--cream);
+        display: inline-flex;
+        font-size: 0.72rem;
+        font-weight: 900;
+        gap: 8px;
+        min-height: 34px;
+        padding: 0 14px;
+        position: absolute;
+        right: var(--edge);
+        text-transform: uppercase;
+        top: 28px;
+      }
+
+      .option-label span {
+        color: #ffcbd1;
+      }
+
+      .section-heading {
+        margin-bottom: clamp(28px, 4vw, 52px);
+        max-width: 760px;
+      }
+
+      .eyebrow {
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 900;
+        margin: 0 0 12px;
+        text-transform: uppercase;
+      }
+
+      h2 {
+        font-family: var(--display);
+        font-size: clamp(3rem, 5.2vw, 5.5rem);
+        line-height: 0.9;
+        margin: 0;
+        max-width: 13ch;
+      }
+
+      .section-heading p {
+        color: var(--muted);
+        font-size: 1rem;
+        line-height: 1.6;
+        margin: 18px 0 0;
+        max-width: 58ch;
+      }
+
+      h3,
+      p {
+        margin: 0;
+      }
+
+      .icon-box {
+        align-items: center;
+        border-radius: 10px;
+        display: inline-flex;
+        height: 44px;
+        justify-content: center;
+        width: 44px;
+      }
+
+      .icon-box svg {
+        height: 22px;
+        width: 22px;
+      }
+
+      .option-1 .steps {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .option-1 article {
+        background: rgba(253, 251, 246, 0.78);
+        border: 1px solid rgba(106, 61, 44, 0.16);
+        border-radius: 8px;
+        display: grid;
+        grid-template-rows: auto auto 1fr;
+        min-height: 245px;
+        padding: 22px;
+      }
+
+      .option-1 .step-top {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        min-height: 44px;
+      }
+
+      .option-1 .number {
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 900;
+      }
+
+      .option-1 .icon-box {
+        background: rgba(201, 52, 69, 0.08);
+        color: var(--strawberry);
+      }
+
+      .option-1 h3 {
+        font-family: var(--display);
+        font-size: clamp(1.65rem, 2.1vw, 2.3rem);
+        line-height: 0.94;
+        margin-top: 28px;
+        min-height: 2.2em;
+      }
+
+      .option-1 p {
+        align-self: end;
+        color: var(--muted);
+        font-size: 0.92rem;
+        line-height: 1.55;
+        margin-top: 20px;
+      }
+
+      .option-2 .section-heading {
+        margin-bottom: 42px;
+      }
+
+      .option-2 .timeline {
+        display: grid;
+        gap: 0;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        position: relative;
+      }
+
+      .option-2 .timeline::before {
+        background: rgba(106, 61, 44, 0.16);
+        content: "";
+        height: 1px;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 48px;
+      }
+
+      .option-2 article {
+        padding: 0 28px 0 0;
+        position: relative;
+      }
+
+      .option-2 article + article {
+        padding-left: 28px;
+      }
+
+      .option-2 .node {
+        align-items: center;
+        background: #fffaf3;
+        border: 1px solid rgba(106, 61, 44, 0.18);
+        border-radius: 999px;
+        display: flex;
+        gap: 12px;
+        height: 96px;
+        padding: 0 16px;
+        position: relative;
+        width: fit-content;
+        z-index: 2;
+      }
+
+      .option-2 .number {
+        color: var(--strawberry);
+        font-size: 0.76rem;
+        font-weight: 900;
+      }
+
+      .option-2 .icon-box {
+        background: var(--chocolate);
+        color: var(--cream);
+        height: 42px;
+        width: 42px;
+      }
+
+      .option-2 h3 {
+        font-family: var(--display);
+        font-size: clamp(1.5rem, 1.9vw, 2.1rem);
+        line-height: 0.96;
+        margin-top: 28px;
+        max-width: 10ch;
+      }
+
+      .option-2 p {
+        color: var(--muted);
+        font-size: 0.92rem;
+        line-height: 1.55;
+        margin-top: 14px;
+        max-width: 24ch;
+      }
+
+      .option-3 {
+        background:
+          radial-gradient(circle at 80% 22%, rgba(201, 52, 69, 0.12), transparent 34rem),
+          linear-gradient(180deg, #fffaf3 0%, #fbf1e7 100%);
+      }
+
+      .option-3 .board {
+        background: #211716;
+        border: 1px solid rgba(197, 154, 82, 0.26);
+        color: var(--cream);
+        display: grid;
+        grid-template-columns: 0.86fr 1.14fr;
+      }
+
+      .option-3 .board-intro {
+        border-right: 1px solid rgba(197, 154, 82, 0.22);
+        padding: clamp(30px, 4vw, 52px);
+      }
+
+      .option-3 .board-intro .eyebrow,
+      .option-3 .board-intro p {
+        color: rgba(255, 247, 236, 0.68);
+      }
+
+      .option-3 .board-intro h2 {
+        color: var(--cream);
+        max-width: 10ch;
+      }
+
+      .option-3 .board-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .option-3 article {
+        border-bottom: 1px solid rgba(197, 154, 82, 0.18);
+        border-right: 1px solid rgba(197, 154, 82, 0.18);
+        display: grid;
+        gap: 18px;
+        grid-template-columns: 54px minmax(0, 1fr);
+        min-height: 220px;
+        padding: 30px;
+      }
+
+      .option-3 article:nth-child(even) {
+        border-right: 0;
+      }
+
+      .option-3 article:nth-last-child(-n + 2) {
+        border-bottom: 0;
+      }
+
+      .option-3 .number {
+        color: var(--gold);
+        font-size: 0.78rem;
+        font-weight: 900;
+      }
+
+      .option-3 .icon-box {
+        background: rgba(255, 247, 236, 0.08);
+        color: #ffcbd1;
+        grid-column: 1;
+        grid-row: 2;
+      }
+
+      .option-3 h3 {
+        color: var(--cream);
+        font-family: var(--display);
+        font-size: clamp(1.55rem, 2vw, 2.15rem);
+        line-height: 0.94;
+      }
+
+      .option-3 p {
+        color: rgba(255, 247, 236, 0.68);
+        font-size: 0.92rem;
+        line-height: 1.55;
+        margin-top: 12px;
+      }
+
+      .next-context {
+        background:
+          radial-gradient(circle at 50% 20%, rgba(201, 52, 69, 0.08), transparent 34rem),
+          linear-gradient(180deg, #fbf1e7 0%, #fffaf3 100%);
+        padding: 76px var(--edge) 110px;
+      }
+
+      .next-context h2 {
+        color: #201b18;
+      }
+
+      @media (max-width: 1100px) {
+        .option-1 .steps,
+        .option-2 .timeline,
+        .option-3 .board,
+        .option-3 .board-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .option-2 .timeline::before {
+          display: none;
+        }
+
+        .option-2 article,
+        .option-2 article + article {
+          border-top: 1px solid rgba(106, 61, 44, 0.12);
+          padding: 22px 0;
+        }
+
+        .option-3 .board-intro,
+        .option-3 article,
+        .option-3 article:nth-child(even) {
+          border-right: 0;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .proposal-note {
+          display: none;
+        }
+
+        .context-strip,
+        .preview-section,
+        .next-context {
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+
+        .option-label {
+          left: 16px;
+          right: auto;
+        }
+
+        h2,
+        .context-strip h1 {
+          font-size: clamp(3rem, 13vw, 4.4rem);
+        }
+
+        .option-1 article,
+        .option-3 article {
+          min-height: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="proposal-note">
+      <strong>3UI process section preview</strong>
+      <span>Trzy warianty sekcji “Jak działa stoisko”; kod produkcyjny bez zmian.</span>
+    </div>
+
+    <section class="context-strip" aria-label="Kontekst hero">
+      <h1>Truskawki w czekoladzie jako atrakcja wydarzenia.</h1>
+      <p>Header i hero zostają w obecnym kierunku; poniżej porównujemy wyłącznie sekcję procesu.</p>
+    </section>
+
+    <section class="preview-section option-1" id="option-1">
+      <span class="option-label"><span>Option 1</span> Aligned Step Cards</span>
+      <div class="section-heading">
+        <p class="eyebrow">Jak działa stoisko</p>
+        <h2>Jeden prosty proces od zapytania do ostatniego kubka.</h2>
+        <p>Nie musisz organizować osobnej obsługi deseru. Przyjeżdżamy z gotowym stanowiskiem, składnikami i rytmem pracy.</p>
+      </div>
+      <div class="steps">
+        <article>
+          <div class="step-top">
+            <span class="number">01</span>
+            <span class="icon-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16M9 15l2 2 4-5"/></svg>
+            </span>
+          </div>
+          <h3>Ustalamy wydarzenie</h3>
+          <p>Termin, miasto, liczba gości, typ wydarzenia i preferowany pakiet.</p>
+        </article>
+        <article>
+          <div class="step-top">
+            <span class="number">02</span>
+            <span class="icon-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M9 5h6"/><path d="M9 3h6v4H9z"/><rect x="5" y="5" width="14" height="16" rx="2"/><path d="m9 14 2 2 4-5"/></svg>
+            </span>
+          </div>
+          <h3>Dopasowujemy stoisko</h3>
+          <p>Dobieramy dodatki, wariant obsługi, wygląd stoiska i ewentualny branding.</p>
+        </article>
+        <article>
+          <div class="step-top">
+            <span class="number">03</span>
+            <span class="icon-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 3v4"/><path d="M5 13a7 7 0 0 1 14 0"/><path d="M4 13h16"/><path d="M6 17h12"/><path d="M8 21h8"/></svg>
+            </span>
+          </div>
+          <h3>Przyjeżdżamy i montujemy</h3>
+          <p>Przywozimy wyposażenie, składniki i przygotowujemy stanowisko przed obsługą.</p>
+        </article>
+        <article>
+          <div class="step-top">
+            <span class="number">04</span>
+            <span class="icon-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 3 4 7v5c0 5 3.5 8 8 9 4.5-1 8-4 8-9V7z"/><path d="m9 12 2 2 4-5"/></svg>
+            </span>
+          </div>
+          <h3>Serwujemy i zamykamy</h3>
+          <p>Obsługa wydaje desery, angażuje gości i po wydarzeniu demontuje stoisko.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="preview-section option-2" id="option-2">
+      <span class="option-label"><span>Option 2</span> Event Timeline</span>
+      <div class="section-heading">
+        <p class="eyebrow">Jak działa stoisko</p>
+        <h2>Jeden prosty proces od zapytania do ostatniego kubka.</h2>
+        <p>Układ pokazuje przepływ pracy jako linię czasu, więc użytkownik czyta proces od lewej do prawej bez ciężkich kart.</p>
+      </div>
+      <div class="timeline">
+        <article>
+          <div class="node"><span class="number">01</span><span class="icon-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16M9 15l2 2 4-5"/></svg></span></div>
+          <h3>Ustalamy wydarzenie</h3>
+          <p>Termin, miasto, liczba gości, typ wydarzenia i preferowany pakiet.</p>
+        </article>
+        <article>
+          <div class="node"><span class="number">02</span><span class="icon-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M9 5h6"/><path d="M9 3h6v4H9z"/><rect x="5" y="5" width="14" height="16" rx="2"/><path d="m9 14 2 2 4-5"/></svg></span></div>
+          <h3>Dopasowujemy stoisko</h3>
+          <p>Dobieramy dodatki, wariant obsługi, wygląd stoiska i ewentualny branding.</p>
+        </article>
+        <article>
+          <div class="node"><span class="number">03</span><span class="icon-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 3v4"/><path d="M5 13a7 7 0 0 1 14 0"/><path d="M4 13h16"/><path d="M6 17h12"/><path d="M8 21h8"/></svg></span></div>
+          <h3>Przyjeżdżamy i montujemy</h3>
+          <p>Przywozimy wyposażenie, składniki i przygotowujemy stanowisko przed obsługą.</p>
+        </article>
+        <article>
+          <div class="node"><span class="number">04</span><span class="icon-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 3 4 7v5c0 5 3.5 8 8 9 4.5-1 8-4 8-9V7z"/><path d="m9 12 2 2 4-5"/></svg></span></div>
+          <h3>Serwujemy i zamykamy</h3>
+          <p>Obsługa wydaje desery, angażuje gości i po wydarzeniu demontuje stoisko.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="preview-section option-3" id="option-3">
+      <span class="option-label"><span>Option 3</span> Cocoa Operations Board</span>
+      <div class="board">
+        <div class="board-intro">
+          <p class="eyebrow">Jak działa stoisko</p>
+          <h2>Jeden prosty proces od zapytania do ostatniego kubka.</h2>
+          <p>Proces jako ciemny panel operacyjny: bardziej premium, mocniej odróżnia sekcję od pakietów i usuwa wrażenie luźnych, nierównych kart.</p>
+        </div>
+        <div class="board-grid">
+          <article>
+            <span class="number">01</span>
+            <span class="icon-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16M9 15l2 2 4-5"/></svg></span>
+            <div><h3>Ustalamy wydarzenie</h3><p>Termin, miasto, liczba gości, typ wydarzenia i preferowany pakiet.</p></div>
+          </article>
+          <article>
+            <span class="number">02</span>
+            <span class="icon-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M9 5h6"/><path d="M9 3h6v4H9z"/><rect x="5" y="5" width="14" height="16" rx="2"/><path d="m9 14 2 2 4-5"/></svg></span>
+            <div><h3>Dopasowujemy stoisko</h3><p>Dobieramy dodatki, wariant obsługi, wygląd stoiska i ewentualny branding.</p></div>
+          </article>
+          <article>
+            <span class="number">03</span>
+            <span class="icon-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 3v4"/><path d="M5 13a7 7 0 0 1 14 0"/><path d="M4 13h16"/><path d="M6 17h12"/><path d="M8 21h8"/></svg></span>
+            <div><h3>Przyjeżdżamy i montujemy</h3><p>Przywozimy wyposażenie, składniki i przygotowujemy stanowisko przed obsługą.</p></div>
+          </article>
+          <article>
+            <span class="number">04</span>
+            <span class="icon-box" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 3 4 7v5c0 5 3.5 8 8 9 4.5-1 8-4 8-9V7z"/><path d="m9 12 2 2 4-5"/></svg></span>
+            <div><h3>Serwujemy i zamykamy</h3><p>Obsługa wydaje desery, angażuje gości i po wydarzeniu demontuje stoisko.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="next-context" aria-label="Następna sekcja">
+      <p class="eyebrow">Pakiety</p>
+      <h2>Trzy poziomy obsługi, jeden efekt: słodki punkt wydarzenia.</h2>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>3UI Gallery Static Regeneration</title>
+    <style>
+      :root {
+        --cream: #fff7ec;
+        --paper: #fdfbf6;
+        --ink: #221413;
+        --muted: #6c5f59;
+        --cocoa: #1b100f;
+        --red: #c93445;
+        --gold: #c59a52;
+        --line: rgba(106, 61, 44, 0.16);
+        --radius: 14px;
+        --display: Georgia, "Times New Roman", serif;
+        --body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #fffaf3;
+        color: var(--ink);
+        font-family: var(--body);
+        margin: 0;
+      }
+
+      img {
+        display: block;
+        height: 100%;
+        object-fit: cover;
+        width: 100%;
+      }
+
+      figure,
+      p,
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+      }
+
+      .context {
+        background:
+          radial-gradient(circle at 84% 0%, rgba(201, 52, 69, 0.2), transparent 26rem),
+          linear-gradient(135deg, #1d0f0f 0%, #2c1615 58%, #160b0b 100%);
+        color: var(--cream);
+        display: grid;
+        gap: 32px;
+        grid-template-columns: minmax(320px, 0.8fr) minmax(0, 1.2fr);
+        padding: 64px clamp(32px, 5vw, 64px);
+      }
+
+      .eyebrow,
+      .option-label {
+        color: var(--red);
+        font-size: 0.76rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .context h1,
+      .section-heading h2,
+      .copy-card h3,
+      .caption strong {
+        font-family: var(--display);
+        font-weight: 700;
+        letter-spacing: 0;
+      }
+
+      .context h1 {
+        color: var(--cream);
+        font-size: clamp(3rem, 5vw, 5.8rem);
+        line-height: 0.9;
+        max-width: 11ch;
+      }
+
+      .context p {
+        align-self: end;
+        color: rgba(255, 247, 236, 0.74);
+        font-size: 1.05rem;
+        line-height: 1.65;
+        max-width: 62ch;
+      }
+
+      .option {
+        border-top: 1px solid var(--line);
+        padding: clamp(76px, 8vw, 122px) clamp(32px, 5vw, 64px);
+      }
+
+      .option-label {
+        background: rgba(201, 52, 69, 0.1);
+        border: 1px solid rgba(201, 52, 69, 0.2);
+        border-radius: 999px;
+        display: inline-flex;
+        margin-bottom: 24px;
+        padding: 9px 13px;
+      }
+
+      .section-heading {
+        align-items: end;
+        display: grid;
+        gap: 24px;
+        grid-template-columns: minmax(320px, 0.85fr) minmax(0, 1.15fr);
+        margin-bottom: 34px;
+      }
+
+      .section-heading h2 {
+        font-size: clamp(3.2rem, 5.4vw, 6.2rem);
+        line-height: 0.9;
+        max-width: 11ch;
+      }
+
+      .section-heading p {
+        color: var(--muted);
+        line-height: 1.65;
+        max-width: 64ch;
+      }
+
+      .photo {
+        border: 1px solid rgba(106, 61, 44, 0.14);
+        border-radius: var(--radius);
+        overflow: hidden;
+        position: relative;
+      }
+
+      .photo::after {
+        background: linear-gradient(180deg, transparent 48%, rgba(27, 16, 15, 0.72));
+        content: "";
+        inset: 0;
+        opacity: 0.78;
+        pointer-events: none;
+        position: absolute;
+      }
+
+      .caption {
+        bottom: 0;
+        color: white;
+        left: 0;
+        padding: 22px;
+        position: absolute;
+        right: 0;
+        z-index: 1;
+      }
+
+      .caption strong {
+        display: block;
+        font-size: clamp(1.8rem, 2.5vw, 3rem);
+        line-height: 0.95;
+      }
+
+      .caption span {
+        color: rgba(255, 247, 236, 0.78);
+        display: block;
+        line-height: 1.4;
+        margin-top: 8px;
+      }
+
+      .option-1 {
+        background: linear-gradient(180deg, #fffaf3 0%, var(--cream) 100%);
+      }
+
+      .mosaic-proof {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: 1.15fr 0.85fr 0.85fr;
+        min-height: 680px;
+      }
+
+      .mosaic-proof .photo:first-child {
+        grid-row: span 2;
+      }
+
+      .mosaic-proof .photo:not(:first-child) {
+        min-height: 330px;
+      }
+
+      .copy-card {
+        background:
+          radial-gradient(circle at 22% 0%, rgba(201, 52, 69, 0.12), transparent 18rem),
+          rgba(253, 251, 246, 0.9);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        display: grid;
+        min-height: 330px;
+        padding: clamp(24px, 3vw, 38px);
+      }
+
+      .copy-card h3 {
+        font-size: clamp(2rem, 2.8vw, 3.3rem);
+        line-height: 0.95;
+      }
+
+      .copy-card p {
+        align-self: end;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .option-2 {
+        background:
+          radial-gradient(circle at 80% 12%, rgba(201, 52, 69, 0.12), transparent 34rem),
+          #1b100f;
+        color: var(--cream);
+      }
+
+      .option-2 .section-heading h2,
+      .option-2 .section-heading p {
+        color: var(--cream);
+      }
+
+      .option-2 .section-heading p {
+        color: rgba(255, 247, 236, 0.72);
+      }
+
+      .editorial-split {
+        display: grid;
+        gap: 18px;
+        grid-template-columns: minmax(420px, 1.2fr) minmax(320px, 0.8fr);
+      }
+
+      .editorial-split .photo-main {
+        aspect-ratio: 16 / 10;
+      }
+
+      .story-list {
+        display: grid;
+        gap: 14px;
+      }
+
+      .story-row {
+        background: rgba(255, 247, 236, 0.08);
+        border: 1px solid rgba(255, 247, 236, 0.13);
+        border-radius: var(--radius);
+        display: grid;
+        gap: 16px;
+        grid-template-columns: 136px minmax(0, 1fr);
+        min-height: 128px;
+        overflow: hidden;
+      }
+
+      .story-row img {
+        min-height: 128px;
+      }
+
+      .story-row div {
+        align-self: center;
+        padding-right: 18px;
+      }
+
+      .story-row strong {
+        display: block;
+        font-family: var(--display);
+        font-size: 1.65rem;
+        line-height: 1;
+      }
+
+      .story-row span {
+        color: rgba(255, 247, 236, 0.66);
+        display: block;
+        line-height: 1.45;
+        margin-top: 8px;
+      }
+
+      .option-3 {
+        background: #fbefe4;
+      }
+
+      .realization-board {
+        display: grid;
+        gap: 0;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        overflow: hidden;
+      }
+
+      .realization-card {
+        background: rgba(253, 251, 246, 0.9);
+        border: 1px solid var(--line);
+        border-right: 0;
+        display: grid;
+        grid-template-rows: minmax(280px, 38vw) auto;
+        min-height: 620px;
+      }
+
+      .realization-card:last-child {
+        border-right: 1px solid var(--line);
+      }
+
+      .realization-card figure {
+        border-bottom: 1px solid var(--line);
+        overflow: hidden;
+      }
+
+      .realization-card div {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding: clamp(22px, 2.5vw, 34px);
+      }
+
+      .realization-card small {
+        color: var(--red);
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .realization-card strong {
+        font-family: var(--display);
+        font-size: clamp(1.85rem, 2.4vw, 3rem);
+        line-height: 0.96;
+      }
+
+      .realization-card p {
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      @media (max-width: 1000px) {
+        .context,
+        .section-heading,
+        .editorial-split {
+          grid-template-columns: 1fr;
+        }
+
+        .mosaic-proof,
+        .realization-board {
+          grid-template-columns: 1fr;
+        }
+
+        .mosaic-proof .photo:first-child {
+          grid-row: auto;
+          min-height: 420px;
+        }
+
+        .realization-card {
+          border-right: 1px solid var(--line);
+          min-height: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="context">
+        <div>
+          <span class="eyebrow">Regeneracja bez karuzeli</span>
+          <h1>Galeria ma działać bez przewijania slajdów.</h1>
+        </div>
+        <p>
+          Wszystkie warianty odrzucają carousel. Zostają wygenerowane zdjęcia, ale układ jest statyczny:
+          użytkownik od razu widzi kilka dowodów wizualnych bez kliknięć, kropek i mechaniki slajdera.
+        </p>
+      </section>
+
+      <section class="option option-1" id="option-1">
+        <span class="option-label">Option 1 · Premium Mosaic Proof</span>
+        <div class="section-heading">
+          <h2>Realizacje pokazane jako mozaika dowodu.</h2>
+          <p>
+            Najbardziej zbliżone do obecnej strony, ale dużo bardziej premium: jeden dominujący kadr, dwa mniejsze
+            zdjęcia i karta tekstowa. Bez interakcji, bez karuzeli, od razu czytelne.
+          </p>
+        </div>
+        <div class="mosaic-proof">
+          <figure class="photo">
+            <img src="/images/gallery-generated/gallery-realization-1-chocolate-pour.png" alt="" />
+            <figcaption class="caption"><strong>Czekolada w ruchu</strong><span>Najbardziej apetyczny moment obsługi.</span></figcaption>
+          </figure>
+          <figure class="photo">
+            <img src="/images/gallery-generated/gallery-realization-2-buffet-counter.png" alt="" />
+            <figcaption class="caption"><strong>Stoisko</strong><span>Czysty, elegancki setup na wydarzeniu.</span></figcaption>
+          </figure>
+          <article class="copy-card">
+            <h3>Jeden widok, kilka dowodów jakości.</h3>
+            <p>Obraz dominuje, tekst tylko dopowiada: świeżość, proces i efekt końcowy są widoczne bez scrollowania w galerii.</p>
+          </article>
+          <figure class="photo">
+            <img src="/images/gallery-generated/gallery-realization-4-finished-cups.png" alt="" />
+            <figcaption class="caption"><strong>Gotowy deser</strong><span>Finalny efekt, który wygląda dobrze na zdjęciach.</span></figcaption>
+          </figure>
+          <figure class="photo">
+            <img src="/images/gallery-generated/gallery-realization-3-guest-toppings.png" alt="" />
+            <figcaption class="caption"><strong>Interakcja</strong><span>Gość widzi proces i wybiera dodatki.</span></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="option option-2" id="option-2">
+        <span class="option-label">Option 2 · Editorial Split Story</span>
+        <div class="section-heading">
+          <h2>Jedno zdjęcie sprzedaje emocję, reszta układa proces.</h2>
+          <p>
+            Ciemniejszy, mocniejszy wariant: duży hero-kadr galerii po lewej i lista trzech etapów po prawej.
+            Bardziej editorial niż klasyczna galeria.
+          </p>
+        </div>
+        <div class="editorial-split">
+          <figure class="photo photo-main">
+            <img src="/images/gallery-generated/gallery-realization-1-chocolate-pour.png" alt="" />
+            <figcaption class="caption"><strong>Moment, który zatrzymuje gości.</strong><span>Najważniejszy kadr zamiast wielu równych miniaturek.</span></figcaption>
+          </figure>
+          <div class="story-list">
+            <article class="story-row">
+              <img src="/images/gallery-generated/gallery-realization-2-buffet-counter.png" alt="" />
+              <div><strong>Setup</strong><span>Stoisko wpisane w elegancki event, bez przypadkowości.</span></div>
+            </article>
+            <article class="story-row">
+              <img src="/images/gallery-generated/gallery-realization-3-guest-toppings.png" alt="" />
+              <div><strong>Proces</strong><span>Goście wybierają dodatki, a obsługa prowadzi tempo.</span></div>
+            </article>
+            <article class="story-row">
+              <img src="/images/gallery-generated/gallery-realization-4-finished-cups.png" alt="" />
+              <div><strong>Efekt</strong><span>Gotowe kubki wyglądają jak premium deser, nie zwykła przekąska.</span></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="option option-3" id="option-3">
+        <span class="option-label">Option 3 · Realization Cards</span>
+        <div class="section-heading">
+          <h2>Karty realizacji zamiast galerii.</h2>
+          <p>
+            Najbardziej uporządkowany wariant: cztery pionowe karty z obrazem i opisem. Czytelny, prosty, bez efektów
+            slidera. Dobry, jeśli chcesz sekcję bardziej informacyjną.
+          </p>
+        </div>
+        <div class="realization-board">
+          <article class="realization-card">
+            <figure><img src="/images/gallery-generated/gallery-realization-1-chocolate-pour.png" alt="" /></figure>
+            <div><small>01 / smak</small><strong>Świeża czekolada</strong><p>Najmocniejszy wizualnie moment podania.</p></div>
+          </article>
+          <article class="realization-card">
+            <figure><img src="/images/gallery-generated/gallery-realization-2-buffet-counter.png" alt="" /></figure>
+            <div><small>02 / stoisko</small><strong>Elegancki setup</strong><p>Kamienny blat, szkło, dodatki i porządek.</p></div>
+          </article>
+          <article class="realization-card">
+            <figure><img src="/images/gallery-generated/gallery-realization-3-guest-toppings.png" alt="" /></figure>
+            <div><small>03 / goście</small><strong>Wybór dodatków</strong><p>Interakcja, która daje ludziom powód podejść.</p></div>
+          </article>
+          <article class="realization-card">
+            <figure><img src="/images/gallery-generated/gallery-realization-4-finished-cups.png" alt="" /></figure>
+            <div><small>04 / efekt</small><strong>Gotowe kubki</strong><p>Deser, który wygląda dobrze także na zdjęciach z eventu.</p></div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,305 @@
+{
+  "capturedAt": "2026-05-19T15:06:03.292Z",
+  "captures": [
+    {
+      "name": "desktop-1920x1080-hero-default",
+      "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-19-motion-mockups/desktop-1920x1080-hero-default.png",
+      "url": "http://localhost:5173/",
+      "selector": "#top",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "actualPngDimensions": {
+        "width": 1920,
+        "height": 1080,
+        "scrollY": 0
+      },
+      "bytes": 1964821,
+      "stability": {
+        "first": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        },
+        "second": {
+          "x": 0,
+          "y": 0,
+          "width": 1920,
+          "height": 1080
+        }
+      }
+    },
+    {
+      "name": "desktop-1920x1080-packages-scroll",
+      "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-19-motion-mockups/desktop-1920x1080-packages-scroll.png",
+      "url": "http://localhost:5173/#pakiety",
+      "selector": "#pakiety",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "actualPngDimensions": {
+        "width": 1920,
+        "height": 1080,
+        "scrollY": 3111
+      },
+      "bytes": 647193,
+      "stability": {
+        "first": {
+          "x": 0,
+          "y": 270.015625,
+          "width": 1920,
+          "height": 2671.421875
+        },
+        "second": {
+          "x": 0,
+          "y": 270.015625,
+          "width": 1920,
+          "height": 2671.421875
+        }
+      }
+    },
+    {
+      "name": "desktop-1920x1080-gallery-carousel",
+      "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-19-motion-mockups/desktop-1920x1080-gallery-carousel.png",
+      "url": "http://localhost:5173/#kontakt",
+      "selector": ".gallery-section",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "actualPngDimensions": {
+        "width": 1920,
+        "height": 1080,
+        "scrollY": 8641
+      },
+      "bytes": 1232989,
+      "stability": {
+        "first": {
+          "x": 0,
+          "y": 125.546875,
+          "width": 1920,
+          "height": 1051.234375
+        },
+        "second": {
+          "x": 0,
+          "y": 125.546875,
+          "width": 1920,
+          "height": 1051.234375
+        }
+      }
+    },
+    {
+      "name": "desktop-1920x1080-contact-form",
+      "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-19-motion-mockups/desktop-1920x1080-contact-form.png",
+      "url": "http://localhost:5173/#kontakt",
+      "selector": "#kontakt",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "actualPngDimensions": {
+        "width": 1920,
+        "height": 1080,
+        "scrollY": 9548
+      },
+      "bytes": 708487,
+      "stability": {
+        "first": {
+          "x": 0,
+          "y": 269.78125,
+          "width": 1920,
+          "height": 1068.609375
+        },
+        "second": {
+          "x": 0,
+          "y": 269.78125,
+          "width": 1920,
+          "height": 1068.609375
+        }
+      }
+    },
+    {
+      "name": "desktop-1920x1080-calculator-modal-step1",
+      "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-19-motion-mockups/desktop-1920x1080-calculator-modal-step1.png",
+      "url": "http://localhost:5173/#kalkulator",
+      "selector": ".calculator-modal__panel",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "actualPngDimensions": {
+        "width": 1920,
+        "height": 1080,
+        "scrollY": 7656
+      },
+      "bytes": 311443,
+      "stability": {
+        "first": {
+          "x": 400,
+          "y": 160,
+          "width": 1120,
+          "height": 760
+        },
+        "second": {
+          "x": 400,
+          "y": 160,
+          "width": 1120,
+          "height": 760
+        }
+      }
+    },
+    {
+      "name": "desktop-1920x1080-package-modal",
+      "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-19-motion-mockups/desktop-1920x1080-package-modal.png",
+      "url": "http://localhost:5173/#kalkulator",
+      "selector": ".package-modal__panel",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "actualPngDimensions": {
+        "width": 1920,
+        "height": 1080,
+        "scrollY": 7656
+      },
+      "bytes": 306755,
+      "stability": {
+        "first": {
+          "x": 370,
+          "y": 160,
+          "width": 1180,
+          "height": 760
+        },
+        "second": {
+          "x": 370,
+          "y": 160,
+          "width": 1180,
+          "height": 760
+        }
+      }
+    },
+    {
+      "name": "mobile-390x844-hero-default",
+      "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-19-motion-mockups/mobile-390x844-hero-default.png",
+      "url": "http://localhost:5173/",
+      "selector": "#top",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "actualPngDimensions": {
+        "width": 390,
+        "height": 844,
+        "scrollY": 0
+      },
+      "bytes": 381140,
+      "stability": {
+        "first": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 1030
+        },
+        "second": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 1030
+        }
+      }
+    },
+    {
+      "name": "mobile-390x844-packages-scroll",
+      "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-19-motion-mockups/mobile-390x844-packages-scroll.png",
+      "url": "http://localhost:5173/#pakiety",
+      "selector": "#pakiety",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "actualPngDimensions": {
+        "width": 390,
+        "height": 844,
+        "scrollY": 4821
+      },
+      "bytes": 130783,
+      "stability": {
+        "first": {
+          "x": 0,
+          "y": 287.765625,
+          "width": 390,
+          "height": 3254.421875
+        },
+        "second": {
+          "x": 0,
+          "y": 287.765625,
+          "width": 390,
+          "height": 3254.421875
+        }
+      }
+    },
+    {
+      "name": "mobile-390x844-gallery-carousel",
+      "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-19-motion-mockups/mobile-390x844-gallery-carousel.png",
+      "url": "http://localhost:5173/#kontakt",
+      "selector": ".gallery-section",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "actualPngDimensions": {
+        "width": 390,
+        "height": 844,
+        "scrollY": 12761
+      },
+      "bytes": 236430,
+      "stability": {
+        "first": {
+          "x": 0,
+          "y": 125.6875,
+          "width": 390,
+          "height": 1096.5625
+        },
+        "second": {
+          "x": 0,
+          "y": 125.6875,
+          "width": 390,
+          "height": 1096.5625
+        }
+      }
+    },
+    {
+      "name": "mobile-390x844-contact-form",
+      "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-19-motion-mockups/mobile-390x844-contact-form.png",
+      "url": "http://localhost:5173/#kontakt",
+      "selector": "#kontakt",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "actualPngDimensions": {
+        "width": 390,
+        "height": 844,
+        "scrollY": 13713
+      },
+      "bytes": 152872,
+      "stability": {
+        "first": {
+          "x": 0,
+          "y": 270.25,
+          "width": 390,
+          "height": 2362.75
+        },
+        "second": {
+          "x": 0,
+          "y": 270.25,
+          "width": 390,
+          "height": 2362.75
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>3UI Logistics Regeneration - Strawberry Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --cream: #fff7ec;
+        --paper: #fdfbf6;
+        --sand: #fbf1e7;
+        --cocoa: #211716;
+        --cocoa-soft: #3d2420;
+        --muted: #75665f;
+        --line: rgba(106, 61, 44, 0.16);
+        --strawberry: #c93445;
+        --gold: #c59a52;
+        --leaf: #2f6b45;
+        --edge: clamp(24px, 3.2vw, 64px);
+        --section-y: clamp(82px, 9vw, 136px);
+        --display: "Cormorant Garamond", Georgia, serif;
+        --body: "Manrope", system-ui, sans-serif;
+      }
+
+      * { box-sizing: border-box; }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        background: #fffaf3;
+        color: var(--cocoa);
+        font-family: var(--body);
+        margin: 0;
+      }
+
+      .context {
+        background:
+          radial-gradient(circle at 74% 16%, rgba(201, 52, 69, 0.08), transparent 34rem),
+          linear-gradient(180deg, #fffaf3 0%, #fbf1e7 100%);
+        border-bottom: 1px solid var(--line);
+        padding: 70px var(--edge) 58px;
+      }
+
+      .context h1,
+      h2 {
+        font-family: var(--display);
+        font-size: clamp(3.2rem, 5.4vw, 6rem);
+        letter-spacing: 0;
+        line-height: 0.9;
+        margin: 0;
+      }
+
+      .context p {
+        color: var(--muted);
+        line-height: 1.7;
+        margin: 18px 0 0;
+        max-width: 58ch;
+      }
+
+      .event-context {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        margin-top: 34px;
+      }
+
+      .event-context span {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        color: var(--muted);
+        min-height: 66px;
+        padding: 18px 20px;
+      }
+
+      .event-context strong {
+        color: var(--cocoa);
+        display: block;
+        font-family: var(--display);
+        font-size: 1.5rem;
+        line-height: 1;
+        margin-bottom: 6px;
+      }
+
+      .preview-section {
+        border-bottom: 1px solid var(--line);
+        padding: var(--section-y) var(--edge);
+        position: relative;
+      }
+
+      .preview-section:nth-of-type(odd) { background: #fffaf3; }
+      .preview-section:nth-of-type(even) { background: #fbf1e7; }
+
+      .option-label {
+        align-items: center;
+        background: #1b100f;
+        border: 1px solid rgba(197, 154, 82, 0.32);
+        border-radius: 999px;
+        color: var(--cream);
+        display: inline-flex;
+        font-size: 0.72rem;
+        font-weight: 900;
+        gap: 8px;
+        min-height: 34px;
+        padding: 0 14px;
+        position: absolute;
+        right: var(--edge);
+        text-transform: uppercase;
+        top: 26px;
+      }
+
+      .option-label span { color: #ffcbd1; }
+
+      .eyebrow {
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 900;
+        margin: 0 0 12px;
+        text-transform: uppercase;
+      }
+
+      p { margin: 0; }
+
+      .lead {
+        color: var(--muted);
+        font-size: 1rem;
+        line-height: 1.7;
+        max-width: 58ch;
+      }
+
+      .value-context {
+        background:
+          radial-gradient(circle at 74% 12%, rgba(201, 52, 69, 0.18), transparent 34rem),
+          linear-gradient(135deg, #1d0f0f 0%, #261514 55%, #160b0b 100%);
+        color: var(--cream);
+        display: grid;
+        gap: clamp(34px, 6vw, 90px);
+        grid-template-columns: minmax(0, 0.95fr) minmax(420px, 1.05fr);
+        padding: clamp(84px, 9vw, 132px) var(--edge);
+      }
+
+      .value-context h2 {
+        color: var(--cream);
+        max-width: 11ch;
+      }
+
+      .value-context p {
+        color: rgba(255, 247, 236, 0.72);
+        line-height: 1.7;
+        margin-top: 20px;
+        max-width: 64ch;
+      }
+
+      .price-card {
+        align-self: center;
+        background: var(--paper);
+        border: 1px solid rgba(255, 247, 236, 0.32);
+        border-radius: 8px;
+        color: var(--cocoa);
+        padding: clamp(26px, 4vw, 42px);
+      }
+
+      .price-card strong {
+        color: var(--strawberry);
+        display: block;
+        font-family: var(--display);
+        font-size: clamp(2rem, 3vw, 3rem);
+        line-height: 1;
+        margin-top: 18px;
+      }
+
+      .option-1 .route-layout {
+        display: grid;
+        gap: clamp(34px, 6vw, 92px);
+        grid-template-columns: minmax(320px, 0.72fr) minmax(0, 1.28fr);
+      }
+
+      .option-1 h2,
+      .option-2 h2,
+      .option-3 h2 {
+        max-width: 10.5ch;
+      }
+
+      .route-map {
+        align-self: center;
+        display: grid;
+        gap: 18px;
+        position: relative;
+      }
+
+      .route-map::before {
+        background: linear-gradient(90deg, var(--strawberry), var(--gold), rgba(47, 107, 69, 0.8));
+        content: "";
+        height: 2px;
+        left: 4%;
+        position: absolute;
+        right: 4%;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .route-row {
+        display: grid;
+        gap: 18px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        position: relative;
+        z-index: 1;
+      }
+
+      .route-row + .route-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-inline: 15%;
+      }
+
+      .route-step {
+        background: rgba(253, 251, 246, 0.9);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        min-height: 138px;
+        padding: 22px;
+      }
+
+      .route-step b {
+        align-items: center;
+        background: rgba(201, 52, 69, 0.1);
+        border-radius: 999px;
+        color: var(--strawberry);
+        display: inline-flex;
+        font-size: 0.75rem;
+        height: 28px;
+        justify-content: center;
+        margin-bottom: 22px;
+        width: 40px;
+      }
+
+      .route-step span {
+        color: var(--cocoa);
+        display: block;
+        font-weight: 900;
+        line-height: 1.35;
+      }
+
+      .option-2 .manifest {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        display: grid;
+        grid-template-columns: minmax(320px, 0.72fr) minmax(0, 1.28fr);
+        overflow: hidden;
+      }
+
+      .manifest-copy {
+        background: linear-gradient(180deg, #fffaf3, #f7eadf);
+        border-right: 1px solid var(--line);
+        padding: clamp(34px, 5vw, 68px);
+      }
+
+      .manifest-copy .lead { margin-top: 22px; }
+
+      .manifest-note {
+        border-top: 1px solid var(--line);
+        color: var(--strawberry);
+        font-family: var(--display);
+        font-size: 2rem;
+        line-height: 1;
+        margin-top: 42px;
+        padding-top: 26px;
+      }
+
+      .manifest-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .manifest-item {
+        border-bottom: 1px solid var(--line);
+        border-right: 1px solid var(--line);
+        display: grid;
+        gap: 18px;
+        grid-template-columns: auto minmax(0, 1fr);
+        min-height: 146px;
+        padding: clamp(22px, 3vw, 34px);
+      }
+
+      .manifest-item:nth-child(even) { border-right: 0; }
+      .manifest-item:nth-last-child(-n + 2) { border-bottom: 0; }
+      .manifest-item:last-child {
+        background: rgba(47, 107, 69, 0.05);
+        grid-column: 1 / -1;
+        min-height: 116px;
+      }
+
+      .manifest-item .mark {
+        color: var(--strawberry);
+        font-size: 1.35rem;
+        font-weight: 900;
+        line-height: 1;
+      }
+
+      .manifest-item strong {
+        display: block;
+        line-height: 1.25;
+        margin-bottom: 8px;
+      }
+
+      .manifest-item p {
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .option-3 {
+        background:
+          radial-gradient(circle at 82% 18%, rgba(197, 154, 82, 0.18), transparent 34rem),
+          linear-gradient(180deg, #fffaf3 0%, #f8efe5 100%);
+      }
+
+      .dock {
+        display: grid;
+        gap: clamp(28px, 5vw, 70px);
+        grid-template-columns: minmax(320px, 0.92fr) minmax(0, 1.08fr);
+      }
+
+      .dock-card {
+        background: #211716;
+        border: 1px solid rgba(197, 154, 82, 0.32);
+        border-radius: 8px;
+        color: var(--cream);
+        padding: clamp(30px, 5vw, 58px);
+      }
+
+      .dock-card .eyebrow,
+      .dock-card .lead {
+        color: rgba(255, 247, 236, 0.68);
+      }
+
+      .dock-card h2 {
+        color: var(--cream);
+      }
+
+      .dock-meta {
+        border-top: 1px solid rgba(255, 247, 236, 0.16);
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-top: 38px;
+        padding-top: 26px;
+      }
+
+      .dock-meta span {
+        color: rgba(255, 247, 236, 0.74);
+        font-size: 0.84rem;
+        line-height: 1.45;
+      }
+
+      .dock-meta strong {
+        color: #fff7ec;
+        display: block;
+        font-family: var(--display);
+        font-size: 1.7rem;
+        line-height: 1;
+        margin-bottom: 5px;
+      }
+
+      .dock-stack {
+        display: grid;
+        gap: 14px;
+      }
+
+      .dock-item {
+        align-items: center;
+        background: rgba(253, 251, 246, 0.88);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        display: grid;
+        gap: 20px;
+        grid-template-columns: 56px minmax(0, 1fr);
+        min-height: 88px;
+        padding: 18px 22px;
+      }
+
+      .dock-item b {
+        align-items: center;
+        background: rgba(47, 107, 69, 0.08);
+        border: 1px solid rgba(47, 107, 69, 0.2);
+        border-radius: 999px;
+        color: var(--leaf);
+        display: inline-flex;
+        font-size: 0.8rem;
+        height: 42px;
+        justify-content: center;
+        width: 42px;
+      }
+
+      .dock-item strong {
+        display: block;
+        line-height: 1.25;
+        margin-bottom: 5px;
+      }
+
+      .dock-item p {
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .proposal-note {
+        background: #1b100f;
+        border: 1px solid rgba(197, 154, 82, 0.34);
+        border-radius: 8px;
+        bottom: 18px;
+        box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28);
+        color: rgba(255, 247, 236, 0.78);
+        display: flex;
+        gap: 14px;
+        left: var(--edge);
+        max-width: min(820px, calc(100vw - (var(--edge) * 2)));
+        padding: 12px 14px;
+        position: fixed;
+        z-index: 60;
+      }
+
+      .proposal-note strong { color: var(--cream); }
+
+      @media (max-width: 960px) {
+        .option-1 .route-layout,
+        .option-2 .manifest,
+        .dock,
+        .value-context {
+          grid-template-columns: 1fr;
+        }
+
+        .manifest-copy {
+          border-bottom: 1px solid var(--line);
+          border-right: 0;
+        }
+
+        .route-map::before { display: none; }
+      }
+
+      @media (max-width: 720px) {
+        .event-context,
+        .route-row,
+        .route-row + .route-row,
+        .manifest-list,
+        .dock-meta {
+          grid-template-columns: 1fr;
+          margin-inline: 0;
+        }
+
+        .manifest-item,
+        .manifest-item:nth-child(even),
+        .manifest-item:nth-last-child(-n + 2) {
+          border-bottom: 1px solid var(--line);
+          border-right: 0;
+        }
+
+        .manifest-item:last-child { border-bottom: 0; }
+
+        .dock-item {
+          align-items: start;
+          grid-template-columns: 46px minmax(0, 1fr);
+        }
+
+        .proposal-note { display: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="context" aria-label="Kontekst poprzedniej sekcji">
+      <p class="eyebrow">Kontekst widoku</p>
+      <h1>Eventy prowadzą w logistykę.</h1>
+      <p>
+        Sekcja musi połączyć kartowy rytm strony z kolejnym, ciemnym blokiem wartości.
+        Problemem starej wersji była pusta prawa strona i zbyt płaski, jednowierszowy układ.
+      </p>
+      <div class="event-context" aria-hidden="true">
+        <span><strong>Wesela</strong> rytm serwisu</span>
+        <span><strong>Firmowe</strong> przewidywalny montaż</span>
+        <span><strong>VIP</strong> dopasowana ekspozycja</span>
+      </div>
+    </section>
+
+    <section class="preview-section option-1" id="option-1">
+      <div class="option-label"><span>Option 1</span> Event Route</div>
+      <div class="route-layout">
+        <div>
+          <p class="eyebrow">Organizacja i logistyka</p>
+          <h2>Przywozimy proces gotowy do pracy.</h2>
+          <p class="lead">
+            Układ rozkłada obsługę na pięć czytelnych punktów trasy. Daje lepsze wypełnienie
+            prawej strony bez ciężkiej karty i porządkuje spacing w pionie.
+          </p>
+        </div>
+        <div class="route-map">
+          <div class="route-row">
+            <article class="route-step"><b>01</b><span>Transport i wyposażenie stoiska</span></article>
+            <article class="route-step"><b>02</b><span>Montaż stanowiska przed eventem</span></article>
+            <article class="route-step"><b>03</b><span>Dwie osoby obsługi w pakiecie</span></article>
+          </div>
+          <div class="route-row">
+            <article class="route-step"><b>04</b><span>Dopasowanie dodatków i wyglądu</span></article>
+            <article class="route-step"><b>05</b><span>Demontaż i uporządkowanie strefy</span></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="preview-section option-2" id="option-2">
+      <div class="option-label"><span>Option 2</span> Service Manifest</div>
+      <div class="manifest">
+        <div class="manifest-copy">
+          <p class="eyebrow">Organizacja i logistyka</p>
+          <h2>Jeden manifest obsługi wydarzenia.</h2>
+          <p class="lead">
+            Bardziej premium i redakcyjny wariant: lewa kolumna wyjaśnia obietnicę, prawa działa jak
+            manifest zakresu. Jest mniej pustki, a elementy mają równą wagę.
+          </p>
+          <p class="manifest-note">Od przyjazdu po zamknięcie strefy.</p>
+        </div>
+        <div class="manifest-list">
+          <article class="manifest-item"><span class="mark">I</span><div><strong>Transport</strong><p>Wyposażenie, składniki i narzędzia przyjeżdżają jako jeden zestaw.</p></div></article>
+          <article class="manifest-item"><span class="mark">II</span><div><strong>Montaż</strong><p>Stanowisko ustawiamy przed obsługą, z miejscem na płynne wydawanie.</p></div></article>
+          <article class="manifest-item"><span class="mark">III</span><div><strong>Obsługa</strong><p>Dwie osoby prowadzą serwis, rytm i porządek na stanowisku.</p></div></article>
+          <article class="manifest-item"><span class="mark">IV</span><div><strong>Personalizacja</strong><p>Dodatki, podanie i wygląd dopasowujemy do typu wydarzenia.</p></div></article>
+          <article class="manifest-item"><span class="mark">V</span><div><strong>Zamknięcie</strong><p>Po evencie demontujemy stoisko i zostawiamy uporządkowaną strefę.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="preview-section option-3" id="option-3">
+      <div class="option-label"><span>Option 3</span> Logistics Dock</div>
+      <div class="dock">
+        <div class="dock-card">
+          <p class="eyebrow">Organizacja i logistyka</p>
+          <h2>Mały zespół, kompletny backstage.</h2>
+          <p class="lead">
+            Najmocniejszy wariant wizualnie: lewa część buduje kontrast przed ciemną sekcją poniżej,
+            prawa podaje zakres jako kompaktowy dock operacyjny.
+          </p>
+          <div class="dock-meta">
+            <span><strong>2 osoby</strong> obsługa w pakiecie</span>
+            <span><strong>5 etapów</strong> od transportu do demontażu</span>
+          </div>
+        </div>
+        <div class="dock-stack">
+          <article class="dock-item"><b>01</b><div><strong>Transport i wyposażenie stoiska</strong><p>Przywozimy komplet potrzebny do pracy.</p></div></article>
+          <article class="dock-item"><b>02</b><div><strong>Montaż przed eventem</strong><p>Ustawienie stanowiska i przygotowanie strefy.</p></div></article>
+          <article class="dock-item"><b>03</b><div><strong>Obsługa w pakiecie</strong><p>Dwie osoby prowadzą wydawanie i kontakt z gośćmi.</p></div></article>
+          <article class="dock-item"><b>04</b><div><strong>Dopasowanie dodatków</strong><p>Smaki, podanie i wygląd dostosowane do wydarzenia.</p></div></article>
+          <article class="dock-item"><b>05</b><div><strong>Demontaż i porządek</strong><p>Zamykamy stanowisko bez dodatkowej obsługi po stronie organizatora.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="value-context" aria-label="Kontekst kolejnej sekcji">
+      <div>
+        <p class="eyebrow">Dlaczego to się opłaca</p>
+        <h2>Efekt premium bez kosztu typowej atrakcji eventowej.</h2>
+        <p>
+          Kolejna sekcja jest ciemna i mocno sprzedażowa, dlatego logistyka powinna kończyć się
+          pewnie, bez dużej pustej przestrzeni.
+        </p>
+      </div>
+      <div class="price-card">
+        <p>Przykład dla 500 gości</p>
+        <strong>5 500-8 500 zł</strong>
+        <p>pakiety Strawberry Group</p>
+      </div>
+    </section>
+
+    <aside class="proposal-note">
+      <strong>Regeneracja:</strong>
+      <span>Trzy nowe układy: proces jako trasa, manifest zakresu i kompaktowy dock operacyjny.</span>
+    </aside>
+  </body>
+</html>

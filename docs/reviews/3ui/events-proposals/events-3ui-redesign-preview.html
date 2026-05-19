@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>3UI Events Section Redesign - Strawberry Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --cream: #fff7ec;
+        --warm-white: #fdfbf6;
+        --chocolate: #211716;
+        --cocoa: #6a3d2c;
+        --muted: #75665f;
+        --border: #e6d8cb;
+        --strawberry: #c93445;
+        --gold: #c59a52;
+        --edge: clamp(24px, 3.2vw, 64px);
+        --section-y: clamp(72px, 9vw, 128px);
+        --display: "Cormorant Garamond", Georgia, serif;
+        --body: "Manrope", system-ui, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #fffaf3;
+        color: var(--chocolate);
+        font-family: var(--body);
+        margin: 0;
+      }
+
+      .proposal-note {
+        background: #1b100f;
+        border: 1px solid rgba(197, 154, 82, 0.34);
+        border-radius: 8px;
+        bottom: 18px;
+        box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28);
+        color: rgba(255, 247, 236, 0.78);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px 24px;
+        justify-content: space-between;
+        left: var(--edge);
+        max-width: min(780px, calc(100vw - (var(--edge) * 2)));
+        padding: 12px 14px;
+        position: fixed;
+        z-index: 60;
+      }
+
+      .proposal-note strong {
+        color: var(--cream);
+      }
+
+      .context {
+        background: linear-gradient(135deg, #1d0f0f, #261514 55%, #160b0b);
+        color: var(--cream);
+        padding: 80px var(--edge);
+      }
+
+      .context h1 {
+        font-family: var(--display);
+        font-size: clamp(3.1rem, 5vw, 5.6rem);
+        line-height: 0.88;
+        margin: 0;
+        max-width: 12ch;
+      }
+
+      .preview-section {
+        border-top: 1px solid rgba(106, 61, 44, 0.12);
+        padding: var(--section-y) var(--edge);
+        position: relative;
+      }
+
+      .preview-section:nth-of-type(odd) {
+        background: #fffaf3;
+      }
+
+      .preview-section:nth-of-type(even) {
+        background: #fbf1e7;
+      }
+
+      .option-label {
+        align-items: center;
+        background: #1b100f;
+        border: 1px solid rgba(197, 154, 82, 0.32);
+        border-radius: 999px;
+        color: var(--cream);
+        display: inline-flex;
+        font-size: 0.72rem;
+        font-weight: 900;
+        gap: 8px;
+        min-height: 34px;
+        padding: 0 14px;
+        position: absolute;
+        right: var(--edge);
+        text-transform: uppercase;
+        top: 28px;
+      }
+
+      .option-label span {
+        color: #ffcbd1;
+      }
+
+      .eyebrow {
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 900;
+        margin: 0 0 12px;
+        text-transform: uppercase;
+      }
+
+      h2 {
+        font-family: var(--display);
+        font-size: clamp(3rem, 5.2vw, 5.5rem);
+        line-height: 0.9;
+        margin: 0;
+      }
+
+      h3,
+      p {
+        margin: 0;
+      }
+
+      svg {
+        height: 22px;
+        width: 22px;
+      }
+
+      .option-1 .events-layout {
+        align-items: start;
+        display: grid;
+        gap: clamp(40px, 6vw, 92px);
+        grid-template-columns: minmax(320px, 0.86fr) minmax(0, 1.14fr);
+      }
+
+      .option-1 .intro {
+        position: sticky;
+        top: 112px;
+      }
+
+      .option-1 .intro h2 {
+        max-width: 11.5ch;
+      }
+
+      .option-1 .intro p {
+        color: var(--muted);
+        line-height: 1.65;
+        margin-top: 22px;
+        max-width: 42ch;
+      }
+
+      .option-1 .grid {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .event-card {
+        background: rgba(253, 251, 246, 0.78);
+        border: 1px solid rgba(106, 61, 44, 0.16);
+        border-radius: 8px;
+        min-height: 150px;
+        padding: 22px;
+      }
+
+      .option-1 .event-card {
+        display: grid;
+        gap: 26px;
+        grid-template-columns: 44px minmax(0, 1fr);
+      }
+
+      .event-icon {
+        align-items: center;
+        background: rgba(201, 52, 69, 0.08);
+        border-radius: 10px;
+        color: var(--strawberry);
+        display: inline-flex;
+        height: 44px;
+        justify-content: center;
+        width: 44px;
+      }
+
+      .event-card h3 {
+        font-family: var(--display);
+        font-size: clamp(1.55rem, 2vw, 2.15rem);
+        line-height: 0.95;
+      }
+
+      .event-card p {
+        color: var(--muted);
+        font-size: 0.93rem;
+        line-height: 1.55;
+        margin-top: 12px;
+      }
+
+      .option-2 .intro {
+        display: grid;
+        gap: 32px;
+        grid-template-columns: minmax(320px, 0.82fr) minmax(0, 1fr);
+        margin-bottom: 38px;
+      }
+
+      .option-2 .intro h2 {
+        max-width: 11ch;
+      }
+
+      .option-2 .intro p {
+        align-self: end;
+        color: var(--muted);
+        line-height: 1.65;
+        max-width: 58ch;
+      }
+
+      .option-2 .grid {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: 1.08fr 1fr 1fr;
+      }
+
+      .option-2 .event-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .option-2 .event-card:first-child {
+        background: linear-gradient(180deg, #211716, #301b18);
+        color: var(--cream);
+        grid-row: span 2;
+        min-height: 334px;
+      }
+
+      .option-2 .event-card:first-child p {
+        color: rgba(255, 247, 236, 0.7);
+      }
+
+      .option-2 .event-card:first-child .event-icon {
+        background: rgba(255, 247, 236, 0.08);
+        color: #ffcbd1;
+      }
+
+      .option-3 {
+        background: linear-gradient(180deg, #fffaf3, #fbf1e7);
+      }
+
+      .option-3 .events-board {
+        display: grid;
+        grid-template-columns: minmax(330px, 0.78fr) minmax(0, 1.22fr);
+      }
+
+      .option-3 .intro-panel {
+        background: #211716;
+        color: var(--cream);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 520px;
+        padding: clamp(34px, 5vw, 64px);
+      }
+
+      .option-3 .intro-panel .eyebrow,
+      .option-3 .intro-panel p {
+        color: rgba(255, 247, 236, 0.68);
+      }
+
+      .option-3 .intro-panel h2 {
+        color: var(--cream);
+        max-width: 10.5ch;
+      }
+
+      .option-3 .intro-panel p:last-child {
+        line-height: 1.65;
+        max-width: 40ch;
+      }
+
+      .option-3 .event-list {
+        border-top: 1px solid rgba(106, 61, 44, 0.14);
+      }
+
+      .option-3 .event-row {
+        align-items: center;
+        border-bottom: 1px solid rgba(106, 61, 44, 0.14);
+        display: grid;
+        gap: clamp(22px, 3vw, 44px);
+        grid-template-columns: 52px minmax(180px, 0.42fr) minmax(0, 1fr);
+        min-height: 86px;
+        padding: 18px clamp(22px, 3vw, 40px);
+      }
+
+      .option-3 .event-row h3 {
+        font-family: var(--display);
+        font-size: clamp(1.5rem, 2vw, 2rem);
+        line-height: 0.96;
+      }
+
+      .option-3 .event-row p {
+        color: var(--muted);
+        font-size: 0.94rem;
+        line-height: 1.55;
+      }
+
+      .next {
+        background: #fffaf3;
+        padding: 72px var(--edge) 110px;
+      }
+
+      .next h2 {
+        max-width: 10ch;
+      }
+
+      @media (max-width: 1100px) {
+        .option-1 .events-layout,
+        .option-2 .intro,
+        .option-2 .grid,
+        .option-3 .events-board {
+          grid-template-columns: 1fr;
+        }
+
+        .option-1 .intro {
+          position: static;
+        }
+      }
+
+      @media (max-width: 700px) {
+        .preview-section,
+        .context,
+        .next {
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+
+        .option-label {
+          left: 16px;
+          right: auto;
+        }
+
+        h2,
+        .context h1 {
+          font-size: clamp(3rem, 13vw, 4.4rem);
+        }
+
+        .option-1 .grid {
+          grid-template-columns: 1fr;
+        }
+
+        .option-1 .event-card,
+        .option-3 .event-row {
+          grid-template-columns: 44px minmax(0, 1fr);
+        }
+
+        .option-3 .event-row p {
+          grid-column: 2;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="proposal-note">
+      <strong>3UI events section preview</strong>
+      <span>Trzy warianty spacingu i pozycjonowania sekcji “Eventy”.</span>
+    </div>
+
+    <section class="context">
+      <h1>Jeden prosty proces od zapytania do ostatniego kubka.</h1>
+    </section>
+
+    <section class="preview-section option-1" id="option-1">
+      <span class="option-label"><span>Option 1</span> Anchored Intro Grid</span>
+      <div class="events-layout">
+        <div class="intro">
+          <p class="eyebrow">Dla jakich wydarzeń</p>
+          <h2>Od wesel po eventy firmowe: stoisko działa tam, gdzie ważne są rytm obsługi i efekt.</h2>
+          <p>Intro zostaje po lewej, a prawa strona dostaje dwukolumnowy grid o równym rytmie. Mniej pustki u góry, lepsze pozycjonowanie kart względem nagłówka.</p>
+        </div>
+        <div class="grid">
+          <article class="event-card"><span class="event-icon">♡</span><div><h3>Wesela i poprawiny</h3><p>Deserowa atrakcja, która dobrze wygląda na zdjęciach.</p></div></article>
+          <article class="event-card"><span class="event-icon">◇</span><div><h3>Eventy firmowe</h3><p>Szybki, elegancki punkt dla pracowników, klientów i partnerów.</p></div></article>
+          <article class="event-card"><span class="event-icon">✧</span><div><h3>Integracje</h3><p>Lekka forma interakcji, która nie wymaga scenariusza.</p></div></article>
+          <article class="event-card"><span class="event-icon">♨</span><div><h3>Gale i bankiety</h3><p>Premium detal, który mieści się w rytmie eleganckiego wydarzenia.</p></div></article>
+          <article class="event-card"><span class="event-icon">⌖</span><div><h3>Festiwale i plener</h3><p>Sprawny proces i czytelna obsługa przy większym ruchu.</p></div></article>
+          <article class="event-card"><span class="event-icon">✦</span><div><h3>Strefy VIP</h3><p>Personalizacja dodatków, podania i wyglądu stoiska.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="preview-section option-2" id="option-2">
+      <span class="option-label"><span>Option 2</span> Featured Occasion Grid</span>
+      <div class="intro">
+        <div>
+          <p class="eyebrow">Dla jakich wydarzeń</p>
+          <h2>Od wesel po eventy firmowe: stoisko działa tam, gdzie ważne są rytm obsługi i efekt.</h2>
+        </div>
+        <p>Jeden typ wydarzenia dostaje większy ciężar, a pozostałe są mniejszymi kaflami. Dobre, jeśli chcesz bardziej editorialowy układ i mniej monotonii.</p>
+      </div>
+      <div class="grid">
+        <article class="event-card"><span class="event-icon">♡</span><div><h3>Wesela i poprawiny</h3><p>Deserowa atrakcja, która dobrze wygląda na zdjęciach.</p></div></article>
+        <article class="event-card"><span class="event-icon">◇</span><div><h3>Eventy firmowe</h3><p>Szybki, elegancki punkt dla pracowników, klientów i partnerów.</p></div></article>
+        <article class="event-card"><span class="event-icon">✧</span><div><h3>Integracje</h3><p>Lekka forma interakcji, która nie wymaga scenariusza.</p></div></article>
+        <article class="event-card"><span class="event-icon">♨</span><div><h3>Gale i bankiety</h3><p>Premium detal, który mieści się w rytmie eleganckiego wydarzenia.</p></div></article>
+        <article class="event-card"><span class="event-icon">⌖</span><div><h3>Festiwale i plener</h3><p>Sprawny proces i czytelna obsługa przy większym ruchu.</p></div></article>
+        <article class="event-card"><span class="event-icon">✦</span><div><h3>Strefy VIP</h3><p>Personalizacja dodatków, podania i wyglądu stoiska.</p></div></article>
+      </div>
+    </section>
+
+    <section class="preview-section option-3" id="option-3">
+      <span class="option-label"><span>Option 3</span> Event Type Index</span>
+      <div class="events-board">
+        <div class="intro-panel">
+          <div>
+            <p class="eyebrow">Dla jakich wydarzeń</p>
+            <h2>Od wesel po eventy firmowe: stoisko działa tam, gdzie ważne są rytm obsługi i efekt.</h2>
+          </div>
+          <p>Najbardziej uporządkowany układ: ciemne intro i lista typów wydarzeń z równą osią ikon, tytułów i opisów.</p>
+        </div>
+        <div class="event-list">
+          <article class="event-row"><span class="event-icon">♡</span><h3>Wesela i poprawiny</h3><p>Deserowa atrakcja, która dobrze wygląda na zdjęciach.</p></article>
+          <article class="event-row"><span class="event-icon">◇</span><h3>Eventy firmowe</h3><p>Szybki, elegancki punkt dla pracowników, klientów i partnerów.</p></article>
+          <article class="event-row"><span class="event-icon">✧</span><h3>Integracje</h3><p>Lekka forma interakcji, która nie wymaga scenariusza.</p></article>
+          <article class="event-row"><span class="event-icon">♨</span><h3>Gale i bankiety</h3><p>Premium detal, który mieści się w rytmie eleganckiego wydarzenia.</p></article>
+          <article class="event-row"><span class="event-icon">⌖</span><h3>Festiwale i plener</h3><p>Sprawny proces i czytelna obsługa przy większym ruchu.</p></article>
+          <article class="event-row"><span class="event-icon">✦</span><h3>Strefy VIP</h3><p>Personalizacja dodatków, podania i wyglądu stoiska.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="next">
+      <p class="eyebrow">Organizacja i logistyka</p>
+      <h2>Przywozimy wszystko, co potrzebne.</h2>
+    </section>
+  </body>
+</html>

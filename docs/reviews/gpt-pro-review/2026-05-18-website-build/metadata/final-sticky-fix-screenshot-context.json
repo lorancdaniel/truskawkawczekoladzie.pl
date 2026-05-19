@@ -1,0 +1,80 @@
+[
+  {
+    "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/gpt-pro-review/2026-05-18-website-build/screenshots/final-sticky-fix/desktop-form-errors.png",
+    "viewName": "Contact lead form",
+    "route": "http://127.0.0.1:4173/#kontakt",
+    "state": "error",
+    "coverageMatrixItem": "desktop validation error state after empty submit",
+    "device": "desktop",
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "pngDimensions": {
+      "width": 1920,
+      "height": 1080
+    },
+    "captureMode": "viewport original-resolution PNG",
+    "stabilitySettleStatus": "target visible, action completed, 900ms settle delay before capture",
+    "interactionStateCoverage": "error",
+    "captureTime": "2026-05-18T08:37:26.754Z",
+    "headerBox": {
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 85
+    },
+    "contactEyebrowBox": {
+      "x": 300,
+      "y": 276.5625,
+      "width": 561.59375,
+      "height": 26.03125
+    },
+    "statusBox": {
+      "x": 974.59375,
+      "y": 317.5625,
+      "width": 604.40625,
+      "height": 349.09375
+    },
+    "consoleIssues": []
+  },
+  {
+    "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/gpt-pro-review/2026-05-18-website-build/screenshots/final-sticky-fix/desktop-form-success.png",
+    "viewName": "Contact lead form",
+    "route": "http://127.0.0.1:4173/#kontakt",
+    "state": "success",
+    "coverageMatrixItem": "desktop success state after valid submit",
+    "device": "desktop",
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "pngDimensions": {
+      "width": 1920,
+      "height": 1080
+    },
+    "captureMode": "viewport original-resolution PNG",
+    "stabilitySettleStatus": "target visible, action completed, 900ms settle delay before capture",
+    "interactionStateCoverage": "success",
+    "captureTime": "2026-05-18T08:37:32.565Z",
+    "headerBox": {
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 85
+    },
+    "contactEyebrowBox": {
+      "x": 300,
+      "y": 276.5625,
+      "width": 561.59375,
+      "height": 26.03125
+    },
+    "statusBox": {
+      "x": 974.59375,
+      "y": 317.5625,
+      "width": 604.40625,
+      "height": 114.390625
+    },
+    "consoleIssues": []
+  }
+]

@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Strawberry Group Icon Verification</title>
+    <style>
+      :root {
+        color: #211715;
+        background: #f7f2ea;
+        font-family:
+          Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+      }
+
+      main {
+        width: min(1080px, calc(100vw - 40px));
+        display: grid;
+        gap: 24px;
+      }
+
+      .surface {
+        display: grid;
+        gap: 20px;
+        padding: 24px;
+        border: 1px solid rgba(151, 101, 48, .28);
+        border-radius: 8px;
+        background: #fffaf3;
+      }
+
+      .surface.dark {
+        color: #f9ead3;
+        background:
+          linear-gradient(135deg, rgba(132, 18, 28, .18), transparent 42%),
+          #160b0a;
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: repeat(5, max-content);
+        gap: 28px;
+        align-items: end;
+      }
+
+      .sample {
+        display: grid;
+        gap: 10px;
+        justify-items: center;
+      }
+
+      .sample img {
+        display: block;
+        width: var(--size);
+        height: var(--size);
+      }
+
+      .label {
+        font-size: 12px;
+        letter-spacing: 0;
+        opacity: .68;
+      }
+
+      .header-strip {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        min-height: 72px;
+        padding: 0 20px;
+        border: 1px solid rgba(255, 240, 180, .22);
+        border-radius: 8px;
+        background: rgba(16, 8, 7, .7);
+      }
+
+      .header-strip img {
+        width: 48px;
+        height: 48px;
+      }
+
+      .nav-dots {
+        display: flex;
+        gap: 10px;
+      }
+
+      .nav-dots span {
+        width: 88px;
+        height: 10px;
+        border-radius: 999px;
+        background: rgba(255, 240, 180, .2);
+      }
+
+      @media (max-width: 680px) {
+        .row {
+          grid-template-columns: repeat(2, max-content);
+          gap: 22px 42px;
+        }
+
+        .nav-dots span {
+          width: 38px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="surface">
+        <div class="row" aria-label="Jasne tlo">
+          <div class="sample" style="--size: 16px">
+            <img src="/brand/strawberry-group-logo.svg" alt="" />
+            <span class="label">16</span>
+          </div>
+          <div class="sample" style="--size: 24px">
+            <img src="/brand/strawberry-group-logo.svg" alt="" />
+            <span class="label">24</span>
+          </div>
+          <div class="sample" style="--size: 48px">
+            <img src="/brand/strawberry-group-logo.svg" alt="" />
+            <span class="label">48</span>
+          </div>
+          <div class="sample" style="--size: 96px">
+            <img src="/brand/strawberry-group-logo.svg" alt="" />
+            <span class="label">96</span>
+          </div>
+          <div class="sample" style="--size: 160px">
+            <img src="/brand/strawberry-group-logo.svg" alt="" />
+            <span class="label">160</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="surface dark">
+        <div class="header-strip">
+          <img src="/brand/strawberry-group-logo.svg" alt="" />
+          <div class="nav-dots" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+        <div class="row" aria-label="Ciemne tlo">
+          <div class="sample" style="--size: 16px">
+            <img src="/brand/strawberry-group-logo.svg" alt="" />
+            <span class="label">16</span>
+          </div>
+          <div class="sample" style="--size: 24px">
+            <img src="/brand/strawberry-group-logo.svg" alt="" />
+            <span class="label">24</span>
+          </div>
+          <div class="sample" style="--size: 48px">
+            <img src="/brand/strawberry-group-logo.svg" alt="" />
+            <span class="label">48</span>
+          </div>
+          <div class="sample" style="--size: 96px">
+            <img src="/brand/strawberry-group-logo.svg" alt="" />
+            <span class="label">96</span>
+          </div>
+          <div class="sample" style="--size: 160px">
+            <img src="/brand/strawberry-group-logo.svg" alt="" />
+            <span class="label">160</span>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

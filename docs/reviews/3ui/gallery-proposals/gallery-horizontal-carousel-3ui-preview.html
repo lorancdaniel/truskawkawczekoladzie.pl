@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>3UI Horizontal Gallery Carousel</title>
+    <style>
+      :root {
+        --cream: #fff7ec;
+        --paper: #fdfbf6;
+        --ink: #221413;
+        --muted: #6d5f59;
+        --cocoa: #1b100f;
+        --red: #c93445;
+        --gold: #c59a52;
+        --line: rgba(106, 61, 44, 0.16);
+        --radius: 14px;
+        --display: Georgia, "Times New Roman", serif;
+        --body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #fffaf3;
+        color: var(--ink);
+        font-family: var(--body);
+        margin: 0;
+      }
+
+      button {
+        font: inherit;
+      }
+
+      img {
+        display: block;
+        height: 100%;
+        object-fit: cover;
+        width: 100%;
+      }
+
+      p,
+      h1,
+      h2,
+      h3,
+      figure {
+        margin: 0;
+      }
+
+      .context {
+        background:
+          radial-gradient(circle at 82% 0%, rgba(201, 52, 69, 0.2), transparent 28rem),
+          linear-gradient(135deg, #1d0f0f 0%, #2d1615 58%, #160b0b 100%);
+        color: var(--cream);
+        display: grid;
+        gap: 32px;
+        grid-template-columns: minmax(320px, 0.82fr) minmax(0, 1.18fr);
+        padding: 66px clamp(32px, 5vw, 64px);
+      }
+
+      .context h1,
+      .section-heading h2,
+      .slide-card h3,
+      .rail-card h3,
+      .feature strong {
+        font-family: var(--display);
+        font-weight: 700;
+        letter-spacing: 0;
+      }
+
+      .context h1 {
+        color: var(--cream);
+        font-size: clamp(3rem, 5vw, 5.6rem);
+        line-height: 0.9;
+        max-width: 11ch;
+      }
+
+      .context p {
+        align-self: end;
+        color: rgba(255, 247, 236, 0.74);
+        font-size: 1.05rem;
+        line-height: 1.65;
+        max-width: 66ch;
+      }
+
+      .option {
+        border-top: 1px solid var(--line);
+        padding: clamp(76px, 8vw, 122px) clamp(32px, 5vw, 64px);
+        overflow: hidden;
+      }
+
+      .option-label {
+        background: rgba(201, 52, 69, 0.1);
+        border: 1px solid rgba(201, 52, 69, 0.2);
+        border-radius: 999px;
+        color: var(--red);
+        display: inline-flex;
+        font-size: 0.76rem;
+        font-weight: 900;
+        margin-bottom: 24px;
+        padding: 9px 13px;
+        text-transform: uppercase;
+      }
+
+      .section-heading {
+        align-items: end;
+        display: grid;
+        gap: 28px;
+        grid-template-columns: minmax(320px, 0.85fr) minmax(0, 1.15fr);
+        margin-bottom: 34px;
+      }
+
+      .section-heading h2 {
+        font-size: clamp(3rem, 5vw, 6rem);
+        line-height: 0.9;
+        max-width: 11ch;
+      }
+
+      .section-heading p {
+        color: var(--muted);
+        line-height: 1.65;
+        max-width: 64ch;
+      }
+
+      .carousel-controls {
+        display: flex;
+        gap: 10px;
+      }
+
+      .carousel-controls button {
+        align-items: center;
+        background: var(--cocoa);
+        border: 1px solid rgba(197, 154, 82, 0.34);
+        border-radius: 999px;
+        color: var(--cream);
+        cursor: pointer;
+        display: inline-flex;
+        font-size: 1.45rem;
+        font-weight: 900;
+        height: 48px;
+        justify-content: center;
+        transition: transform 180ms ease, background 180ms ease;
+        width: 48px;
+      }
+
+      .carousel-controls button:hover {
+        background: #321615;
+        transform: translateY(-1px);
+      }
+
+      .horizontal-track {
+        display: flex;
+        gap: 18px;
+        overflow-x: auto;
+        padding: 3px 0 18px;
+        scroll-behavior: smooth;
+        scroll-snap-type: x mandatory;
+      }
+
+      .horizontal-track::-webkit-scrollbar {
+        height: 8px;
+      }
+
+      .horizontal-track::-webkit-scrollbar-thumb {
+        background: rgba(106, 61, 44, 0.22);
+        border-radius: 999px;
+      }
+
+      .slide-card {
+        background: rgba(253, 251, 246, 0.9);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        box-shadow: 0 22px 70px rgba(73, 42, 24, 0.1);
+        flex: 0 0 min(72vw, 820px);
+        overflow: hidden;
+        scroll-snap-align: start;
+      }
+
+      .slide-card figure {
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+      }
+
+      .slide-card__body {
+        align-items: end;
+        display: grid;
+        gap: 18px;
+        grid-template-columns: minmax(0, 0.9fr) minmax(180px, 0.42fr);
+        padding: clamp(22px, 2.8vw, 34px);
+      }
+
+      .slide-card h3 {
+        font-size: clamp(2rem, 3vw, 3.5rem);
+        line-height: 0.95;
+      }
+
+      .slide-card p {
+        color: var(--muted);
+        line-height: 1.55;
+        margin-top: 10px;
+      }
+
+      .feature {
+        border-left: 1px solid rgba(106, 61, 44, 0.16);
+        padding-left: 18px;
+      }
+
+      .feature strong {
+        color: var(--red);
+        display: block;
+        font-size: 2.2rem;
+        line-height: 1;
+      }
+
+      .feature span {
+        color: var(--muted);
+        display: block;
+        font-size: 0.84rem;
+        line-height: 1.35;
+        margin-top: 8px;
+      }
+
+      .option-2 {
+        background:
+          radial-gradient(circle at 84% 8%, rgba(201, 52, 69, 0.16), transparent 32rem),
+          #1b100f;
+        color: var(--cream);
+      }
+
+      .option-2 .section-heading h2,
+      .option-2 .section-heading p {
+        color: var(--cream);
+      }
+
+      .option-2 .section-heading p {
+        color: rgba(255, 247, 236, 0.72);
+      }
+
+      .option-2 .carousel-controls button {
+        background: rgba(255, 247, 236, 0.1);
+      }
+
+      .cinematic-window {
+        position: relative;
+      }
+
+      .cinematic-track {
+        display: flex;
+        gap: 20px;
+        overflow-x: auto;
+        padding: 0 0 18px;
+        scroll-behavior: smooth;
+        scroll-snap-type: x mandatory;
+      }
+
+      .cinematic-track::-webkit-scrollbar {
+        height: 8px;
+      }
+
+      .cinematic-track::-webkit-scrollbar-thumb {
+        background: rgba(255, 247, 236, 0.24);
+        border-radius: 999px;
+      }
+
+      .cinematic-card {
+        border: 1px solid rgba(255, 247, 236, 0.16);
+        border-radius: var(--radius);
+        flex: 0 0 min(78vw, 1040px);
+        min-height: 560px;
+        overflow: hidden;
+        position: relative;
+        scroll-snap-align: center;
+      }
+
+      .cinematic-card::after {
+        background: linear-gradient(180deg, transparent 42%, rgba(27, 16, 15, 0.78));
+        content: "";
+        inset: 0;
+        pointer-events: none;
+        position: absolute;
+      }
+
+      .cinematic-card figcaption {
+        bottom: 0;
+        color: var(--cream);
+        left: 0;
+        padding: clamp(26px, 4vw, 54px);
+        position: absolute;
+        right: 0;
+        z-index: 1;
+      }
+
+      .cinematic-card h3 {
+        color: var(--cream);
+        font-family: var(--display);
+        font-size: clamp(2.7rem, 5vw, 5.8rem);
+        line-height: 0.88;
+        max-width: 10ch;
+      }
+
+      .cinematic-card p {
+        color: rgba(255, 247, 236, 0.72);
+        line-height: 1.55;
+        margin-top: 14px;
+        max-width: 52ch;
+      }
+
+      .option-3 {
+        background: linear-gradient(180deg, #fbefe4 0%, #fffaf3 100%);
+      }
+
+      .rail-shell {
+        background: rgba(253, 251, 246, 0.72);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        overflow: hidden;
+      }
+
+      .rail-top {
+        align-items: center;
+        border-bottom: 1px solid var(--line);
+        display: flex;
+        gap: 18px;
+        justify-content: space-between;
+        padding: 18px clamp(20px, 3vw, 34px);
+      }
+
+      .rail-top p {
+        color: var(--muted);
+        max-width: 58ch;
+      }
+
+      .rail-track {
+        display: flex;
+        gap: 0;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        scroll-snap-type: x mandatory;
+      }
+
+      .rail-track::-webkit-scrollbar {
+        height: 8px;
+      }
+
+      .rail-track::-webkit-scrollbar-thumb {
+        background: rgba(106, 61, 44, 0.22);
+        border-radius: 999px;
+      }
+
+      .rail-card {
+        border-right: 1px solid var(--line);
+        display: grid;
+        flex: 0 0 min(74vw, 520px);
+        grid-template-rows: 360px auto;
+        scroll-snap-align: start;
+      }
+
+      .rail-card:last-child {
+        border-right: 0;
+      }
+
+      .rail-card figure {
+        overflow: hidden;
+      }
+
+      .rail-card div {
+        padding: 24px;
+      }
+
+      .rail-card h3 {
+        font-size: clamp(1.85rem, 2.5vw, 3rem);
+        line-height: 0.95;
+      }
+
+      .rail-card p {
+        color: var(--muted);
+        line-height: 1.55;
+        margin-top: 10px;
+      }
+
+      @media (max-width: 900px) {
+        .context,
+        .section-heading {
+          grid-template-columns: 1fr;
+        }
+
+        .slide-card,
+        .cinematic-card,
+        .rail-card {
+          flex-basis: 86vw;
+        }
+
+        .slide-card__body {
+          grid-template-columns: 1fr;
+        }
+
+        .feature {
+          border-left: 0;
+          border-top: 1px solid rgba(106, 61, 44, 0.16);
+          padding-left: 0;
+          padding-top: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="context">
+        <div>
+          <span class="option-label">Regeneracja · horizontal carousel</span>
+          <h1>Pozioma galeria z ruchem lewo i prawo.</h1>
+        </div>
+        <p>
+          Wszystkie trzy opcje są prawdziwie poziome: scroll-snap, strzałki, płynne przesuwanie w lewo/prawo
+          i zdjęcia jako główna treść. Różnią się ciężarem wizualnym i sposobem opisu kadrów.
+        </p>
+      </section>
+
+      <section class="option option-1" id="option-1">
+        <span class="option-label">Option 1 · Premium Snap Rail</span>
+        <div class="section-heading">
+          <h2>Galeria realizacji przewijana poziomo.</h2>
+          <p>
+            Najbardziej użytkowy wariant: duże karty, scroll-snap, strzałki po prawej. Każdy slajd ma zdjęcie,
+            opis i jeden konkretny dowód jakości.
+          </p>
+          <div class="carousel-controls" data-target="track-1">
+            <button type="button" data-dir="-1" aria-label="Przewiń w lewo">‹</button>
+            <button type="button" data-dir="1" aria-label="Przewiń w prawo">›</button>
+          </div>
+        </div>
+        <div class="horizontal-track" id="track-1">
+          <article class="slide-card">
+            <figure><img src="/images/gallery-generated/gallery-realization-1-chocolate-pour.png" alt="" /></figure>
+            <div class="slide-card__body">
+              <div><h3>Czekolada w ruchu</h3><p>Najmocniejszy moment wizualny: świeży deser przygotowywany na oczach gości.</p></div>
+              <div class="feature"><strong>01</strong><span>apetyczny kadr otwierający</span></div>
+            </div>
+          </article>
+          <article class="slide-card">
+            <figure><img src="/images/gallery-generated/gallery-realization-2-buffet-counter.png" alt="" /></figure>
+            <div class="slide-card__body">
+              <div><h3>Elegancki blat</h3><p>Stoisko pokazane jako część scenografii eventu, nie przypadkowy stolik z deserami.</p></div>
+              <div class="feature"><strong>02</strong><span>setup gotowy na wydarzenie</span></div>
+            </div>
+          </article>
+          <article class="slide-card">
+            <figure><img src="/images/gallery-generated/gallery-realization-3-guest-toppings.png" alt="" /></figure>
+            <div class="slide-card__body">
+              <div><h3>Interakcja przy dodatkach</h3><p>Goście widzą proces, wybierają dekoracje i naturalnie zatrzymują się przy stoisku.</p></div>
+              <div class="feature"><strong>03</strong><span>doświadczenie, nie tylko deser</span></div>
+            </div>
+          </article>
+          <article class="slide-card">
+            <figure><img src="/images/gallery-generated/gallery-realization-4-finished-cups.png" alt="" /></figure>
+            <div class="slide-card__body">
+              <div><h3>Gotowe kubki</h3><p>Finalny efekt wygląda dobrze na zdjęciach z wydarzenia i nie wymaga dodatkowej stylizacji.</p></div>
+              <div class="feature"><strong>04</strong><span>premium deser w detalu</span></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="option option-2" id="option-2">
+        <span class="option-label">Option 2 · Cinematic Side Scroll</span>
+        <div class="section-heading">
+          <h2>Duże filmowe kadry przesuwane bokiem.</h2>
+          <p>
+            Najbardziej premium i obrazowy wariant: szerokie zdjęcia prawie na całą sekcję, overlay z podpisem
+            i mocny ciemny kontener. Strzałki przesuwają w lewo/prawo.
+          </p>
+          <div class="carousel-controls" data-target="track-2">
+            <button type="button" data-dir="-1" aria-label="Przewiń w lewo">‹</button>
+            <button type="button" data-dir="1" aria-label="Przewiń w prawo">›</button>
+          </div>
+        </div>
+        <div class="cinematic-window">
+          <div class="cinematic-track" id="track-2">
+            <figure class="cinematic-card"><img src="/images/gallery-generated/gallery-realization-1-chocolate-pour.png" alt="" /><figcaption><h3>Moment polewania</h3><p>Ruch, światło i apetyczny detal budują natychmiastowy dowód jakości.</p></figcaption></figure>
+            <figure class="cinematic-card"><img src="/images/gallery-generated/gallery-realization-2-buffet-counter.png" alt="" /><figcaption><h3>Stoisko w kontekście eventu</h3><p>Blat, kwiaty, światła i uporządkowane dodatki pokazują klasę oprawy.</p></figcaption></figure>
+            <figure class="cinematic-card"><img src="/images/gallery-generated/gallery-realization-3-guest-toppings.png" alt="" /><figcaption><h3>Goście wybierają dodatki</h3><p>Zdjęcie pokazuje interakcję, przez co sekcja nie jest tylko ładnym food-shotem.</p></figcaption></figure>
+            <figure class="cinematic-card"><img src="/images/gallery-generated/gallery-realization-4-finished-cups.png" alt="" /><figcaption><h3>Efekt gotowy do podania</h3><p>Finalny produkt zamyka opowieść i prowadzi naturalnie do formularza.</p></figcaption></figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="option option-3" id="option-3">
+        <span class="option-label">Option 3 · Modular Photo Rail</span>
+        <div class="section-heading">
+          <h2>Poziomy rail jak sekcja realizacji.</h2>
+          <p>
+            Bardziej spokojny i modułowy wariant: przewijane karty w jednym pasie. Działa dobrze, jeśli sekcja ma być
+            premium, ale nie aż tak filmowa jak opcja druga.
+          </p>
+        </div>
+        <div class="rail-shell">
+          <div class="rail-top">
+            <p>Przewiń zdjęcia realizacji w lewo lub prawo. Każdy kadr pokazuje inny fragment doświadczenia.</p>
+            <div class="carousel-controls" data-target="track-3">
+              <button type="button" data-dir="-1" aria-label="Przewiń w lewo">‹</button>
+              <button type="button" data-dir="1" aria-label="Przewiń w prawo">›</button>
+            </div>
+          </div>
+          <div class="rail-track" id="track-3">
+            <article class="rail-card"><figure><img src="/images/gallery-generated/gallery-realization-1-chocolate-pour.png" alt="" /></figure><div><h3>Polewanie czekoladą</h3><p>Najbardziej zmysłowy moment całej obsługi.</p></div></article>
+            <article class="rail-card"><figure><img src="/images/gallery-generated/gallery-realization-2-buffet-counter.png" alt="" /></figure><div><h3>Blat i dodatki</h3><p>Kompozycja stoiska gotowa na zdjęcia z eventu.</p></div></article>
+            <article class="rail-card"><figure><img src="/images/gallery-generated/gallery-realization-3-guest-toppings.png" alt="" /></figure><div><h3>Wybór gościa</h3><p>Interakcja, która zatrzymuje ludzi przy stoisku.</p></div></article>
+            <article class="rail-card"><figure><img src="/images/gallery-generated/gallery-realization-4-finished-cups.png" alt="" /></figure><div><h3>Gotowy deser</h3><p>Efekt końcowy w eleganckim, powtarzalnym formacie.</p></div></article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      document.querySelectorAll(".carousel-controls").forEach((controls) => {
+        const target = document.getElementById(controls.dataset.target);
+        if (!target) return;
+        controls.querySelectorAll("button").forEach((button) => {
+          button.addEventListener("click", () => {
+            const dir = Number(button.dataset.dir || 1);
+            const card = target.querySelector(":scope > *");
+            const distance = card ? card.getBoundingClientRect().width + 18 : target.clientWidth * 0.82;
+            target.scrollBy({ left: dir * distance, behavior: "smooth" });
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>3UI About Regeneration Preview</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --cream: #fff7ec;
+        --warm: #fffaf3;
+        --ink: #20110f;
+        --chocolate: #1f1110;
+        --muted: #6d5f58;
+        --line: rgba(106, 61, 44, 0.16);
+        --soft-line: rgba(33, 23, 22, 0.12);
+        --strawberry: #cf3144;
+        --gold: #c59a52;
+        --edge: clamp(28px, 3.2vw, 64px);
+        --radius: 8px;
+        --display: "Cormorant Garamond", Georgia, serif;
+        --body: "Manrope", Arial, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        background:
+          radial-gradient(circle at 78% 4%, rgba(243, 214, 217, 0.42), transparent 25rem),
+          linear-gradient(180deg, var(--cream), var(--warm));
+        color: var(--ink);
+        font-family: var(--body);
+        margin: 0;
+      }
+
+      .preview-shell {
+        display: grid;
+        gap: 50px;
+        padding: 36px 0 70px;
+      }
+
+      .preview-intro,
+      .option-label {
+        padding-inline: var(--edge);
+      }
+
+      .preview-kicker,
+      .eyebrow,
+      .option-label strong,
+      .proof-kicker {
+        color: var(--strawberry);
+        font-size: 0.78rem;
+        font-weight: 900;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: var(--display);
+        font-weight: 700;
+        line-height: 0.96;
+        margin: 0;
+      }
+
+      h1 {
+        font-size: clamp(3.4rem, 7vw, 7.2rem);
+        max-width: 15ch;
+      }
+
+      h2 {
+        font-size: clamp(3rem, 5.8vw, 6.35rem);
+        max-width: 11.2ch;
+      }
+
+      h3 {
+        font-size: clamp(1.9rem, 3vw, 3.1rem);
+      }
+
+      p {
+        line-height: 1.65;
+      }
+
+      .preview-intro p {
+        color: var(--muted);
+        margin: 10px 0 0;
+        max-width: 72ch;
+      }
+
+      .option {
+        border-top: 1px solid var(--line);
+      }
+
+      .option-label {
+        align-items: center;
+        color: var(--muted);
+        display: flex;
+        font-size: 0.78rem;
+        font-weight: 900;
+        gap: 12px;
+        justify-content: space-between;
+        padding-block: 20px;
+        text-transform: uppercase;
+      }
+
+      .fixed-context-note {
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 800;
+        padding: 0 var(--edge) 8px;
+      }
+
+      .hero-hint-context {
+        background: rgba(253, 251, 246, 0.96);
+        border-radius: 8px 8px 0 0;
+        color: var(--chocolate);
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        margin-inline: var(--edge);
+        overflow: hidden;
+      }
+
+      .hero-hint-context div {
+        border-right: 1px solid var(--soft-line);
+        padding: 18px 22px;
+      }
+
+      .hero-hint-context div:last-child {
+        border-right: 0;
+      }
+
+      .hero-hint-context strong {
+        color: var(--strawberry);
+        display: block;
+        font-size: 0.82rem;
+        line-height: normal;
+        text-transform: uppercase;
+      }
+
+      .hero-hint-context span {
+        color: var(--muted);
+        display: block;
+        font-size: 0.88rem;
+        line-height: normal;
+        margin-top: 5px;
+      }
+
+      .about-option {
+        padding: clamp(56px, 6vw, 88px) var(--edge);
+      }
+
+      .option-1,
+      .option-2,
+      .option-3 {
+        background:
+          radial-gradient(circle at 82% 6%, rgba(201, 52, 69, 0.05), transparent 30rem),
+          linear-gradient(180deg, var(--cream) 0%, var(--warm) 100%);
+      }
+
+      .option-1 .about-grid {
+        display: grid;
+        gap: clamp(34px, 5vw, 74px);
+        grid-template-columns: minmax(0, 0.82fr) minmax(520px, 1.18fr);
+      }
+
+      .copy p {
+        color: var(--muted);
+        font-size: 1.02rem;
+        margin: 24px 0 0;
+        max-width: 54ch;
+      }
+
+      .compact-proof {
+        border: 1px solid var(--line);
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        min-height: 430px;
+      }
+
+      .compact-proof article {
+        border-right: 1px solid var(--line);
+        display: grid;
+        gap: 28px;
+        grid-template-rows: auto 1fr auto;
+        padding: clamp(28px, 3vw, 42px);
+      }
+
+      .compact-proof article:last-child {
+        border-right: 0;
+      }
+
+      .compact-proof .number {
+        color: rgba(201, 52, 69, 0.42);
+        font-family: var(--display);
+        font-size: clamp(3rem, 5vw, 5.6rem);
+        line-height: 0.8;
+      }
+
+      .compact-proof p,
+      .signal-card p,
+      .proof-board p,
+      .signature-panel p {
+        color: var(--muted);
+        margin: 16px 0 0;
+      }
+
+      .proof-footer {
+        border-top: 1px solid var(--line);
+        color: var(--strawberry);
+        font-size: 0.84rem;
+        font-weight: 900;
+        padding-top: 18px;
+        text-transform: uppercase;
+      }
+
+      .option-2 .about-grid {
+        display: grid;
+        gap: clamp(34px, 5vw, 78px);
+        grid-template-columns: minmax(420px, 0.9fr) minmax(0, 1.1fr);
+      }
+
+      .signature-panel {
+        align-self: stretch;
+        background:
+          radial-gradient(circle at 20% 12%, rgba(201, 52, 69, 0.1), transparent 22rem),
+          linear-gradient(135deg, #1d0f0f 0%, #2a1615 62%, #160b0b 100%);
+        color: #fff7ec;
+        display: grid;
+        min-height: 470px;
+        padding: clamp(34px, 4vw, 58px);
+      }
+
+      .signature-panel h2 {
+        color: #fff7ec;
+        max-width: 9ch;
+      }
+
+      .signature-panel p {
+        color: rgba(255, 247, 236, 0.72);
+        max-width: 43ch;
+      }
+
+      .signature-panel strong {
+        align-self: end;
+        border-top: 1px solid rgba(255, 247, 236, 0.16);
+        color: #ffcbd1;
+        display: block;
+        font-family: var(--display);
+        font-size: clamp(2rem, 3.4vw, 3.4rem);
+        line-height: 0.95;
+        padding-top: 24px;
+      }
+
+      .signal-stack {
+        display: grid;
+        gap: 14px;
+      }
+
+      .signal-card {
+        align-items: start;
+        background: rgba(253, 251, 246, 0.84);
+        border: 1px solid var(--line);
+        display: grid;
+        gap: 26px;
+        grid-template-columns: 72px minmax(0, 1fr);
+        padding: clamp(24px, 3vw, 34px);
+      }
+
+      .signal-card span {
+        color: var(--strawberry);
+        font-weight: 900;
+      }
+
+      .signal-card h3 {
+        font-family: var(--body);
+        font-size: 1.08rem;
+        line-height: 1.25;
+      }
+
+      .option-3 .proof-header {
+        align-items: end;
+        display: grid;
+        gap: clamp(34px, 5vw, 70px);
+        grid-template-columns: minmax(0, 1fr) minmax(360px, 0.58fr);
+      }
+
+      .option-3 h2 {
+        max-width: 12.4ch;
+      }
+
+      .proof-mark {
+        border-left: 1px solid var(--line);
+        padding-left: clamp(24px, 3vw, 38px);
+      }
+
+      .proof-mark strong {
+        color: var(--strawberry);
+        display: block;
+        font-family: var(--display);
+        font-size: clamp(2rem, 4vw, 4.25rem);
+        line-height: 0.94;
+      }
+
+      .proof-mark p {
+        color: var(--muted);
+        margin: 16px 0 0;
+      }
+
+      .proof-board {
+        border: 1px solid var(--line);
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        margin-top: clamp(30px, 4vw, 54px);
+      }
+
+      .proof-board article {
+        border-right: 1px solid var(--line);
+        min-height: 250px;
+        padding: clamp(28px, 3vw, 42px);
+      }
+
+      .proof-board article:last-child {
+        border-right: 0;
+      }
+
+      .proof-board .proof-kicker {
+        display: block;
+        margin-bottom: 26px;
+      }
+
+      .process-teaser {
+        background:
+          radial-gradient(circle at 76% 16%, rgba(201, 52, 69, 0.16), transparent 28rem),
+          linear-gradient(135deg, #1d0f0f 0%, #261514 54%, #160b0b 100%);
+        color: #fff7ec;
+        display: grid;
+        gap: 18px;
+        grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr);
+        margin: 0 var(--edge);
+        padding: 34px;
+      }
+
+      .process-teaser h3 {
+        color: #fff7ec;
+      }
+
+      .process-teaser p {
+        color: rgba(255, 247, 236, 0.72);
+        margin: 0;
+      }
+
+      @media (max-width: 980px) {
+        .hero-hint-context,
+        .option-1 .about-grid,
+        .option-2 .about-grid,
+        .option-3 .proof-header,
+        .compact-proof,
+        .proof-board,
+        .process-teaser {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-hint-context div,
+        .compact-proof article,
+        .proof-board article {
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+        }
+
+        .hero-hint-context div:last-child,
+        .compact-proof article:last-child,
+        .proof-board article:last-child {
+          border-bottom: 0;
+        }
+
+        .proof-mark {
+          border-left: 0;
+          border-top: 1px solid var(--line);
+          padding-left: 0;
+          padding-top: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="preview-shell">
+      <section class="preview-intro" aria-labelledby="preview-title">
+        <p class="preview-kicker">3UI preview · regeneracja sekcji O nas</p>
+        <h1 id="preview-title">Nowe warianty bez ruszania paska zalet.</h1>
+        <p>
+          Kierunek bazuje na wcześniejszej opcji 3: więcej porządku, mniej pustej prawej strony, mocniejszy
+          argument marki. Pasek „Świeże owoce / Interakcja / Skala / Organizacja” jest pokazany jako element
+          kontekstu i zostaje bez zmian.
+        </p>
+      </section>
+
+      <section class="option" id="option-1" aria-labelledby="option-1-title">
+        <div class="option-label">
+          <strong>Option 1</strong>
+          <span id="option-1-title">Compact Proof Grid</span>
+        </div>
+        <p class="fixed-context-note">Pasek zalet bez zmian</p>
+        <div class="hero-hint-context" aria-hidden="true">
+          <div><strong>Świeże owoce</strong><span>przygotowanie na miejscu</span></div>
+          <div><strong>Interakcja</strong><span>goście wybierają dodatki</span></div>
+          <div><strong>Skala</strong><span>proces dla dużych eventów</span></div>
+          <div><strong>Organizacja</strong><span>transport, montaż, obsługa</span></div>
+        </div>
+        <div class="about-option option-1">
+          <div class="about-grid">
+            <div class="copy">
+              <p class="eyebrow">O nas</p>
+              <h2>Obsługa atrakcji, którą można oddać w nasze ręce.</h2>
+              <p>
+                Najbardziej kompaktowa wersja po opcji 3: lewa strona sprzedaje ulgę dla organizatora,
+                a prawa pokazuje trzy równe dowody bez dodatkowej karty wprowadzającej.
+              </p>
+            </div>
+            <div class="compact-proof">
+              <article>
+                <span class="number">01</span>
+                <div>
+                  <h3>Goście widzą deser na żywo</h3>
+                  <p>Wybór dodatków i polew dzieje się przy stoisku, więc atrakcja naturalnie angażuje.</p>
+                </div>
+                <span class="proof-footer">Interakcja na miejscu</span>
+              </article>
+              <article>
+                <span class="number">02</span>
+                <div>
+                  <h3>Zaplecze jest po naszej stronie</h3>
+                  <p>Przywozimy stanowisko, składniki i obsługę, bez dokładania pracy organizatorowi.</p>
+                </div>
+                <span class="proof-footer">Proces eventowy</span>
+              </article>
+              <article>
+                <span class="number">03</span>
+                <div>
+                  <h3>Jakość trzyma rytm wydarzenia</h3>
+                  <p>Dbamy o świeżość, ekspozycję i porządek od pierwszego kubka do demontażu.</p>
+                </div>
+                <span class="proof-footer">Stały standard</span>
+              </article>
+            </div>
+          </div>
+        </div>
+        <div class="process-teaser" aria-hidden="true">
+          <h3>Jeden prosty proces od zapytania do ostatniego kubka.</h3>
+          <p>Wariant zostawia jasne przejście do kolejnej, mocniejszej sekcji procesu.</p>
+        </div>
+      </section>
+
+      <section class="option" id="option-2" aria-labelledby="option-2-title">
+        <div class="option-label">
+          <strong>Option 2</strong>
+          <span id="option-2-title">Signature + Signals</span>
+        </div>
+        <p class="fixed-context-note">Pasek zalet bez zmian</p>
+        <div class="hero-hint-context" aria-hidden="true">
+          <div><strong>Świeże owoce</strong><span>przygotowanie na miejscu</span></div>
+          <div><strong>Interakcja</strong><span>goście wybierają dodatki</span></div>
+          <div><strong>Skala</strong><span>proces dla dużych eventów</span></div>
+          <div><strong>Organizacja</strong><span>transport, montaż, obsługa</span></div>
+        </div>
+        <div class="about-option option-2">
+          <div class="about-grid">
+            <aside class="signature-panel">
+              <div>
+                <p class="eyebrow">O nas</p>
+                <h2>Mobilne atelier bez chaosu po stronie eventu.</h2>
+                <p>
+                  Bardziej premium i kontrastowo: podpis marki pracuje jak obietnica jakości,
+                  a prawa strona rozpisuje ją na konkretne sygnały operacyjne.
+                </p>
+              </div>
+              <strong>Świeżość. Jakość. Doświadczenie.</strong>
+            </aside>
+            <div class="signal-stack">
+              <article class="signal-card">
+                <span>01</span>
+                <div>
+                  <h3>Gość wybiera, obsługa serwuje</h3>
+                  <p>Deser powstaje przy stoisku, a interakcja nie wymaga scenariusza prowadzącego.</p>
+                </div>
+              </article>
+              <article class="signal-card">
+                <span>02</span>
+                <div>
+                  <h3>Logistyka jest domknięta</h3>
+                  <p>Transport, montaż, składniki, wydawanie i demontaż są częścią usługi.</p>
+                </div>
+              </article>
+              <article class="signal-card">
+                <span>03</span>
+                <div>
+                  <h3>Stoisko wygląda jak część oprawy</h3>
+                  <p>Dbamy o ekspozycję składników, estetykę podania i tempo przy większych grupach.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+        <div class="process-teaser" aria-hidden="true">
+          <h3>Jeden prosty proces od zapytania do ostatniego kubka.</h3>
+          <p>Wariant mocniej podpina sekcję pod premium charakter marki.</p>
+        </div>
+      </section>
+
+      <section class="option" id="option-3" aria-labelledby="option-3-title">
+        <div class="option-label">
+          <strong>Option 3</strong>
+          <span id="option-3-title">Premium Proof Board Reworked</span>
+        </div>
+        <p class="fixed-context-note">Pasek zalet bez zmian</p>
+        <div class="hero-hint-context" aria-hidden="true">
+          <div><strong>Świeże owoce</strong><span>przygotowanie na miejscu</span></div>
+          <div><strong>Interakcja</strong><span>goście wybierają dodatki</span></div>
+          <div><strong>Skala</strong><span>proces dla dużych eventów</span></div>
+          <div><strong>Organizacja</strong><span>transport, montaż, obsługa</span></div>
+        </div>
+        <div class="about-option option-3">
+          <div class="proof-header">
+            <div class="copy">
+              <p class="eyebrow">O nas</p>
+              <h2>Deserowa atrakcja obsłużona jak pełny serwis.</h2>
+              <p>
+                Najbliżej wybranego kierunku: duży statement, podpis jakości i trzy argumenty w jednej,
+                uporządkowanej tablicy. Bez zmiany paska zalet nad sekcją.
+              </p>
+            </div>
+            <aside class="proof-mark">
+              <strong>Świeżość. Jakość. Doświadczenie.</strong>
+              <p>Krótki podpis marki wzmacnia zaufanie bez budowania osobnej, pustej karty.</p>
+            </aside>
+          </div>
+          <div class="proof-board">
+            <article>
+              <span class="proof-kicker">01 · Przy stoisku</span>
+              <h3>Deser dzieje się przy gościach</h3>
+              <p>Wybór dodatków, polew i dekoracji daje lekki moment interakcji bez przerywania eventu.</p>
+            </article>
+            <article>
+              <span class="proof-kicker">02 · Organizacja</span>
+              <h3>Proces nie spada na organizatora</h3>
+              <p>Przyjeżdża stanowisko, obsługa i składniki, a po wydarzeniu zamykamy strefę.</p>
+            </article>
+            <article>
+              <span class="proof-kicker">03 · Standard</span>
+              <h3>Wygląd i porządek trzymają poziom</h3>
+              <p>Ekspozycja, świeżość i płynne wydawanie są częścią usługi od początku do końca.</p>
+            </article>
+          </div>
+        </div>
+        <div class="process-teaser" aria-hidden="true">
+          <h3>Jeden prosty proces od zapytania do ostatniego kubka.</h3>
+          <p>Najbardziej czytelny wariant, gdy sekcja ma być krótsza, równa i łatwa do skanowania.</p>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

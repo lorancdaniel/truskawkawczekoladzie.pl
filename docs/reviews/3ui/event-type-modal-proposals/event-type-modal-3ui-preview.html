@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>3UI Event Type Modal Proposals - Strawberry Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --cream: #fff7ec;
+        --paper: #fdfbf6;
+        --cocoa: #211716;
+        --cocoa-2: #321615;
+        --muted: #75665f;
+        --strawberry: #c93445;
+        --gold: #c59a52;
+        --line: rgba(106, 61, 44, 0.14);
+        --display: "Cormorant Garamond", Georgia, serif;
+        --body: "Manrope", system-ui, sans-serif;
+        --edge: clamp(24px, 3.2vw, 64px);
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        background: linear-gradient(180deg, #fff7ec 0%, #fffaf3 50%, #f4eadf 100%);
+        color: var(--cocoa);
+        font-family: var(--body);
+        margin: 0;
+      }
+
+      button, input, textarea { font: inherit; }
+
+      .preview-nav {
+        align-items: center;
+        background: #1b100f;
+        border-top: 4px solid var(--gold);
+        color: var(--cream);
+        display: flex;
+        gap: 36px;
+        min-height: 82px;
+        padding: 0 var(--edge);
+        position: sticky;
+        top: 0;
+        z-index: 30;
+      }
+
+      .brand {
+        align-items: center;
+        display: flex;
+        gap: 14px;
+        margin-right: auto;
+      }
+
+      .brand img {
+        height: 54px;
+        width: 50px;
+      }
+
+      .brand strong {
+        color: var(--cream);
+        display: block;
+        font-size: 0.9rem;
+        line-height: 1;
+        text-transform: uppercase;
+      }
+
+      .preview-nav a {
+        color: rgba(255, 247, 236, 0.78);
+        font-size: 0.86rem;
+        font-weight: 900;
+        text-decoration: none;
+      }
+
+      .preview-intro {
+        padding: 50px var(--edge) 20px;
+      }
+
+      .preview-intro h1 {
+        font-family: var(--display);
+        font-size: clamp(3rem, 5vw, 5.4rem);
+        line-height: 0.92;
+        margin: 0;
+      }
+
+      .preview-intro p {
+        color: var(--muted);
+        max-width: 76ch;
+      }
+
+      .option {
+        padding: 32px var(--edge) 82px;
+      }
+
+      .option-label {
+        align-items: center;
+        display: flex;
+        gap: 14px;
+        margin-bottom: 20px;
+      }
+
+      .option-label b {
+        background: var(--cocoa);
+        border-radius: 999px;
+        color: var(--cream);
+        font-size: 0.72rem;
+        padding: 8px 12px;
+        text-transform: uppercase;
+      }
+
+      .option-label span {
+        color: var(--muted);
+        font-size: 0.9rem;
+        font-weight: 800;
+      }
+
+      .contact-shell {
+        border: 1px solid rgba(106, 61, 44, 0.2);
+        border-radius: 24px;
+        box-shadow: 0 32px 110px rgba(73, 42, 24, 0.14);
+        display: grid;
+        grid-template-columns: minmax(390px, 0.9fr) minmax(620px, 1.1fr);
+        min-height: 680px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .contact-panel {
+        background:
+          radial-gradient(circle at 18% 0%, rgba(201, 52, 69, 0.28), transparent 22rem),
+          linear-gradient(145deg, var(--cocoa-2) 0%, var(--cocoa) 58%, #160b0b 100%);
+        color: var(--cream);
+        padding: clamp(38px, 4.8vw, 68px);
+      }
+
+      .eyebrow {
+        color: #efbcc4;
+        font-size: 0.74rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .contact-panel h2 {
+        font-family: var(--display);
+        font-size: clamp(4rem, 5vw, 6.8rem);
+        line-height: 0.9;
+        margin: 28px 0 0;
+        max-width: 9.8ch;
+      }
+
+      .contact-panel p {
+        color: rgba(255, 247, 236, 0.78);
+        line-height: 1.65;
+        margin-top: 34px;
+        max-width: 44ch;
+      }
+
+      .lead-form {
+        background:
+          radial-gradient(circle at 92% 12%, rgba(201, 52, 69, 0.06), transparent 26rem),
+          linear-gradient(180deg, rgba(255, 252, 247, 0.98), rgba(253, 246, 236, 0.98));
+        border-left: 1px solid rgba(106, 61, 44, 0.16);
+        padding: clamp(30px, 4.2vw, 60px);
+      }
+
+      .lead-form__header {
+        border-bottom: 1px solid var(--line);
+        margin-bottom: 26px;
+        padding-bottom: 24px;
+      }
+
+      .lead-form__header span {
+        color: var(--strawberry);
+        font-size: 0.72rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .lead-form__header h3 {
+        font-family: var(--display);
+        font-size: clamp(2.4rem, 3.4vw, 4rem);
+        line-height: 0.95;
+        margin: 14px 0 0;
+      }
+
+      .form-group {
+        display: grid;
+        gap: 16px 18px;
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .form-group h4 {
+        align-items: center;
+        display: flex;
+        font-size: 0.76rem;
+        font-weight: 900;
+        gap: 10px;
+        grid-column: 1 / -1;
+        margin: 0;
+        text-transform: uppercase;
+      }
+
+      .form-group h4::after {
+        background: var(--line);
+        content: "";
+        flex: 1;
+        height: 1px;
+      }
+
+      .field {
+        display: grid;
+        gap: 8px;
+      }
+
+      .field label {
+        font-size: 0.86rem;
+        font-weight: 900;
+      }
+
+      .input-shell,
+      .event-trigger {
+        align-items: center;
+        background: rgba(255, 247, 236, 0.72);
+        border: 1px solid #e6d8cb;
+        border-radius: 8px;
+        color: #201b18;
+        display: flex;
+        justify-content: space-between;
+        min-height: 52px;
+        padding: 0 14px;
+        width: 100%;
+      }
+
+      .event-trigger {
+        border-color: rgba(201, 52, 69, 0.5);
+        box-shadow: 0 0 0 3px rgba(201, 52, 69, 0.1);
+        cursor: pointer;
+        font-weight: 800;
+        text-align: left;
+      }
+
+      .event-trigger svg {
+        color: var(--strawberry);
+        flex: 0 0 auto;
+      }
+
+      .modal-backdrop {
+        align-items: center;
+        background: rgba(22, 11, 11, 0.54);
+        display: flex;
+        inset: 0;
+        justify-content: center;
+        padding: 28px;
+        position: absolute;
+        z-index: 5;
+      }
+
+      .modal {
+        background: var(--paper);
+        border: 1px solid rgba(106, 61, 44, 0.22);
+        border-radius: 18px;
+        box-shadow: 0 34px 90px rgba(33, 23, 22, 0.28);
+        color: var(--cocoa);
+        width: min(680px, 100%);
+      }
+
+      .modal__head {
+        border-bottom: 1px solid var(--line);
+        padding: 26px 28px 22px;
+      }
+
+      .modal__head span {
+        color: var(--strawberry);
+        display: block;
+        font-size: 0.72rem;
+        font-weight: 900;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+      }
+
+      .modal__head h3 {
+        font-family: var(--display);
+        font-size: 3rem;
+        line-height: 0.95;
+        margin: 0;
+      }
+
+      .modal__body {
+        padding: 22px 28px 28px;
+      }
+
+      .close {
+        align-items: center;
+        background: transparent;
+        border: 1px solid rgba(106, 61, 44, 0.18);
+        border-radius: 999px;
+        color: var(--cocoa);
+        display: inline-flex;
+        float: right;
+        font-size: 1.2rem;
+        height: 40px;
+        justify-content: center;
+        width: 40px;
+      }
+
+      .option-1 .event-list {
+        display: grid;
+        gap: 8px;
+      }
+
+      .option-1 .event-list button {
+        align-items: center;
+        background: #fff7ec;
+        border: 1px solid #e6d8cb;
+        border-radius: 10px;
+        color: var(--cocoa);
+        display: grid;
+        grid-template-columns: 34px 1fr;
+        min-height: 56px;
+        padding: 0 14px;
+        text-align: left;
+      }
+
+      .option-1 .event-list button.is-selected {
+        border-color: var(--strawberry);
+        box-shadow: 0 0 0 3px rgba(201, 52, 69, 0.1);
+      }
+
+      .option-1 .event-list em {
+        align-items: center;
+        background: rgba(201, 52, 69, 0.1);
+        border-radius: 999px;
+        color: var(--strawberry);
+        display: inline-flex;
+        font-style: normal;
+        height: 24px;
+        justify-content: center;
+        width: 24px;
+      }
+
+      .option-2 .event-grid {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .option-2 .event-card {
+        background: #fff7ec;
+        border: 1px solid #e6d8cb;
+        border-radius: 14px;
+        min-height: 108px;
+        padding: 18px;
+        text-align: left;
+      }
+
+      .option-2 .event-card.is-selected {
+        background:
+          radial-gradient(circle at 92% 8%, rgba(201, 52, 69, 0.12), transparent 9rem),
+          #fff7ec;
+        border-color: var(--strawberry);
+      }
+
+      .option-2 .event-card strong {
+        display: block;
+        font-family: var(--display);
+        font-size: 1.58rem;
+        line-height: 1;
+      }
+
+      .option-2 .event-card span {
+        color: var(--muted);
+        display: block;
+        font-size: 0.78rem;
+        font-weight: 800;
+        margin-top: 10px;
+      }
+
+      .option-3 .event-dock {
+        display: grid;
+        gap: 12px;
+      }
+
+      .option-3 .event-dock button {
+        align-items: center;
+        background: #fff7ec;
+        border: 1px solid #e6d8cb;
+        border-radius: 12px;
+        display: grid;
+        gap: 14px;
+        grid-template-columns: 46px 1fr auto;
+        min-height: 74px;
+        padding: 10px 16px 10px 10px;
+        text-align: left;
+      }
+
+      .option-3 .event-dock button.is-selected {
+        border-color: var(--strawberry);
+      }
+
+      .option-3 .event-dock em {
+        align-items: center;
+        background: rgba(201, 52, 69, 0.1);
+        border-radius: 10px;
+        color: var(--strawberry);
+        display: inline-flex;
+        font-style: normal;
+        height: 46px;
+        justify-content: center;
+        width: 46px;
+      }
+
+      .option-3 .event-dock strong,
+      .option-3 .event-dock span {
+        display: block;
+      }
+
+      .option-3 .event-dock span {
+        color: var(--muted);
+        font-size: 0.8rem;
+      }
+
+      .option-3 .event-dock small {
+        color: var(--strawberry);
+        font-weight: 900;
+      }
+
+      @media (max-width: 1100px) {
+        .contact-shell,
+        .form-group,
+        .option-2 .event-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .lead-form {
+          border-left: 0;
+          border-top: 1px solid rgba(106, 61, 44, 0.16);
+        }
+      }
+
+      @media (max-width: 720px) {
+        .preview-nav a { display: none; }
+        .option { padding-inline: 14px; }
+        .contact-panel,
+        .lead-form { padding: 28px 20px; }
+        .modal-backdrop { align-items: flex-end; padding: 0; }
+        .modal {
+          border-radius: 20px 20px 0 0;
+          max-height: 86svh;
+          overflow: auto;
+        }
+        .modal__head,
+        .modal__body { padding-inline: 20px; }
+        .modal__head h3 { font-size: 2.55rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="preview-nav">
+      <div class="brand">
+        <img src="/strawberry-logo.png" alt="" />
+        <strong>Strawberry<br />Group</strong>
+      </div>
+      <a href="#option-1">Option 1</a>
+      <a href="#option-2">Option 2</a>
+      <a href="#option-3">Option 3</a>
+    </header>
+
+    <section class="preview-intro">
+      <h1>Typ wydarzenia jako modal</h1>
+      <p>
+        Natywny dropdown nie pasuje do formularza. Każda opcja pokazuje ten sam kontekst sekcji kontaktu oraz
+        inny model wyboru typu wydarzenia w osobnym modalu.
+      </p>
+    </section>
+
+    <main>
+      <section class="option option-1" id="option-1">
+        <div class="option-label"><b>Option 1</b><span>Simple Selection Sheet - najbardziej spokojne i czytelne</span></div>
+        <div class="contact-shell">
+          <aside class="contact-panel">
+            <span class="eyebrow">Wycena</span>
+            <h2>Sprawdź dostępność terminu i orientacyjny koszt stoiska.</h2>
+            <p>Podaj kilka informacji o wydarzeniu. Wrócimy z dostępnością, rekomendowanym pakietem i konkretnym zakresem obsługi.</p>
+          </aside>
+          <form class="lead-form">
+            <div class="lead-form__header"><span>Formularz</span><h3>Szczegóły wydarzenia</h3></div>
+            <div class="form-group">
+              <h4>Wydarzenie</h4>
+              <div class="field"><label>Data wydarzenia</label><div class="input-shell">dd/mm/yyyy <span>□</span></div></div>
+              <div class="field"><label>Typ wydarzenia</label><button class="event-trigger" type="button">Wesele / poprawiny <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2"/></svg></button></div>
+              <div class="field"><label>Miasto / lokalizacja wydarzenia</label><div class="input-shell"></div></div>
+              <div class="field"><label>Szacowana liczba gości</label><div class="input-shell"></div></div>
+            </div>
+          </form>
+          <div class="modal-backdrop">
+            <article class="modal">
+              <header class="modal__head">
+                <button class="close" type="button">×</button>
+                <span>Typ wydarzenia</span>
+                <h3>Wybierz scenariusz</h3>
+              </header>
+              <div class="modal__body event-list">
+                <button class="is-selected" type="button"><em>✓</em><strong>Wesele / poprawiny</strong></button>
+                <button type="button"><em></em><strong>Event firmowy</strong></button>
+                <button type="button"><em></em><strong>Spotkanie integracyjne</strong></button>
+                <button type="button"><em></em><strong>Gala / bankiet</strong></button>
+                <button type="button"><em></em><strong>Premiera produktu</strong></button>
+                <button type="button"><em></em><strong>Festiwal / plener</strong></button>
+                <button type="button"><em></em><strong>Strefa VIP</strong></button>
+                <button type="button"><em></em><strong>Inne wydarzenie</strong></button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="option option-2" id="option-2">
+        <div class="option-label"><b>Option 2</b><span>Category Cards - bardziej premium, szybkie skanowanie</span></div>
+        <div class="contact-shell">
+          <aside class="contact-panel">
+            <span class="eyebrow">Wycena</span>
+            <h2>Sprawdź dostępność terminu i orientacyjny koszt stoiska.</h2>
+            <p>Podaj kilka informacji o wydarzeniu. Wrócimy z dostępnością, rekomendowanym pakietem i konkretnym zakresem obsługi.</p>
+          </aside>
+          <form class="lead-form">
+            <div class="lead-form__header"><span>Formularz</span><h3>Szczegóły wydarzenia</h3></div>
+            <div class="form-group">
+              <h4>Wydarzenie</h4>
+              <div class="field"><label>Data wydarzenia</label><div class="input-shell">dd/mm/yyyy <span>□</span></div></div>
+              <div class="field"><label>Typ wydarzenia</label><button class="event-trigger" type="button">Event firmowy <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2"/></svg></button></div>
+              <div class="field"><label>Miasto / lokalizacja wydarzenia</label><div class="input-shell"></div></div>
+              <div class="field"><label>Szacowana liczba gości</label><div class="input-shell"></div></div>
+            </div>
+          </form>
+          <div class="modal-backdrop">
+            <article class="modal">
+              <header class="modal__head">
+                <button class="close" type="button">×</button>
+                <span>Typ wydarzenia</span>
+                <h3>Jaki charakter ma event?</h3>
+              </header>
+              <div class="modal__body event-grid">
+                <button class="event-card" type="button"><strong>Wesele</strong><span>uroczystość, poprawiny, rodzinne przyjęcie</span></button>
+                <button class="event-card is-selected" type="button"><strong>Firma</strong><span>event firmowy, integracja, premiera</span></button>
+                <button class="event-card" type="button"><strong>Gala</strong><span>bankiet, VIP, elegancki scenariusz</span></button>
+                <button class="event-card" type="button"><strong>Plener</strong><span>festiwal, większy ruch, obsługa przepływu</span></button>
+                <button class="event-card" type="button"><strong>Strefa VIP</strong><span>personalizacja i premium podanie</span></button>
+                <button class="event-card" type="button"><strong>Inne</strong><span>opiszesz szczegóły w formularzu</span></button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="option option-3" id="option-3">
+        <div class="option-label"><b>Option 3</b><span>Guided Dock - najbardziej dopracowane UX, z krótkimi podpowiedziami</span></div>
+        <div class="contact-shell">
+          <aside class="contact-panel">
+            <span class="eyebrow">Wycena</span>
+            <h2>Sprawdź dostępność terminu i orientacyjny koszt stoiska.</h2>
+            <p>Podaj kilka informacji o wydarzeniu. Wrócimy z dostępnością, rekomendowanym pakietem i konkretnym zakresem obsługi.</p>
+          </aside>
+          <form class="lead-form">
+            <div class="lead-form__header"><span>Formularz</span><h3>Szczegóły wydarzenia</h3></div>
+            <div class="form-group">
+              <h4>Wydarzenie</h4>
+              <div class="field"><label>Data wydarzenia</label><div class="input-shell">dd/mm/yyyy <span>□</span></div></div>
+              <div class="field"><label>Typ wydarzenia</label><button class="event-trigger" type="button">Gala / bankiet <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2"/></svg></button></div>
+              <div class="field"><label>Miasto / lokalizacja wydarzenia</label><div class="input-shell"></div></div>
+              <div class="field"><label>Szacowana liczba gości</label><div class="input-shell"></div></div>
+            </div>
+          </form>
+          <div class="modal-backdrop">
+            <article class="modal">
+              <header class="modal__head">
+                <button class="close" type="button">×</button>
+                <span>Typ wydarzenia</span>
+                <h3>Dopasuj rytm obsługi</h3>
+              </header>
+              <div class="modal__body event-dock">
+                <button type="button"><em>01</em><span><strong>Wesele / poprawiny</strong><span>efekt wizualny i zdjęcia</span></span><small>wybierz</small></button>
+                <button type="button"><em>02</em><span><strong>Event firmowy</strong><span>szybki punkt dla zespołu i klientów</span></span><small>wybierz</small></button>
+                <button type="button"><em>03</em><span><strong>Spotkanie integracyjne</strong><span>lekka interakcja bez scenariusza</span></span><small>wybierz</small></button>
+                <button class="is-selected" type="button"><em>04</em><span><strong>Gala / bankiet</strong><span>premium detal i spokojna obsługa</span></span><small>wybrane</small></button>
+                <button type="button"><em>05</em><span><strong>Premiera produktu</strong><span>atrakcja wizerunkowa</span></span><small>wybierz</small></button>
+                <button type="button"><em>06</em><span><strong>Festiwal / plener</strong><span>większy ruch i sprawny przepływ</span></span><small>wybierz</small></button>
+                <button type="button"><em>07</em><span><strong>Strefa VIP</strong><span>personalizacja dodatków</span></span><small>wybierz</small></button>
+                <button type="button"><em>08</em><span><strong>Inne wydarzenie</strong><span>ustalimy zakres indywidualnie</span></span><small>wybierz</small></button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,77 @@
+{
+  "scope": "icon-only SVG logo",
+  "captures": [
+    {
+      "name": "post-change-logo-direct-desktop",
+      "url": "http://localhost:4174/brand/strawberry-group-logo.svg",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "device": "desktop",
+      "path": "/Users/danielloranc/Documents/truskawka/docs/reviews/gpt-pro-review/2026-05-18-logo-icon/screenshot/post-change-logo-direct-desktop.png",
+      "captureTime": "2026-05-18T09:24:22.248Z",
+      "pngDimensions": {
+        "width": 1920,
+        "height": 1080
+      },
+      "observed": {
+        "width": 1920,
+        "height": 1080,
+        "title": "Znak marki",
+        "bodyText": "",
+        "visibleTextNodes": 0,
+        "svgCount": 1
+      },
+      "stability": "networkidle plus 700ms settle"
+    },
+    {
+      "name": "post-change-logo-preview-desktop",
+      "url": "http://localhost:4174/docs/reviews/gpt-pro-review/2026-05-18-logo-icon/verification/logo-icon-scale-preview.html",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "device": "desktop",
+      "path": "/Users/danielloranc/Documents/truskawka/docs/reviews/gpt-pro-review/2026-05-18-logo-icon/screenshot/post-change-logo-preview-desktop.png",
+      "captureTime": "2026-05-18T09:24:23.656Z",
+      "pngDimensions": {
+        "width": 1920,
+        "height": 1080
+      },
+      "observed": {
+        "width": 1920,
+        "height": 1080,
+        "title": "Strawberry Group Icon Verification",
+        "bodyText": "16\n24\n48\n96\n160\n16\n24\n48\n96\n160",
+        "visibleTextNodes": 0,
+        "svgCount": 0
+      },
+      "stability": "networkidle plus 700ms settle"
+    },
+    {
+      "name": "post-change-logo-preview-mobile",
+      "url": "http://localhost:4174/docs/reviews/gpt-pro-review/2026-05-18-logo-icon/verification/logo-icon-scale-preview.html",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "device": "mobile",
+      "path": "/Users/danielloranc/Documents/truskawka/docs/reviews/gpt-pro-review/2026-05-18-logo-icon/screenshot/post-change-logo-preview-mobile.png",
+      "captureTime": "2026-05-18T09:24:25.025Z",
+      "pngDimensions": {
+        "width": 390,
+        "height": 844
+      },
+      "observed": {
+        "width": 390,
+        "height": 844,
+        "title": "Strawberry Group Icon Verification",
+        "bodyText": "16\n24\n48\n96\n160\n16\n24\n48\n96\n160",
+        "visibleTextNodes": 0,
+        "svgCount": 0
+      },
+      "stability": "networkidle plus 700ms settle"
+    }
+  ]
+}

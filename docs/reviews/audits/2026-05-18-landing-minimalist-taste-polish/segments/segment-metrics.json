@@ -1,0 +1,182 @@
+[
+  {
+    "viewport": "desktop",
+    "label": "01-hero",
+    "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/audits/2026-05-18-landing-minimalist-taste-polish/segments/desktop-01-hero.png",
+    "metrics": {
+      "scrollY": 0,
+      "section": "#top",
+      "rect": {
+        "top": 0,
+        "bottom": 1080,
+        "height": 1080
+      },
+      "hiddenRevealCount": 9
+    }
+  },
+  {
+    "viewport": "desktop",
+    "label": "02-offer",
+    "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/audits/2026-05-18-landing-minimalist-taste-polish/segments/desktop-02-offer.png",
+    "metrics": {
+      "scrollY": 626,
+      "section": "#oferta",
+      "rect": {
+        "top": 454,
+        "bottom": 713,
+        "height": 259
+      },
+      "hiddenRevealCount": 7
+    }
+  },
+  {
+    "viewport": "desktop",
+    "label": "03-process",
+    "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/audits/2026-05-18-landing-minimalist-taste-polish/segments/desktop-03-process.png",
+    "metrics": {
+      "scrollY": 1951,
+      "section": "#jak-dziala",
+      "rect": {
+        "top": 154,
+        "bottom": 1158,
+        "height": 1004
+      },
+      "hiddenRevealCount": 6
+    }
+  },
+  {
+    "viewport": "desktop",
+    "label": "04-packages",
+    "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/audits/2026-05-18-landing-minimalist-taste-polish/segments/desktop-04-packages.png",
+    "metrics": {
+      "scrollY": 3200,
+      "section": "#pakiety",
+      "rect": {
+        "top": -91,
+        "bottom": 1404,
+        "height": 1495
+      },
+      "hiddenRevealCount": 5
+    }
+  },
+  {
+    "viewport": "desktop",
+    "label": "05-events",
+    "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/audits/2026-05-18-landing-minimalist-taste-polish/segments/desktop-05-events.png",
+    "metrics": {
+      "scrollY": 4538,
+      "section": "#eventy",
+      "rect": {
+        "top": 66,
+        "bottom": 1247,
+        "height": 1181
+      },
+      "hiddenRevealCount": 4
+    }
+  },
+  {
+    "viewport": "desktop",
+    "label": "06-contact",
+    "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/audits/2026-05-18-landing-minimalist-taste-polish/segments/desktop-06-contact.png",
+    "metrics": {
+      "scrollY": 8461,
+      "section": "#kontakt",
+      "rect": {
+        "top": 87,
+        "bottom": 1225,
+        "height": 1137
+      },
+      "hiddenRevealCount": 3
+    }
+  },
+  {
+    "viewport": "mobile",
+    "label": "01-hero",
+    "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/audits/2026-05-18-landing-minimalist-taste-polish/segments/mobile-01-hero.png",
+    "metrics": {
+      "scrollY": 0,
+      "section": "#top",
+      "rect": {
+        "top": 0,
+        "bottom": 1180,
+        "height": 1180
+      },
+      "hiddenRevealCount": 9
+    }
+  },
+  {
+    "viewport": "mobile",
+    "label": "02-offer",
+    "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/audits/2026-05-18-landing-minimalist-taste-polish/segments/mobile-02-offer.png",
+    "metrics": {
+      "scrollY": 1133,
+      "section": "#oferta",
+      "rect": {
+        "top": 47,
+        "bottom": 886,
+        "height": 839
+      },
+      "hiddenRevealCount": 8
+    }
+  },
+  {
+    "viewport": "mobile",
+    "label": "03-process",
+    "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/audits/2026-05-18-landing-minimalist-taste-polish/segments/mobile-03-process.png",
+    "metrics": {
+      "scrollY": 3127,
+      "section": "#jak-dziala",
+      "rect": {
+        "top": -215,
+        "bottom": 1291,
+        "height": 1506
+      },
+      "hiddenRevealCount": 7
+    }
+  },
+  {
+    "viewport": "mobile",
+    "label": "04-packages",
+    "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/audits/2026-05-18-landing-minimalist-taste-polish/segments/mobile-04-packages.png",
+    "metrics": {
+      "scrollY": 5168,
+      "section": "#pakiety",
+      "rect": {
+        "top": -750,
+        "bottom": 1825,
+        "height": 2575
+      },
+      "hiddenRevealCount": 6
+    }
+  },
+  {
+    "viewport": "mobile",
+    "label": "05-events",
+    "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/audits/2026-05-18-landing-minimalist-taste-polish/segments/mobile-05-events.png",
+    "metrics": {
+      "scrollY": 7278,
+      "section": "#eventy",
+      "rect": {
+        "top": -285,
+        "bottom": 1362,
+        "height": 1646
+      },
+      "hiddenRevealCount": 5
+    }
+  },
+  {
+    "viewport": "mobile",
+    "label": "06-contact",
+    "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/audits/2026-05-18-landing-minimalist-taste-polish/segments/mobile-06-contact.png",
+    "metrics": {
+      "scrollY": 11962,
+      "section": "#kontakt",
+      "rect": {
+        "top": -435,
+        "bottom": 1512,
+        "height": 1947
+      },
+      "hiddenRevealCount": 4
+    }
+  }
+]

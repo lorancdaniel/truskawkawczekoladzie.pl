@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>3UI Packages Scroll - Strawberry Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --cream: #fff7ec;
+        --paper: #fffaf3;
+        --warm-white: #fdf8ef;
+        --cocoa: #1d0f0f;
+        --ink: #241815;
+        --muted: #75665f;
+        --strawberry: #cf3447;
+        --gold: #c69b55;
+        --pistachio: #cfe7dc;
+        --leaf: #2f6b45;
+        --line: rgba(106, 61, 44, 0.14);
+        --edge: clamp(28px, 3.2vw, 64px);
+        --display: "Cormorant Garamond", Georgia, serif;
+        --body: "Manrope", system-ui, sans-serif;
+        --radius: 8px;
+      }
+
+      * { box-sizing: border-box; }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        background: var(--paper);
+        color: var(--ink);
+        font-family: var(--body);
+        margin: 0;
+      }
+
+      h1, h2, h3, p { margin: 0; }
+
+      button { font: inherit; }
+
+      .context {
+        background:
+          radial-gradient(circle at 72% 16%, rgba(201, 52, 69, 0.12), transparent 34rem),
+          linear-gradient(135deg, #1d0f0f 0%, #2a1514 62%, #140808 100%);
+        color: var(--cream);
+        padding: 64px var(--edge);
+      }
+
+      .context h2,
+      .after h2 {
+        font-family: var(--display);
+        font-size: clamp(3.2rem, 5vw, 5.8rem);
+        line-height: 0.92;
+        max-width: 12ch;
+      }
+
+      .context p,
+      .after p {
+        color: rgba(255, 247, 236, 0.72);
+        line-height: 1.65;
+        margin-top: 18px;
+        max-width: 58ch;
+      }
+
+      .after {
+        background: #fffaf3;
+        padding: 90px var(--edge);
+      }
+
+      .after p { color: var(--muted); }
+
+      .option {
+        background:
+          radial-gradient(circle at 50% 18%, rgba(201, 52, 69, 0.08), transparent 34rem),
+          linear-gradient(180deg, #fbf1e7 0%, #fffaf3 100%);
+        min-height: 100svh;
+        padding: 78px var(--edge);
+        position: relative;
+      }
+
+      .option + .option {
+        border-top: 1px solid rgba(106, 61, 44, 0.12);
+      }
+
+      .option-label {
+        align-items: center;
+        background: var(--warm-white);
+        border: 1px solid rgba(198, 155, 85, 0.34);
+        border-radius: 999px;
+        color: var(--ink);
+        display: inline-flex;
+        font-size: 0.72rem;
+        font-weight: 900;
+        gap: 8px;
+        min-height: 34px;
+        padding: 0 14px;
+        position: absolute;
+        right: var(--edge);
+        text-transform: uppercase;
+        top: 22px;
+        z-index: 5;
+      }
+
+      .option-label b { color: var(--strawberry); }
+
+      .eyebrow {
+        color: var(--muted);
+        font-size: 0.76rem;
+        font-weight: 900;
+        margin-bottom: 16px;
+        text-transform: uppercase;
+      }
+
+      .title {
+        font-family: var(--display);
+        font-size: clamp(3.3rem, 5.2vw, 6.1rem);
+        line-height: 0.92;
+        max-width: 13ch;
+      }
+
+      .lead {
+        color: var(--muted);
+        line-height: 1.7;
+        margin-top: 18px;
+        max-width: 58ch;
+      }
+
+      .button {
+        align-items: center;
+        background: var(--strawberry);
+        border: 0;
+        border-radius: 999px;
+        box-shadow: 0 18px 42px rgba(201, 52, 69, 0.22);
+        color: white;
+        cursor: pointer;
+        display: inline-flex;
+        font-weight: 900;
+        justify-content: center;
+        min-height: 52px;
+        padding: 0 22px;
+      }
+
+      .button::after {
+        content: "→";
+        margin-left: 10px;
+      }
+
+      .package-card {
+        background: rgba(253, 251, 246, 0.9);
+        border: 1px solid rgba(106, 61, 44, 0.18);
+        border-radius: var(--radius);
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset;
+        display: grid;
+        gap: 20px;
+        min-height: 560px;
+        padding: clamp(24px, 3vw, 34px);
+      }
+
+      .package-card.is-featured {
+        background: linear-gradient(180deg, rgba(248, 224, 220, 0.92), rgba(255, 250, 243, 0.98));
+        border-color: rgba(201, 52, 69, 0.32);
+        box-shadow: 0 26px 70px rgba(201, 52, 69, 0.1);
+      }
+
+      .package-card > span {
+        align-self: start;
+        background: var(--pistachio);
+        border-radius: 999px;
+        color: var(--leaf);
+        display: inline-flex;
+        font-size: 0.72rem;
+        font-weight: 900;
+        padding: 7px 10px;
+        width: fit-content;
+      }
+
+      .package-card h3 {
+        color: var(--ink);
+        font-family: var(--display);
+        font-size: clamp(2.7rem, 3.8vw, 4.2rem);
+        line-height: 0.92;
+      }
+
+      .package-card p,
+      .package-card li,
+      .package-card small {
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .package-card ul {
+        display: grid;
+        gap: 8px;
+        margin: 0;
+        padding-left: 18px;
+      }
+
+      .prices {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-top: auto;
+      }
+
+      .prices div {
+        background: var(--cream);
+        border: 1px solid rgba(106, 61, 44, 0.1);
+        border-radius: var(--radius);
+        padding: 14px;
+      }
+
+      .prices strong {
+        color: var(--strawberry);
+        display: block;
+        font-family: var(--display);
+        font-size: 2rem;
+        line-height: 1;
+      }
+
+      .option-1 {
+        padding-bottom: 120px;
+      }
+
+      .option-1 .scroll-layout {
+        align-items: start;
+        display: grid;
+        gap: clamp(34px, 6vw, 90px);
+        grid-template-columns: minmax(320px, 0.78fr) minmax(0, 1.22fr);
+      }
+
+      .option-1 .sticky-copy {
+        position: sticky;
+        top: 110px;
+      }
+
+      .progress-list {
+        border-top: 1px solid var(--line);
+        display: grid;
+        gap: 0;
+        margin-top: 36px;
+      }
+
+      .progress-list span {
+        border-bottom: 1px solid var(--line);
+        color: var(--muted);
+        display: flex;
+        font-weight: 900;
+        justify-content: space-between;
+        min-height: 54px;
+        padding-block: 16px;
+      }
+
+      .progress-list span.is-active {
+        color: var(--strawberry);
+      }
+
+      .scroll-stack {
+        display: grid;
+        gap: 28px;
+      }
+
+      .scroll-stack .package-card {
+        opacity: 0.44;
+        transform: translateY(34px) scale(0.965);
+        transition:
+          opacity 420ms cubic-bezier(0.22, 1, 0.36, 1),
+          transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+          box-shadow 420ms cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .scroll-stack .package-card.is-active {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+
+      .option-2 {
+        min-height: 300svh;
+        padding-block: 0;
+      }
+
+      .option-2 .pin-stage {
+        min-height: 100svh;
+        overflow: hidden;
+        padding: 90px var(--edge);
+        position: sticky;
+        top: 0;
+      }
+
+      .option-2 .pin-head {
+        align-items: end;
+        display: grid;
+        gap: 36px;
+        grid-template-columns: minmax(0, 0.74fr) minmax(360px, 0.46fr);
+        margin-bottom: 34px;
+      }
+
+      .horizontal-track {
+        display: flex;
+        gap: 18px;
+        transform: translateX(var(--track-x, 0px));
+        transition: transform 90ms linear;
+        will-change: transform;
+      }
+
+      .horizontal-track .package-card {
+        flex: 0 0 min(440px, 82vw);
+      }
+
+      .option-3 .step-board {
+        display: grid;
+        gap: 24px;
+        grid-template-columns: minmax(330px, 0.76fr) minmax(0, 1.24fr);
+      }
+
+      .option-3 .step-copy {
+        background:
+          radial-gradient(circle at 20% 0%, rgba(201, 52, 69, 0.18), transparent 20rem),
+          #211716;
+        border-radius: var(--radius);
+        color: var(--cream);
+        min-height: 680px;
+        padding: clamp(32px, 4.4vw, 58px);
+        position: sticky;
+        top: 100px;
+      }
+
+      .option-3 .step-copy .eyebrow,
+      .option-3 .step-copy .lead {
+        color: rgba(255, 247, 236, 0.72);
+      }
+
+      .option-3 .step-copy .title {
+        color: var(--cream);
+      }
+
+      .step-number {
+        border-top: 1px solid rgba(255, 247, 236, 0.14);
+        color: var(--strawberry);
+        font-family: var(--display);
+        font-size: clamp(4rem, 7vw, 8rem);
+        line-height: 0.82;
+        margin-top: 56px;
+        padding-top: 28px;
+      }
+
+      .step-cards {
+        display: grid;
+        gap: 26px;
+      }
+
+      .step-cards .package-card {
+        min-height: 520px;
+        transform-origin: center top;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .scroll-stack .package-card,
+        .horizontal-track {
+          opacity: 1;
+          transform: none !important;
+          transition: none;
+        }
+      }
+
+      @media (max-width: 980px) {
+        .option-1 .scroll-layout,
+        .option-2 .pin-head,
+        .option-3 .step-board {
+          grid-template-columns: 1fr;
+        }
+
+        .option-1 .sticky-copy,
+        .option-3 .step-copy,
+        .option-2 .pin-stage {
+          position: relative;
+          top: auto;
+        }
+
+        .option-2 {
+          min-height: 0;
+          padding: 78px var(--edge);
+        }
+
+        .option-2 .pin-stage {
+          padding: 0;
+        }
+
+        .horizontal-track {
+          display: grid;
+          transform: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="context">
+      <h2>Jeden prosty proces od zapytania do ostatniego kubka.</h2>
+      <p>Pakiety są następnym krokiem decyzyjnym, więc mogą dostać ruch scrollowy zamiast statycznej siatki.</p>
+    </section>
+
+    <section class="option option-1" id="option-1">
+      <div class="option-label"><b>Option 1</b> Sticky Package Story</div>
+      <div class="scroll-layout">
+        <div class="sticky-copy">
+          <p class="eyebrow">Pakiety</p>
+          <h2 class="title">Trzy poziomy obsługi, przewijane jak historia wyboru.</h2>
+          <p class="lead">Najbliżej obecnego układu, ale z animowanym wejściem kart. Lewa kolumna zostaje przypięta, a każda karta dostaje własny moment w scrollu.</p>
+          <div class="progress-list" aria-label="Pakiety">
+            <span data-progress="silver" class="is-active">Silver <b>10-11 zł</b></span>
+            <span data-progress="gold">Gold <b>12-13 zł</b></span>
+            <span data-progress="platinum">Platinum <b>16-17 zł</b></span>
+          </div>
+        </div>
+        <div class="scroll-stack" data-stack="option-1">
+          <article class="package-card is-active" data-package="silver">
+            <span>Najsprawniejszy wybór</span>
+            <h3>Silver</h3>
+            <p>Prosta, szybka i efektowna forma serwowania.</p>
+            <ul><li>ok. 300 g świeżych truskawek w kubku</li><li>czekolada mleczna</li><li>2 rodzaje posypek</li><li>2 osoby obsługi</li></ul>
+            <div class="prices"><div><strong>11 zł</strong><small>do 800 osób</small></div><div><strong>10 zł</strong><small>800+ osób</small></div></div>
+            <button class="button">Zapytaj o Silver</button>
+          </article>
+          <article class="package-card is-featured" data-package="gold">
+            <span>Najbardziej uniwersalny</span>
+            <h3>Gold</h3>
+            <p>Więcej smaków, więcej możliwości.</p>
+            <ul><li>czekolada mleczna i biała</li><li>4 rodzaje posypek</li><li>deser przygotowywany przez obsługę</li><li>2 osoby obsługi</li></ul>
+            <div class="prices"><div><strong>13 zł</strong><small>do 800 osób</small></div><div><strong>12 zł</strong><small>800+ osób</small></div></div>
+            <button class="button">Zapytaj o Gold</button>
+          </article>
+          <article class="package-card" data-package="platinum">
+            <span>Najbardziej interaktywny</span>
+            <h3>Platinum</h3>
+            <p>Najwięcej możliwości i najwyższy poziom doświadczenia.</p>
+            <ul><li>4 rodzaje owoców</li><li>2 polewy: karmel i czekolada</li><li>gość sam dekoruje kubek</li><li>2 osoby obsługi</li></ul>
+            <div class="prices"><div><strong>17 zł</strong><small>do 800 osób</small></div><div><strong>16 zł</strong><small>800+ osób</small></div></div>
+            <button class="button">Zapytaj o Platinum</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="option option-2" id="option-2">
+      <div class="option-label"><b>Option 2</b> Pinned Horizontal Scroll</div>
+      <div class="pin-stage">
+        <div class="pin-head">
+          <div>
+            <p class="eyebrow">Pakiety</p>
+            <h2 class="title">Karty przesuwają się poziomo podczas scrolla.</h2>
+          </div>
+          <p class="lead">Najbardziej “litsi-like”: sekcja zachowuje się jak przypięta scena, a pakiety jadą poziomo w jednym kontrolowanym ruchu.</p>
+        </div>
+        <div class="horizontal-track" data-horizontal>
+          <article class="package-card"><span>Najsprawniejszy wybór</span><h3>Silver</h3><p>Prosta i szybka forma serwowania.</p><ul><li>czekolada mleczna</li><li>2 rodzaje posypek</li><li>2 osoby obsługi</li></ul><div class="prices"><div><strong>11 zł</strong><small>do 800 osób</small></div><div><strong>10 zł</strong><small>800+ osób</small></div></div><button class="button">Zapytaj o Silver</button></article>
+          <article class="package-card is-featured"><span>Najbardziej uniwersalny</span><h3>Gold</h3><p>Więcej smaków, więcej możliwości.</p><ul><li>czekolada mleczna i biała</li><li>4 posypki</li><li>2 osoby obsługi</li></ul><div class="prices"><div><strong>13 zł</strong><small>do 800 osób</small></div><div><strong>12 zł</strong><small>800+ osób</small></div></div><button class="button">Zapytaj o Gold</button></article>
+          <article class="package-card"><span>Najbardziej interaktywny</span><h3>Platinum</h3><p>Najwyższy poziom doświadczenia.</p><ul><li>4 rodzaje owoców</li><li>2 polewy</li><li>gość dekoruje kubek</li></ul><div class="prices"><div><strong>17 zł</strong><small>do 800 osób</small></div><div><strong>16 zł</strong><small>800+ osób</small></div></div><button class="button">Zapytaj o Platinum</button></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="option option-3" id="option-3">
+      <div class="option-label"><b>Option 3</b> Step Reveal Stack</div>
+      <div class="step-board">
+        <aside class="step-copy">
+          <p class="eyebrow">Pakiety</p>
+          <h2 class="title">Scroll wybiera pakiet krok po kroku.</h2>
+          <p class="lead">Bardziej narracyjny wariant: prawa strona przewija pakiety, a lewa zmienia numer i akcent wyboru.</p>
+          <div class="step-number" data-step-number>01</div>
+        </aside>
+        <div class="step-cards" data-stack="option-3">
+          <article class="package-card is-active" data-step="01"><span>Najsprawniejszy wybór</span><h3>Silver</h3><p>Duże wydarzenia z płynną obsługą i estetycznym podaniem.</p><ul><li>mleczna czekolada</li><li>2 posypki</li><li>2 osoby obsługi</li></ul><div class="prices"><div><strong>11 zł</strong><small>do 800 osób</small></div><div><strong>10 zł</strong><small>800+ osób</small></div></div><button class="button">Zapytaj o Silver</button></article>
+          <article class="package-card is-featured" data-step="02"><span>Najbardziej uniwersalny</span><h3>Gold</h3><p>Eventy, gdzie liczy się wybór i angażujące doświadczenie gości.</p><ul><li>biała i mleczna czekolada</li><li>4 posypki</li><li>2 osoby obsługi</li></ul><div class="prices"><div><strong>13 zł</strong><small>do 800 osób</small></div><div><strong>12 zł</strong><small>800+ osób</small></div></div><button class="button">Zapytaj o Gold</button></article>
+          <article class="package-card" data-step="03"><span>Najbardziej interaktywny</span><h3>Platinum</h3><p>Wesela premium, gale, bankiety, premiery i strefy VIP.</p><ul><li>4 rodzaje owoców</li><li>karmel i czekolada</li><li>gość sam komponuje kubek</li></ul><div class="prices"><div><strong>17 zł</strong><small>do 800 osób</small></div><div><strong>16 zł</strong><small>800+ osób</small></div></div><button class="button">Zapytaj o Platinum</button></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="after">
+      <h2>Przywozimy kompletny proces, nie tylko składniki.</h2>
+      <p>Kontekst następnej sekcji zostaje czytelny po wyjściu z animowanego pakietu.</p>
+    </section>
+
+    <script>
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (!reduceMotion) {
+        const cards = document.querySelectorAll('.option-1 [data-package]');
+        const progress = document.querySelectorAll('[data-progress]');
+        const stepCards = document.querySelectorAll('.option-3 [data-step]');
+        const stepNumber = document.querySelector('[data-step-number]');
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-active');
+            const packageName = entry.target.dataset.package;
+            if (packageName) {
+              progress.forEach((item) => item.classList.toggle('is-active', item.dataset.progress === packageName));
+            }
+            const step = entry.target.dataset.step;
+            if (step && stepNumber) stepNumber.textContent = step;
+          });
+        }, { threshold: 0.58 });
+
+        [...cards, ...stepCards].forEach((card) => observer.observe(card));
+
+        const horizontalSection = document.querySelector('.option-2');
+        const track = document.querySelector('[data-horizontal]');
+        const syncHorizontal = () => {
+          if (!horizontalSection || !track || window.innerWidth < 981) return;
+          const rect = horizontalSection.getBoundingClientRect();
+          const maxScroll = horizontalSection.offsetHeight - window.innerHeight;
+          const progress = Math.min(1, Math.max(0, -rect.top / maxScroll));
+          const travel = Math.max(0, track.scrollWidth - horizontalSection.clientWidth + 128);
+          track.style.setProperty('--track-x', `${-travel * progress}px`);
+        };
+
+        syncHorizontal();
+        window.addEventListener('scroll', syncHorizontal, { passive: true });
+        window.addEventListener('resize', syncHorizontal);
+      }
+    </script>
+  </body>
+</html>

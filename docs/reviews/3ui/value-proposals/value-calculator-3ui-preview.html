@@ -1,0 +1,658 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>3UI Value Calculator Modal - Strawberry Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --cream: #fff7ec;
+        --paper: #fdfbf6;
+        --cocoa: #211716;
+        --cocoa-soft: #2a1715;
+        --muted: #75665f;
+        --strawberry: #c93445;
+        --gold: #c59a52;
+        --line: rgba(245, 239, 228, 0.14);
+        --edge: clamp(24px, 3.2vw, 64px);
+        --display: "Cormorant Garamond", Georgia, serif;
+        --body: "Manrope", system-ui, sans-serif;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        background: #fffaf3;
+        color: var(--cocoa);
+        font-family: var(--body);
+        margin: 0;
+      }
+
+      button,
+      input,
+      select {
+        font: inherit;
+      }
+
+      .context {
+        background:
+          radial-gradient(circle at 70% 20%, rgba(201, 52, 69, 0.08), transparent 32rem),
+          linear-gradient(180deg, #fffaf3 0%, #f8efe5 100%);
+        padding: 54px var(--edge);
+      }
+
+      .context-grid {
+        border-bottom: 1px solid rgba(106, 61, 44, 0.16);
+        border-top: 1px solid rgba(106, 61, 44, 0.16);
+        display: grid;
+        gap: 0;
+        grid-template-columns: repeat(5, 1fr);
+        padding-block: 22px;
+      }
+
+      .context-grid span {
+        align-items: center;
+        color: #2f6b45;
+        display: flex;
+        font-size: 0.9rem;
+        gap: 10px;
+        min-height: 42px;
+      }
+
+      .preview-section {
+        background:
+          radial-gradient(circle at 72% 18%, rgba(201, 52, 69, 0.18), transparent 34rem),
+          linear-gradient(135deg, #1d0f0f 0%, #261514 55%, #160b0b 100%);
+        border-bottom: 1px solid rgba(217, 158, 92, 0.28);
+        color: var(--cream);
+        min-height: 620px;
+        padding: clamp(84px, 9vw, 136px) var(--edge);
+        position: relative;
+      }
+
+      .option-label {
+        align-items: center;
+        background: var(--paper);
+        border: 1px solid rgba(197, 154, 82, 0.34);
+        border-radius: 999px;
+        color: var(--cocoa);
+        display: inline-flex;
+        font-size: 0.72rem;
+        font-weight: 900;
+        gap: 8px;
+        min-height: 34px;
+        padding: 0 14px;
+        position: absolute;
+        right: var(--edge);
+        text-transform: uppercase;
+        top: 24px;
+      }
+
+      .option-label span { color: var(--strawberry); }
+
+      .eyebrow {
+        color: rgba(255, 247, 236, 0.72);
+        font-size: 0.78rem;
+        font-weight: 900;
+        margin: 0 0 14px;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      h2 {
+        color: var(--cream);
+        font-family: var(--display);
+        font-size: clamp(3.25rem, 5.4vw, 6.2rem);
+        line-height: 0.9;
+        max-width: 10.8ch;
+      }
+
+      .lead {
+        color: rgba(255, 247, 236, 0.76);
+        line-height: 1.72;
+        margin-top: 22px;
+        max-width: 64ch;
+      }
+
+      .button {
+        align-items: center;
+        background: var(--strawberry);
+        border: 0;
+        border-radius: 999px;
+        color: #fff;
+        cursor: pointer;
+        display: inline-flex;
+        font-weight: 900;
+        gap: 10px;
+        min-height: 54px;
+        padding: 0 24px;
+      }
+
+      .ghost-button {
+        background: rgba(255, 247, 236, 0.08);
+        border: 1px solid rgba(255, 247, 236, 0.2);
+      }
+
+      .value-layout {
+        align-items: center;
+        display: grid;
+        gap: clamp(38px, 7vw, 110px);
+        grid-template-columns: minmax(0, 0.92fr) minmax(430px, 1.08fr);
+      }
+
+      .value-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      .calc-card {
+        background: var(--paper);
+        border: 1px solid rgba(217, 158, 92, 0.38);
+        border-radius: 8px;
+        color: var(--cocoa);
+        padding: clamp(28px, 4vw, 46px);
+      }
+
+      .calc-card__top {
+        align-items: start;
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .calc-card h3 {
+        font-family: var(--display);
+        font-size: clamp(2.2rem, 3.4vw, 3.7rem);
+        line-height: 0.95;
+        max-width: 8ch;
+      }
+
+      .calc-card p,
+      .calc-card small {
+        color: var(--muted);
+      }
+
+      .metric-grid {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-top: 28px;
+      }
+
+      .metric {
+        background: #fff7ec;
+        border: 1px solid rgba(106, 61, 44, 0.12);
+        border-radius: 8px;
+        padding: 18px;
+      }
+
+      .metric strong {
+        color: var(--strawberry);
+        display: block;
+        font-family: var(--display);
+        font-size: 2.2rem;
+        line-height: 1;
+      }
+
+      .option-2 .value-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .option-2 .value-topline {
+        align-items: end;
+        display: grid;
+        gap: 32px;
+        grid-template-columns: minmax(0, 0.85fr) minmax(420px, 0.72fr);
+      }
+
+      .option-2 .calc-card {
+        margin-top: 34px;
+      }
+
+      .option-2 .metric-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .option-3 .value-layout {
+        gap: 0;
+        grid-template-columns: minmax(360px, 0.78fr) minmax(0, 1.22fr);
+      }
+
+      .option-3 .copy-panel {
+        background: rgba(255, 247, 236, 0.055);
+        border: 1px solid rgba(217, 158, 92, 0.28);
+        border-radius: 8px 0 0 8px;
+        min-height: 520px;
+        padding: clamp(34px, 5vw, 62px);
+      }
+
+      .option-3 .calc-card {
+        border-radius: 0 8px 8px 0;
+        min-height: 520px;
+      }
+
+      .option-3 .calc-card h3 {
+        max-width: none;
+        width: 100%;
+      }
+
+      dialog {
+        background: transparent;
+        border: 0;
+        max-width: min(980px, calc(100vw - 32px));
+        padding: 0;
+        width: 100%;
+      }
+
+      dialog::backdrop {
+        background: rgba(19, 9, 8, 0.72);
+        backdrop-filter: blur(8px);
+      }
+
+      .modal {
+        background: var(--paper);
+        border: 1px solid rgba(217, 158, 92, 0.42);
+        border-radius: 10px;
+        color: var(--cocoa);
+        display: grid;
+        grid-template-columns: minmax(240px, 0.46fr) minmax(0, 1fr);
+        overflow: hidden;
+      }
+
+      .modal-side {
+        background:
+          radial-gradient(circle at 40% 20%, rgba(201, 52, 69, 0.22), transparent 16rem),
+          #211716;
+        color: var(--cream);
+        padding: 34px;
+      }
+
+      .modal-side h3 {
+        font-family: var(--display);
+        font-size: 2.7rem;
+        line-height: 0.92;
+        margin-top: 16px;
+      }
+
+      .steps {
+        display: grid;
+        gap: 12px;
+        margin-top: 34px;
+      }
+
+      .steps span {
+        border-left: 2px solid rgba(255, 247, 236, 0.18);
+        color: rgba(255, 247, 236, 0.58);
+        font-size: 0.82rem;
+        font-weight: 900;
+        padding: 4px 0 4px 12px;
+        text-transform: uppercase;
+      }
+
+      .steps span.active {
+        border-color: var(--strawberry);
+        color: var(--cream);
+      }
+
+      .modal-body {
+        padding: 34px;
+      }
+
+      .modal-close {
+        background: transparent;
+        border: 1px solid rgba(106, 61, 44, 0.18);
+        border-radius: 999px;
+        cursor: pointer;
+        float: right;
+        height: 38px;
+        width: 38px;
+      }
+
+      .step-panel { display: none; }
+      .step-panel.active { display: block; }
+
+      .package-grid,
+      .field-grid {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        margin-top: 24px;
+      }
+
+      .package {
+        background: #fff7ec;
+        border: 1px solid rgba(106, 61, 44, 0.16);
+        border-radius: 8px;
+        cursor: pointer;
+        min-height: 154px;
+        padding: 20px;
+        text-align: left;
+      }
+
+      .package.selected {
+        border-color: var(--strawberry);
+        box-shadow: 0 0 0 3px rgba(201, 52, 69, 0.1);
+      }
+
+      .package strong {
+        display: block;
+        font-family: var(--display);
+        font-size: 2rem;
+      }
+
+      label {
+        color: #342521;
+        display: grid;
+        font-size: 0.86rem;
+        font-weight: 900;
+        gap: 8px;
+      }
+
+      input,
+      select {
+        background: #fff7ec;
+        border: 1px solid rgba(106, 61, 44, 0.18);
+        border-radius: 8px;
+        min-height: 48px;
+        padding: 0 13px;
+      }
+
+      .result-box {
+        background:
+          radial-gradient(circle at 76% 10%, rgba(201, 52, 69, 0.12), transparent 18rem),
+          #fff7ec;
+        border: 1px solid rgba(106, 61, 44, 0.16);
+        border-radius: 8px;
+        margin-top: 24px;
+        padding: 24px;
+      }
+
+      .result-box strong {
+        color: var(--strawberry);
+        display: block;
+        font-family: var(--display);
+        font-size: clamp(2.6rem, 5vw, 4.4rem);
+        line-height: 0.95;
+      }
+
+      .modal-actions {
+        border-top: 1px solid rgba(106, 61, 44, 0.14);
+        display: flex;
+        justify-content: space-between;
+        margin-top: 28px;
+        padding-top: 18px;
+      }
+
+      .modal-actions .button:last-child {
+        margin-left: auto;
+      }
+
+      @media (max-width: 920px) {
+        .context-grid,
+        .value-layout,
+        .option-2 .value-topline,
+        .option-2 .metric-grid,
+        .option-3 .value-layout,
+        .modal {
+          grid-template-columns: 1fr;
+        }
+
+        .option-3 .copy-panel,
+        .option-3 .calc-card {
+          border-radius: 8px;
+          min-height: auto;
+        }
+
+        .package-grid,
+        .field-grid,
+        .metric-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="context" aria-label="Kontekst sekcji logistyki">
+      <div class="context-grid">
+        <span>○ Transport i wyposażenie</span>
+        <span>○ Montaż przed eventem</span>
+        <span>○ Obsługa w pakiecie</span>
+        <span>○ Dopasowanie dodatków</span>
+        <span>○ Demontaż strefy</span>
+      </div>
+    </section>
+
+    <section class="preview-section option-1" id="option-1">
+      <div class="option-label"><span>Option 1</span> Guided Cost Modal</div>
+      <div class="value-layout">
+        <div>
+          <p class="eyebrow">Dlaczego to się opłaca</p>
+          <h2>Efekt premium z kalkulacją przed rozmową.</h2>
+          <p class="lead">
+            Mniej pustki, mocniejszy rytm i jeden jasny cel: otworzyć kalkulator, wybrać pakiet,
+            podać podstawowe dane i dostać orientacyjny koszt.
+          </p>
+          <div class="value-actions">
+            <button class="button" data-open="modal-1">Otwórz kalkulator</button>
+            <button class="button ghost-button">Zobacz pakiety</button>
+          </div>
+        </div>
+        <article class="calc-card">
+          <div class="calc-card__top">
+            <div>
+              <p>Przykład dla 500 gości</p>
+              <h3>Policz koszt stoiska.</h3>
+            </div>
+            <button class="button" data-open="modal-1">Start</button>
+          </div>
+          <div class="metric-grid">
+            <div class="metric"><strong>11-17,5 tys.</strong><small>typowa atrakcja</small></div>
+            <div class="metric"><strong>5,5-8,5 tys.</strong><small>pakiety Strawberry Group</small></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="preview-section option-2" id="option-2">
+      <div class="option-label"><span>Option 2</span> Quote Console</div>
+      <div class="value-layout">
+        <div class="value-topline">
+          <div>
+            <p class="eyebrow">Dlaczego to się opłaca</p>
+            <h2>Koszt atrakcji bez zgadywania.</h2>
+          </div>
+          <div>
+            <p class="lead">
+              Najbardziej operacyjny wariant: cały blok prowadzi do modalnego flow wyceny, a statyczne
+              liczby są tylko szybkim punktem odniesienia.
+            </p>
+            <div class="value-actions">
+              <button class="button" data-open="modal-2">Uruchom wycenę etapową</button>
+            </div>
+          </div>
+        </div>
+        <article class="calc-card">
+          <div class="metric-grid">
+            <div class="metric"><strong>Silver</strong><small>od 10-11 zł/os.</small></div>
+            <div class="metric"><strong>Gold</strong><small>od 12-13 zł/os.</small></div>
+            <div class="metric"><strong>Platinum</strong><small>od 16-17 zł/os.</small></div>
+            <div class="metric"><strong>3 kroki</strong><small>pakiet, dane, wynik</small></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="preview-section option-3" id="option-3">
+      <div class="option-label"><span>Option 3</span> Premium Estimator Board</div>
+      <div class="value-layout">
+        <div class="copy-panel">
+          <p class="eyebrow">Dlaczego to się opłaca</p>
+          <h2>Kalkulator jako główny argument.</h2>
+          <p class="lead">
+            Bardziej premium i zamknięty układ: lewa część sprzedaje wartość, prawa część wygląda jak
+            panel estymacji, który otwiera modal z etapami.
+          </p>
+          <div class="value-actions">
+            <button class="button" data-open="modal-3">Policz wydarzenie</button>
+          </div>
+        </div>
+        <article class="calc-card">
+          <p>Orientacyjna kalkulacja</p>
+          <h3>Pakiet, goście, wynik.</h3>
+          <p class="lead" style="color:#75665f;margin-top:16px">
+            Gość wybiera pakiet, wpisuje liczbę osób i typ wydarzenia, a modal pokazuje zakres kosztu
+            oraz rekomendowany następny krok.
+          </p>
+          <div class="metric-grid">
+            <div class="metric"><strong>10-17 zł</strong><small>za osobę w pakietach</small></div>
+            <div class="metric"><strong>22-35 zł</strong><small>typowy koszt alternatywny</small></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <dialog id="modal-1" data-modal>
+      <div class="modal" data-flow>
+        <aside class="modal-side">
+          <p class="eyebrow">Kalkulator</p>
+          <h3>Orientacyjna wycena wydarzenia.</h3>
+          <div class="steps"><span class="active">1 Pakiet</span><span>2 Dane</span><span>3 Kalkulacja</span></div>
+        </aside>
+        <div class="modal-body">
+          <button class="modal-close" data-close>×</button>
+          <div class="step-panel active" data-step="1"></div>
+          <div class="step-panel" data-step="2"></div>
+          <div class="step-panel" data-step="3"></div>
+          <div class="modal-actions"><button class="button ghost-button" data-prev>Wstecz</button><button class="button" data-next>Dalej</button></div>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog id="modal-2" data-modal>
+      <div class="modal" data-flow>
+        <aside class="modal-side">
+          <p class="eyebrow">Wycena</p>
+          <h3>Pakiet, dane, wynik.</h3>
+          <div class="steps"><span class="active">1 Pakiet</span><span>2 Dane</span><span>3 Kalkulacja</span></div>
+        </aside>
+        <div class="modal-body">
+          <button class="modal-close" data-close>×</button>
+          <div class="step-panel active" data-step="1"></div>
+          <div class="step-panel" data-step="2"></div>
+          <div class="step-panel" data-step="3"></div>
+          <div class="modal-actions"><button class="button ghost-button" data-prev>Wstecz</button><button class="button" data-next>Dalej</button></div>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog id="modal-3" data-modal>
+      <div class="modal" data-flow>
+        <aside class="modal-side">
+          <p class="eyebrow">Estimator</p>
+          <h3>Najpierw wybór, potem wynik.</h3>
+          <div class="steps"><span class="active">1 Pakiet</span><span>2 Dane</span><span>3 Kalkulacja</span></div>
+        </aside>
+        <div class="modal-body">
+          <button class="modal-close" data-close>×</button>
+          <div class="step-panel active" data-step="1"></div>
+          <div class="step-panel" data-step="2"></div>
+          <div class="step-panel" data-step="3"></div>
+          <div class="modal-actions"><button class="button ghost-button" data-prev>Wstecz</button><button class="button" data-next>Dalej</button></div>
+        </div>
+      </div>
+    </dialog>
+
+    <script>
+      const packages = {
+        silver: { name: 'Silver', min: 10, max: 11, text: 'Szybka forma serwowania.' },
+        gold: { name: 'Gold', min: 12, max: 13, text: 'Więcej smaków i dodatków.' },
+        platinum: { name: 'Platinum', min: 16, max: 17, text: 'Najbardziej interaktywny wariant.' },
+      };
+
+      function money(value) {
+        return new Intl.NumberFormat('pl-PL').format(value) + ' zł';
+      }
+
+      function render(flow) {
+        const state = flow.__state || { step: 1, package: 'gold', guests: 500, type: 'Wesele' };
+        flow.__state = state;
+        const panels = flow.querySelectorAll('.step-panel');
+        const stepLabels = flow.querySelectorAll('.steps span');
+        const next = flow.querySelector('[data-next]');
+        const prev = flow.querySelector('[data-prev]');
+        panels.forEach((panel) => panel.classList.toggle('active', Number(panel.dataset.step) === state.step));
+        stepLabels.forEach((label, index) => label.classList.toggle('active', index + 1 === state.step));
+        prev.style.visibility = state.step === 1 ? 'hidden' : 'visible';
+        next.textContent = state.step === 3 ? 'Zamknij' : 'Dalej';
+
+        panels[0].innerHTML = '<h3>Wybierz pakiet</h3><p style="color:#75665f;margin-top:8px">To pierwszy krok kalkulacji. Zakres ceny zmieni się w wyniku.</p><div class="package-grid">' +
+          Object.entries(packages).map(([key, pkg]) => `<button class="package ${state.package === key ? 'selected' : ''}" data-package="${key}"><strong>${pkg.name}</strong><small>${pkg.min}-${pkg.max} zł/os.</small><p style="margin-top:12px;color:#75665f">${pkg.text}</p></button>`).join('') +
+          '</div>';
+        panels[1].innerHTML = `<h3>Dane wydarzenia</h3><p style="color:#75665f;margin-top:8px">Minimum potrzebne do orientacyjnego wyniku.</p><div class="field-grid"><label>Liczba gości<input type="number" min="50" max="1000" value="${state.guests}" data-guests></label><label>Typ wydarzenia<select data-type><option${state.type === 'Wesele' ? ' selected' : ''}>Wesele</option><option${state.type === 'Event firmowy' ? ' selected' : ''}>Event firmowy</option><option${state.type === 'Gala' ? ' selected' : ''}>Gala</option><option${state.type === 'Plener' ? ' selected' : ''}>Plener</option></select></label><label>Miasto<input value="Warszawa" data-city></label></div>`;
+        const pkg = packages[state.package];
+        const min = state.guests * pkg.min;
+        const max = state.guests * pkg.max;
+        const altMin = state.guests * 22;
+        const altMax = state.guests * 35;
+        panels[2].innerHTML = `<h3>Orientacyjny wynik</h3><div class="result-box"><p>${pkg.name}, ${state.guests} gości, ${state.type}</p><strong>${money(min)}-${money(max)}</strong><p style="color:#75665f;margin-top:8px">Typowa atrakcja eventowa: ${money(altMin)}-${money(altMax)}.</p></div><p style="color:#75665f;margin-top:16px">W następnym kroku formularz może przejąć pakiet, liczbę gości i typ wydarzenia.</p>`;
+
+        flow.querySelectorAll('[data-package]').forEach((button) => {
+          button.addEventListener('click', () => {
+            state.package = button.dataset.package;
+            render(flow);
+          });
+        });
+        flow.querySelector('[data-guests]')?.addEventListener('input', (event) => {
+          state.guests = Math.max(50, Number(event.target.value || 500));
+        });
+        flow.querySelector('[data-type]')?.addEventListener('change', (event) => {
+          state.type = event.target.value;
+        });
+      }
+
+      document.querySelectorAll('[data-flow]').forEach(render);
+      document.querySelectorAll('[data-open]').forEach((button) => {
+        button.addEventListener('click', () => document.getElementById(button.dataset.open).showModal());
+      });
+      document.querySelectorAll('[data-close]').forEach((button) => {
+        button.addEventListener('click', () => button.closest('dialog').close());
+      });
+      document.querySelectorAll('[data-prev]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const flow = button.closest('[data-flow]');
+          flow.__state.step = Math.max(1, flow.__state.step - 1);
+          render(flow);
+        });
+      });
+      document.querySelectorAll('[data-next]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const flow = button.closest('[data-flow]');
+          if (flow.__state.step === 2) {
+            flow.__state.guests = Math.max(50, Number(flow.querySelector('[data-guests]').value || 500));
+            flow.__state.type = flow.querySelector('[data-type]').value;
+          }
+          if (flow.__state.step === 3) {
+            button.closest('dialog').close();
+            return;
+          }
+          flow.__state.step += 1;
+          render(flow);
+        });
+      });
+    </script>
+  </body>
+</html>

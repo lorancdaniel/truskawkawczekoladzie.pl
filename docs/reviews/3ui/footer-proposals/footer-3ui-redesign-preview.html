@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>3UI Footer Redesign - Strawberry Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --cream: #fff7ec;
+        --paper: #fdfbf6;
+        --sand: #fbf1e7;
+        --cocoa: #211716;
+        --cocoa-2: #1b100f;
+        --muted-dark: rgba(255, 247, 236, 0.68);
+        --line-dark: rgba(245, 239, 228, 0.11);
+        --line-gold: rgba(197, 154, 82, 0.34);
+        --strawberry: #c93445;
+        --gold: #c59a52;
+        --edge: clamp(24px, 3.2vw, 64px);
+        --display: "Cormorant Garamond", Georgia, serif;
+        --body: "Manrope", system-ui, sans-serif;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        background: #fffaf3;
+        color: var(--cocoa);
+        font-family: var(--body);
+        margin: 0;
+      }
+
+      .context {
+        background:
+          radial-gradient(circle at 20% 12%, rgba(201, 52, 69, 0.08), transparent 30rem),
+          linear-gradient(180deg, #fffaf3 0%, #f4eadf 100%);
+        display: grid;
+        gap: clamp(34px, 5vw, 80px);
+        grid-template-columns: minmax(0, 0.95fr) minmax(420px, 1.05fr);
+        min-height: 520px;
+        padding: clamp(70px, 8vw, 116px) var(--edge);
+      }
+
+      .context h1 {
+        font-family: var(--display);
+        font-size: clamp(3.6rem, 6vw, 7rem);
+        line-height: 0.88;
+        margin: 0;
+        max-width: 9.5ch;
+      }
+
+      .context p {
+        color: #75665f;
+        line-height: 1.7;
+        margin: 18px 0 0;
+        max-width: 54ch;
+      }
+
+      .form-ghost {
+        align-self: start;
+        background: rgba(253, 251, 246, 0.88);
+        border: 1px solid rgba(106, 61, 44, 0.16);
+        border-radius: 8px;
+        display: grid;
+        gap: 14px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        padding: clamp(24px, 4vw, 44px);
+      }
+
+      .field {
+        background: rgba(255, 247, 236, 0.66);
+        border: 1px solid rgba(106, 61, 44, 0.14);
+        border-radius: 8px;
+        height: 54px;
+      }
+
+      .field.wide { grid-column: 1 / -1; height: 120px; }
+
+      .preview-section {
+        background: var(--cocoa);
+        border-top: 1px solid var(--line-gold);
+        color: var(--cream);
+        padding: 0 var(--edge);
+        position: relative;
+      }
+
+      .preview-section + .preview-section {
+        border-top-color: rgba(255, 247, 236, 0.16);
+      }
+
+      .option-label {
+        align-items: center;
+        background: var(--paper);
+        border: 1px solid rgba(197, 154, 82, 0.3);
+        border-radius: 999px;
+        color: var(--cocoa);
+        display: inline-flex;
+        font-size: 0.72rem;
+        font-weight: 900;
+        gap: 8px;
+        min-height: 34px;
+        padding: 0 14px;
+        position: absolute;
+        right: var(--edge);
+        text-transform: uppercase;
+        top: 22px;
+        z-index: 5;
+      }
+
+      .option-label span { color: var(--strawberry); }
+
+      a {
+        color: inherit;
+        text-decoration-color: rgba(255, 247, 236, 0.34);
+        text-underline-offset: 0.18em;
+      }
+
+      ul,
+      dl,
+      dd {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .footer-brand {
+        align-items: flex-start;
+        display: flex;
+        gap: 16px;
+      }
+
+      .footer-brand img {
+        height: 58px;
+        width: auto;
+      }
+
+      .footer-brand h2 {
+        font-family: var(--display);
+        font-size: clamp(2rem, 3vw, 3.2rem);
+        line-height: 0.95;
+        margin: 0;
+      }
+
+      .footer-brand p,
+      .footer-copy,
+      .footer-section p,
+      .footer-contact dd,
+      .footer-bottom {
+        color: var(--muted-dark);
+      }
+
+      .footer-copy {
+        line-height: 1.75;
+        margin: 22px 0 0;
+        max-width: 48ch;
+      }
+
+      .footer-section {
+        border-left: 1px solid var(--line-dark);
+        padding-left: clamp(22px, 3vw, 34px);
+      }
+
+      .footer-section h3 {
+        color: rgba(255, 247, 236, 0.92);
+        font-family: var(--body);
+        font-size: 0.86rem;
+        letter-spacing: 0.02em;
+        margin: 0 0 18px;
+        text-transform: uppercase;
+      }
+
+      .footer-links {
+        display: grid;
+        gap: 0;
+      }
+
+      .footer-links li + li {
+        border-top: 1px solid var(--line-dark);
+      }
+
+      .footer-links a {
+        align-items: center;
+        display: flex;
+        min-height: 42px;
+      }
+
+      .footer-contact {
+        display: grid;
+        gap: 15px;
+      }
+
+      .footer-contact div {
+        display: grid;
+        gap: 4px;
+      }
+
+      .footer-contact dt {
+        color: rgba(255, 247, 236, 0.48);
+        font-size: 0.76rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .footer-bottom {
+        border-top: 1px solid var(--line-dark);
+        display: flex;
+        flex-wrap: wrap;
+        font-size: 0.86rem;
+        gap: 12px 26px;
+        justify-content: space-between;
+        padding-block: 20px;
+      }
+
+      .option-1 .footer-grid {
+        display: grid;
+        gap: clamp(28px, 4vw, 54px);
+        grid-template-columns: minmax(0, 1.45fr) minmax(170px, 0.72fr) minmax(220px, 0.9fr) minmax(190px, 0.72fr);
+        padding-block: clamp(58px, 7vw, 88px) 38px;
+      }
+
+      .option-2 {
+        background:
+          radial-gradient(circle at 82% 18%, rgba(201, 52, 69, 0.16), transparent 34rem),
+          linear-gradient(135deg, #1d0f0f 0%, #261514 56%, #160b0b 100%);
+      }
+
+      .option-2 .footer-cta {
+        align-items: center;
+        border-bottom: 1px solid var(--line-dark);
+        display: grid;
+        gap: 28px;
+        grid-template-columns: minmax(0, 1fr) auto;
+        padding-block: clamp(52px, 6vw, 78px) 34px;
+      }
+
+      .option-2 .footer-cta h2 {
+        font-family: var(--display);
+        font-size: clamp(3rem, 5vw, 5.7rem);
+        line-height: 0.9;
+        margin: 0;
+        max-width: 11ch;
+      }
+
+      .footer-button {
+        align-items: center;
+        background: var(--strawberry);
+        border-radius: 999px;
+        color: #fff;
+        display: inline-flex;
+        font-weight: 900;
+        min-height: 54px;
+        padding: 0 24px;
+        text-decoration: none;
+      }
+
+      .option-2 .footer-grid {
+        display: grid;
+        gap: clamp(28px, 4vw, 52px);
+        grid-template-columns: minmax(0, 1.15fr) minmax(220px, 0.85fr) minmax(180px, 0.65fr);
+        padding-block: 34px 28px;
+      }
+
+      .option-3 {
+        background: #1b100f;
+      }
+
+      .option-3 .footer-board {
+        display: grid;
+        grid-template-columns: minmax(320px, 0.88fr) minmax(0, 1.12fr);
+        padding-block: clamp(58px, 7vw, 96px) 32px;
+      }
+
+      .option-3 .footer-panel {
+        background: rgba(255, 247, 236, 0.055);
+        border: 1px solid var(--line-gold);
+        border-radius: 8px;
+        padding: clamp(30px, 4vw, 48px);
+      }
+
+      .option-3 .footer-directory {
+        border-bottom: 1px solid var(--line-dark);
+        border-right: 1px solid var(--line-dark);
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .option-3 .footer-directory .footer-section {
+        border: 0;
+        border-left: 1px solid var(--line-dark);
+        border-top: 1px solid var(--line-dark);
+        min-height: 210px;
+        padding: clamp(26px, 3vw, 38px);
+      }
+
+      .option-3 .footer-directory .footer-section:nth-child(-n + 2) {
+        border-top: 0;
+      }
+
+      @media (max-width: 980px) {
+        .context,
+        .option-1 .footer-grid,
+        .option-2 .footer-cta,
+        .option-2 .footer-grid,
+        .option-3 .footer-board,
+        .option-3 .footer-directory {
+          grid-template-columns: 1fr;
+        }
+
+        .form-ghost { grid-template-columns: 1fr; }
+
+        .footer-section,
+        .option-3 .footer-directory .footer-section {
+          border-left: 0;
+          border-top: 1px solid var(--line-dark);
+          padding-left: 0;
+        }
+
+        .option-3 .footer-directory {
+          border-bottom: 0;
+          border-right: 0;
+        }
+
+        .option-3 .footer-directory .footer-section:nth-child(-n + 2) {
+          border-top: 1px solid var(--line-dark);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="context" aria-label="Kontekst kontaktu przed stopką">
+      <div>
+        <p>Wycena</p>
+        <h1>Sprawdź dostępność terminu i orientacyjny koszt stoiska.</h1>
+        <p>
+          Footer ma domykać landing po formularzu: szybki kontakt, nawigacja, zaufanie i porządek
+          jak w układzie BIP PZD Żywiec, ale bez urzędowej estetyki.
+        </p>
+      </div>
+      <div class="form-ghost" aria-hidden="true">
+        <div class="field"></div>
+        <div class="field"></div>
+        <div class="field"></div>
+        <div class="field"></div>
+        <div class="field wide"></div>
+      </div>
+    </section>
+
+    <section class="preview-section option-1" id="option-1">
+      <div class="option-label"><span>Option 1</span> Directory Grid</div>
+      <footer>
+        <div class="footer-grid">
+          <section class="footer-intro">
+            <div class="footer-brand">
+              <img src="/brand/strawberry-group-logo.svg" alt="" />
+              <div>
+                <h2>Strawberry Group S.C.</h2>
+                <p>Świeżość. Jakość. Doświadczenie.</p>
+              </div>
+            </div>
+            <p class="footer-copy">
+              Mobilne stoisko deserowe z truskawkami w czekoladzie na wesela, eventy firmowe,
+              gale i strefy VIP.
+            </p>
+          </section>
+          <section class="footer-section">
+            <h3>Nawigacja</h3>
+            <ul class="footer-links">
+              <li><a href="#oferta">Oferta</a></li>
+              <li><a href="#pakiety">Pakiety</a></li>
+              <li><a href="#jak-dziala">Jak działamy</a></li>
+              <li><a href="#eventy">Eventy</a></li>
+              <li><a href="#kontakt">Kontakt</a></li>
+            </ul>
+          </section>
+          <section class="footer-section">
+            <h3>Kontakt</h3>
+            <dl class="footer-contact">
+              <div><dt>Telefon</dt><dd><a href="tel:+48514214567">+48 514 214 567</a></dd></div>
+              <div><dt>E-mail</dt><dd><a href="mailto:strawberrygroupsc@gmail.com">strawberrygroupsc@gmail.com</a></dd></div>
+              <div><dt>Obsługa</dt><dd>Wyceny i dostępność terminów</dd></div>
+            </dl>
+          </section>
+          <section class="footer-section">
+            <h3>Zakres</h3>
+            <ul class="footer-links">
+              <li><a href="#oferta">Stoisko deserowe</a></li>
+              <li><a href="#pakiety">Pakiety od 10 zł</a></li>
+              <li><a href="#eventy">Eventy do 1000 gości</a></li>
+            </ul>
+          </section>
+        </div>
+        <div class="footer-bottom"><span>© 2026 Strawberry Group S.C.</span><span>Interaktywne stoisko deserowe</span></div>
+      </footer>
+    </section>
+
+    <section class="preview-section option-2" id="option-2">
+      <div class="option-label"><span>Option 2</span> Directory No CTA</div>
+      <footer>
+        <div class="footer-grid">
+          <section class="footer-intro">
+            <div class="footer-brand">
+              <img src="/brand/strawberry-group-logo.svg" alt="" />
+              <div>
+                <h2>Strawberry Group S.C.</h2>
+                <p>Świeżość. Jakość. Doświadczenie.</p>
+              </div>
+            </div>
+            <p class="footer-copy">Słodka atrakcja z obsługą, transportem, montażem i porządkiem po wydarzeniu.</p>
+          </section>
+          <section class="footer-section">
+            <h3>Szybki kontakt</h3>
+            <dl class="footer-contact">
+              <div><dt>Telefon</dt><dd><a href="tel:+48514214567">+48 514 214 567</a></dd></div>
+              <div><dt>E-mail</dt><dd><a href="mailto:strawberrygroupsc@gmail.com">strawberrygroupsc@gmail.com</a></dd></div>
+            </dl>
+          </section>
+          <section class="footer-section">
+            <h3>Menu</h3>
+            <ul class="footer-links">
+              <li><a href="#oferta">Oferta</a></li>
+              <li><a href="#pakiety">Pakiety</a></li>
+              <li><a href="#jak-dziala">Jak działamy</a></li>
+              <li><a href="#kontakt">Kontakt</a></li>
+            </ul>
+          </section>
+        </div>
+        <div class="footer-bottom"><span>© 2026 Strawberry Group S.C.</span><span>Wesela, eventy firmowe, gale, plener</span></div>
+      </footer>
+    </section>
+
+    <section class="preview-section option-3" id="option-3">
+      <div class="option-label"><span>Option 3</span> Contact Board</div>
+      <footer>
+        <div class="footer-board">
+          <section class="footer-panel">
+            <div class="footer-brand">
+              <img src="/brand/strawberry-group-logo.svg" alt="" />
+              <div>
+                <h2>Strawberry Group S.C.</h2>
+                <p>Świeżość. Jakość. Doświadczenie.</p>
+              </div>
+            </div>
+            <p class="footer-copy">
+              Układ najbardziej zbliżony do BIP: mocny blok identyfikacji i po prawej uporządkowana
+              tablica sekcji z linkami oraz danymi kontaktowymi.
+            </p>
+          </section>
+          <div class="footer-directory">
+            <section class="footer-section">
+              <h3>Kontakt</h3>
+              <dl class="footer-contact">
+                <div><dt>Telefon</dt><dd><a href="tel:+48514214567">+48 514 214 567</a></dd></div>
+                <div><dt>E-mail</dt><dd><a href="mailto:strawberrygroupsc@gmail.com">strawberrygroupsc@gmail.com</a></dd></div>
+              </dl>
+            </section>
+            <section class="footer-section">
+              <h3>Oferta</h3>
+              <ul class="footer-links">
+                <li><a href="#oferta">Świeże owoce</a></li>
+                <li><a href="#pakiety">Pakiety Silver, Gold, Platinum</a></li>
+                <li><a href="#eventy">Typy wydarzeń</a></li>
+              </ul>
+            </section>
+            <section class="footer-section">
+              <h3>Proces</h3>
+              <ul class="footer-links">
+                <li><a href="#jak-dziala">Jak działamy</a></li>
+                <li><a href="#kontakt">Wycena terminu</a></li>
+              </ul>
+            </section>
+            <section class="footer-section">
+              <h3>Zakres</h3>
+              <dl class="footer-contact">
+                <div><dt>Obsługa</dt><dd>2 osoby w pakiecie</dd></div>
+                <div><dt>Skala</dt><dd>nawet do 1000 gości</dd></div>
+              </dl>
+            </section>
+          </div>
+        </div>
+        <div class="footer-bottom"><span>© 2026 Strawberry Group S.C.</span><span>Interaktywne stoisko deserowe</span></div>
+      </footer>
+    </section>
+  </body>
+</html>

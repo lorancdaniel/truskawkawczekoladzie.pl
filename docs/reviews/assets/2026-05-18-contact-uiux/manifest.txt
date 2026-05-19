@@ -1,0 +1,16 @@
+/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-contact-uiux/landing-desktop-1920x1080-hero.png
+/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-contact-uiux/landing-desktop-1920x1080-offer-about.png
+/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-contact-uiux/landing-desktop-1920x1080-process.png
+/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-contact-uiux/landing-desktop-1920x1080-packages.png
+/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-contact-uiux/landing-desktop-1920x1080-events-logistics.png
+/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-contact-uiux/landing-desktop-1920x1080-calculator-gallery.png
+/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-contact-uiux/contact-desktop-1920x1080-default.png
+/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-contact-uiux/contact-desktop-1920x1080-form-footer-closure.png
+/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-contact-uiux/contact-desktop-1920x1080-validation-errors.png
+/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-contact-uiux/contact-desktop-1920x1080-select-focus.png
+/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-contact-uiux/contact-desktop-1920x1080-success.png
+/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-contact-uiux/contact-mobile-390x844-top.png
+/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-contact-uiux/contact-mobile-390x844-form-middle.png
+/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-contact-uiux/contact-mobile-390x844-form-bottom-footer.png
+/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-contact-uiux/contact-mobile-390x844-validation-errors.png
+/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-contact-uiux/contact-mobile-390x844-input-focus.png

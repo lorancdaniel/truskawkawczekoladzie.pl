@@ -1,0 +1,993 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>3UI Calculator Animation Proposals - Strawberry Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --cream: #fff7ec;
+        --paper: #fdfbf6;
+        --cocoa: #211716;
+        --cocoa-2: #311817;
+        --muted: #75665f;
+        --strawberry: #c93445;
+        --strawberry-2: #dd394c;
+        --gold: #c59a52;
+        --green: #2f6b45;
+        --line: rgba(106, 61, 44, 0.14);
+        --display: "Cormorant Garamond", Georgia, serif;
+        --body: "Manrope", system-ui, sans-serif;
+        --edge: clamp(22px, 3.2vw, 64px);
+        --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+        --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      * { box-sizing: border-box; }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        background: #fffaf3;
+        color: var(--cocoa);
+        font-family: var(--body);
+        margin: 0;
+      }
+
+      button,
+      input,
+      select { font: inherit; }
+
+      .preview-nav {
+        align-items: center;
+        background: #190d0c;
+        border-top: 2px solid var(--gold);
+        color: var(--cream);
+        display: flex;
+        gap: 28px;
+        min-height: 72px;
+        padding: 0 var(--edge);
+        position: sticky;
+        top: 0;
+        z-index: 20;
+      }
+
+      .brand {
+        align-items: center;
+        display: flex;
+        gap: 12px;
+        margin-right: auto;
+      }
+
+      .brand__mark {
+        align-items: center;
+        background: radial-gradient(circle at 50% 26%, #ef3244 0 26%, #5a1f16 27% 64%, transparent 65%);
+        border: 1px solid rgba(197, 154, 82, 0.7);
+        border-radius: 999px 999px 62% 62%;
+        display: grid;
+        height: 38px;
+        justify-items: center;
+        position: relative;
+        width: 34px;
+      }
+
+      .brand__mark::before {
+        background: #5f7832;
+        border-radius: 80% 0;
+        content: "";
+        height: 14px;
+        position: absolute;
+        top: -8px;
+        transform: rotate(-24deg);
+        width: 10px;
+      }
+
+      .brand strong {
+        display: block;
+        font-size: 0.8rem;
+        line-height: 0.95;
+        text-transform: uppercase;
+      }
+
+      .preview-nav a {
+        color: rgba(255, 247, 236, 0.78);
+        font-size: 0.82rem;
+        font-weight: 900;
+        text-decoration: none;
+      }
+
+      .preview-option {
+        background:
+          radial-gradient(circle at 75% 12%, rgba(201, 52, 69, 0.18), transparent 36rem),
+          linear-gradient(135deg, #1d0f0f 0%, #261514 58%, #160b0b 100%);
+        border-bottom: 1px solid rgba(217, 158, 92, 0.28);
+        color: var(--cream);
+        min-height: 100vh;
+        overflow: hidden;
+        padding: clamp(72px, 8vw, 112px) var(--edge);
+        position: relative;
+      }
+
+      .option-label {
+        align-items: center;
+        background: var(--paper);
+        border: 1px solid rgba(197, 154, 82, 0.34);
+        border-radius: 999px;
+        color: var(--cocoa);
+        display: inline-flex;
+        font-size: 0.72rem;
+        font-weight: 900;
+        gap: 8px;
+        min-height: 34px;
+        padding: 0 14px;
+        position: absolute;
+        right: var(--edge);
+        text-transform: uppercase;
+        top: 24px;
+      }
+
+      .option-label span { color: var(--strawberry); }
+
+      .context-grid {
+        align-items: stretch;
+        display: grid;
+        gap: 0;
+        grid-template-columns: minmax(340px, 0.78fr) minmax(0, 1.22fr);
+        margin-inline: auto;
+        max-width: 1480px;
+      }
+
+      .value-copy {
+        background: rgba(255, 247, 236, 0.055);
+        border: 1px solid rgba(217, 158, 92, 0.28);
+        border-radius: 8px 0 0 8px;
+        min-height: 520px;
+        padding: clamp(34px, 5vw, 62px);
+      }
+
+      .value-card {
+        background: var(--paper);
+        border: 1px solid rgba(217, 158, 92, 0.38);
+        border-left: 0;
+        border-radius: 0 8px 8px 0;
+        color: var(--cocoa);
+        min-height: 520px;
+        padding: clamp(34px, 5vw, 58px);
+      }
+
+      .eyebrow {
+        color: currentColor;
+        font-size: 0.74rem;
+        font-weight: 900;
+        margin: 0 0 16px;
+        opacity: 0.72;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3,
+      p { margin: 0; }
+
+      h2,
+      .modal-title,
+      .flow-title,
+      .result-number {
+        font-family: var(--display);
+        letter-spacing: 0;
+      }
+
+      h2 {
+        color: var(--cream);
+        font-size: clamp(3.2rem, 5.4vw, 6.4rem);
+        line-height: 0.9;
+        max-width: 10.8ch;
+      }
+
+      .value-card h3 {
+        color: var(--cocoa);
+        font-family: var(--display);
+        font-size: clamp(2.4rem, 4.2vw, 4.7rem);
+        line-height: 0.92;
+        max-width: 10ch;
+      }
+
+      .lead {
+        line-height: 1.68;
+        margin-top: 20px;
+        max-width: 62ch;
+      }
+
+      .value-copy .lead { color: rgba(255, 247, 236, 0.78); }
+      .value-card .lead { color: var(--muted); }
+
+      .trigger-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 32px;
+      }
+
+      .btn {
+        align-items: center;
+        background: var(--strawberry);
+        border: 0;
+        border-radius: 999px;
+        color: #fff;
+        cursor: pointer;
+        display: inline-flex;
+        font-weight: 900;
+        gap: 10px;
+        justify-content: center;
+        min-height: 50px;
+        padding: 0 24px;
+        transition: transform 180ms var(--ease-out), background 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
+      }
+
+      .btn:hover { background: var(--strawberry-2); box-shadow: 0 14px 34px rgba(201, 52, 69, 0.22); transform: translateY(-2px); }
+      .btn:active { transform: translateY(0) scale(0.98); }
+
+      .btn.secondary {
+        background: transparent;
+        border: 1px solid rgba(106, 61, 44, 0.18);
+        color: var(--muted);
+      }
+
+      .value-copy .btn.secondary {
+        border-color: rgba(255, 247, 236, 0.22);
+        color: var(--cream);
+      }
+
+      .metric-strip {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-top: 38px;
+      }
+
+      .metric-strip div {
+        background: var(--cream);
+        border: 1px solid rgba(106, 61, 44, 0.12);
+        border-radius: 8px;
+        padding: 18px;
+      }
+
+      .metric-strip strong {
+        color: var(--strawberry);
+        display: block;
+        font-family: var(--display);
+        font-size: 2.15rem;
+        line-height: 1;
+      }
+
+      .demo-modal {
+        animation: modalEnter 540ms var(--ease-expo) both;
+        background: var(--paper);
+        border: 1px solid rgba(217, 158, 92, 0.42);
+        border-radius: 8px;
+        box-shadow: 0 34px 100px rgba(0, 0, 0, 0.34);
+        color: var(--cocoa);
+        display: grid;
+        margin: clamp(38px, 5vw, 72px) auto 0;
+        max-width: 1120px;
+        min-height: 574px;
+        overflow: clip;
+        position: relative;
+      }
+
+      .demo-modal::before {
+        animation: backdropPulse 3600ms var(--ease-out) infinite alternate;
+        background: radial-gradient(circle, rgba(201, 52, 69, 0.11), transparent 60%);
+        content: "";
+        height: 360px;
+        pointer-events: none;
+        position: absolute;
+        right: -120px;
+        top: -150px;
+        width: 360px;
+      }
+
+      .close {
+        align-items: center;
+        background: transparent;
+        border: 1px solid rgba(106, 61, 44, 0.18);
+        border-radius: 999px;
+        color: var(--cocoa);
+        cursor: pointer;
+        display: inline-flex;
+        font-size: 1.2rem;
+        height: 44px;
+        justify-content: center;
+        position: absolute;
+        right: 24px;
+        top: 24px;
+        transition: transform 180ms var(--ease-out), border-color 180ms var(--ease-out);
+        width: 44px;
+        z-index: 3;
+      }
+
+      .close:hover { border-color: rgba(201, 52, 69, 0.4); transform: rotate(90deg); }
+
+      .packages {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .package {
+        background: var(--cream);
+        border: 1px solid rgba(106, 61, 44, 0.16);
+        border-radius: 8px;
+        color: var(--cocoa);
+        cursor: pointer;
+        min-height: 192px;
+        padding: 22px 20px;
+        text-align: left;
+        transition: transform 220ms var(--ease-out), border-color 220ms var(--ease-out), box-shadow 220ms var(--ease-out), background 220ms var(--ease-out);
+      }
+
+      .package:nth-child(1) { animation: itemIn 520ms var(--ease-expo) 120ms both; }
+      .package:nth-child(2) { animation: itemIn 520ms var(--ease-expo) 200ms both; }
+      .package:nth-child(3) { animation: itemIn 520ms var(--ease-expo) 280ms both; }
+      .package:hover { transform: translateY(-5px); }
+      .package.is-selected {
+        background: #fff2e4;
+        border-color: var(--strawberry);
+        box-shadow: 0 0 0 3px rgba(201, 52, 69, 0.1), 0 18px 42px rgba(201, 52, 69, 0.12);
+        transform: translateY(-4px);
+      }
+
+      .package span {
+        color: var(--green);
+        display: block;
+        font-size: 0.72rem;
+        font-weight: 900;
+        line-height: 1.25;
+        min-height: 2.4em;
+      }
+
+      .package strong {
+        color: var(--cocoa);
+        display: block;
+        font-family: var(--display);
+        font-size: 2.35rem;
+        line-height: 1;
+        margin-top: 20px;
+      }
+
+      .package small,
+      .package p { color: var(--muted); }
+
+      .package p {
+        line-height: 1.55;
+        margin-top: 16px;
+      }
+
+      .actions {
+        align-items: center;
+        border-top: 1px solid var(--line);
+        display: flex;
+        gap: 12px;
+        justify-content: space-between;
+        margin-top: 30px;
+        padding-top: 20px;
+      }
+
+      .modal-title {
+        color: var(--cocoa);
+        font-size: clamp(2.9rem, 5vw, 4.4rem);
+        line-height: 0.92;
+      }
+
+      .modal-copy {
+        color: var(--muted);
+        line-height: 1.65;
+        margin-top: 12px;
+      }
+
+      .fields {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        margin-top: 28px;
+      }
+
+      .fields label {
+        display: grid;
+        font-size: 0.82rem;
+        font-weight: 900;
+        gap: 8px;
+      }
+
+      .fields input,
+      .fields select {
+        background: var(--cream);
+        border: 1px solid rgba(106, 61, 44, 0.18);
+        border-radius: 8px;
+        color: var(--cocoa);
+        min-height: 52px;
+        padding: 0 14px;
+        transition: border-color 180ms var(--ease-out), box-shadow 180ms var(--ease-out), transform 180ms var(--ease-out);
+      }
+
+      .fields input:focus,
+      .fields select:focus {
+        border-color: rgba(201, 52, 69, 0.62);
+        box-shadow: 0 0 0 4px rgba(201, 52, 69, 0.1);
+        outline: 0;
+        transform: translateY(-1px);
+      }
+
+      .result-box {
+        background:
+          radial-gradient(circle at 80% 0%, rgba(201, 52, 69, 0.12), transparent 20rem),
+          var(--cream);
+        border: 1px solid rgba(106, 61, 44, 0.16);
+        border-radius: 8px;
+        margin-top: 28px;
+        padding: clamp(24px, 4vw, 38px);
+      }
+
+      .result-number {
+        color: var(--strawberry);
+        display: block;
+        font-size: clamp(3rem, 6vw, 5.4rem);
+        line-height: 0.9;
+        margin-top: 8px;
+      }
+
+      .step-pane { animation: stepSwap 360ms var(--ease-out) both; }
+      .step-pane[hidden] { display: none; }
+
+      .option-1 .demo-modal {
+        grid-template-columns: minmax(280px, 0.48fr) minmax(0, 1fr);
+      }
+
+      .option-1 .side-panel {
+        background:
+          radial-gradient(circle at 34% 16%, rgba(201, 52, 69, 0.22), transparent 17rem),
+          var(--cocoa);
+        color: var(--cream);
+        padding: clamp(30px, 4vw, 48px);
+      }
+
+      .option-1 .side-panel h3 {
+        color: var(--cream);
+        font-family: var(--display);
+        font-size: clamp(2.5rem, 4.4vw, 3.8rem);
+        line-height: 0.9;
+      }
+
+      .progress-rail {
+        display: grid;
+        gap: 16px;
+        margin-top: 38px;
+      }
+
+      .progress-rail span {
+        border-left: 2px solid rgba(255, 247, 236, 0.18);
+        color: rgba(255, 247, 236, 0.58);
+        font-size: 0.82rem;
+        font-weight: 900;
+        padding: 5px 0 5px 14px;
+        text-transform: uppercase;
+        transition: color 240ms var(--ease-out), border-color 240ms var(--ease-out), transform 240ms var(--ease-out);
+      }
+
+      .progress-rail span.is-active {
+        border-color: var(--strawberry);
+        color: var(--cream);
+        transform: translateX(4px);
+      }
+
+      .option-1 .modal-body {
+        padding: clamp(34px, 4.4vw, 54px);
+      }
+
+      .option-2 .demo-modal {
+        grid-template-rows: auto 1fr;
+        max-width: 1180px;
+      }
+
+      .console-top {
+        align-items: center;
+        background: var(--cocoa);
+        border-bottom: 1px solid rgba(217, 158, 92, 0.24);
+        color: var(--cream);
+        display: grid;
+        gap: 26px;
+        grid-template-columns: minmax(260px, 0.75fr) minmax(0, 1.25fr);
+        padding: 28px 34px;
+      }
+
+      .console-top h3 {
+        color: var(--cream);
+        font-family: var(--display);
+        font-size: clamp(2.3rem, 3.6vw, 3.7rem);
+        line-height: 0.92;
+      }
+
+      .step-tabs {
+        background: rgba(255, 247, 236, 0.08);
+        border: 1px solid rgba(255, 247, 236, 0.14);
+        border-radius: 999px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        padding: 5px;
+      }
+
+      .step-tabs span {
+        border-radius: 999px;
+        color: rgba(255, 247, 236, 0.62);
+        font-size: 0.78rem;
+        font-weight: 900;
+        padding: 11px 12px;
+        text-align: center;
+        text-transform: uppercase;
+        transition: background 240ms var(--ease-out), color 240ms var(--ease-out);
+      }
+
+      .step-tabs span.is-active {
+        background: var(--cream);
+        color: var(--cocoa);
+      }
+
+      .option-2 .modal-body {
+        padding: 34px;
+      }
+
+      .option-2 .packages {
+        grid-template-columns: 1fr;
+      }
+
+      .console-grid {
+        display: grid;
+        gap: 28px;
+        grid-template-columns: minmax(0, 1fr) 286px;
+      }
+
+      .summary-card {
+        background: #fff2e4;
+        border: 1px solid rgba(106, 61, 44, 0.14);
+        border-radius: 8px;
+        padding: 22px;
+        position: sticky;
+        top: 96px;
+      }
+
+      .summary-card dl {
+        display: grid;
+        gap: 14px;
+        margin: 18px 0 0;
+      }
+
+      .summary-card div {
+        border-top: 1px solid rgba(106, 61, 44, 0.12);
+        padding-top: 14px;
+      }
+
+      .summary-card dt {
+        color: var(--muted);
+        font-size: 0.72rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .summary-card dd {
+        font-family: var(--display);
+        font-size: 1.7rem;
+        line-height: 1;
+        margin: 5px 0 0;
+      }
+
+      .option-3 .demo-modal {
+        background: #fffaf3;
+        grid-template-columns: minmax(300px, 0.42fr) minmax(0, 1fr);
+        max-width: 1160px;
+      }
+
+      .concierge-side {
+        background:
+          linear-gradient(180deg, rgba(201, 52, 69, 0.1), transparent 48%),
+          var(--cocoa);
+        color: var(--cream);
+        display: grid;
+        grid-template-rows: 1fr auto;
+        padding: clamp(30px, 4vw, 48px);
+      }
+
+      .concierge-side h3 {
+        color: var(--cream);
+        font-family: var(--display);
+        font-size: clamp(2.8rem, 5vw, 4.4rem);
+        line-height: 0.88;
+      }
+
+      .concierge-note {
+        border-top: 1px solid rgba(255, 247, 236, 0.14);
+        color: rgba(255, 247, 236, 0.7);
+        line-height: 1.7;
+        padding-top: 20px;
+      }
+
+      .concierge-body {
+        padding: clamp(34px, 4.8vw, 60px);
+      }
+
+      .concierge-head {
+        align-items: end;
+        display: grid;
+        gap: 24px;
+        grid-template-columns: minmax(0, 1fr) auto;
+      }
+
+      .dot-steps {
+        display: flex;
+        gap: 10px;
+      }
+
+      .dot-steps span {
+        background: rgba(106, 61, 44, 0.14);
+        border-radius: 999px;
+        height: 10px;
+        transition: width 240ms var(--ease-out), background 240ms var(--ease-out);
+        width: 10px;
+      }
+
+      .dot-steps span.is-active {
+        background: var(--strawberry);
+        width: 34px;
+      }
+
+      .option-3 .packages {
+        gap: 12px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        margin-top: 30px;
+      }
+
+      .option-3 .package {
+        background: transparent;
+        min-height: 210px;
+      }
+
+      .option-3 .package.is-selected {
+        background: #fff2e4;
+      }
+
+      @keyframes modalEnter {
+        from { opacity: 0; transform: translateY(24px) scale(0.975); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+      }
+
+      @keyframes itemIn {
+        from { opacity: 0; transform: translateY(18px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      @keyframes stepSwap {
+        from { opacity: 0; transform: translateX(14px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+
+      @keyframes backdropPulse {
+        from { opacity: 0.65; transform: scale(0.98); }
+        to { opacity: 1; transform: scale(1.04); }
+      }
+
+      @media (max-width: 1080px) {
+        .preview-nav { overflow-x: auto; }
+        .context-grid,
+        .option-1 .demo-modal,
+        .option-3 .demo-modal,
+        .console-grid,
+        .console-top {
+          grid-template-columns: 1fr;
+        }
+
+        .value-copy,
+        .value-card {
+          border: 1px solid rgba(217, 158, 92, 0.32);
+          border-radius: 8px;
+          min-height: 0;
+        }
+
+        .value-card { border-top: 0; }
+        .packages,
+        .fields,
+        .metric-strip,
+        .option-3 .packages { grid-template-columns: 1fr; }
+        .summary-card { position: static; }
+      }
+
+      @media (max-width: 640px) {
+        .preview-option { padding-block: 58px; }
+        .demo-modal { min-height: 0; }
+        .modal-title { font-size: 3rem; }
+        .actions { align-items: stretch; flex-direction: column-reverse; }
+        .btn { width: 100%; }
+        .close { right: 14px; top: 14px; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="preview-nav" aria-label="Podgląd wariantów">
+      <div class="brand">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <strong>Strawberry<br />Group S.C.</strong>
+      </div>
+      <a href="#option-1">Option 1</a>
+      <a href="#option-2">Option 2</a>
+      <a href="#option-3">Option 3</a>
+    </nav>
+
+    <section class="preview-option option-1" id="option-1">
+      <div class="option-label"><span>Option 1</span> Guided Panel</div>
+      <div class="context-grid" aria-label="Kontekst sekcji kalkulatora">
+        <div class="value-copy">
+          <p class="eyebrow">Dlaczego to się opłaca</p>
+          <h2>Kalkulator jako główny argument.</h2>
+          <p class="lead">Najbliżej obecnego układu, ale z mocniejszą choreografią: modal wchodzi jak spokojny panel doradczy, a użytkownik widzi dokładnie gdzie jest w procesie.</p>
+          <div class="trigger-row">
+            <button class="btn" type="button">Policz wydarzenie →</button>
+            <button class="btn secondary" type="button">Zobacz pakiety</button>
+          </div>
+        </div>
+        <div class="value-card">
+          <p>Orientacyjna kalkulacja</p>
+          <h3>Pakiet, goście, wynik.</h3>
+          <p class="lead">Wariant zachowuje obecny język strony, ale poprawia rytm, punkt ciężkości i feedback przy zmianie etapu.</p>
+          <div class="metric-strip">
+            <div><strong>10–17 zł</strong><small>za osobę w pakietach</small></div>
+            <div><strong>22–35 zł</strong><small>typowy koszt alternatywny</small></div>
+          </div>
+        </div>
+      </div>
+
+      <article class="demo-modal" data-demo>
+        <button class="close" type="button" aria-label="Zamknij">×</button>
+        <aside class="side-panel">
+          <p class="eyebrow">Kalkulator</p>
+          <h3>Orientacyjna wycena wydarzenia.</h3>
+          <div class="progress-rail" aria-label="Etapy">
+            <span class="is-active" data-step-indicator="1">1 Pakiet</span>
+            <span data-step-indicator="2">2 Dane</span>
+            <span data-step-indicator="3">3 Kalkulacja</span>
+          </div>
+        </aside>
+        <div class="modal-body">
+          <div class="step-pane" data-step="1">
+            <h3 class="modal-title">Wybierz pakiet</h3>
+            <p class="modal-copy">Od pakietu zależy cena za osobę i zakres doświadczenia na stoisku.</p>
+            <div class="packages" data-packages>
+              <button class="package" type="button"><span>Najsprawniejszy wybór</span><strong>Silver</strong><small>10–11 zł/os.</small><p>Prosta, szybka i efektowna forma serwowania.</p></button>
+              <button class="package is-selected" type="button"><span>Najbardziej uniwersalny</span><strong>Gold</strong><small>12–13 zł/os.</small><p>Więcej smaków, więcej możliwości.</p></button>
+              <button class="package" type="button"><span>Najbardziej interaktywny</span><strong>Platinum</strong><small>16–17 zł/os.</small><p>Najwięcej możliwości i najwyższy poziom doświadczenia.</p></button>
+            </div>
+          </div>
+          <div class="step-pane" data-step="2" hidden>
+            <h3 class="modal-title">Dane wydarzenia</h3>
+            <p class="modal-copy">Tylko informacje potrzebne do pierwszego zakresu kosztów.</p>
+            <div class="fields">
+              <label>Liczba gości <input value="500" inputmode="numeric" /></label>
+              <label>Typ wydarzenia <select><option>Wesele</option><option>Event firmowy</option><option>Gala / bankiet</option></select></label>
+              <label>Miasto <input placeholder="np. Warszawa" /></label>
+            </div>
+          </div>
+          <div class="step-pane" data-step="3" hidden>
+            <h3 class="modal-title">Orientacyjny wynik</h3>
+            <div class="result-box">
+              <p>Gold, 500 gości, wesele</p>
+              <strong class="result-number">6 500 zł</strong>
+              <p class="modal-copy">Typowa atrakcja eventowa dla tej skali: 11 000–17 500 zł.</p>
+            </div>
+          </div>
+          <div class="actions">
+            <button class="btn secondary" data-prev type="button">Wstecz</button>
+            <button class="btn" data-next type="button">Dalej →</button>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="preview-option option-2" id="option-2">
+      <div class="option-label"><span>Option 2</span> Estimator Console</div>
+      <div class="context-grid">
+        <div class="value-copy">
+          <p class="eyebrow">Dlaczego to się opłaca</p>
+          <h2>Kalkulator jako panel decyzji.</h2>
+          <p class="lead">Bardziej użytkowy kierunek: mniej teatralny modal, więcej czytelnego sterowania i stałe podsumowanie po prawej stronie.</p>
+          <div class="trigger-row"><button class="btn" type="button">Policz wydarzenie →</button></div>
+        </div>
+        <div class="value-card">
+          <p>Orientacyjna kalkulacja</p>
+          <h3>Wybór bez zgadywania.</h3>
+          <p class="lead">Użytkownik cały czas widzi bieżący pakiet, skalę i szacowany zakres. Animacja przesuwa uwagę do aktywnego obszaru, bez chaosu.</p>
+        </div>
+      </div>
+
+      <article class="demo-modal" data-demo>
+        <button class="close" type="button" aria-label="Zamknij">×</button>
+        <header class="console-top">
+          <div>
+            <p class="eyebrow">Kalkulator</p>
+            <h3>Panel estymacji kosztu.</h3>
+          </div>
+          <div class="step-tabs" aria-label="Etapy">
+            <span class="is-active" data-step-indicator="1">Pakiet</span>
+            <span data-step-indicator="2">Dane</span>
+            <span data-step-indicator="3">Wynik</span>
+          </div>
+        </header>
+        <div class="modal-body console-grid">
+          <div>
+            <div class="step-pane" data-step="1">
+              <h3 class="modal-title">Najpierw pakiet</h3>
+              <p class="modal-copy">W tej wersji pakiety są kompaktowe, bo decyzja ma być szybka.</p>
+              <div class="packages" data-packages>
+                <button class="package" type="button"><span>10–11 zł/os.</span><strong>Silver</strong><p>Szybkie wydawanie deserów.</p></button>
+                <button class="package is-selected" type="button"><span>12–13 zł/os.</span><strong>Gold</strong><p>Najbezpieczniejszy wybór na większość wydarzeń.</p></button>
+                <button class="package" type="button"><span>16–17 zł/os.</span><strong>Platinum</strong><p>Wariant, w którym goście komponują kubki.</p></button>
+              </div>
+            </div>
+            <div class="step-pane" data-step="2" hidden>
+              <h3 class="modal-title">Skala i miejsce</h3>
+              <p class="modal-copy">Dane aktualizują podsumowanie i przygotowują wynik.</p>
+              <div class="fields">
+                <label>Goście <input value="500" inputmode="numeric" /></label>
+                <label>Typ <select><option>Event firmowy</option><option>Wesele</option><option>Strefa VIP</option></select></label>
+                <label>Miasto <input value="Kraków" /></label>
+              </div>
+            </div>
+            <div class="step-pane" data-step="3" hidden>
+              <h3 class="modal-title">Wynik gotowy</h3>
+              <div class="result-box">
+                <p>Gold dla 500 gości</p>
+                <strong class="result-number">6 500 zł</strong>
+                <p class="modal-copy">Następny krok: potwierdzenie terminu i logistyki.</p>
+              </div>
+            </div>
+            <div class="actions">
+              <button class="btn secondary" data-prev type="button">Wstecz</button>
+              <button class="btn" data-next type="button">Dalej →</button>
+            </div>
+          </div>
+          <aside class="summary-card" aria-label="Podsumowanie">
+            <p class="eyebrow" style="color: var(--muted)">Podsumowanie</p>
+            <dl>
+              <div><dt>Pakiet</dt><dd>Gold</dd></div>
+              <div><dt>Goście</dt><dd>500</dd></div>
+              <div><dt>Zakres</dt><dd>6 000–6 500 zł</dd></div>
+            </dl>
+          </aside>
+        </div>
+      </article>
+    </section>
+
+    <section class="preview-option option-3" id="option-3">
+      <div class="option-label"><span>Option 3</span> Concierge Flow</div>
+      <div class="context-grid">
+        <div class="value-copy">
+          <p class="eyebrow">Dlaczego to się opłaca</p>
+          <h2>Kalkulator jak rozmowa.</h2>
+          <p class="lead">Najbardziej premium kierunek: mniej techniczny, bardziej „prowadzący”. Ruch jest miękki, ale nadal szybki i użyteczny.</p>
+          <div class="trigger-row"><button class="btn" type="button">Policz wydarzenie →</button></div>
+        </div>
+        <div class="value-card">
+          <p>Orientacyjna kalkulacja</p>
+          <h3>Trzy pytania, konkretny zakres.</h3>
+          <p class="lead">Dobry kierunek, jeśli kalkulator ma być głównym argumentem premium i jednocześnie nie może wyglądać jak tabelka cenowa.</p>
+        </div>
+      </div>
+
+      <article class="demo-modal" data-demo>
+        <button class="close" type="button" aria-label="Zamknij">×</button>
+        <aside class="concierge-side">
+          <div>
+            <p class="eyebrow">Kalkulator</p>
+            <h3>Ustalmy zakres w trzy kroki.</h3>
+          </div>
+          <p class="concierge-note">Po kalkulacji użytkownik nie trafia w ślepy formularz: ma już wybrany pakiet, skalę i sensowny kontekst rozmowy.</p>
+        </aside>
+        <div class="concierge-body">
+          <div class="concierge-head">
+            <div>
+              <h3 class="modal-title">Co pasuje do wydarzenia?</h3>
+              <p class="modal-copy">Wybierz punkt startowy, a wynik dopasuje się do skali.</p>
+            </div>
+            <div class="dot-steps" aria-label="Etapy">
+              <span class="is-active" data-step-indicator="1"></span>
+              <span data-step-indicator="2"></span>
+              <span data-step-indicator="3"></span>
+            </div>
+          </div>
+          <div class="step-pane" data-step="1">
+            <div class="packages" data-packages>
+              <button class="package" type="button"><span>Sprawnie</span><strong>Silver</strong><small>10–11 zł/os.</small><p>Dla dużych grup i prostego wydawania.</p></button>
+              <button class="package is-selected" type="button"><span>Uniwersalnie</span><strong>Gold</strong><small>12–13 zł/os.</small><p>Najlepszy balans wyboru, ceny i efektu.</p></button>
+              <button class="package" type="button"><span>Najbardziej premium</span><strong>Platinum</strong><small>16–17 zł/os.</small><p>Dla zdjęć, interakcji i stref VIP.</p></button>
+            </div>
+          </div>
+          <div class="step-pane" data-step="2" hidden>
+            <h3 class="modal-title">Ile osób obsłużymy?</h3>
+            <p class="modal-copy">Ten krok daje poczucie wyceny, ale nie przeciąża decyzji.</p>
+            <div class="fields">
+              <label>Goście <input value="500" inputmode="numeric" /></label>
+              <label>Typ wydarzenia <select><option>Wesele</option><option>Gala / bankiet</option><option>Plener</option></select></label>
+              <label>Miasto <input placeholder="np. Poznań" /></label>
+            </div>
+          </div>
+          <div class="step-pane" data-step="3" hidden>
+            <h3 class="modal-title">Zakres orientacyjny</h3>
+            <div class="result-box">
+              <p>Rekomendacja: Gold</p>
+              <strong class="result-number">6 000–6 500 zł</strong>
+              <p class="modal-copy">Przy tej skali klasyczna atrakcja eventowa często kosztuje 11 000–17 500 zł.</p>
+            </div>
+          </div>
+          <div class="actions">
+            <button class="btn secondary" data-prev type="button">Wstecz</button>
+            <button class="btn" data-next type="button">Dalej →</button>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <script>
+      document.querySelectorAll("[data-demo]").forEach((demo) => {
+        let step = 1;
+        const panes = [...demo.querySelectorAll("[data-step]")];
+        const indicators = [...demo.querySelectorAll("[data-step-indicator]")];
+        const next = demo.querySelector("[data-next]");
+        const prev = demo.querySelector("[data-prev]");
+
+        const render = () => {
+          panes.forEach((pane) => {
+            pane.hidden = Number(pane.dataset.step) !== step;
+          });
+          indicators.forEach((indicator) => {
+            indicator.classList.toggle("is-active", Number(indicator.dataset.stepIndicator) === step);
+          });
+          prev.disabled = step === 1;
+          prev.style.opacity = step === 1 ? "0.55" : "1";
+          next.textContent = step === 3 ? "Przejdź do formularza →" : "Dalej →";
+        };
+
+        demo.querySelectorAll(".package").forEach((card) => {
+          card.addEventListener("click", () => {
+            demo.querySelectorAll(".package").forEach((item) => item.classList.remove("is-selected"));
+            card.classList.add("is-selected");
+          });
+        });
+
+        next.addEventListener("click", () => {
+          step = step === 3 ? 1 : step + 1;
+          render();
+        });
+
+        prev.addEventListener("click", () => {
+          step = Math.max(1, step - 1);
+          render();
+        });
+
+        render();
+      });
+    </script>
+  </body>
+</html>

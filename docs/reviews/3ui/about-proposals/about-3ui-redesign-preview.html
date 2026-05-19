@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>3UI About Redesign Preview</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --cream: #fff7ec;
+        --warm: #fffaf3;
+        --ink: #20110f;
+        --muted: #6d5f58;
+        --line: rgba(106, 61, 44, 0.16);
+        --strawberry: #cf3144;
+        --gold: #c59a52;
+        --cocoa: #1b100f;
+        --edge: clamp(28px, 3.2vw, 64px);
+        --radius: 8px;
+        --display: "Cormorant Garamond", Georgia, serif;
+        --body: "Manrope", Arial, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        background:
+          radial-gradient(circle at 78% 4%, rgba(243, 214, 217, 0.5), transparent 24rem),
+          linear-gradient(180deg, var(--cream), var(--warm));
+        color: var(--ink);
+        font-family: var(--body);
+        margin: 0;
+      }
+
+      .preview-shell {
+        display: grid;
+        gap: 46px;
+        padding: 36px 0 64px;
+      }
+
+      .preview-intro {
+        padding: 0 var(--edge);
+      }
+
+      .preview-intro p {
+        color: var(--muted);
+        line-height: 1.65;
+        margin: 8px 0 0;
+        max-width: 72ch;
+      }
+
+      .preview-kicker,
+      .eyebrow {
+        color: var(--strawberry);
+        font-size: 0.78rem;
+        font-weight: 900;
+        letter-spacing: 0;
+        margin: 0 0 12px;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: var(--display);
+        font-weight: 700;
+        line-height: 0.96;
+        margin: 0;
+      }
+
+      h1 {
+        font-size: clamp(3.5rem, 7vw, 7.5rem);
+        max-width: 15ch;
+      }
+
+      h2 {
+        font-size: clamp(3rem, 5.8vw, 6.4rem);
+      }
+
+      h3 {
+        font-size: clamp(1.65rem, 2.5vw, 2.35rem);
+      }
+
+      .option {
+        border-top: 1px solid rgba(106, 61, 44, 0.16);
+      }
+
+      .option-label {
+        align-items: center;
+        color: var(--muted);
+        display: flex;
+        font-size: 0.78rem;
+        font-weight: 900;
+        gap: 12px;
+        justify-content: space-between;
+        padding: 20px var(--edge);
+        text-transform: uppercase;
+      }
+
+      .option-label strong {
+        color: var(--strawberry);
+      }
+
+      .context-strip {
+        background:
+          linear-gradient(180deg, rgba(255, 248, 238, 0.98), rgba(255, 250, 243, 0.92));
+        border-bottom: 1px solid var(--line);
+        border-top: 1px solid var(--line);
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        margin: 0 var(--edge);
+      }
+
+      .context-strip div {
+        border-right: 1px solid var(--line);
+        padding: 18px 22px;
+      }
+
+      .context-strip div:last-child {
+        border-right: 0;
+      }
+
+      .context-strip strong {
+        color: var(--strawberry);
+        display: block;
+        font-size: 0.78rem;
+        text-transform: uppercase;
+      }
+
+      .context-strip span {
+        color: var(--muted);
+        display: block;
+        font-size: 0.9rem;
+        line-height: 1.4;
+        margin-top: 4px;
+      }
+
+      .process-teaser {
+        background:
+          radial-gradient(circle at 76% 16%, rgba(201, 52, 69, 0.16), transparent 28rem),
+          linear-gradient(135deg, #1d0f0f 0%, #261514 54%, #160b0b 100%);
+        color: #fff7ec;
+        display: grid;
+        gap: 18px;
+        grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr);
+        margin: 0 var(--edge);
+        padding: 34px;
+      }
+
+      .process-teaser h3 {
+        color: #fff7ec;
+      }
+
+      .process-teaser p {
+        color: rgba(255, 247, 236, 0.72);
+        line-height: 1.6;
+        margin: 0;
+      }
+
+      .about-option {
+        padding: clamp(56px, 6vw, 86px) var(--edge);
+      }
+
+      .option-1 {
+        background:
+          radial-gradient(ellipse at 82% 0%, rgba(255, 248, 238, 0.9), transparent 38rem),
+          linear-gradient(180deg, var(--cream), var(--warm));
+        display: grid;
+        gap: clamp(36px, 6vw, 88px);
+        grid-template-columns: minmax(0, 0.86fr) minmax(520px, 1.14fr);
+      }
+
+      .option-1 .copy p,
+      .option-2 .copy p,
+      .option-3 .copy p {
+        color: var(--muted);
+        font-size: 1.02rem;
+        line-height: 1.7;
+        margin: 24px 0 0;
+        max-width: 56ch;
+      }
+
+      .service-ledger {
+        align-self: stretch;
+        border: 1px solid var(--line);
+        display: grid;
+        grid-template-rows: auto repeat(3, 1fr);
+      }
+
+      .ledger-intro {
+        background:
+          linear-gradient(180deg, rgba(255, 252, 247, 0.96), rgba(253, 246, 236, 0.9));
+        border-bottom: 1px solid var(--line);
+        padding: clamp(28px, 3vw, 42px);
+      }
+
+      .ledger-intro p {
+        color: var(--muted);
+        line-height: 1.68;
+        margin: 0;
+      }
+
+      .ledger-intro strong {
+        color: var(--strawberry);
+        display: block;
+        font-family: var(--display);
+        font-size: clamp(2rem, 3.2vw, 3.2rem);
+        line-height: 0.95;
+        margin-top: 20px;
+      }
+
+      .ledger-row {
+        align-items: center;
+        border-bottom: 1px solid var(--line);
+        display: grid;
+        gap: 26px;
+        grid-template-columns: 82px minmax(0, 1fr);
+        padding: 22px clamp(26px, 3vw, 42px);
+      }
+
+      .ledger-row:last-child {
+        border-bottom: 0;
+      }
+
+      .ledger-row span {
+        color: rgba(201, 52, 69, 0.42);
+        font-family: var(--display);
+        font-size: 3.8rem;
+        font-weight: 700;
+        line-height: 0.8;
+      }
+
+      .ledger-row h3 {
+        font-family: var(--body);
+        font-size: 1.08rem;
+        line-height: 1.25;
+      }
+
+      .ledger-row p {
+        color: var(--muted);
+        line-height: 1.6;
+        margin: 6px 0 0;
+      }
+
+      .option-2 {
+        background:
+          radial-gradient(circle at 82% 20%, rgba(197, 154, 82, 0.16), transparent 28rem),
+          linear-gradient(135deg, #1d0f0f 0%, #2b1715 58%, #170b0b 100%);
+        color: #fff7ec;
+        display: grid;
+        gap: clamp(34px, 5vw, 72px);
+        grid-template-columns: minmax(360px, 0.76fr) minmax(0, 1.24fr);
+      }
+
+      .option-2 h2 {
+        color: #fff7ec;
+      }
+
+      .option-2 .copy p {
+        color: rgba(255, 247, 236, 0.72);
+      }
+
+      .atelier-board {
+        display: grid;
+        gap: 0;
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .atelier-card {
+        border: 1px solid rgba(255, 247, 236, 0.16);
+        border-right: 0;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        min-height: 430px;
+        padding: clamp(24px, 3vw, 36px);
+      }
+
+      .atelier-card:last-child {
+        border-right: 1px solid rgba(255, 247, 236, 0.16);
+      }
+
+      .atelier-card span {
+        color: var(--gold);
+        font-size: 0.78rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .atelier-card h3 {
+        color: #fff7ec;
+        font-size: clamp(2rem, 3.3vw, 3.3rem);
+        margin-top: 26px;
+      }
+
+      .atelier-card p {
+        color: rgba(255, 247, 236, 0.7);
+        line-height: 1.65;
+        margin: 22px 0 0;
+      }
+
+      .atelier-card strong {
+        border-top: 1px solid rgba(255, 247, 236, 0.14);
+        color: #ffcbd1;
+        font-size: 0.84rem;
+        margin-top: 34px;
+        padding-top: 18px;
+        text-transform: uppercase;
+      }
+
+      .option-3 {
+        background:
+          radial-gradient(circle at 18% 24%, rgba(201, 52, 69, 0.06), transparent 28rem),
+          linear-gradient(180deg, #fffaf3 0%, #f8efe5 100%);
+        display: grid;
+        gap: clamp(30px, 4vw, 54px);
+      }
+
+      .proof-header {
+        align-items: end;
+        display: grid;
+        gap: 42px;
+        grid-template-columns: minmax(0, 1fr) minmax(360px, 0.64fr);
+      }
+
+      .proof-stamp {
+        border-left: 1px solid var(--line);
+        padding-left: 34px;
+      }
+
+      .proof-stamp strong {
+        color: var(--strawberry);
+        display: block;
+        font-family: var(--display);
+        font-size: clamp(2rem, 4vw, 4rem);
+        line-height: 0.95;
+      }
+
+      .proof-stamp p {
+        color: var(--muted);
+        line-height: 1.6;
+        margin: 14px 0 0;
+      }
+
+      .proof-board {
+        border: 1px solid var(--line);
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .proof-board article {
+        border-right: 1px solid var(--line);
+        min-height: 260px;
+        padding: clamp(26px, 3vw, 42px);
+      }
+
+      .proof-board article:last-child {
+        border-right: 0;
+      }
+
+      .proof-board span {
+        color: var(--strawberry);
+        font-size: 0.78rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .proof-board h3 {
+        font-size: clamp(2rem, 3.2vw, 3.3rem);
+        margin-top: 28px;
+      }
+
+      .proof-board p {
+        color: var(--muted);
+        line-height: 1.65;
+        margin: 18px 0 0;
+      }
+
+      @media (max-width: 980px) {
+        .context-strip,
+        .option-1,
+        .option-2,
+        .proof-header,
+        .proof-board,
+        .atelier-board,
+        .process-teaser {
+          grid-template-columns: 1fr;
+        }
+
+        .context-strip div,
+        .atelier-card,
+        .proof-board article {
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+        }
+
+        .context-strip div:last-child,
+        .atelier-card:last-child,
+        .proof-board article:last-child {
+          border-bottom: 0;
+        }
+
+        .option-1,
+        .option-2 {
+          gap: 34px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="preview-shell">
+      <section class="preview-intro" aria-labelledby="preview-title">
+        <p class="preview-kicker">3UI preview · sekcja O nas</p>
+        <h1 id="preview-title">Przeróbka sekcji po pasku oferty.</h1>
+        <p>
+          Kontekst: jasny claim strip nad sekcją, potem moduł o firmie i przejście do ciemnego procesu.
+          Warianty różnią się układem, ciężarem wizualnym i sposobem budowania zaufania.
+        </p>
+      </section>
+
+      <section class="option" id="option-1" aria-labelledby="option-1-title">
+        <div class="option-label">
+          <strong>Option 1</strong>
+          <span id="option-1-title">Service Ledger Split</span>
+        </div>
+        <div class="context-strip" aria-hidden="true">
+          <div><strong>Świeże owoce</strong><span>przygotowanie na miejscu</span></div>
+          <div><strong>Interakcja</strong><span>goście wybierają dodatki</span></div>
+          <div><strong>Skala</strong><span>proces dla dużych eventów</span></div>
+          <div><strong>Organizacja</strong><span>transport, montaż, obsługa</span></div>
+        </div>
+        <div class="about-option option-1">
+          <div class="copy">
+            <p class="eyebrow">O nas</p>
+            <h2>Mobilne atelier deserowe, które zdejmie obsługę z organizatora.</h2>
+            <p>
+              Najbliżej obecnego układu, ale prawa strona staje się jednym logicznym ledgerem:
+              najpierw obietnica, potem trzy konkretne dowody operacyjne.
+            </p>
+          </div>
+          <div class="service-ledger">
+            <div class="ledger-intro">
+              <p>
+                Tworzymy stoisko deserowe, przy którym goście zatrzymują się, wybierają dodatki
+                i dostają deser przygotowany na miejscu.
+              </p>
+              <strong>Świeżość. Jakość. Doświadczenie.</strong>
+            </div>
+            <article class="ledger-row">
+              <span>01</span>
+              <div>
+                <h3>Obsługa na miejscu</h3>
+                <p>Goście wybierają dodatki, a deser powstaje przy stoisku w rytmie wydarzenia.</p>
+              </div>
+            </article>
+            <article class="ledger-row">
+              <span>02</span>
+              <div>
+                <h3>Eventowy proces</h3>
+                <p>Przywozimy stanowisko, składniki i zespół, bez koordynowania zaplecza przez organizatora.</p>
+              </div>
+            </article>
+            <article class="ledger-row">
+              <span>03</span>
+              <div>
+                <h3>Kontrola jakości</h3>
+                <p>Dbamy o świeżość, ekspozycję i porządek od pierwszej porcji do demontażu.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+        <div class="process-teaser" aria-hidden="true">
+          <h3>Jeden prosty proces od zapytania do ostatniego kubka.</h3>
+          <p>Niżej strona przechodzi w ciemniejszy moduł procesu, więc ten wariant zostawia jasny oddech.</p>
+        </div>
+      </section>
+
+      <section class="option" id="option-2" aria-labelledby="option-2-title">
+        <div class="option-label">
+          <strong>Option 2</strong>
+          <span id="option-2-title">Cocoa Atelier Process</span>
+        </div>
+        <div class="context-strip" aria-hidden="true">
+          <div><strong>Świeże owoce</strong><span>przygotowanie na miejscu</span></div>
+          <div><strong>Interakcja</strong><span>goście wybierają dodatki</span></div>
+          <div><strong>Skala</strong><span>proces dla dużych eventów</span></div>
+          <div><strong>Organizacja</strong><span>transport, montaż, obsługa</span></div>
+        </div>
+        <div class="about-option option-2">
+          <div class="copy">
+            <p class="eyebrow">O nas</p>
+            <h2>Przywozimy deserowy rytuał, nie tylko składniki.</h2>
+            <p>
+              Najbardziej kontrastowy kierunek: sekcja zaczyna budować napięcie przed ciemnym procesem,
+              a trzy filary są pokazane jak sceny obsługi.
+            </p>
+          </div>
+          <div class="atelier-board">
+            <article class="atelier-card">
+              <span>Obsługa</span>
+              <div>
+                <h3>Goście widzą proces</h3>
+                <p>Stoisko działa jak mały punkt doświadczenia: wybór dodatków, polewa i gotowy kubek.</p>
+              </div>
+              <strong>Naturalna interakcja</strong>
+            </article>
+            <article class="atelier-card">
+              <span>Organizacja</span>
+              <div>
+                <h3>Zespół przyjeżdża gotowy</h3>
+                <p>Transport, montaż, składniki i obsługa są po naszej stronie od startu do zamknięcia.</p>
+              </div>
+              <strong>Mniej pracy dla organizatora</strong>
+            </article>
+            <article class="atelier-card">
+              <span>Jakość</span>
+              <div>
+                <h3>Porządek przez cały event</h3>
+                <p>Dbamy o ekspozycję, świeżość i płynne wydawanie deserów także przy dużych grupach.</p>
+              </div>
+              <strong>Premium bez chaosu</strong>
+            </article>
+          </div>
+        </div>
+        <div class="process-teaser" aria-hidden="true">
+          <h3>Jeden prosty proces od zapytania do ostatniego kubka.</h3>
+          <p>Tu przejście do procesu jest najmocniejsze i bardziej teatralne.</p>
+        </div>
+      </section>
+
+      <section class="option" id="option-3" aria-labelledby="option-3-title">
+        <div class="option-label">
+          <strong>Option 3</strong>
+          <span id="option-3-title">Premium Proof Board</span>
+        </div>
+        <div class="context-strip" aria-hidden="true">
+          <div><strong>Świeże owoce</strong><span>przygotowanie na miejscu</span></div>
+          <div><strong>Interakcja</strong><span>goście wybierają dodatki</span></div>
+          <div><strong>Skala</strong><span>proces dla dużych eventów</span></div>
+          <div><strong>Organizacja</strong><span>transport, montaż, obsługa</span></div>
+        </div>
+        <div class="about-option option-3">
+          <div class="proof-header">
+            <div class="copy">
+              <p class="eyebrow">O nas</p>
+              <h2>Obsługa słodkiej atrakcji, podana jak premium serwis.</h2>
+              <p>
+                Najbardziej uporządkowany wariant: zamiast klasycznego splitu sekcja działa jak tablica dowodów,
+                z mocnym statementem i trzema równymi argumentami.
+              </p>
+            </div>
+            <aside class="proof-stamp">
+              <strong>Świeżość. Jakość. Doświadczenie.</strong>
+              <p>Krótki znak jakości może pracować jak podpis marki, bez osobnej pustej karty.</p>
+            </aside>
+          </div>
+          <div class="proof-board">
+            <article>
+              <span>01 · Na miejscu</span>
+              <h3>Deser dzieje się przy gościach</h3>
+              <p>Wybór dodatków i polew tworzy realną interakcję, nie tylko pasywny bufet.</p>
+            </article>
+            <article>
+              <span>02 · Proces</span>
+              <h3>Logistyka jest zamknięta po naszej stronie</h3>
+              <p>Przyjeżdża stanowisko, składniki i obsługa, więc organizator nie prowadzi zaplecza.</p>
+            </article>
+            <article>
+              <span>03 · Porządek</span>
+              <h3>Wygląd i jakość trzymają poziom</h3>
+              <p>Ekspozycja, świeżość i demontaż są częścią usługi, nie dodatkiem na końcu.</p>
+            </article>
+          </div>
+        </div>
+        <div class="process-teaser" aria-hidden="true">
+          <h3>Jeden prosty proces od zapytania do ostatniego kubka.</h3>
+          <p>Ten wariant zostawia najwięcej oddechu przed kolejną sekcją i jest najłatwiejszy do skanowania.</p>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

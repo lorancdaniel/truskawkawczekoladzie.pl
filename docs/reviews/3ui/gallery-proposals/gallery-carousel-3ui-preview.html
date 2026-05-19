@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>3UI Gallery Carousel Proposals</title>
+    <style>
+      :root {
+        --cream: #fff7ec;
+        --paper: #fdfbf6;
+        --ink: #221413;
+        --muted: #6e5f59;
+        --cocoa: #1b100f;
+        --red: #c93445;
+        --gold: #c59a52;
+        --line: rgba(106, 61, 44, 0.16);
+        --radius: 14px;
+        --display: Georgia, "Times New Roman", serif;
+        --body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #1b100f;
+        color: var(--ink);
+        font-family: var(--body);
+        margin: 0;
+      }
+
+      img {
+        display: block;
+        height: 100%;
+        object-fit: cover;
+        width: 100%;
+      }
+
+      button {
+        font: inherit;
+      }
+
+      .preview-shell {
+        background: linear-gradient(180deg, #fffaf3 0%, var(--cream) 100%);
+        min-height: 100vh;
+      }
+
+      .context-band {
+        background:
+          radial-gradient(circle at 74% 0%, rgba(201, 52, 69, 0.2), transparent 24rem),
+          linear-gradient(135deg, #1d0f0f 0%, #2b1514 58%, #160b0b 100%);
+        color: var(--cream);
+        display: grid;
+        gap: 20px;
+        grid-template-columns: minmax(320px, 0.82fr) minmax(0, 1.18fr);
+        padding: 72px clamp(32px, 5vw, 64px);
+      }
+
+      .context-band h1,
+      .section-copy h2,
+      .option-copy h3,
+      .feature-card strong,
+      .metric strong {
+        font-family: var(--display);
+        font-weight: 700;
+        letter-spacing: 0;
+        margin: 0;
+      }
+
+      .context-band h1 {
+        font-size: clamp(3rem, 5vw, 5.7rem);
+        line-height: 0.92;
+        max-width: 10ch;
+      }
+
+      .context-band p {
+        color: rgba(255, 247, 236, 0.76);
+        line-height: 1.6;
+        margin: 18px 0 0;
+        max-width: 55ch;
+      }
+
+      .context-card {
+        align-self: end;
+        background: rgba(255, 247, 236, 0.08);
+        border: 1px solid rgba(255, 247, 236, 0.14);
+        border-radius: var(--radius);
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        overflow: hidden;
+      }
+
+      .context-card span {
+        border-right: 1px solid rgba(255, 247, 236, 0.14);
+        padding: 20px;
+      }
+
+      .context-card span:last-child {
+        border-right: 0;
+      }
+
+      .context-card strong {
+        display: block;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+      }
+
+      .context-card small {
+        color: rgba(255, 247, 236, 0.64);
+        display: block;
+        line-height: 1.4;
+        margin-top: 6px;
+      }
+
+      .option {
+        border-top: 1px solid var(--line);
+        padding: clamp(72px, 8vw, 118px) clamp(32px, 5vw, 64px);
+      }
+
+      .option:first-of-type {
+        border-top: 0;
+      }
+
+      .option-label {
+        background: var(--red);
+        border-radius: 999px;
+        color: white;
+        display: inline-flex;
+        font-size: 0.74rem;
+        font-weight: 900;
+        gap: 8px;
+        letter-spacing: 0;
+        margin-bottom: 22px;
+        padding: 9px 13px;
+        text-transform: uppercase;
+      }
+
+      .section-copy {
+        display: grid;
+        gap: 18px;
+        grid-template-columns: minmax(280px, 0.7fr) minmax(0, 1fr);
+        margin-bottom: 34px;
+      }
+
+      .section-copy h2 {
+        font-size: clamp(3rem, 5.2vw, 6.3rem);
+        line-height: 0.92;
+        max-width: 11ch;
+      }
+
+      .section-copy p {
+        align-self: end;
+        color: var(--muted);
+        line-height: 1.65;
+        max-width: 58ch;
+      }
+
+      .carousel {
+        position: relative;
+      }
+
+      .carousel input {
+        position: absolute;
+        transform: scale(0);
+      }
+
+      .media-stack {
+        display: grid;
+      }
+
+      .slide {
+        grid-area: 1 / 1;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(10px);
+        transition: opacity 260ms ease, transform 260ms ease;
+      }
+
+      .carousel:has(#o1s1:checked) .o1s1,
+      .carousel:has(#o1s2:checked) .o1s2,
+      .carousel:has(#o1s3:checked) .o1s3,
+      .carousel:has(#o1s4:checked) .o1s4,
+      .carousel:has(#o2s1:checked) .o2s1,
+      .carousel:has(#o2s2:checked) .o2s2,
+      .carousel:has(#o2s3:checked) .o2s3,
+      .carousel:has(#o2s4:checked) .o2s4,
+      .carousel:has(#o3s1:checked) .o3s1,
+      .carousel:has(#o3s2:checked) .o3s2,
+      .carousel:has(#o3s3:checked) .o3s3,
+      .carousel:has(#o3s4:checked) .o3s4 {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+
+      .thumbs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .thumbs label {
+        cursor: pointer;
+      }
+
+      .option-1 .gallery-console {
+        display: grid;
+        gap: 18px;
+        grid-template-columns: minmax(420px, 1.25fr) minmax(280px, 0.75fr);
+      }
+
+      .option-1 .hero-frame {
+        aspect-ratio: 16 / 9;
+        border-radius: var(--radius);
+        box-shadow: 0 36px 90px rgba(73, 42, 24, 0.16);
+        overflow: hidden;
+        position: relative;
+      }
+
+      .option-1 .hero-frame::after,
+      .option-3 .cinema-frame::after {
+        background: linear-gradient(180deg, transparent 54%, rgba(27, 16, 15, 0.74));
+        content: "";
+        inset: 0;
+        pointer-events: none;
+        position: absolute;
+      }
+
+      .option-1 .option-copy {
+        background: rgba(253, 251, 246, 0.86);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: clamp(24px, 3vw, 38px);
+      }
+
+      .option-copy h3 {
+        font-size: clamp(2rem, 3vw, 3.5rem);
+        line-height: 0.96;
+      }
+
+      .option-copy p {
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .option-1 .thumbs {
+        margin-top: 16px;
+      }
+
+      .option-1 .thumbs label {
+        border: 1px solid rgba(106, 61, 44, 0.2);
+        border-radius: 999px;
+        color: var(--ink);
+        font-size: 0.82rem;
+        font-weight: 900;
+        padding: 11px 15px;
+      }
+
+      .feature-row {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(3, 1fr);
+        margin-top: 18px;
+      }
+
+      .feature-card {
+        background: rgba(255, 247, 236, 0.72);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        min-height: 132px;
+        padding: 18px;
+      }
+
+      .feature-card strong {
+        display: block;
+        font-size: 1.55rem;
+        line-height: 1;
+      }
+
+      .feature-card span {
+        color: var(--muted);
+        display: block;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-top: 12px;
+      }
+
+      .option-2 {
+        background: linear-gradient(180deg, #fff7ec 0%, #fbefe4 100%);
+      }
+
+      .option-2 .gallery-stage {
+        display: grid;
+        gap: 18px;
+        grid-template-columns: minmax(360px, 0.72fr) minmax(0, 1.28fr);
+      }
+
+      .option-2 .option-copy {
+        background:
+          radial-gradient(circle at 12% 0%, rgba(201, 52, 69, 0.18), transparent 18rem),
+          #1b100f;
+        border-radius: var(--radius);
+        color: var(--cream);
+        min-height: 540px;
+        padding: clamp(28px, 4vw, 54px);
+      }
+
+      .option-2 .option-copy p {
+        color: rgba(255, 247, 236, 0.72);
+      }
+
+      .option-2 .media-grid {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: 1.1fr 0.9fr;
+      }
+
+      .option-2 .feature-image {
+        aspect-ratio: 1 / 1;
+        border-radius: var(--radius);
+        overflow: hidden;
+      }
+
+      .option-2 .main-image {
+        grid-row: span 2;
+      }
+
+      .option-2 .main-image,
+      .option-2 .side-image {
+        border: 1px solid rgba(106, 61, 44, 0.16);
+        border-radius: var(--radius);
+        overflow: hidden;
+      }
+
+      .option-2 .side-image {
+        aspect-ratio: 16 / 10;
+      }
+
+      .metrics {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(2, 1fr);
+        margin-top: 24px;
+      }
+
+      .metric {
+        border-top: 1px solid rgba(255, 247, 236, 0.16);
+        padding-top: 14px;
+      }
+
+      .metric strong {
+        color: var(--cream);
+        display: block;
+        font-size: 2rem;
+        line-height: 1;
+      }
+
+      .metric span {
+        color: rgba(255, 247, 236, 0.66);
+        display: block;
+        font-size: 0.86rem;
+        margin-top: 8px;
+      }
+
+      .option-3 {
+        background: #fffaf3;
+      }
+
+      .option-3 .cinema {
+        background:
+          radial-gradient(circle at 78% 18%, rgba(201, 52, 69, 0.16), transparent 30rem),
+          #1b100f;
+        border-radius: var(--radius);
+        color: var(--cream);
+        overflow: hidden;
+      }
+
+      .option-3 .cinema-header {
+        align-items: end;
+        display: grid;
+        gap: 24px;
+        grid-template-columns: minmax(280px, 0.76fr) minmax(0, 1fr);
+        padding: clamp(28px, 4vw, 54px);
+      }
+
+      .option-3 .cinema-header h2 {
+        color: var(--cream);
+        font-family: var(--display);
+        font-size: clamp(3rem, 5vw, 5.8rem);
+        line-height: 0.9;
+        margin: 0;
+        max-width: 10ch;
+      }
+
+      .option-3 .cinema-header p {
+        color: rgba(255, 247, 236, 0.72);
+        line-height: 1.65;
+        max-width: 60ch;
+      }
+
+      .option-3 .cinema-frame {
+        aspect-ratio: 21 / 9;
+        margin: 0 clamp(22px, 4vw, 54px);
+        overflow: hidden;
+        position: relative;
+      }
+
+      .option-3 .thumbs {
+        background: rgba(255, 247, 236, 0.06);
+        border-top: 1px solid rgba(255, 247, 236, 0.12);
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        padding: 14px clamp(22px, 4vw, 54px) 24px;
+      }
+
+      .option-3 .thumbs label {
+        border-radius: 10px;
+        display: grid;
+        gap: 8px;
+        grid-template-columns: 72px minmax(0, 1fr);
+        min-height: 72px;
+        padding: 10px;
+      }
+
+      .option-3 .thumbs img {
+        aspect-ratio: 1;
+        border-radius: 8px;
+      }
+
+      .option-3 .thumbs span {
+        color: rgba(255, 247, 236, 0.86);
+        font-size: 0.84rem;
+        font-weight: 900;
+        line-height: 1.25;
+      }
+
+      @media (max-width: 900px) {
+        .context-band,
+        .section-copy,
+        .option-1 .gallery-console,
+        .option-2 .gallery-stage,
+        .option-3 .cinema-header {
+          grid-template-columns: 1fr;
+        }
+
+        .context-card,
+        .feature-row,
+        .metrics,
+        .option-3 .thumbs {
+          grid-template-columns: 1fr;
+        }
+
+        .option-2 .media-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .option-2 .option-copy {
+          min-height: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="preview-shell">
+      <section class="context-band" aria-label="Kontekst strony">
+        <div>
+          <h1>Kontekst: landing Strawberry Group</h1>
+          <p>
+            Sekcja galerii siedzi po kalkulatorze i przed formularzem. Ma przejąć rolę wizualnego dowodu:
+            nie tylko tekst o stylu, ale kilka realistycznych kadrów z realizacji jako karuzela.
+          </p>
+        </div>
+        <div class="context-card">
+          <span><strong>Przed</strong><small>jeden obraz + trzy karty tekstowe</small></span>
+          <span><strong>Cel</strong><small>galeria, karuzela, mocniejszy dowód premium</small></span>
+          <span><strong>Assety</strong><small>4 wygenerowane kadry eventowe</small></span>
+        </div>
+      </section>
+
+      <section class="option option-1" id="option-1">
+        <span class="option-label">Option 1 · Editorial Carousel</span>
+        <div class="section-copy">
+          <h2>Wizualny dowód bez udawania realizacji.</h2>
+          <p>
+            Najbliżej obecnej strony, ale mocniej: duży kadr karuzeli, po prawej opis i trzy konkretne powody,
+            dlaczego stoisko wygląda premium na wydarzeniu.
+          </p>
+        </div>
+        <div class="carousel gallery-console">
+          <input checked id="o1s1" name="o1" type="radio" />
+          <input id="o1s2" name="o1" type="radio" />
+          <input id="o1s3" name="o1" type="radio" />
+          <input id="o1s4" name="o1" type="radio" />
+          <div>
+            <div class="media-stack hero-frame">
+              <img class="slide o1s1" src="/images/gallery-generated/gallery-realization-1-chocolate-pour.png" alt="" />
+              <img class="slide o1s2" src="/images/gallery-generated/gallery-realization-2-buffet-counter.png" alt="" />
+              <img class="slide o1s3" src="/images/gallery-generated/gallery-realization-3-guest-toppings.png" alt="" />
+              <img class="slide o1s4" src="/images/gallery-generated/gallery-realization-4-finished-cups.png" alt="" />
+            </div>
+            <div class="thumbs" aria-label="Miniatury karuzeli">
+              <label for="o1s1">Polewanie</label>
+              <label for="o1s2">Bufet</label>
+              <label for="o1s3">Dodatki</label>
+              <label for="o1s4">Gotowe kubki</label>
+            </div>
+          </div>
+          <aside class="option-copy">
+            <div>
+              <h3>Zdjęcia, które sprzedają proces.</h3>
+              <p>Karuzela pokazuje smak, ruch i detal. Karty pod spodem zostają, ale wspierają obraz zamiast go zastępować.</p>
+            </div>
+            <div class="feature-row">
+              <div class="feature-card"><strong>01</strong><span>Świeże składniki widoczne w kadrze.</span></div>
+              <div class="feature-card"><strong>02</strong><span>Obsługa i interakcja na miejscu.</span></div>
+              <div class="feature-card"><strong>03</strong><span>Premium efekt w gotowych kubkach.</span></div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="option option-2" id="option-2">
+        <span class="option-label">Option 2 · Proof Gallery Wall</span>
+        <div class="gallery-stage">
+          <aside class="option-copy">
+            <h3>Galeria jako moduł zaufania.</h3>
+            <p>
+              Bardziej ekspozycyjny układ: lewy panel prowadzi narrację, prawa strona działa jak ściana zdjęć.
+              Najlepsze, gdy chcemy mocno przerwać rytm strony i zbudować efekt „to już wygląda jak realizacja”.
+            </p>
+            <div class="metrics">
+              <div class="metric"><strong>4 kadry</strong><span>proces, stoisko, dodatki, gotowy deser</span></div>
+              <div class="metric"><strong>1 cel</strong><span>pokazać jakość zanim ktoś wyśle formularz</span></div>
+            </div>
+          </aside>
+          <div class="media-grid">
+            <figure class="main-image"><img src="/images/gallery-generated/gallery-realization-1-chocolate-pour.png" alt="" /></figure>
+            <figure class="side-image"><img src="/images/gallery-generated/gallery-realization-2-buffet-counter.png" alt="" /></figure>
+            <figure class="side-image"><img src="/images/gallery-generated/gallery-realization-4-finished-cups.png" alt="" /></figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="option option-3" id="option-3">
+        <span class="option-label">Option 3 · Cinema Reel Carousel</span>
+        <div class="cinema carousel">
+          <input checked id="o3s1" name="o3" type="radio" />
+          <input id="o3s2" name="o3" type="radio" />
+          <input id="o3s3" name="o3" type="radio" />
+          <input id="o3s4" name="o3" type="radio" />
+          <div class="cinema-header">
+            <h2>Realizacja pokazana jak krótki film.</h2>
+            <p>
+              Najbardziej premium wariant: szeroki kadr, ciemny kontener i pasek miniatur. Nadaje sekcji status
+              głównej galerii, a nie tylko dodatku między kalkulatorem a formularzem.
+            </p>
+          </div>
+          <div class="media-stack cinema-frame">
+            <img class="slide o3s1" src="/images/gallery-generated/gallery-realization-1-chocolate-pour.png" alt="" />
+            <img class="slide o3s2" src="/images/gallery-generated/gallery-realization-2-buffet-counter.png" alt="" />
+            <img class="slide o3s3" src="/images/gallery-generated/gallery-realization-3-guest-toppings.png" alt="" />
+            <img class="slide o3s4" src="/images/gallery-generated/gallery-realization-4-finished-cups.png" alt="" />
+          </div>
+          <div class="thumbs" aria-label="Kadry galerii">
+            <label for="o3s1"><img src="/images/gallery-generated/gallery-realization-1-chocolate-pour.png" alt="" /><span>Czekolada w ruchu</span></label>
+            <label for="o3s2"><img src="/images/gallery-generated/gallery-realization-2-buffet-counter.png" alt="" /><span>Bufet eventowy</span></label>
+            <label for="o3s3"><img src="/images/gallery-generated/gallery-realization-3-guest-toppings.png" alt="" /><span>Gość wybiera dodatki</span></label>
+            <label for="o3s4"><img src="/images/gallery-generated/gallery-realization-4-finished-cups.png" alt="" /><span>Gotowe kubki</span></label>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

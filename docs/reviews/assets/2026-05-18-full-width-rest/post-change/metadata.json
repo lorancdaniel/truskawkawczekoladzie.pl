@@ -1,0 +1,998 @@
+[
+  {
+    "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-full-width-rest/post-change/desktop-1920x1080-01-hero.png",
+    "device": "desktop",
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "state": "01-hero",
+    "target": null,
+    "capturedAt": "2026-05-18T10:25:17.645Z",
+    "metrics": {
+      "url": "http://localhost:5174/",
+      "scrollY": 0,
+      "viewport": "1920x1080",
+      "scrollWidth": 1920,
+      "clientWidth": 1920,
+      "hero": 1232,
+      "heroHintTop": 1153,
+      "heroFactsBottom": 1018,
+      "sections": [
+        {
+          "cls": "claim-strip reveal",
+          "x": 0,
+          "width": 1920,
+          "top": 1260
+        },
+        {
+          "cls": "split-section reveal",
+          "x": 0,
+          "width": 1920,
+          "top": 1519
+        },
+        {
+          "cls": "process-section reveal",
+          "x": 0,
+          "width": 1920,
+          "top": 2285
+        },
+        {
+          "cls": "packages-section reveal",
+          "x": 0,
+          "width": 1920,
+          "top": 3289
+        },
+        {
+          "cls": "events-section reveal",
+          "x": 0,
+          "width": 1920,
+          "top": 4784
+        },
+        {
+          "cls": "logistics-section reveal",
+          "x": 0,
+          "width": 1920,
+          "top": 5965
+        },
+        {
+          "cls": "value-section reveal",
+          "x": 0,
+          "width": 1920,
+          "top": 6758
+        },
+        {
+          "cls": "gallery-section reveal",
+          "x": 0,
+          "width": 1920,
+          "top": 7547
+        },
+        {
+          "cls": "contact-section reveal",
+          "x": 0,
+          "width": 1920,
+          "top": 8728
+        },
+        {
+          "cls": "site-footer",
+          "x": 0,
+          "width": 1920,
+          "top": 9838
+        }
+      ]
+    }
+  },
+  {
+    "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-full-width-rest/post-change/desktop-1920x1080-02-offer-about.png",
+    "device": "desktop",
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "state": "02-offer-about",
+    "target": "#oferta",
+    "capturedAt": "2026-05-18T10:25:18.733Z",
+    "metrics": {
+      "url": "http://localhost:5174/",
+      "scrollY": 778,
+      "viewport": "1920x1080",
+      "scrollWidth": 1920,
+      "clientWidth": 1920,
+      "hero": 1232,
+      "heroHintTop": 375,
+      "heroFactsBottom": 240,
+      "sections": [
+        {
+          "cls": "claim-strip reveal is-visible",
+          "x": 0,
+          "width": 1920,
+          "top": 454
+        },
+        {
+          "cls": "split-section reveal is-visible",
+          "x": 0,
+          "width": 1920,
+          "top": 713
+        },
+        {
+          "cls": "process-section reveal",
+          "x": 0,
+          "width": 1920,
+          "top": 1507
+        },
+        {
+          "cls": "packages-section reveal",
+          "x": 0,
+          "width": 1920,
+          "top": 2511
+        },
+        {
+          "cls": "events-section reveal",
+          "x": 0,
+          "width": 1920,
+          "top": 4006
+        },
+        {
+          "cls": "logistics-section reveal",
+          "x": 0,
+          "width": 1920,
+          "top": 5187
+        },
+        {
+          "cls": "value-section reveal",
+          "x": 0,
+          "width": 1920,
+          "top": 5980
+        },
+        {
+          "cls": "gallery-section reveal",
+          "x": 0,
+          "width": 1920,
+          "top": 6769
+        },
+        {
+          "cls": "contact-section reveal",
+          "x": 0,
+          "width": 1920,
+          "top": 7950
+        },
+        {
+          "cls": "site-footer",
+          "x": 0,
+          "width": 1920,
+          "top": 9060
+        }
+      ]
+    }
+  },
+  {
+    "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-full-width-rest/post-change/desktop-1920x1080-03-packages.png",
+    "device": "desktop",
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "state": "03-packages",
+    "target": "#pakiety",
+    "capturedAt": "2026-05-18T10:25:19.769Z",
+    "metrics": {
+      "url": "http://localhost:5174/",
+      "scrollY": 3352,
+      "viewport": "1920x1080",
+      "scrollWidth": 1920,
+      "clientWidth": 1920,
+      "hero": 1232,
+      "heroHintTop": -2199,
+      "heroFactsBottom": -2334,
+      "sections": [
+        {
+          "cls": "claim-strip reveal is-visible",
+          "x": 0,
+          "width": 1920,
+          "top": -2120
+        },
+        {
+          "cls": "split-section reveal is-visible",
+          "x": 0,
+          "width": 1920,
+          "top": -1861
+        },
+        {
+          "cls": "process-section reveal",
+          "x": 0,
+          "width": 1920,
+          "top": -1067
+        },
+        {
+          "cls": "packages-section reveal is-visible",
+          "x": 0,
+          "width": 1920,
+          "top": -91
+        },
+        {
+          "cls": "events-section reveal",
+          "x": 0,
+          "width": 1920,
+          "top": 1432
+        },
+        {
+          "cls": "logistics-section reveal",
+          "x": 0,
+          "width": 1920,
+          "top": 2613
+        },
+        {
+          "cls": "value-section reveal",
+          "x": 0,
+          "width": 1920,
+          "top": 3406
+        },
+        {
+          "cls": "gallery-section reveal",
+          "x": 0,
+          "width": 1920,
+          "top": 4195
+        },
+        {
+          "cls": "contact-section reveal",
+          "x": 0,
+          "width": 1920,
+          "top": 5376
+        },
+        {
+          "cls": "site-footer",
+          "x": 0,
+          "width": 1920,
+          "top": 6486
+        }
+      ]
+    }
+  },
+  {
+    "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-full-width-rest/post-change/desktop-1920x1080-04-events-logistics.png",
+    "device": "desktop",
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "state": "04-events-logistics",
+    "target": "#eventy",
+    "capturedAt": "2026-05-18T10:25:20.730Z",
+    "metrics": {
+      "url": "http://localhost:5174/",
+      "scrollY": 4690,
+      "viewport": "1920x1080",
+      "scrollWidth": 1920,
+      "clientWidth": 1920,
+      "hero": 1232,
+      "heroHintTop": -3537,
+      "heroFactsBottom": -3672,
+      "sections": [
+        {
+          "cls": "claim-strip reveal is-visible",
+          "x": 0,
+          "width": 1920,
+          "top": -3458
+        },
+        {
+          "cls": "split-section reveal is-visible",
+          "x": 0,
+          "width": 1920,
+          "top": -3199
+        },
+        {
+          "cls": "process-section reveal",
+          "x": 0,
+          "width": 1920,
+          "top": -2405
+        },
+        {
+          "cls": "packages-section reveal is-visible",
+          "x": 0,
+          "width": 1920,
+          "top": -1429
+        },
+        {
+          "cls": "events-section reveal is-visible",
+          "x": 0,
+          "width": 1920,
+          "top": 66
+        },
+        {
+          "cls": "logistics-section reveal",
+          "x": 0,
+          "width": 1920,
+          "top": 1275
+        },
+        {
+          "cls": "value-section reveal",
+          "x": 0,
+          "width": 1920,
+          "top": 2068
+        },
+        {
+          "cls": "gallery-section reveal",
+          "x": 0,
+          "width": 1920,
+          "top": 2857
+        },
+        {
+          "cls": "contact-section reveal",
+          "x": 0,
+          "width": 1920,
+          "top": 4038
+        },
+        {
+          "cls": "site-footer",
+          "x": 0,
+          "width": 1920,
+          "top": 5148
+        }
+      ]
+    }
+  },
+  {
+    "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-full-width-rest/post-change/desktop-1920x1080-05-value.png",
+    "device": "desktop",
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "state": "05-value",
+    "target": ".value-section",
+    "capturedAt": "2026-05-18T10:25:21.750Z",
+    "metrics": {
+      "url": "http://localhost:5174/",
+      "scrollY": 6540,
+      "viewport": "1920x1080",
+      "scrollWidth": 1920,
+      "clientWidth": 1920,
+      "hero": 1232,
+      "heroHintTop": -5387,
+      "heroFactsBottom": -5522,
+      "sections": [
+        {
+          "cls": "claim-strip reveal is-visible",
+          "x": 0,
+          "width": 1920,
+          "top": -5308
+        },
+        {
+          "cls": "split-section reveal is-visible",
+          "x": 0,
+          "width": 1920,
+          "top": -5049
+        },
+        {
+          "cls": "process-section reveal",
+          "x": 0,
+          "width": 1920,
+          "top": -4255
+        },
+        {
+          "cls": "packages-section reveal is-visible",
+          "x": 0,
+          "width": 1920,
+          "top": -3279
+        },
+        {
+          "cls": "events-section reveal is-visible",
+          "x": 0,
+          "width": 1920,
+          "top": -1784
+        },
+        {
+          "cls": "logistics-section reveal is-visible",
+          "x": 0,
+          "width": 1920,
+          "top": -603
+        },
+        {
+          "cls": "value-section reveal is-visible",
+          "x": 0,
+          "width": 1920,
+          "top": 190
+        },
+        {
+          "cls": "gallery-section reveal",
+          "x": 0,
+          "width": 1920,
+          "top": 1007
+        },
+        {
+          "cls": "contact-section reveal",
+          "x": 0,
+          "width": 1920,
+          "top": 2188
+        },
+        {
+          "cls": "site-footer",
+          "x": 0,
+          "width": 1920,
+          "top": 3298
+        }
+      ]
+    }
+  },
+  {
+    "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-full-width-rest/post-change/desktop-1920x1080-06-contact.png",
+    "device": "desktop",
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "state": "06-contact",
+    "target": "#kontakt",
+    "capturedAt": "2026-05-18T10:25:22.724Z",
+    "metrics": {
+      "url": "http://localhost:5174/",
+      "scrollY": 8613,
+      "viewport": "1920x1080",
+      "scrollWidth": 1920,
+      "clientWidth": 1920,
+      "hero": 1232,
+      "heroHintTop": -7460,
+      "heroFactsBottom": -7595,
+      "sections": [
+        {
+          "cls": "claim-strip reveal is-visible",
+          "x": 0,
+          "width": 1920,
+          "top": -7381
+        },
+        {
+          "cls": "split-section reveal is-visible",
+          "x": 0,
+          "width": 1920,
+          "top": -7122
+        },
+        {
+          "cls": "process-section reveal",
+          "x": 0,
+          "width": 1920,
+          "top": -6328
+        },
+        {
+          "cls": "packages-section reveal is-visible",
+          "x": 0,
+          "width": 1920,
+          "top": -5352
+        },
+        {
+          "cls": "events-section reveal is-visible",
+          "x": 0,
+          "width": 1920,
+          "top": -3857
+        },
+        {
+          "cls": "logistics-section reveal is-visible",
+          "x": 0,
+          "width": 1920,
+          "top": -2676
+        },
+        {
+          "cls": "value-section reveal is-visible",
+          "x": 0,
+          "width": 1920,
+          "top": -1883
+        },
+        {
+          "cls": "gallery-section reveal",
+          "x": 0,
+          "width": 1920,
+          "top": -1066
+        },
+        {
+          "cls": "contact-section reveal is-visible",
+          "x": 0,
+          "width": 1920,
+          "top": 87
+        },
+        {
+          "cls": "site-footer",
+          "x": 0,
+          "width": 1920,
+          "top": 1225
+        }
+      ]
+    }
+  },
+  {
+    "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-full-width-rest/post-change/mobile-390x844-01-hero.png",
+    "device": "mobile",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "state": "01-hero",
+    "target": null,
+    "capturedAt": "2026-05-18T10:25:25.677Z",
+    "metrics": {
+      "url": "http://localhost:5174/",
+      "scrollY": 0,
+      "viewport": "390x844",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "hero": 1180,
+      "heroHintTop": 897,
+      "heroFactsBottom": 840,
+      "sections": [
+        {
+          "cls": "claim-strip reveal",
+          "x": 0,
+          "width": 390,
+          "top": 1208
+        },
+        {
+          "cls": "split-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": 2047
+        },
+        {
+          "cls": "process-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": 2940
+        },
+        {
+          "cls": "packages-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": 4446
+        },
+        {
+          "cls": "events-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": 7021
+        },
+        {
+          "cls": "logistics-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": 8668
+        },
+        {
+          "cls": "value-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": 9366
+        },
+        {
+          "cls": "gallery-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": 10223
+        },
+        {
+          "cls": "contact-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": 11555
+        },
+        {
+          "cls": "site-footer",
+          "x": 0,
+          "width": 390,
+          "top": 13474
+        }
+      ]
+    }
+  },
+  {
+    "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-full-width-rest/post-change/mobile-390x844-02-offer-about.png",
+    "device": "mobile",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "state": "02-offer-about",
+    "target": "#oferta",
+    "capturedAt": "2026-05-18T10:25:26.624Z",
+    "metrics": {
+      "url": "http://localhost:5174/",
+      "scrollY": 1133,
+      "viewport": "390x844",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "hero": 1180,
+      "heroHintTop": -236,
+      "heroFactsBottom": -293,
+      "sections": [
+        {
+          "cls": "claim-strip reveal is-visible",
+          "x": 0,
+          "width": 390,
+          "top": 47
+        },
+        {
+          "cls": "split-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": 914
+        },
+        {
+          "cls": "process-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": 1807
+        },
+        {
+          "cls": "packages-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": 3313
+        },
+        {
+          "cls": "events-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": 5888
+        },
+        {
+          "cls": "logistics-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": 7535
+        },
+        {
+          "cls": "value-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": 8233
+        },
+        {
+          "cls": "gallery-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": 9090
+        },
+        {
+          "cls": "contact-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": 10422
+        },
+        {
+          "cls": "site-footer",
+          "x": 0,
+          "width": 390,
+          "top": 12341
+        }
+      ]
+    }
+  },
+  {
+    "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-full-width-rest/post-change/mobile-390x844-03-packages.png",
+    "device": "mobile",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "state": "03-packages",
+    "target": "#pakiety",
+    "capturedAt": "2026-05-18T10:25:27.560Z",
+    "metrics": {
+      "url": "http://localhost:5174/",
+      "scrollY": 5168,
+      "viewport": "390x844",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "hero": 1180,
+      "heroHintTop": -4271,
+      "heroFactsBottom": -4328,
+      "sections": [
+        {
+          "cls": "claim-strip reveal is-visible",
+          "x": 0,
+          "width": 390,
+          "top": -3988
+        },
+        {
+          "cls": "split-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": -3121
+        },
+        {
+          "cls": "process-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": -2228
+        },
+        {
+          "cls": "packages-section reveal is-visible",
+          "x": 0,
+          "width": 390,
+          "top": -750
+        },
+        {
+          "cls": "events-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": 1853
+        },
+        {
+          "cls": "logistics-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": 3500
+        },
+        {
+          "cls": "value-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": 4198
+        },
+        {
+          "cls": "gallery-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": 5055
+        },
+        {
+          "cls": "contact-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": 6387
+        },
+        {
+          "cls": "site-footer",
+          "x": 0,
+          "width": 390,
+          "top": 8306
+        }
+      ]
+    }
+  },
+  {
+    "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-full-width-rest/post-change/mobile-390x844-04-events-logistics.png",
+    "device": "mobile",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "state": "04-events-logistics",
+    "target": "#eventy",
+    "capturedAt": "2026-05-18T10:25:28.506Z",
+    "metrics": {
+      "url": "http://localhost:5174/",
+      "scrollY": 7278,
+      "viewport": "390x844",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "hero": 1180,
+      "heroHintTop": -6381,
+      "heroFactsBottom": -6438,
+      "sections": [
+        {
+          "cls": "claim-strip reveal is-visible",
+          "x": 0,
+          "width": 390,
+          "top": -6098
+        },
+        {
+          "cls": "split-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": -5231
+        },
+        {
+          "cls": "process-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": -4338
+        },
+        {
+          "cls": "packages-section reveal is-visible",
+          "x": 0,
+          "width": 390,
+          "top": -2860
+        },
+        {
+          "cls": "events-section reveal is-visible",
+          "x": 0,
+          "width": 390,
+          "top": -285
+        },
+        {
+          "cls": "logistics-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": 1390
+        },
+        {
+          "cls": "value-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": 2088
+        },
+        {
+          "cls": "gallery-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": 2945
+        },
+        {
+          "cls": "contact-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": 4277
+        },
+        {
+          "cls": "site-footer",
+          "x": 0,
+          "width": 390,
+          "top": 6196
+        }
+      ]
+    }
+  },
+  {
+    "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-full-width-rest/post-change/mobile-390x844-05-value.png",
+    "device": "mobile",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "state": "05-value",
+    "target": ".value-section",
+    "capturedAt": "2026-05-18T10:25:29.457Z",
+    "metrics": {
+      "url": "http://localhost:5174/",
+      "scrollY": 9300,
+      "viewport": "390x844",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "hero": 1180,
+      "heroHintTop": -8403,
+      "heroFactsBottom": -8460,
+      "sections": [
+        {
+          "cls": "claim-strip reveal is-visible",
+          "x": 0,
+          "width": 390,
+          "top": -8120
+        },
+        {
+          "cls": "split-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": -7253
+        },
+        {
+          "cls": "process-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": -6360
+        },
+        {
+          "cls": "packages-section reveal is-visible",
+          "x": 0,
+          "width": 390,
+          "top": -4882
+        },
+        {
+          "cls": "events-section reveal is-visible",
+          "x": 0,
+          "width": 390,
+          "top": -2307
+        },
+        {
+          "cls": "logistics-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": -632
+        },
+        {
+          "cls": "value-section reveal is-visible",
+          "x": 0,
+          "width": 390,
+          "top": 38
+        },
+        {
+          "cls": "gallery-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": 923
+        },
+        {
+          "cls": "contact-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": 2255
+        },
+        {
+          "cls": "site-footer",
+          "x": 0,
+          "width": 390,
+          "top": 4174
+        }
+      ]
+    }
+  },
+  {
+    "file": "/Users/danielloranc/Documents/truskawka/docs/reviews/assets/2026-05-18-full-width-rest/post-change/mobile-390x844-06-contact.png",
+    "device": "mobile",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "state": "06-contact",
+    "target": "#kontakt",
+    "capturedAt": "2026-05-18T10:25:30.408Z",
+    "metrics": {
+      "url": "http://localhost:5174/",
+      "scrollY": 11962,
+      "viewport": "390x844",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "hero": 1180,
+      "heroHintTop": -11065,
+      "heroFactsBottom": -11122,
+      "sections": [
+        {
+          "cls": "claim-strip reveal is-visible",
+          "x": 0,
+          "width": 390,
+          "top": -10782
+        },
+        {
+          "cls": "split-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": -9915
+        },
+        {
+          "cls": "process-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": -9022
+        },
+        {
+          "cls": "packages-section reveal is-visible",
+          "x": 0,
+          "width": 390,
+          "top": -7544
+        },
+        {
+          "cls": "events-section reveal is-visible",
+          "x": 0,
+          "width": 390,
+          "top": -4969
+        },
+        {
+          "cls": "logistics-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": -3294
+        },
+        {
+          "cls": "value-section reveal is-visible",
+          "x": 0,
+          "width": 390,
+          "top": -2624
+        },
+        {
+          "cls": "gallery-section reveal",
+          "x": 0,
+          "width": 390,
+          "top": -1739
+        },
+        {
+          "cls": "contact-section reveal is-visible",
+          "x": 0,
+          "width": 390,
+          "top": -435
+        },
+        {
+          "cls": "site-footer",
+          "x": 0,
+          "width": 390,
+          "top": 1512
+        }
+      ]
+    }
+  }
+]

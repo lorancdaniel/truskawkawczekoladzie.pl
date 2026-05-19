@@ -1,0 +1,26 @@
+{
+  "ok": true,
+  "blocked": false,
+  "reason": "chrome-chatgpt-files-uploaded-prompt-sent",
+  "conversationUrl": "https://chatgpt.com/c/6a0ab9e0-df94-8393-a898-31055374e65f",
+  "promptFile": "/Users/danielloranc/Documents/truskawka/docs/reviews/gpt-pro-review/2026-05-18-website-build/prompts/01-architecture-and-image-prompt.md",
+  "files": [
+    "/Users/danielloranc/Documents/truskawka/docs/reviews/gpt-pro-review/2026-05-18-website-build/screenshots/references-live/marquet-live-desktop-viewport.png",
+    "/Users/danielloranc/Documents/truskawka/docs/reviews/gpt-pro-review/2026-05-18-website-build/screenshots/references-live/marquet-live-mobile-viewport.png",
+    "/Users/danielloranc/Documents/truskawka/docs/reviews/gpt-pro-review/2026-05-18-website-build/screenshots/references-live/savor-live-desktop-viewport.png",
+    "/Users/danielloranc/Documents/truskawka/docs/reviews/gpt-pro-review/2026-05-18-website-build/screenshots/references-live/savor-live-mobile-viewport.png",
+    "/Users/danielloranc/Documents/truskawka/docs/reviews/gpt-pro-review/2026-05-18-website-build/screenshots/references-live/driscolls-live-desktop-viewport.png",
+    "/Users/danielloranc/Documents/truskawka/docs/reviews/gpt-pro-review/2026-05-18-website-build/screenshots/references-live/driscolls-live-mobile-viewport.png"
+  ],
+  "persistentChromeChatGptLogin": "verified",
+  "persistentChromeChatGptDeveloperMode": "verified",
+  "signals": [
+    "[aria-label*='Remove']",
+    "img[src^='blob:']"
+  ],
+  "chromeLease": {
+    "acquired": true,
+    "purpose": "upload-files-and-send-prompt"
+  },
+  "note": "Initial wrong Awwwards-page upload was interrupted before completion. This successful run used live websites found through Awwwards."
+}

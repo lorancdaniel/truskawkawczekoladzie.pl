@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>3UI Value Exposure - Strawberry Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --cream: #fff7ec;
+        --paper: #fffaf3;
+        --warm-white: #fdf8ef;
+        --cocoa: #1d0f0f;
+        --cocoa-soft: #291615;
+        --ink: #241815;
+        --muted: #75665f;
+        --strawberry: #cf3447;
+        --strawberry-dark: #a62234;
+        --gold: #c69b55;
+        --sage: #2f6b45;
+        --bluewash: #d9e8f6;
+        --edge: clamp(26px, 3.2vw, 64px);
+        --radius: 8px;
+        --display: "Cormorant Garamond", Georgia, serif;
+        --body: "Manrope", system-ui, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--paper);
+        color: var(--ink);
+        font-family: var(--body);
+        margin: 0;
+      }
+
+      button {
+        font: inherit;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      .context-band {
+        background:
+          radial-gradient(circle at 82% 6%, rgba(201, 52, 69, 0.08), transparent 30rem),
+          linear-gradient(180deg, #fffaf3 0%, #f6ebdf 100%);
+        padding: 48px var(--edge) 70px;
+      }
+
+      .context-band__strip {
+        border-bottom: 1px solid rgba(106, 61, 44, 0.16);
+        border-top: 1px solid rgba(106, 61, 44, 0.16);
+        display: grid;
+        gap: 0;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+      }
+
+      .context-band__strip span {
+        align-items: center;
+        color: #314a41;
+        display: flex;
+        font-size: 0.86rem;
+        gap: 10px;
+        min-height: 72px;
+        padding-right: 18px;
+      }
+
+      .context-band__strip span::before {
+        border: 1px solid rgba(47, 107, 69, 0.42);
+        border-radius: 999px;
+        color: var(--sage);
+        content: "✓";
+        display: grid;
+        flex: 0 0 auto;
+        font-size: 0.7rem;
+        height: 22px;
+        place-items: center;
+        width: 22px;
+      }
+
+      .gallery-hint {
+        background: #fffaf3;
+        padding: 68px var(--edge) 120px;
+      }
+
+      .gallery-hint p {
+        color: var(--muted);
+        font-size: 0.86rem;
+        font-weight: 900;
+        margin-bottom: 18px;
+        text-transform: uppercase;
+      }
+
+      .gallery-hint h2 {
+        color: var(--ink);
+        font-family: var(--display);
+        font-size: clamp(3.2rem, 5vw, 5.8rem);
+        line-height: 0.92;
+        max-width: 14ch;
+      }
+
+      .preview-section {
+        background:
+          radial-gradient(circle at 78% 18%, rgba(201, 52, 69, 0.2), transparent 32rem),
+          linear-gradient(135deg, #1b0c0c 0%, #2b1716 56%, #150909 100%);
+        color: var(--cream);
+        min-height: 660px;
+        padding: clamp(88px, 10vw, 148px) var(--edge);
+        position: relative;
+      }
+
+      .preview-section + .preview-section {
+        border-top: 1px solid rgba(217, 158, 92, 0.28);
+      }
+
+      .option-label {
+        align-items: center;
+        background: var(--warm-white);
+        border: 1px solid rgba(198, 155, 85, 0.34);
+        border-radius: 999px;
+        color: var(--ink);
+        display: inline-flex;
+        font-size: 0.72rem;
+        font-weight: 900;
+        gap: 8px;
+        min-height: 34px;
+        padding: 0 14px;
+        position: absolute;
+        right: var(--edge);
+        text-transform: uppercase;
+        top: 22px;
+      }
+
+      .option-label b {
+        color: var(--strawberry);
+      }
+
+      .eyebrow {
+        color: rgba(255, 247, 236, 0.74);
+        font-size: 0.76rem;
+        font-weight: 900;
+        letter-spacing: 0;
+        margin-bottom: 16px;
+        text-transform: uppercase;
+      }
+
+      .section-title {
+        color: var(--cream);
+        font-family: var(--display);
+        font-size: clamp(3.4rem, 5.4vw, 6.4rem);
+        line-height: 0.91;
+      }
+
+      .section-lead {
+        color: rgba(255, 247, 236, 0.78);
+        font-size: 1rem;
+        line-height: 1.72;
+        margin-top: 22px;
+        max-width: 62ch;
+      }
+
+      .button {
+        align-items: center;
+        background: linear-gradient(180deg, #e04455, #c93145);
+        border: 0;
+        border-radius: 999px;
+        box-shadow: 0 18px 42px rgba(201, 52, 69, 0.32);
+        color: #fff;
+        cursor: pointer;
+        display: inline-flex;
+        font-weight: 900;
+        gap: 10px;
+        justify-content: center;
+        min-height: 58px;
+        padding: 0 26px;
+      }
+
+      .button::after {
+        content: "→";
+        font-size: 1rem;
+      }
+
+      .button--ghost {
+        background: rgba(255, 247, 236, 0.08);
+        border: 1px solid rgba(255, 247, 236, 0.22);
+        box-shadow: none;
+      }
+
+      .button--ghost::after {
+        content: "↓";
+      }
+
+      .option-1 .value-frame {
+        align-items: stretch;
+        display: grid;
+        grid-template-columns: minmax(350px, 0.82fr) minmax(0, 1.18fr);
+      }
+
+      .option-1 .copy-panel {
+        background: rgba(255, 247, 236, 0.07);
+        border: 1px solid rgba(217, 158, 92, 0.3);
+        border-radius: var(--radius) 0 0 var(--radius);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 560px;
+        padding: clamp(36px, 4.8vw, 64px);
+      }
+
+      .option-1 .actions {
+        display: grid;
+        gap: 14px;
+        margin-top: 34px;
+        max-width: 360px;
+      }
+
+      .option-1 .button {
+        width: 100%;
+      }
+
+      .option-1 .micro-stats {
+        border-top: 1px solid rgba(255, 247, 236, 0.18);
+        display: grid;
+        gap: 18px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-top: 48px;
+        padding-top: 28px;
+      }
+
+      .option-1 .micro-stats strong {
+        display: block;
+        font-family: var(--display);
+        font-size: 2rem;
+        line-height: 1;
+      }
+
+      .option-1 .calculator-board {
+        background:
+          radial-gradient(circle at 84% 12%, rgba(207, 52, 71, 0.08), transparent 24rem),
+          var(--warm-white);
+        border: 1px solid rgba(217, 158, 92, 0.38);
+        border-left: 0;
+        border-radius: 0 var(--radius) var(--radius) 0;
+        color: var(--ink);
+        display: grid;
+        min-height: 560px;
+        padding: clamp(34px, 4vw, 58px);
+      }
+
+      .board-kicker {
+        color: var(--muted);
+        font-size: 0.88rem;
+        font-weight: 700;
+      }
+
+      .calculator-board h3 {
+        color: var(--ink);
+        font-family: var(--display);
+        font-size: clamp(3rem, 4.8vw, 5.4rem);
+        line-height: 0.9;
+        margin-top: 22px;
+        max-width: 12ch;
+      }
+
+      .calculator-board p {
+        color: var(--muted);
+        line-height: 1.7;
+        margin-top: 22px;
+        max-width: 72ch;
+      }
+
+      .metric-grid {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-top: 36px;
+      }
+
+      .metric {
+        background: #fff2e3;
+        border: 1px solid rgba(106, 61, 44, 0.13);
+        border-radius: var(--radius);
+        padding: 22px;
+      }
+
+      .metric strong {
+        color: var(--strawberry);
+        display: block;
+        font-family: var(--display);
+        font-size: clamp(2rem, 3vw, 3rem);
+        line-height: 0.96;
+      }
+
+      .metric small {
+        color: var(--muted);
+        display: block;
+        margin-top: 6px;
+      }
+
+      .option-2 {
+        background:
+          radial-gradient(circle at 50% 34%, rgba(217, 158, 92, 0.14), transparent 28rem),
+          linear-gradient(135deg, #190c0c 0%, #2a1213 54%, #180a0a 100%);
+      }
+
+      .option-2 .value-frame {
+        display: grid;
+        gap: 30px;
+      }
+
+      .option-2 .topline {
+        align-items: end;
+        display: grid;
+        gap: clamp(26px, 5vw, 82px);
+        grid-template-columns: minmax(0, 0.82fr) minmax(440px, 0.78fr);
+      }
+
+      .option-2 .section-title {
+        max-width: 13ch;
+      }
+
+      .option-2 .estimator-console {
+        background: rgba(255, 247, 236, 0.965);
+        border: 1px solid rgba(217, 158, 92, 0.42);
+        border-radius: var(--radius);
+        box-shadow: 0 30px 86px rgba(0, 0, 0, 0.26);
+        color: var(--ink);
+        display: grid;
+        gap: 16px;
+        grid-template-columns: 1.04fr 0.96fr;
+        min-height: 390px;
+        padding: clamp(18px, 2.2vw, 30px);
+      }
+
+      .console-main {
+        background:
+          linear-gradient(180deg, rgba(207, 52, 71, 0.08), rgba(207, 52, 71, 0)),
+          #fff7ec;
+        border: 1px solid rgba(106, 61, 44, 0.14);
+        border-radius: var(--radius);
+        padding: clamp(24px, 3vw, 42px);
+      }
+
+      .console-main h3 {
+        color: var(--ink);
+        font-family: var(--display);
+        font-size: clamp(3rem, 4.8vw, 5.4rem);
+        line-height: 0.9;
+        margin-bottom: 22px;
+      }
+
+      .console-steps {
+        display: grid;
+        gap: 10px;
+      }
+
+      .console-steps span {
+        align-items: center;
+        border-bottom: 1px solid rgba(106, 61, 44, 0.12);
+        color: #594943;
+        display: flex;
+        font-weight: 800;
+        justify-content: space-between;
+        min-height: 48px;
+      }
+
+      .console-steps b {
+        color: var(--strawberry);
+        font-size: 0.78rem;
+        text-transform: uppercase;
+      }
+
+      .console-result {
+        border: 1px solid rgba(106, 61, 44, 0.14);
+        border-radius: var(--radius);
+        display: grid;
+        gap: 12px;
+        padding: clamp(24px, 3vw, 42px);
+      }
+
+      .result-number {
+        border-bottom: 1px solid rgba(106, 61, 44, 0.14);
+        padding-bottom: 20px;
+      }
+
+      .result-number strong {
+        color: var(--strawberry);
+        display: block;
+        font-family: var(--display);
+        font-size: clamp(3rem, 5vw, 6rem);
+        line-height: 0.85;
+      }
+
+      .option-2 .button {
+        min-height: 64px;
+        width: 100%;
+      }
+
+      .option-3 {
+        background:
+          radial-gradient(circle at 85% 8%, rgba(207, 52, 71, 0.24), transparent 34rem),
+          linear-gradient(135deg, #1d0e0e 0%, #261413 52%, #110707 100%);
+      }
+
+      .option-3 .value-frame {
+        align-items: center;
+        display: grid;
+        gap: clamp(30px, 6vw, 90px);
+        grid-template-columns: minmax(360px, 0.74fr) minmax(0, 1.26fr);
+      }
+
+      .option-3 .copy-panel {
+        max-width: 520px;
+      }
+
+      .option-3 .cta-card {
+        background:
+          linear-gradient(180deg, rgba(255, 247, 236, 0.12), rgba(255, 247, 236, 0.04)),
+          rgba(255, 247, 236, 0.055);
+        border: 1px solid rgba(217, 158, 92, 0.3);
+        border-radius: var(--radius);
+        margin-top: 32px;
+        padding: 18px;
+      }
+
+      .option-3 .cta-card .button {
+        min-height: 68px;
+        width: 100%;
+      }
+
+      .option-3 .showcase {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: minmax(0, 1fr) minmax(230px, 0.38fr);
+      }
+
+      .option-3 .live-panel {
+        background:
+          radial-gradient(circle at 80% 0%, rgba(207, 52, 71, 0.12), transparent 22rem),
+          #fff7ec;
+        border: 1px solid rgba(217, 158, 92, 0.42);
+        border-radius: var(--radius);
+        color: var(--ink);
+        min-height: 500px;
+        padding: clamp(30px, 4vw, 52px);
+      }
+
+      .option-3 .live-panel h3 {
+        color: var(--ink);
+        font-family: var(--display);
+        font-size: clamp(3.1rem, 4.9vw, 5.6rem);
+        line-height: 0.9;
+        max-width: 12ch;
+      }
+
+      .option-3 .live-fields {
+        display: grid;
+        gap: 12px;
+        margin-top: 34px;
+      }
+
+      .field-line {
+        align-items: center;
+        background: rgba(255, 255, 255, 0.52);
+        border: 1px solid rgba(106, 61, 44, 0.13);
+        border-radius: var(--radius);
+        display: flex;
+        justify-content: space-between;
+        min-height: 58px;
+        padding: 0 18px;
+      }
+
+      .field-line b {
+        color: var(--strawberry);
+      }
+
+      .option-3 .side-meters {
+        display: grid;
+        gap: 16px;
+      }
+
+      .meter {
+        background: rgba(255, 247, 236, 0.08);
+        border: 1px solid rgba(217, 158, 92, 0.24);
+        border-radius: var(--radius);
+        color: rgba(255, 247, 236, 0.78);
+        min-height: 156px;
+        padding: 20px;
+      }
+
+      .meter strong {
+        color: var(--cream);
+        display: block;
+        font-family: var(--display);
+        font-size: 2.35rem;
+        line-height: 0.95;
+        margin-bottom: 8px;
+      }
+
+      @media (max-width: 980px) {
+        .context-band__strip,
+        .option-1 .value-frame,
+        .option-2 .topline,
+        .option-2 .estimator-console,
+        .option-3 .value-frame,
+        .option-3 .showcase {
+          grid-template-columns: 1fr;
+        }
+
+        .option-1 .copy-panel,
+        .option-1 .calculator-board {
+          border-radius: var(--radius);
+          border-left: 1px solid rgba(217, 158, 92, 0.38);
+          min-height: auto;
+        }
+
+        .metric-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .preview-section {
+          padding-top: 92px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="context-band" aria-label="Kontekst poprzedniej sekcji">
+      <div class="context-band__strip">
+        <span>Transport i wyposażenie stoiska</span>
+        <span>Montaż stanowiska przed eventem</span>
+        <span>Dwie osoby obsługi w pakiecie</span>
+        <span>Dopasowanie dodatków i wyglądu</span>
+        <span>Demontaż i uporządkowanie strefy</span>
+      </div>
+    </section>
+
+    <section class="preview-section option-1" id="option-1" aria-label="Option 1">
+      <div class="option-label"><b>Option 1</b> Dominant CTA Panel</div>
+      <div class="value-frame">
+        <div class="copy-panel">
+          <div>
+            <p class="eyebrow">Dlaczego to się opłaca</p>
+            <h2 class="section-title">Policz zakres zanim zapytasz o termin.</h2>
+            <p class="section-lead">
+              Wariant najbliższy obecnej sekcji, ale mocniej prowadzi wzrok do kalkulatora:
+              większy panel CTA, mniej statycznej narracji i jasny obiekt akcji.
+            </p>
+            <div class="actions">
+              <button class="button" type="button">Otwórz kalkulator wydarzenia</button>
+              <button class="button button--ghost" type="button">Zobacz pakiety</button>
+            </div>
+          </div>
+          <div class="micro-stats">
+            <span><strong>3 kroki</strong><small>pakiet, dane, wynik</small></span>
+            <span><strong>10-17 zł</strong><small>orientacyjnie za osobę</small></span>
+          </div>
+        </div>
+        <article class="calculator-board">
+          <div>
+            <p class="board-kicker">Panel orientacyjnej kalkulacji</p>
+            <h3>Pakiet, goście, wynik.</h3>
+            <p>
+              Gość wybiera pakiet, wpisuje skalę wydarzenia i dostaje widełki kosztu,
+              zanim przejdzie do formularza z konkretnym kontekstem rozmowy.
+            </p>
+          </div>
+          <div class="metric-grid">
+            <div class="metric"><strong>5 500-8 500 zł</strong><small>pakiet Strawberry Group dla 500 gości</small></div>
+            <div class="metric"><strong>11 000-17 500 zł</strong><small>typowa atrakcja eventowa tej skali</small></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="preview-section option-2" id="option-2" aria-label="Option 2">
+      <div class="option-label"><b>Option 2</b> Full Estimator Console</div>
+      <div class="value-frame">
+        <div class="topline">
+          <div>
+            <p class="eyebrow">Dlaczego to się opłaca</p>
+            <h2 class="section-title">Kalkulator jako centrum decyzji.</h2>
+          </div>
+          <div>
+            <p class="section-lead">
+              Najmocniejsza ekspozycja: zamiast małego przycisku sekcja wygląda jak właściwy
+              moduł wyceny, z dużym panelem wynikowym i przyciskiem w samej konsoli.
+            </p>
+          </div>
+        </div>
+        <article class="estimator-console">
+          <div class="console-main">
+            <p class="board-kicker">Interaktywny flow</p>
+            <h3>Ustal koszt w trzy kroki.</h3>
+            <div class="console-steps">
+              <span><b>01</b> Wybierz pakiet obsługi</span>
+              <span><b>02</b> Podaj liczbę gości i typ eventu</span>
+              <span><b>03</b> Zobacz widełki i przejdź do formularza</span>
+            </div>
+          </div>
+          <div class="console-result">
+            <p class="board-kicker">Przykład: Gold, 500 gości</p>
+            <div class="result-number">
+              <strong>6 000-6 500 zł</strong>
+              <small>orientacyjny koszt pakietu</small>
+            </div>
+            <div class="metric">
+              <strong>do 11 000 zł</strong>
+              <small>potencjalna różnica względem typowych atrakcji eventowych</small>
+            </div>
+            <button class="button" type="button">Uruchom kalkulator</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="preview-section option-3" id="option-3" aria-label="Option 3">
+      <div class="option-label"><b>Option 3</b> Live Quote Board</div>
+      <div class="value-frame">
+        <div class="copy-panel">
+          <p class="eyebrow">Dlaczego to się opłaca</p>
+          <h2 class="section-title">Zobacz widełki, potem zapytaj o termin.</h2>
+          <p class="section-lead">
+            Bardziej dynamiczny kierunek: sekcja sprzedaje kalkulator jako aktywne narzędzie,
+            a nie tylko argument cenowy. Sprawdza się, jeśli chcemy więcej energii przed galerią.
+          </p>
+          <div class="cta-card">
+            <button class="button" type="button">Policz moje wydarzenie</button>
+          </div>
+        </div>
+        <div class="showcase">
+          <article class="live-panel">
+            <p class="board-kicker">Szybka symulacja</p>
+            <h3>Wybór pakietu od razu zmienia wynik.</h3>
+            <div class="live-fields">
+              <div class="field-line"><span>Pakiet</span><b>Gold</b></div>
+              <div class="field-line"><span>Skala</span><b>500 gości</b></div>
+              <div class="field-line"><span>Wynik</span><b>6 000-6 500 zł</b></div>
+            </div>
+          </article>
+          <div class="side-meters">
+            <div class="meter"><strong>3</strong>etapy bez opuszczania strony</div>
+            <div class="meter"><strong>500</strong>gości w przykładzie kalkulacji</div>
+            <div class="meter"><strong>+ formularz</strong>z przejęciem kontekstu po wyniku</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery-hint" aria-label="Kontekst następnej sekcji">
+      <p>Styl stoiska</p>
+      <h2>Wizualny dowód bez udawania realizacji.</h2>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3UI Hero Proposals - Strawberry Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --cream: #fdfbf6;
+        --warm: #fff8ed;
+        --ink: #241615;
+        --muted: #806f68;
+        --berry: #d32f45;
+        --berry-deep: #8f1524;
+        --chocolate: #2a1715;
+        --gold: #c59a52;
+        --line: rgba(255, 248, 237, 0.32);
+        --font-display: "Cormorant Garamond", Georgia, serif;
+        --font-body: Manrope, Arial, sans-serif;
+        --image: url("/images/hero-strawberry-stand.png");
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        background: var(--cream);
+        color: var(--ink);
+        font-family: var(--font-body);
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+      }
+
+      .intro {
+        background: var(--cream);
+        border-bottom: 1px solid rgba(42, 23, 21, 0.12);
+        display: grid;
+        gap: 10px;
+        padding: 24px max(20px, calc((100vw - 1320px) / 2));
+      }
+
+      .intro strong {
+        color: var(--berry);
+        font-size: 0.78rem;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .intro h1 {
+        font-family: var(--font-display);
+        font-size: clamp(2.6rem, 5vw, 5.2rem);
+        line-height: 0.92;
+        margin: 0;
+        max-width: 900px;
+      }
+
+      .intro p {
+        color: var(--muted);
+        margin: 0;
+        max-width: 760px;
+      }
+
+      .proposal-label {
+        align-items: center;
+        background: var(--ink);
+        color: var(--cream);
+        display: flex;
+        gap: 14px;
+        justify-content: space-between;
+        padding: 14px max(20px, calc((100vw - 1320px) / 2));
+      }
+
+      .proposal-label span {
+        color: rgba(255, 248, 237, 0.72);
+        font-size: 0.86rem;
+      }
+
+      .proposal-label strong {
+        font-size: 0.92rem;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      .hero-preview {
+        background-image: var(--layer), var(--image);
+        background-position: center;
+        background-size: cover;
+        color: var(--cream);
+        min-height: 100svh;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .hero-preview::after {
+        background: linear-gradient(180deg, transparent 76%, rgba(253, 251, 246, 0.94));
+        bottom: 0;
+        content: "";
+        height: 220px;
+        left: 0;
+        pointer-events: none;
+        position: absolute;
+        right: 0;
+      }
+
+      .demo-header {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        left: 0;
+        padding: 18px max(20px, calc((100vw - 1320px) / 2));
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 3;
+      }
+
+      .brand {
+        align-items: center;
+        color: inherit;
+        display: flex;
+        gap: 12px;
+        text-decoration: none;
+      }
+
+      .brand-mark {
+        align-items: center;
+        background: rgba(253, 251, 246, 0.14);
+        border: 1px solid rgba(253, 251, 246, 0.38);
+        border-radius: 50%;
+        display: inline-flex;
+        font-family: var(--font-display);
+        height: 44px;
+        justify-content: center;
+        width: 44px;
+      }
+
+      .brand span:last-child {
+        display: grid;
+        font-weight: 800;
+        line-height: 1.1;
+      }
+
+      .brand small {
+        color: rgba(253, 251, 246, 0.72);
+        font-size: 0.72rem;
+        font-weight: 600;
+      }
+
+      .demo-nav {
+        align-items: center;
+        display: flex;
+        gap: 24px;
+      }
+
+      .demo-nav a,
+      .phone {
+        color: rgba(253, 251, 246, 0.82);
+        font-size: 0.94rem;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .demo-cta,
+      .primary,
+      .secondary {
+        align-items: center;
+        border: 0;
+        border-radius: 999px;
+        display: inline-flex;
+        font-weight: 800;
+        justify-content: center;
+        min-height: 50px;
+        padding: 0 24px;
+        text-decoration: none;
+      }
+
+      .demo-cta,
+      .primary {
+        background: var(--berry);
+        box-shadow: 0 20px 46px rgba(126, 14, 28, 0.3);
+        color: white;
+      }
+
+      .secondary {
+        border: 1px solid rgba(255, 248, 237, 0.45);
+        color: var(--cream);
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+      }
+
+      .eyebrow {
+        color: #ffc6cd;
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0;
+        margin: 0 0 14px;
+        text-transform: uppercase;
+      }
+
+      .hero-title {
+        font-family: var(--font-display);
+        font-size: clamp(4.4rem, 9vw, 10.8rem);
+        letter-spacing: 0;
+        line-height: 0.84;
+        margin: 0;
+        max-width: 10.8ch;
+      }
+
+      .hero-copy {
+        color: rgba(255, 248, 237, 0.86);
+        font-size: clamp(1rem, 1.2vw, 1.25rem);
+        line-height: 1.62;
+        margin: 22px 0 0;
+        max-width: 650px;
+      }
+
+      .hero-actions,
+      .fact-row,
+      .mini-strip {
+        align-items: center;
+        display: flex;
+      }
+
+      .hero-actions {
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 28px;
+      }
+
+      .fact-row {
+        color: rgba(255, 248, 237, 0.78);
+        gap: 0;
+      }
+
+      .fact-row div {
+        border-left: 1px solid var(--line);
+        padding: 0 22px;
+      }
+
+      .fact-row div:first-child {
+        border-left: 0;
+        padding-left: 0;
+      }
+
+      .fact-row strong {
+        color: var(--cream);
+        display: block;
+        font-family: var(--font-display);
+        font-size: 2.25rem;
+        line-height: 1;
+      }
+
+      .fact-row span {
+        display: block;
+        font-size: 0.86rem;
+        margin-top: 4px;
+        max-width: 120px;
+      }
+
+      .mini-strip {
+        backdrop-filter: blur(16px);
+        background: rgba(253, 251, 246, 0.12);
+        border: 1px solid rgba(253, 251, 246, 0.24);
+        border-radius: 999px;
+        color: rgba(255, 248, 237, 0.86);
+        gap: 16px;
+        padding: 12px 18px;
+      }
+
+      .next-hint {
+        align-items: center;
+        background: rgba(253, 251, 246, 0.96);
+        border-radius: 8px 8px 0 0;
+        bottom: 0;
+        color: var(--ink);
+        display: grid;
+        gap: 0;
+        grid-template-columns: repeat(4, 1fr);
+        left: max(20px, calc((100vw - 1320px) / 2));
+        overflow: hidden;
+        position: absolute;
+        right: max(20px, calc((100vw - 1320px) / 2));
+        z-index: 3;
+      }
+
+      .next-hint div {
+        border-right: 1px solid rgba(42, 23, 21, 0.12);
+        padding: 18px 22px;
+      }
+
+      .next-hint div:last-child {
+        border-right: 0;
+      }
+
+      .next-hint strong {
+        color: var(--berry);
+        display: block;
+        font-size: 0.82rem;
+        margin-bottom: 4px;
+        text-transform: uppercase;
+      }
+
+      .next-hint span {
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+
+      .option-one {
+        --layer:
+          linear-gradient(90deg, rgba(26, 10, 9, 0.86), rgba(26, 10, 9, 0.58) 38%, rgba(26, 10, 9, 0.08) 78%),
+          radial-gradient(circle at 18% 48%, rgba(211, 47, 69, 0.18), transparent 28rem);
+      }
+
+      .option-one .hero-content {
+        padding: 18svh max(20px, calc((100vw - 1320px) / 2)) 210px;
+      }
+
+      .option-one .fact-row {
+        margin-top: 34px;
+      }
+
+      .option-two {
+        --layer:
+          linear-gradient(180deg, rgba(20, 8, 7, 0.44), rgba(20, 8, 7, 0.72) 64%, rgba(20, 8, 7, 0.9)),
+          radial-gradient(circle at 50% 52%, transparent 0, rgba(20, 8, 7, 0.14) 28%, rgba(20, 8, 7, 0.62) 80%);
+      }
+
+      .option-two .hero-content {
+        align-items: center;
+        display: grid;
+        min-height: 100svh;
+        padding: 15svh max(20px, calc((100vw - 1320px) / 2)) 200px;
+        text-align: center;
+      }
+
+      .option-two .hero-title,
+      .option-two .hero-copy {
+        margin-inline: auto;
+      }
+
+      .option-two .hero-title {
+        max-width: 11.6ch;
+      }
+
+      .option-two .hero-actions,
+      .option-two .fact-row {
+        justify-content: center;
+      }
+
+      .option-two .fact-row {
+        background: rgba(253, 251, 246, 0.1);
+        border: 1px solid rgba(253, 251, 246, 0.24);
+        border-radius: 999px;
+        justify-self: center;
+        margin-top: 32px;
+        padding: 14px 22px;
+      }
+
+      .option-three {
+        --layer:
+          linear-gradient(90deg, rgba(14, 6, 5, 0.68), rgba(14, 6, 5, 0.24) 42%, rgba(14, 6, 5, 0.74)),
+          linear-gradient(180deg, rgba(14, 6, 5, 0.48), rgba(14, 6, 5, 0.76));
+      }
+
+      .option-three .hero-content {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+        min-height: 100svh;
+        padding: 17svh max(20px, calc((100vw - 1320px) / 2)) 210px;
+      }
+
+      .option-three .hero-title {
+        font-size: clamp(4.2rem, 8.8vw, 10rem);
+        max-width: 9.8ch;
+      }
+
+      .side-ticket {
+        align-self: center;
+        backdrop-filter: blur(18px);
+        background: rgba(253, 251, 246, 0.12);
+        border: 1px solid rgba(253, 251, 246, 0.24);
+        border-radius: 8px;
+        display: grid;
+        gap: 18px;
+        padding: 26px;
+      }
+
+      .side-ticket strong {
+        color: var(--cream);
+        font-family: var(--font-display);
+        font-size: 3rem;
+        line-height: 0.9;
+      }
+
+      .side-ticket p,
+      .side-ticket span {
+        color: rgba(255, 248, 237, 0.78);
+        margin: 0;
+      }
+
+      .option-three .fact-row {
+        bottom: 128px;
+        left: max(20px, calc((100vw - 1320px) / 2));
+        position: absolute;
+      }
+
+      @media (max-width: 900px) {
+        .demo-nav a,
+        .phone,
+        .demo-cta {
+          display: none;
+        }
+
+        .hero-title {
+          font-size: clamp(3.4rem, 16vw, 6.2rem);
+        }
+
+        .hero-copy {
+          font-size: 1rem;
+        }
+
+        .option-one .hero-content,
+        .option-two .hero-content,
+        .option-three .hero-content {
+          display: block;
+          padding: 128px 20px 230px;
+        }
+
+        .option-three .fact-row {
+          bottom: 128px;
+          left: 20px;
+          right: 20px;
+        }
+
+        .side-ticket {
+          margin-top: 26px;
+          max-width: 360px;
+        }
+
+        .fact-row {
+          align-items: stretch;
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .fact-row div,
+        .fact-row div:first-child {
+          border-left: 1px solid var(--line);
+          padding-left: 14px;
+        }
+
+        .next-hint {
+          grid-template-columns: 1fr 1fr;
+          left: 14px;
+          right: 14px;
+        }
+
+        .next-hint div {
+          padding: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="intro">
+      <strong>3UI proposal preview</strong>
+      <h1>Nowy hero fullscreen ze zdjęciem i tekstem na obrazie.</h1>
+      <p>
+        To jest nieprodukcyjny preview wariantów. Każda opcja pokazuje hero w kontekście headera, CTA,
+        statystyk i początku następnej sekcji, żeby ocenić realną hierarchię landing page.
+      </p>
+    </section>
+
+    <div class="proposal-label">
+      <strong>Option 1 - Cinematic Left</strong>
+      <span>Najbliżej obecnej hierarchii, ale pełne zdjęcie i mocny overlay.</span>
+    </div>
+    <section class="hero-preview option-one">
+      <header class="demo-header">
+        <a class="brand" href="#">
+          <span class="brand-mark">SG</span>
+          <span>Strawberry Group <small>Świeżość. Jakość. Doświadczenie.</small></span>
+        </a>
+        <nav class="demo-nav" aria-label="Główna nawigacja">
+          <a href="#">Oferta</a>
+          <a href="#">Pakiety</a>
+          <a href="#">Jak działamy</a>
+          <a href="#">Eventy</a>
+          <a class="phone" href="#">+48 514 214 567</a>
+          <a class="demo-cta" href="#">Sprawdź termin</a>
+        </nav>
+      </header>
+      <div class="hero-content">
+        <p class="eyebrow">Interaktywne stoisko deserowe</p>
+        <h2 class="hero-title">Truskawki w czekoladzie jako atrakcja wydarzenia.</h2>
+        <p class="hero-copy">
+          Polskie truskawki, czekolada, dodatki i elegancka obsługa nawet do 1000 gości. Świeża
+          strefa deserowa, która pracuje sprawnie przy dużej skali.
+        </p>
+        <div class="hero-actions">
+          <a class="primary" href="#">Sprawdź dostępność terminu</a>
+          <a class="secondary" href="#">Zobacz pakiety</a>
+        </div>
+        <div class="fact-row" aria-label="Najważniejsze informacje">
+          <div><strong>do 1000</strong><span>gości w krótkim czasie</span></div>
+          <div><strong>od 10 zł</strong><span>za osobę w pakietach</span></div>
+          <div><strong>2 osoby</strong><span>obsługi w każdym pakiecie</span></div>
+        </div>
+      </div>
+      <div class="next-hint">
+        <div><strong>Świeże owoce</strong><span>przygotowanie na miejscu</span></div>
+        <div><strong>Interakcja</strong><span>goście wybierają dodatki</span></div>
+        <div><strong>Skala</strong><span>proces dla dużych eventów</span></div>
+        <div><strong>Organizacja</strong><span>transport, montaż, obsługa</span></div>
+      </div>
+    </section>
+
+    <div class="proposal-label">
+      <strong>Option 2 - Center Stage</strong>
+      <span>Najbardziej eventowe i emocjonalne: tekst centralnie, zdjęcie jako scena.</span>
+    </div>
+    <section class="hero-preview option-two">
+      <header class="demo-header">
+        <a class="brand" href="#">
+          <span class="brand-mark">SG</span>
+          <span>Strawberry Group <small>Świeżość. Jakość. Doświadczenie.</small></span>
+        </a>
+        <nav class="demo-nav" aria-label="Główna nawigacja">
+          <a href="#">Oferta</a>
+          <a href="#">Pakiety</a>
+          <a href="#">Jak działamy</a>
+          <a href="#">Eventy</a>
+          <a class="phone" href="#">+48 514 214 567</a>
+          <a class="demo-cta" href="#">Sprawdź termin</a>
+        </nav>
+      </header>
+      <div class="hero-content">
+        <div>
+          <p class="eyebrow">Świeżość. Jakość. Doświadczenie.</p>
+          <h2 class="hero-title">Deserowa scena, przy której goście zostają na dłużej.</h2>
+          <p class="hero-copy">
+            Mobilne stoisko z truskawkami w czekoladzie dla wesel, gal, bankietów, eventów firmowych
+            i stref VIP.
+          </p>
+          <div class="hero-actions">
+            <a class="primary" href="#">Sprawdź termin</a>
+            <a class="secondary" href="#">Porównaj pakiety</a>
+          </div>
+          <div class="fact-row" aria-label="Najważniejsze informacje">
+            <div><strong>3 pakiety</strong><span>Silver, Gold, Platinum</span></div>
+            <div><strong>800+</strong><span>niższa cena przy skali</span></div>
+            <div><strong>VIP</strong><span>personalizacja i branding</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="next-hint">
+        <div><strong>Silver</strong><span>prosta i sprawna obsługa</span></div>
+        <div><strong>Gold</strong><span>więcej smaków i dodatków</span></div>
+        <div><strong>Platinum</strong><span>najbardziej interaktywny</span></div>
+        <div><strong>Wycena</strong><span>termin, miasto, liczba gości</span></div>
+      </div>
+    </section>
+
+    <div class="proposal-label">
+      <strong>Option 3 - Premium Event Ticket</strong>
+      <span>Najodważniejszy wariant: okładkowy układ, boczny ticket i mocna sprzedaż.</span>
+    </div>
+    <section class="hero-preview option-three">
+      <header class="demo-header">
+        <a class="brand" href="#">
+          <span class="brand-mark">SG</span>
+          <span>Strawberry Group <small>Świeżość. Jakość. Doświadczenie.</small></span>
+        </a>
+        <nav class="demo-nav" aria-label="Główna nawigacja">
+          <a href="#">Oferta</a>
+          <a href="#">Pakiety</a>
+          <a href="#">Jak działamy</a>
+          <a href="#">Eventy</a>
+          <a class="phone" href="#">+48 514 214 567</a>
+          <a class="demo-cta" href="#">Sprawdź termin</a>
+        </nav>
+      </header>
+      <div class="hero-content">
+        <div>
+          <p class="eyebrow">Premium mobile dessert bar</p>
+          <h2 class="hero-title">Truskawki, czekolada i obsługa bez kolejki.</h2>
+          <p class="hero-copy">
+            Atrakcja, która wygląda jak strefa premium, a organizacyjnie działa jak sprawny punkt
+            eventowy.
+          </p>
+          <div class="hero-actions">
+            <a class="primary" href="#">Zarezerwuj termin</a>
+            <a class="secondary" href="#">Zobacz jak działa</a>
+          </div>
+        </div>
+        <aside class="side-ticket" aria-label="Skrót oferty">
+          <span>Pakiety od</span>
+          <strong>10 zł / osoba</strong>
+          <p>Obsługa, transport, montaż i demontaż po stronie Strawberry Group.</p>
+          <div class="mini-strip">Silver · Gold · Platinum</div>
+        </aside>
+        <div class="fact-row" aria-label="Najważniejsze informacje">
+          <div><strong>2 osoby</strong><span>obsługi w każdym pakiecie</span></div>
+          <div><strong>4 owoce</strong><span>w wariancie Platinum</span></div>
+          <div><strong>branding</strong><span>dla wybranych wydarzeń</span></div>
+        </div>
+      </div>
+      <div class="next-hint">
+        <div><strong>O nas</strong><span>mobilne atelier deserowe</span></div>
+        <div><strong>Proces</strong><span>od zapytania do demontażu</span></div>
+        <div><strong>Pakiety</strong><span>jasna cena za osobę</span></div>
+        <div><strong>Kontakt</strong><span>formularz leadowy</span></div>
+      </div>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,909 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3UI Header Option 3 Solid Console - Strawberry Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --cream: #fff7ec;
+        --warm: #fdfbf6;
+        --ink: #211716;
+        --cocoa: #34201c;
+        --berry: #c93445;
+        --berry-dark: #8f1728;
+        --gold: #c69b52;
+        --muted: #75665f;
+        --line-dark: #4a3029;
+        --line-light: #e8d7c5;
+        --image: url("/images/hero-strawberry-stand.png");
+        --logo: url("/brand/strawberry-group-premium-logo.svg");
+        font-family: Manrope, Arial, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        background: var(--warm);
+        color: var(--ink);
+        margin: 0;
+      }
+
+      a,
+      button {
+        font: inherit;
+      }
+
+      .intro,
+      .label {
+        padding-inline: max(20px, calc((100vw - 1320px) / 2));
+      }
+
+      .intro {
+        background:
+          radial-gradient(circle at 82% 8%, rgba(201, 52, 69, 0.16), transparent 24rem),
+          linear-gradient(135deg, #fffaf2, #f6eadc 58%, #fdfbf6);
+        border-bottom: 1px solid rgba(33, 23, 22, 0.12);
+        display: grid;
+        gap: 10px;
+        padding-bottom: 26px;
+        padding-top: 26px;
+      }
+
+      .intro strong,
+      .eyebrow {
+        color: var(--berry);
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      .intro h1 {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: clamp(2.7rem, 5vw, 5.2rem);
+        line-height: 0.92;
+        margin: 0;
+        max-width: 1120px;
+      }
+
+      .intro p {
+        color: var(--muted);
+        margin: 0;
+        max-width: 860px;
+      }
+
+      .label {
+        align-items: center;
+        background: var(--ink);
+        color: var(--cream);
+        display: flex;
+        gap: 24px;
+        justify-content: space-between;
+        min-height: 58px;
+        padding-bottom: 13px;
+        padding-top: 13px;
+      }
+
+      .label strong {
+        text-transform: uppercase;
+      }
+
+      .label span {
+        color: #dfcbbd;
+        font-size: 0.88rem;
+      }
+
+      .hero {
+        background-image:
+          linear-gradient(90deg, rgba(18, 6, 5, 0.92), rgba(18, 6, 5, 0.55) 42%, rgba(18, 6, 5, 0.14) 80%),
+          radial-gradient(circle at 18% 48%, rgba(201, 52, 69, 0.24), transparent 30rem),
+          var(--image);
+        background-position: center;
+        background-size: cover;
+        color: var(--cream);
+        min-height: 100svh;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .hero::after {
+        background: linear-gradient(180deg, transparent 74%, rgba(253, 251, 246, 0.96));
+        bottom: 0;
+        content: "";
+        height: 220px;
+        left: 0;
+        pointer-events: none;
+        position: absolute;
+        right: 0;
+      }
+
+      .hero-content {
+        padding: 19svh max(20px, calc((100vw - 1320px) / 2)) 214px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .eyebrow {
+        color: #ffcbd1;
+        display: block;
+        margin-bottom: 14px;
+      }
+
+      .hero h2 {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: clamp(4.3rem, 8vw, 9.6rem);
+        line-height: 0.84;
+        margin: 0;
+        max-width: 10.6ch;
+      }
+
+      .hero p {
+        color: rgba(255, 247, 236, 0.86);
+        font-size: clamp(1rem, 1.18vw, 1.2rem);
+        line-height: 1.62;
+        margin: 22px 0 0;
+        max-width: 650px;
+      }
+
+      .actions,
+      .facts,
+      .nav,
+      .header,
+      .brand,
+      .command-panel,
+      .phone-block {
+        align-items: center;
+        display: flex;
+      }
+
+      .actions {
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 28px;
+      }
+
+      .cta,
+      .ghost,
+      .nav a,
+      .menu,
+      .phone-number {
+        color: inherit;
+        font-size: 0.9rem;
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      .cta,
+      .ghost,
+      .menu {
+        border-radius: 999px;
+        justify-content: center;
+        min-height: 46px;
+        padding: 0 20px;
+      }
+
+      .cta {
+        align-items: center;
+        background: var(--berry);
+        box-shadow: 0 18px 42px rgba(120, 12, 24, 0.34);
+        color: white;
+        display: inline-flex;
+      }
+
+      .ghost {
+        align-items: center;
+        border: 1px solid rgba(255, 247, 236, 0.34);
+        display: inline-flex;
+      }
+
+      .menu {
+        background: var(--cream);
+        border: 0;
+        color: var(--ink);
+        display: none;
+        font-weight: 800;
+      }
+
+      .facts {
+        gap: 0;
+        margin-top: 34px;
+      }
+
+      .facts div {
+        border-left: 1px solid rgba(255, 247, 236, 0.28);
+        padding: 0 22px;
+      }
+
+      .facts div:first-child {
+        border-left: 0;
+        padding-left: 0;
+      }
+
+      .facts strong {
+        display: block;
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 2.1rem;
+        line-height: 1;
+      }
+
+      .facts span {
+        color: rgba(255, 247, 236, 0.72);
+        display: block;
+        font-size: 0.84rem;
+        margin-top: 4px;
+        max-width: 120px;
+      }
+
+      .hint {
+        background: rgba(253, 251, 246, 0.96);
+        border-radius: 8px 8px 0 0;
+        bottom: 0;
+        color: var(--ink);
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        left: max(20px, calc((100vw - 1320px) / 2));
+        overflow: hidden;
+        position: absolute;
+        right: max(20px, calc((100vw - 1320px) / 2));
+        z-index: 3;
+      }
+
+      .hint div {
+        border-right: 1px solid rgba(33, 23, 22, 0.12);
+        padding: 18px 22px;
+      }
+
+      .hint div:last-child {
+        border-right: 0;
+      }
+
+      .hint strong {
+        color: var(--berry);
+        display: block;
+        font-size: 0.82rem;
+        text-transform: uppercase;
+      }
+
+      .hint span {
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+
+      .logo-img {
+        background-image: var(--logo);
+        background-position: left center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        display: block;
+      }
+
+      .phone-block {
+        flex-direction: column;
+        gap: 2px;
+        justify-content: center;
+        min-width: 100%;
+        text-align: center;
+      }
+
+      .phone-label {
+        color: #d7bfa7;
+        font-size: 0.63rem;
+        font-weight: 900;
+        letter-spacing: 0;
+        line-height: 1;
+        text-transform: uppercase;
+      }
+
+      .phone-number {
+        color: var(--cream);
+        font-size: 0.98rem;
+        line-height: 1.1;
+        white-space: nowrap;
+      }
+
+      .header-a {
+        background: var(--ink);
+        border: 1px solid var(--line-dark);
+        border-radius: 18px;
+        box-shadow: 0 30px 90px rgba(0, 0, 0, 0.28);
+        display: grid;
+        grid-template-columns: 290px minmax(0, 1fr) 224px;
+        left: max(20px, calc((100vw - 1320px) / 2));
+        min-height: 94px;
+        overflow: hidden;
+        position: absolute;
+        right: max(20px, calc((100vw - 1320px) / 2));
+        top: 22px;
+        z-index: 4;
+      }
+
+      .header-a::before {
+        background: var(--gold);
+        content: "";
+        height: 4px;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+
+      .header-a .brand {
+        background: #2a1815;
+        border-right: 1px solid var(--line-dark);
+        padding: 16px 22px;
+      }
+
+      .header-a .logo-img {
+        height: 58px;
+        width: 242px;
+      }
+
+      .header-a .nav {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+      }
+
+      .header-a .nav a {
+        align-items: center;
+        border-right: 1px solid var(--line-dark);
+        color: #ead7c8;
+        display: flex;
+        justify-content: center;
+        min-width: 0;
+        padding: 0 12px;
+      }
+
+      .header-a .nav a:hover {
+        background: #3a221e;
+        color: white;
+      }
+
+      .header-a .command-panel {
+        background: #301c18;
+        display: grid;
+        gap: 9px;
+        padding: 14px;
+      }
+
+      .header-a .cta {
+        min-height: 40px;
+        width: 100%;
+      }
+
+      .header-b {
+        background: var(--cream);
+        border-radius: 18px;
+        display: grid;
+        gap: 0;
+        grid-template-columns: 294px minmax(0, 1fr) 228px;
+        left: max(20px, calc((100vw - 1320px) / 2));
+        min-height: 96px;
+        position: absolute;
+        right: max(20px, calc((100vw - 1320px) / 2));
+        top: 22px;
+        z-index: 4;
+      }
+
+      .header-b .brand,
+      .header-b .nav,
+      .header-b .command-panel {
+        background: var(--cream);
+        border-bottom: 1px solid var(--line-light);
+        border-top: 1px solid var(--line-light);
+        color: var(--ink);
+      }
+
+      .header-b .brand {
+        border-left: 1px solid var(--line-light);
+        border-radius: 18px 0 0 18px;
+        border-right: 1px solid var(--line-light);
+        padding: 16px 22px;
+      }
+
+      .header-b .logo-img {
+        filter: invert(1) saturate(0.2) brightness(0.35);
+        height: 58px;
+        width: 244px;
+      }
+
+      .header-b .nav {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+      }
+
+      .header-b .nav a {
+        align-items: center;
+        border-right: 1px solid var(--line-light);
+        color: var(--muted);
+        display: flex;
+        justify-content: center;
+        min-width: 0;
+        padding: 0 12px;
+      }
+
+      .header-b .nav a:hover {
+        background: #f3e1cf;
+        color: var(--ink);
+      }
+
+      .header-b .command-panel {
+        background: var(--berry-dark);
+        border-color: #a33c49;
+        border-radius: 0 18px 18px 0;
+        color: white;
+        display: grid;
+        gap: 10px;
+        padding: 13px;
+      }
+
+      .header-b .phone-label {
+        color: #ffd7dc;
+      }
+
+      .header-b .cta {
+        background: var(--cream);
+        box-shadow: none;
+        color: var(--ink);
+        min-height: 40px;
+        width: 100%;
+      }
+
+      .header-c {
+        background: var(--ink);
+        border-radius: 18px;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 238px;
+        left: max(20px, calc((100vw - 1320px) / 2));
+        position: absolute;
+        right: max(20px, calc((100vw - 1320px) / 2));
+        top: 22px;
+        z-index: 4;
+      }
+
+      .header-c .main-rail {
+        background: #f8eadc;
+        border: 1px solid var(--line-light);
+        border-radius: 18px 0 0 18px;
+        box-shadow: 0 30px 90px rgba(0, 0, 0, 0.22);
+        display: grid;
+        grid-template-columns: 284px minmax(0, 1fr);
+        min-height: 88px;
+        overflow: hidden;
+      }
+
+      .header-c .brand {
+        border-right: 1px solid var(--line-light);
+        padding: 15px 22px;
+      }
+
+      .header-c .logo-img {
+        filter: invert(1) saturate(0.2) brightness(0.35);
+        height: 58px;
+        width: 240px;
+      }
+
+      .header-c .nav {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+      }
+
+      .header-c .nav a {
+        align-items: center;
+        border-right: 1px solid var(--line-light);
+        color: var(--muted);
+        display: flex;
+        justify-content: center;
+        min-width: 0;
+        padding: 0 12px;
+      }
+
+      .header-c .nav a:hover {
+        background: var(--cream);
+        color: var(--ink);
+      }
+
+      .header-c .command-panel {
+        background: var(--ink);
+        border: 1px solid var(--line-dark);
+        border-left: 0;
+        border-radius: 0 18px 18px 0;
+        box-shadow: 0 30px 90px rgba(0, 0, 0, 0.22);
+        display: grid;
+        gap: 9px;
+        min-height: 88px;
+        padding: 12px;
+      }
+
+      .header-c .phone-block {
+        border-bottom: 1px solid var(--line-dark);
+        padding-bottom: 7px;
+      }
+
+      .header-c .cta {
+        min-height: 36px;
+        width: 100%;
+      }
+
+      .fit-notes {
+        background:
+          radial-gradient(circle at 78% 12%, rgba(201, 52, 69, 0.12), transparent 24rem),
+          linear-gradient(180deg, var(--warm), #fff3e6);
+        display: grid;
+        gap: 18px;
+        grid-template-columns: repeat(3, 1fr);
+        padding: 34px max(20px, calc((100vw - 1320px) / 2)) 86px;
+      }
+
+      .fit-notes article {
+        background: rgba(255, 255, 255, 0.66);
+        border: 1px solid rgba(33, 23, 22, 0.12);
+        border-radius: 10px;
+        padding: 18px;
+      }
+
+      .fit-notes strong {
+        color: var(--berry);
+        display: block;
+        font-size: 0.82rem;
+        text-transform: uppercase;
+      }
+
+      .fit-notes p {
+        color: var(--muted);
+        font-size: 0.92rem;
+        line-height: 1.48;
+        margin: 8px 0 0;
+      }
+
+      @media (max-width: 1120px) {
+        .header-a,
+        .header-b {
+          grid-template-columns: 260px minmax(0, 1fr) 210px;
+        }
+
+        .header-c {
+          grid-template-columns: minmax(0, 1fr) 220px;
+        }
+
+        .header-c .main-rail {
+          grid-template-columns: 260px minmax(0, 1fr);
+        }
+
+        .logo-img,
+        .header-a .logo-img,
+        .header-b .logo-img,
+        .header-c .logo-img {
+          width: 216px;
+        }
+
+        .nav a {
+          font-size: 0.84rem;
+        }
+      }
+
+      @media (max-width: 900px) {
+        .nav,
+        .command-panel {
+          display: none;
+        }
+
+        .menu {
+          display: inline-flex;
+        }
+
+        .header-a,
+        .header-b,
+        .header-c {
+          align-items: center;
+          display: flex;
+          justify-content: space-between;
+          left: 14px;
+          min-height: 72px;
+          right: 14px;
+          top: 14px;
+        }
+
+        .header-a,
+        .header-b {
+          background: var(--ink);
+          border: 1px solid var(--line-dark);
+          border-radius: 999px;
+          grid-template-columns: none;
+          overflow: hidden;
+          padding: 8px 10px 8px 16px;
+        }
+
+        .header-a .brand,
+        .header-b .brand {
+          background: transparent;
+          border: 0;
+          padding: 0;
+        }
+
+        .header-b .logo-img,
+        .header-c .logo-img {
+          filter: none;
+        }
+
+        .header-c {
+          background: var(--ink);
+          border: 1px solid var(--line-dark);
+          border-radius: 999px;
+          padding: 8px 10px 8px 16px;
+        }
+
+        .header-c .main-rail {
+          background: transparent;
+          border: 0;
+          box-shadow: none;
+          display: flex;
+          min-height: 0;
+        }
+
+        .header-c .brand {
+          border: 0;
+          padding: 0;
+        }
+
+        .logo-img,
+        .header-a .logo-img,
+        .header-b .logo-img,
+        .header-c .logo-img {
+          height: 50px;
+          width: 214px;
+        }
+
+        .hero-content {
+          padding: 130px 20px 230px;
+        }
+
+        .hero h2 {
+          font-size: clamp(3.2rem, 15vw, 6rem);
+        }
+
+        .facts {
+          align-items: stretch;
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .facts div,
+        .facts div:first-child {
+          border-left: 1px solid rgba(255, 247, 236, 0.28);
+          padding-left: 14px;
+        }
+
+        .hint {
+          grid-template-columns: 1fr 1fr;
+          left: 14px;
+          right: 14px;
+        }
+
+        .hint div {
+          padding: 14px;
+        }
+
+        .fit-notes {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .intro,
+        .label {
+          padding-inline: 16px;
+        }
+
+        .label {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 4px;
+        }
+
+        .header-a,
+        .header-b,
+        .header-c {
+          min-height: 66px;
+        }
+
+        .logo-img,
+        .header-a .logo-img,
+        .header-b .logo-img,
+        .header-c .logo-img {
+          height: 46px;
+          width: 184px;
+        }
+
+        .menu {
+          min-height: 42px;
+          padding-inline: 16px;
+        }
+
+        .hero-content {
+          padding-inline: 16px;
+        }
+
+        .hint {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="intro">
+      <strong>3UI refinement</strong>
+      <h1>Option 3 dalej, ale bez transparentnego tła i z wyeksponowanym telefonem nad CTA.</h1>
+      <p>
+        Trzy nowe warianty zachowują segmentowaną konsolę, ale header nie używa już przezroczystego glass panelu.
+        Numer telefonu jest osobnym punktem kontaktu nad przyciskiem „Sprawdź termin”.
+      </p>
+    </section>
+
+    <div class="label">
+      <strong>Option 1 - Cocoa Command Bar</strong>
+      <span>Solidny ciemny header z górnym złotym akcentem i telefonem jako pierwszym elementem command panelu.</span>
+    </div>
+    <section class="hero">
+      <header class="header header-a">
+        <a class="brand" href="#" aria-label="Strawberry Group">
+          <span class="logo-img"></span>
+        </a>
+        <nav class="nav" aria-label="Główna nawigacja">
+          <a href="#">Oferta</a>
+          <a href="#">Pakiety</a>
+          <a href="#">Jak działamy</a>
+          <a href="#">Eventy</a>
+          <a href="#">Kontakt</a>
+        </nav>
+        <div class="command-panel">
+          <a class="phone-block" href="tel:+48514214567">
+            <span class="phone-label">kontakt bezpośredni</span>
+            <span class="phone-number">+48 514 214 567</span>
+          </a>
+          <a class="cta" href="#">Sprawdź termin</a>
+        </div>
+        <button class="menu" type="button">Menu</button>
+      </header>
+      <div class="hero-content">
+        <span class="eyebrow">Interaktywne stoisko deserowe</span>
+        <h2>Truskawki w czekoladzie jako atrakcja wydarzenia.</h2>
+        <p>Polskie truskawki, czekolada, dodatki i elegancka obsługa nawet do 1000 gości.</p>
+        <div class="actions">
+          <a class="cta" href="#">Sprawdź dostępność terminu</a>
+          <a class="ghost" href="#">Zobacz pakiety</a>
+        </div>
+        <div class="facts">
+          <div><strong>do 1000</strong><span>gości w krótkim czasie</span></div>
+          <div><strong>od 10 zł</strong><span>za osobę w pakietach</span></div>
+          <div><strong>2 osoby</strong><span>obsługi w każdym pakiecie</span></div>
+        </div>
+      </div>
+      <div class="hint">
+        <div><strong>Świeże owoce</strong><span>przygotowanie na miejscu</span></div>
+        <div><strong>Interakcja</strong><span>goście wybierają dodatki</span></div>
+        <div><strong>Skala</strong><span>proces dla dużych eventów</span></div>
+        <div><strong>Organizacja</strong><span>transport, montaż, obsługa</span></div>
+      </div>
+    </section>
+    <section class="fit-notes">
+      <article><strong>UX intent</strong><p>Najbliżej option 3, ale bez glassu. Daje mocny, ekskluzywny pasek na zdjęciu.</p></article>
+      <article><strong>Impact</strong><p>Średni. Struktura jest podobna do poprzedniego wariantu, zmienia się głównie język wizualny.</p></article>
+      <article><strong>Tradeoff</strong><p>Najciemniejszy header. Jest premium, ale może być cięższy niż jasne kierunki.</p></article>
+    </section>
+
+    <div class="label">
+      <strong>Option 2 - Cream Ticket Console</strong>
+      <span>Jasny nieprzezroczysty header na fotografii, z czerwonym panelem kontaktowym po prawej.</span>
+    </div>
+    <section class="hero">
+      <header class="header header-b">
+        <a class="brand" href="#" aria-label="Strawberry Group">
+          <span class="logo-img"></span>
+        </a>
+        <nav class="nav" aria-label="Główna nawigacja">
+          <a href="#">Oferta</a>
+          <a href="#">Pakiety</a>
+          <a href="#">Jak działamy</a>
+          <a href="#">Eventy</a>
+          <a href="#">Kontakt</a>
+        </nav>
+        <div class="command-panel">
+          <a class="phone-block" href="tel:+48514214567">
+            <span class="phone-label">zadzwoń i sprawdź termin</span>
+            <span class="phone-number">+48 514 214 567</span>
+          </a>
+          <a class="cta" href="#">Sprawdź termin</a>
+        </div>
+        <button class="menu" type="button">Menu</button>
+      </header>
+      <div class="hero-content">
+        <span class="eyebrow">Interaktywne stoisko deserowe</span>
+        <h2>Truskawki w czekoladzie jako atrakcja wydarzenia.</h2>
+        <p>Polskie truskawki, czekolada, dodatki i elegancka obsługa nawet do 1000 gości.</p>
+        <div class="actions">
+          <a class="cta" href="#">Sprawdź dostępność terminu</a>
+          <a class="ghost" href="#">Zobacz pakiety</a>
+        </div>
+        <div class="facts">
+          <div><strong>do 1000</strong><span>gości w krótkim czasie</span></div>
+          <div><strong>od 10 zł</strong><span>za osobę w pakietach</span></div>
+          <div><strong>2 osoby</strong><span>obsługi w każdym pakiecie</span></div>
+        </div>
+      </div>
+      <div class="hint">
+        <div><strong>Świeże owoce</strong><span>przygotowanie na miejscu</span></div>
+        <div><strong>Interakcja</strong><span>goście wybierają dodatki</span></div>
+        <div><strong>Skala</strong><span>proces dla dużych eventów</span></div>
+        <div><strong>Organizacja</strong><span>transport, montaż, obsługa</span></div>
+      </div>
+    </section>
+    <section class="fit-notes">
+      <article><strong>UX intent</strong><p>Telefon robi się częścią czerwonego call center, a jasny pasek lepiej odcina się od zdjęcia.</p></article>
+      <article><strong>Impact</strong><p>Średni. Wymaga ciemnej wersji logo albo filtra dla jasnego paska.</p></article>
+      <article><strong>Tradeoff</strong><p>Mniej „nocne premium”, bardziej editorial ticket. Może lepiej pasować do deserowej świeżości.</p></article>
+    </section>
+
+    <div class="label">
+      <strong>Option 3 - Split Ticket Rail</strong>
+      <span>Jasny główny rail + solidny ciemny panel kontaktowy, bez przezroczystości i bez ciężkiej ramy.</span>
+    </div>
+    <section class="hero">
+      <header class="header header-c">
+        <div class="main-rail">
+          <a class="brand" href="#" aria-label="Strawberry Group">
+            <span class="logo-img"></span>
+          </a>
+          <nav class="nav" aria-label="Główna nawigacja">
+            <a href="#">Oferta</a>
+            <a href="#">Pakiety</a>
+            <a href="#">Jak działamy</a>
+            <a href="#">Eventy</a>
+            <a href="#">Kontakt</a>
+          </nav>
+        </div>
+        <div class="command-panel">
+          <a class="phone-block" href="tel:+48514214567">
+            <span class="phone-label">szybki kontakt</span>
+            <span class="phone-number">+48 514 214 567</span>
+          </a>
+          <a class="cta" href="#">Sprawdź termin</a>
+        </div>
+        <button class="menu" type="button">Menu</button>
+      </header>
+      <div class="hero-content">
+        <span class="eyebrow">Interaktywne stoisko deserowe</span>
+        <h2>Truskawki w czekoladzie jako atrakcja wydarzenia.</h2>
+        <p>Polskie truskawki, czekolada, dodatki i elegancka obsługa nawet do 1000 gości.</p>
+        <div class="actions">
+          <a class="cta" href="#">Sprawdź dostępność terminu</a>
+          <a class="ghost" href="#">Zobacz pakiety</a>
+        </div>
+        <div class="facts">
+          <div><strong>do 1000</strong><span>gości w krótkim czasie</span></div>
+          <div><strong>od 10 zł</strong><span>za osobę w pakietach</span></div>
+          <div><strong>2 osoby</strong><span>obsługi w każdym pakiecie</span></div>
+        </div>
+      </div>
+      <div class="hint">
+        <div><strong>Świeże owoce</strong><span>przygotowanie na miejscu</span></div>
+        <div><strong>Interakcja</strong><span>goście wybierają dodatki</span></div>
+        <div><strong>Skala</strong><span>proces dla dużych eventów</span></div>
+        <div><strong>Organizacja</strong><span>transport, montaż, obsługa</span></div>
+      </div>
+    </section>
+    <section class="fit-notes">
+      <article><strong>UX intent</strong><p>Najbardziej dopracowany kompromis: jasna nawigacja dla skanowania, ciemny blok dla kontaktu i CTA.</p></article>
+      <article><strong>Impact</strong><p>Średni. Dwa solidne panele zamiast glassu, ale układ nadal prosty do przeniesienia.</p></article>
+      <article><strong>Tradeoff</strong><p>Najmniej dramatyczny, za to najczytelniejszy i najbardziej użytkowy.</p></article>
+    </section>
+  </body>
+</html>

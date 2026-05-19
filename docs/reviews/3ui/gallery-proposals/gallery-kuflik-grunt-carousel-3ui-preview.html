@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>3UI Kuflik/Grunt Gallery Carousel</title>
+    <style>
+      :root {
+        --cream: #fff7ec;
+        --paper: #fdfbf6;
+        --ink: #221413;
+        --muted: #6d5f59;
+        --cocoa: #1b100f;
+        --red: #c93445;
+        --gold: #c59a52;
+        --ochre: #9e6900;
+        --line: rgba(106, 61, 44, 0.16);
+        --radius: 14px;
+        --display: Georgia, "Times New Roman", serif;
+        --body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #fffaf3;
+        color: var(--ink);
+        font-family: var(--body);
+        margin: 0;
+      }
+
+      button {
+        font: inherit;
+      }
+
+      img {
+        display: block;
+        height: 100%;
+        object-fit: cover;
+        width: 100%;
+      }
+
+      figure,
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      .context {
+        background:
+          radial-gradient(circle at 82% 0%, rgba(201, 52, 69, 0.2), transparent 28rem),
+          linear-gradient(135deg, #1d0f0f 0%, #2d1615 58%, #160b0b 100%);
+        color: var(--cream);
+        display: grid;
+        gap: 32px;
+        grid-template-columns: minmax(320px, 0.82fr) minmax(0, 1.18fr);
+        padding: 66px clamp(32px, 5vw, 64px);
+      }
+
+      .context h1,
+      .section-heading h2,
+      .slide-caption h3,
+      .option-2 .minimal-title {
+        font-family: var(--display);
+        font-weight: 700;
+        letter-spacing: 0;
+      }
+
+      .context h1 {
+        color: var(--cream);
+        font-size: clamp(3rem, 5vw, 5.6rem);
+        line-height: 0.9;
+        max-width: 11ch;
+      }
+
+      .context p {
+        align-self: end;
+        color: rgba(255, 247, 236, 0.74);
+        font-size: 1.05rem;
+        line-height: 1.65;
+        max-width: 68ch;
+      }
+
+      .option {
+        border-top: 1px solid var(--line);
+        overflow: hidden;
+        padding: clamp(74px, 8vw, 116px) 0;
+      }
+
+      .option-label {
+        background: rgba(201, 52, 69, 0.1);
+        border: 1px solid rgba(201, 52, 69, 0.2);
+        border-radius: 999px;
+        color: var(--red);
+        display: inline-flex;
+        font-size: 0.76rem;
+        font-weight: 900;
+        margin: 0 clamp(32px, 5vw, 64px) 24px;
+        padding: 9px 13px;
+        text-transform: uppercase;
+      }
+
+      .section-heading {
+        align-items: end;
+        display: grid;
+        gap: 28px;
+        grid-template-columns: minmax(320px, 0.85fr) minmax(0, 1.15fr);
+        margin: 0 clamp(32px, 5vw, 64px) 32px;
+      }
+
+      .section-heading h2 {
+        font-size: clamp(3rem, 5vw, 6rem);
+        line-height: 0.9;
+        max-width: 11ch;
+      }
+
+      .section-heading p {
+        color: var(--muted);
+        line-height: 1.65;
+        max-width: 68ch;
+      }
+
+      .peeking-carousel {
+        --slide-w: min(46vw, 760px);
+        position: relative;
+      }
+
+      .carousel-viewport {
+        overflow: hidden;
+        padding: 0;
+        width: 100%;
+      }
+
+      .carousel-track {
+        align-items: stretch;
+        display: flex;
+        gap: 34px;
+        transform: translate3d(var(--offset, 0px), 0, 0);
+        transition: transform 560ms cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: transform;
+      }
+
+      .kuflik-slide {
+        border-radius: var(--radius);
+        flex: 0 0 var(--slide-w);
+        min-height: 360px;
+        opacity: 0.48;
+        overflow: hidden;
+        position: relative;
+        transform: scale(0.92);
+        transition: opacity 420ms ease, transform 420ms ease, box-shadow 420ms ease;
+      }
+
+      .kuflik-slide.is-active {
+        box-shadow: 0 36px 100px rgba(73, 42, 24, 0.18);
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .kuflik-slide::after {
+        background: linear-gradient(180deg, transparent 44%, rgba(27, 16, 15, 0.72));
+        content: "";
+        inset: 0;
+        opacity: 0.84;
+        pointer-events: none;
+        position: absolute;
+      }
+
+      .slide-caption {
+        bottom: 0;
+        color: white;
+        left: 0;
+        padding: clamp(22px, 3vw, 38px);
+        position: absolute;
+        right: 0;
+        z-index: 1;
+      }
+
+      .slide-caption h3 {
+        color: white;
+        font-size: clamp(2.2rem, 3.6vw, 4.4rem);
+        line-height: 0.9;
+        max-width: 10ch;
+      }
+
+      .slide-caption p {
+        color: rgba(255, 247, 236, 0.78);
+        line-height: 1.5;
+        margin-top: 12px;
+        max-width: 42ch;
+      }
+
+      .carousel-ui {
+        align-items: center;
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        margin-top: 26px;
+      }
+
+      .carousel-ui button {
+        background: transparent;
+        border: 1px solid rgba(106, 61, 44, 0.22);
+        border-radius: 999px;
+        color: var(--ink);
+        cursor: pointer;
+        font-weight: 900;
+        height: 44px;
+        transition: transform 180ms ease, background 180ms ease;
+        width: 44px;
+      }
+
+      .carousel-ui button:hover {
+        background: rgba(201, 52, 69, 0.08);
+        transform: translateY(-1px);
+      }
+
+      .dots {
+        display: flex;
+        gap: 14px;
+        justify-content: center;
+      }
+
+      .dot {
+        background: transparent;
+        border: 2px solid rgba(34, 20, 19, 0.5);
+        border-radius: 999px;
+        cursor: pointer;
+        height: 11px;
+        padding: 0;
+        width: 11px;
+      }
+
+      .dot.is-active {
+        background: var(--ink);
+        border-color: var(--ink);
+      }
+
+      .option-2 {
+        background: var(--ochre);
+        color: #f7dfb9;
+      }
+
+      .option-2 .section-heading {
+        align-items: center;
+        display: block;
+        margin-inline: auto;
+        max-width: 680px;
+        text-align: center;
+      }
+
+      .option-2 .section-heading h2 {
+        color: #7c0808;
+        font-family: var(--body);
+        font-size: clamp(2.6rem, 5vw, 5.8rem);
+        font-weight: 900;
+        line-height: 0.95;
+        margin-inline: auto;
+        max-width: 12ch;
+        text-decoration: underline;
+        text-decoration-thickness: 0.08em;
+        text-underline-offset: 0.08em;
+      }
+
+      .option-2 .section-heading p {
+        color: #f7dfb9;
+        font-family: var(--display);
+        margin: 28px auto 0;
+        max-width: 54ch;
+      }
+
+      .option-2 .peeking-carousel {
+        --slide-w: min(38vw, 620px);
+        margin-top: 56px;
+      }
+
+      .option-2 .kuflik-slide {
+        border: 2px solid rgba(124, 8, 8, 0.18);
+        min-height: 430px;
+        opacity: 0.54;
+      }
+
+      .option-2 .kuflik-slide.is-active {
+        box-shadow: 0 34px 80px rgba(87, 43, 0, 0.28);
+      }
+
+      .option-2 .carousel-ui button,
+      .option-2 .dot {
+        border-color: rgba(124, 8, 8, 0.55);
+        color: #7c0808;
+      }
+
+      .option-2 .dot.is-active {
+        background: #7c0808;
+        border-color: #7c0808;
+      }
+
+      .option-3 {
+        background:
+          radial-gradient(circle at 80% 8%, rgba(201, 52, 69, 0.16), transparent 34rem),
+          #1b100f;
+        color: var(--cream);
+      }
+
+      .option-3 .section-heading h2,
+      .option-3 .section-heading p {
+        color: var(--cream);
+      }
+
+      .option-3 .section-heading p {
+        color: rgba(255, 247, 236, 0.72);
+      }
+
+      .option-3 .peeking-carousel {
+        --slide-w: min(58vw, 920px);
+      }
+
+      .option-3 .kuflik-slide {
+        min-height: 520px;
+        opacity: 0.38;
+      }
+
+      .option-3 .kuflik-slide.is-active {
+        box-shadow: 0 36px 100px rgba(0, 0, 0, 0.34);
+      }
+
+      .option-3 .carousel-ui button,
+      .option-3 .dot {
+        border-color: rgba(255, 247, 236, 0.44);
+        color: var(--cream);
+      }
+
+      .option-3 .dot.is-active {
+        background: var(--cream);
+        border-color: var(--cream);
+      }
+
+      @media (max-width: 900px) {
+        .context,
+        .section-heading {
+          grid-template-columns: 1fr;
+        }
+
+        .peeking-carousel,
+        .option-2 .peeking-carousel,
+        .option-3 .peeking-carousel {
+          --slide-w: 78vw;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="context">
+        <div>
+          <span class="option-label">Regeneracja · Kuflik / Grunt</span>
+          <h1>Centered slider z wystającymi kartami.</h1>
+        </div>
+        <p>
+          Referencja z Kuflik: środkowy aktywny baner, po bokach widoczne kolejne slajdy, kropki pod spodem
+          i płynny ruch lewo/prawo. Grunt traktuję jako wskazówkę minimalistycznego, centralnego tonu.
+        </p>
+      </section>
+
+      <section class="option option-1" id="option-1">
+        <span class="option-label">Option 1 · Kuflik Center Stage</span>
+        <div class="section-heading">
+          <h2>Wizualny dowód jako centralny slider.</h2>
+          <p>
+            Najbliżej Kuflik: szeroki środkowy kadr, boczne slajdy wystają po lewej i prawej, pod spodem proste kropki.
+            Dobre jako bezpieczna baza do wdrożenia.
+          </p>
+        </div>
+        <div class="peeking-carousel" data-carousel>
+          <div class="carousel-viewport">
+            <div class="carousel-track">
+              <figure class="kuflik-slide"><img src="/images/gallery-generated/gallery-realization-1-chocolate-pour.png" alt="" /><figcaption class="slide-caption"><h3>Czekolada w ruchu</h3><p>Najbardziej apetyczny moment obsługi.</p></figcaption></figure>
+              <figure class="kuflik-slide"><img src="/images/gallery-generated/gallery-realization-2-buffet-counter.png" alt="" /><figcaption class="slide-caption"><h3>Elegancki blat</h3><p>Setup gotowy na wydarzenie premium.</p></figcaption></figure>
+              <figure class="kuflik-slide"><img src="/images/gallery-generated/gallery-realization-3-guest-toppings.png" alt="" /><figcaption class="slide-caption"><h3>Wybór dodatków</h3><p>Goście widzą proces i komponują deser.</p></figcaption></figure>
+              <figure class="kuflik-slide"><img src="/images/gallery-generated/gallery-realization-4-finished-cups.png" alt="" /><figcaption class="slide-caption"><h3>Gotowe kubki</h3><p>Finalny efekt wygląda dobrze na zdjęciach.</p></figcaption></figure>
+            </div>
+          </div>
+          <div class="carousel-ui">
+            <button type="button" data-prev aria-label="Poprzedni slajd">‹</button>
+            <div class="dots"></div>
+            <button type="button" data-next aria-label="Następny slajd">›</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="option option-2" id="option-2">
+        <span class="option-label">Option 2 · Grunt Minimal Center</span>
+        <div class="section-heading">
+          <h2>STYL STOISKA</h2>
+          <p>
+            Minimalistyczny, centralny wariant: więcej charakteru jak w Grunt, ale mechanika slidera nadal Kuflikowa.
+            Mniej dekoracji, mocny kolor tła i zdjęcia jako kontrapunkt.
+          </p>
+        </div>
+        <div class="peeking-carousel" data-carousel>
+          <div class="carousel-viewport">
+            <div class="carousel-track">
+              <figure class="kuflik-slide"><img src="/images/gallery-generated/gallery-realization-2-buffet-counter.png" alt="" /><figcaption class="slide-caption"><h3>Stoisko</h3><p>Porządek, blat, światło i dodatki.</p></figcaption></figure>
+              <figure class="kuflik-slide"><img src="/images/gallery-generated/gallery-realization-1-chocolate-pour.png" alt="" /><figcaption class="slide-caption"><h3>Proces</h3><p>Ruch czekolady jako główny dowód świeżości.</p></figcaption></figure>
+              <figure class="kuflik-slide"><img src="/images/gallery-generated/gallery-realization-4-finished-cups.png" alt="" /><figcaption class="slide-caption"><h3>Efekt</h3><p>Gotowe kubki w eleganckim powtarzalnym formacie.</p></figcaption></figure>
+              <figure class="kuflik-slide"><img src="/images/gallery-generated/gallery-realization-3-guest-toppings.png" alt="" /><figcaption class="slide-caption"><h3>Goście</h3><p>Interakcja przy dodatkach bez scenariusza.</p></figcaption></figure>
+            </div>
+          </div>
+          <div class="carousel-ui">
+            <button type="button" data-prev aria-label="Poprzedni slajd">‹</button>
+            <div class="dots"></div>
+            <button type="button" data-next aria-label="Następny slajd">›</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="option option-3" id="option-3">
+        <span class="option-label">Option 3 · Premium Peeking Hero</span>
+        <div class="section-heading">
+          <h2>Galeria z dużym aktywnym kadrem.</h2>
+          <p>
+            Ten wariant bierze mechanikę Kuflik, ale dopasowuje ją do ciemnego, premium tonu Strawberry Group:
+            większy aktywny slajd, mocniejszy kontrast i bardziej eventowy klimat.
+          </p>
+        </div>
+        <div class="peeking-carousel" data-carousel>
+          <div class="carousel-viewport">
+            <div class="carousel-track">
+              <figure class="kuflik-slide"><img src="/images/gallery-generated/gallery-realization-1-chocolate-pour.png" alt="" /><figcaption class="slide-caption"><h3>Świeża czekolada</h3><p>Rytuał, który zatrzymuje wzrok i buduje apetyt.</p></figcaption></figure>
+              <figure class="kuflik-slide"><img src="/images/gallery-generated/gallery-realization-2-buffet-counter.png" alt="" /><figcaption class="slide-caption"><h3>Eventowy setup</h3><p>Stoisko jako część oprawy, nie dodatek na końcu sali.</p></figcaption></figure>
+              <figure class="kuflik-slide"><img src="/images/gallery-generated/gallery-realization-3-guest-toppings.png" alt="" /><figcaption class="slide-caption"><h3>Interakcja</h3><p>Gość wybiera dodatki i dostaje deser na miejscu.</p></figcaption></figure>
+              <figure class="kuflik-slide"><img src="/images/gallery-generated/gallery-realization-4-finished-cups.png" alt="" /><figcaption class="slide-caption"><h3>Gotowy efekt</h3><p>Deser premium gotowy do wydania i fotografowania.</p></figcaption></figure>
+            </div>
+          </div>
+          <div class="carousel-ui">
+            <button type="button" data-prev aria-label="Poprzedni slajd">‹</button>
+            <div class="dots"></div>
+            <button type="button" data-next aria-label="Następny slajd">›</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      document.querySelectorAll("[data-carousel]").forEach((carousel) => {
+        const track = carousel.querySelector(".carousel-track");
+        const slides = Array.from(carousel.querySelectorAll(".kuflik-slide"));
+        const dots = carousel.querySelector(".dots");
+        let active = 1;
+
+        slides.forEach((_, index) => {
+          const dot = document.createElement("button");
+          dot.className = "dot";
+          dot.type = "button";
+          dot.setAttribute("aria-label", `Slajd ${index + 1}`);
+          dot.addEventListener("click", () => setActive(index));
+          dots.append(dot);
+        });
+
+        const setActive = (index) => {
+          active = (index + slides.length) % slides.length;
+          slides.forEach((slide, slideIndex) => slide.classList.toggle("is-active", slideIndex === active));
+          Array.from(dots.children).forEach((dot, dotIndex) => dot.classList.toggle("is-active", dotIndex === active));
+          const viewport = carousel.querySelector(".carousel-viewport").getBoundingClientRect();
+          const slide = slides[active].getBoundingClientRect();
+          const currentOffset = Number(track.dataset.offset || 0);
+          const delta = viewport.left + viewport.width / 2 - (slide.left + slide.width / 2);
+          const nextOffset = currentOffset + delta;
+          track.dataset.offset = String(nextOffset);
+          track.style.setProperty("--offset", `${nextOffset}px`);
+        };
+
+        carousel.querySelector("[data-prev]").addEventListener("click", () => setActive(active - 1));
+        carousel.querySelector("[data-next]").addEventListener("click", () => setActive(active + 1));
+        window.addEventListener("resize", () => {
+          track.dataset.offset = "0";
+          track.style.setProperty("--offset", "0px");
+          requestAnimationFrame(() => setActive(active));
+        });
+        requestAnimationFrame(() => setActive(active));
+      });
+    </script>
+  </body>
+</html>

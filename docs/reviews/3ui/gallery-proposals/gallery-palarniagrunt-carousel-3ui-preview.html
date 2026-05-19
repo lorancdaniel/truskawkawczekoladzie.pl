@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>3UI Palarnia Grunt Gallery Carousel</title>
+    <style>
+      :root {
+        --cream: #fff7ec;
+        --paper: #ffffff;
+        --warm: #fffaf3;
+        --ink: #221413;
+        --muted: #6d5f59;
+        --cocoa: #1b100f;
+        --red: #c93445;
+        --gold: #c59a52;
+        --line: rgba(106, 61, 44, 0.16);
+        --radius: 14px;
+        --display: Georgia, "Times New Roman", serif;
+        --body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        background: var(--paper);
+        color: var(--ink);
+        font-family: var(--body);
+        margin: 0;
+      }
+
+      img {
+        display: block;
+        height: 100%;
+        object-fit: cover;
+        width: 100%;
+      }
+
+      button {
+        font: inherit;
+      }
+
+      figure,
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      .context {
+        align-items: center;
+        background: #fff;
+        border-bottom: 1px solid rgba(34, 20, 19, 0.08);
+        display: grid;
+        gap: 42px;
+        grid-template-columns: minmax(320px, 0.72fr) minmax(0, 1.28fr);
+        padding: 46px clamp(32px, 5vw, 64px);
+      }
+
+      .context h1,
+      .section-heading h2,
+      .summary h3 {
+        font-family: var(--display);
+        font-weight: 700;
+        letter-spacing: 0;
+      }
+
+      .context h1 {
+        font-size: clamp(2.8rem, 4.8vw, 5.4rem);
+        line-height: 0.9;
+        max-width: 12ch;
+      }
+
+      .context p {
+        color: var(--muted);
+        line-height: 1.65;
+        max-width: 70ch;
+      }
+
+      .reference-note {
+        background: #f7f7f4;
+        border: 1px solid rgba(34, 20, 19, 0.08);
+        border-radius: 999px;
+        color: #1d1d1b;
+        display: inline-flex;
+        font-size: 0.78rem;
+        font-weight: 900;
+        gap: 8px;
+        margin-bottom: 16px;
+        padding: 9px 13px;
+        text-transform: uppercase;
+      }
+
+      .option {
+        overflow: hidden;
+        padding: clamp(70px, 8vw, 110px) 0;
+      }
+
+      .option + .option {
+        border-top: 1px solid var(--line);
+      }
+
+      .option-label {
+        background: rgba(201, 52, 69, 0.1);
+        border: 1px solid rgba(201, 52, 69, 0.18);
+        border-radius: 999px;
+        color: var(--red);
+        display: inline-flex;
+        font-size: 0.76rem;
+        font-weight: 900;
+        margin: 0 clamp(32px, 5vw, 64px) 22px;
+        padding: 9px 13px;
+        text-transform: uppercase;
+      }
+
+      .section-heading {
+        align-items: end;
+        display: grid;
+        gap: 28px;
+        grid-template-columns: minmax(320px, 0.85fr) minmax(0, 1.15fr);
+        margin: 0 clamp(32px, 5vw, 64px) 30px;
+      }
+
+      .section-heading h2 {
+        font-size: clamp(3rem, 5vw, 5.9rem);
+        line-height: 0.9;
+        max-width: 11ch;
+      }
+
+      .section-heading p {
+        color: var(--muted);
+        line-height: 1.65;
+        max-width: 68ch;
+      }
+
+      .showcase {
+        --slide-w: min(75vw, 1120px);
+        position: relative;
+      }
+
+      .viewport {
+        overflow: hidden;
+        width: 100%;
+      }
+
+      .track {
+        align-items: center;
+        display: flex;
+        gap: 50px;
+        transform: translate3d(var(--offset, 0px), 0, 0);
+        transition: transform 620ms cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: transform;
+      }
+
+      .slide {
+        border-radius: var(--radius);
+        flex: 0 0 var(--slide-w);
+        height: clamp(360px, 40vw, 560px);
+        opacity: 0.36;
+        overflow: hidden;
+        position: relative;
+        transform: scale(0.9);
+        transition: opacity 460ms ease, transform 460ms ease, filter 460ms ease, box-shadow 460ms ease;
+      }
+
+      .slide.is-active {
+        box-shadow: 0 20px 72px rgba(34, 20, 19, 0.14);
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .slide:not(.is-active) {
+        filter: saturate(0.72) brightness(0.88);
+      }
+
+      .dots {
+        align-items: center;
+        display: flex;
+        gap: 14px;
+        justify-content: center;
+        margin-top: 26px;
+      }
+
+      .dot {
+        background: transparent;
+        border: 2px solid rgba(34, 20, 19, 0.55);
+        border-radius: 999px;
+        cursor: pointer;
+        height: 12px;
+        padding: 0;
+        width: 12px;
+      }
+
+      .dot.is-active {
+        background: var(--ink);
+        border-color: var(--ink);
+      }
+
+      .nav {
+        align-items: center;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        margin-top: 18px;
+      }
+
+      .nav button {
+        background: transparent;
+        border: 1px solid rgba(34, 20, 19, 0.2);
+        border-radius: 999px;
+        color: var(--ink);
+        cursor: pointer;
+        font-size: 1.5rem;
+        font-weight: 900;
+        height: 44px;
+        transition: background 180ms ease, transform 180ms ease;
+        width: 44px;
+      }
+
+      .nav button:hover {
+        background: rgba(34, 20, 19, 0.06);
+        transform: translateY(-1px);
+      }
+
+      .tabs {
+        align-items: center;
+        display: flex;
+        gap: 0;
+        justify-content: center;
+        margin: 36px clamp(32px, 5vw, 64px) 0;
+      }
+
+      .tabs span {
+        border-right: 1px solid rgba(34, 20, 19, 0.15);
+        font-size: clamp(1.15rem, 1.4vw, 1.45rem);
+        font-weight: 900;
+        padding: 0 30px;
+      }
+
+      .tabs span:last-child {
+        border-right: 0;
+      }
+
+      .option-2 {
+        background: var(--warm);
+      }
+
+      .option-2 .showcase {
+        --slide-w: min(68vw, 980px);
+      }
+
+      .option-2 .slide {
+        background: #fff;
+        box-shadow: none;
+        display: grid;
+        gap: 0;
+        grid-template-columns: 1fr 0.44fr;
+      }
+
+      .option-2 .slide.is-active {
+        box-shadow: 0 28px 82px rgba(73, 42, 24, 0.14);
+      }
+
+      .summary {
+        background: #fff;
+        border-left: 1px solid rgba(34, 20, 19, 0.08);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: clamp(24px, 3vw, 46px);
+      }
+
+      .summary h3 {
+        font-size: clamp(2rem, 3vw, 3.8rem);
+        line-height: 0.92;
+      }
+
+      .summary p {
+        color: var(--muted);
+        line-height: 1.55;
+        margin-top: 14px;
+      }
+
+      .option-3 {
+        background:
+          radial-gradient(circle at 50% 10%, rgba(201, 52, 69, 0.12), transparent 30rem),
+          #1b100f;
+        color: var(--cream);
+      }
+
+      .option-3 .section-heading h2,
+      .option-3 .section-heading p {
+        color: var(--cream);
+      }
+
+      .option-3 .section-heading p {
+        color: rgba(255, 247, 236, 0.72);
+      }
+
+      .option-3 .slide {
+        height: clamp(420px, 44vw, 620px);
+        opacity: 0.28;
+      }
+
+      .option-3 .slide.is-active {
+        box-shadow: 0 26px 82px rgba(0, 0, 0, 0.36);
+      }
+
+      .option-3 .slide::after {
+        background: linear-gradient(180deg, transparent 50%, rgba(27, 16, 15, 0.74));
+        content: "";
+        inset: 0;
+        position: absolute;
+      }
+
+      .caption {
+        bottom: 0;
+        color: var(--cream);
+        left: 0;
+        padding: clamp(24px, 4vw, 54px);
+        position: absolute;
+        right: 0;
+        z-index: 1;
+      }
+
+      .caption h3 {
+        color: var(--cream);
+        font-family: var(--display);
+        font-size: clamp(2.6rem, 5vw, 5.7rem);
+        line-height: 0.88;
+        max-width: 10ch;
+      }
+
+      .caption p {
+        color: rgba(255, 247, 236, 0.72);
+        line-height: 1.55;
+        margin-top: 14px;
+        max-width: 48ch;
+      }
+
+      .option-3 .dot {
+        border-color: rgba(255, 247, 236, 0.5);
+      }
+
+      .option-3 .dot.is-active {
+        background: var(--cream);
+        border-color: var(--cream);
+      }
+
+      .option-3 .nav button {
+        border-color: rgba(255, 247, 236, 0.26);
+        color: var(--cream);
+      }
+
+      @media (max-width: 900px) {
+        .context,
+        .section-heading {
+          grid-template-columns: 1fr;
+        }
+
+        .showcase,
+        .option-2 .showcase {
+          --slide-w: 82vw;
+        }
+
+        .option-2 .slide {
+          grid-template-columns: 1fr;
+          height: auto;
+        }
+
+        .option-2 .slide figure {
+          height: 360px;
+        }
+
+        .tabs {
+          flex-wrap: wrap;
+          gap: 12px;
+        }
+
+        .tabs span {
+          border: 1px solid rgba(34, 20, 19, 0.12);
+          border-radius: 999px;
+          padding: 9px 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="context">
+        <div>
+          <span class="reference-note">Palarnia Grunt reference</span>
+          <h1>Showcase carousel z aktywnym środkiem.</h1>
+        </div>
+        <p>
+          Właściwy Grunt ma biały kontekst, ogromny aktywny slajd na środku, ucięte boczne kadry i kropki pod spodem.
+          Te warianty przenoszą ten wzorzec na zdjęcia realizacji Strawberry Group.
+        </p>
+      </section>
+
+      <section class="option option-1" id="option-1">
+        <span class="option-label">Option 1 · Palarnia Grunt Showcase</span>
+        <div class="section-heading">
+          <h2>Duży kadr, boczne zdjęcia, kropki.</h2>
+          <p>
+            Najbliżej referencji: białe tło, centralny aktywny slajd, widoczne boczne kadry i subtelne dotsy pod spodem.
+          </p>
+        </div>
+        <div class="showcase" data-showcase>
+          <div class="viewport">
+            <div class="track">
+              <figure class="slide"><img src="/images/gallery-generated/gallery-realization-1-chocolate-pour.png" alt="" /></figure>
+              <figure class="slide"><img src="/images/gallery-generated/gallery-realization-2-buffet-counter.png" alt="" /></figure>
+              <figure class="slide"><img src="/images/gallery-generated/gallery-realization-3-guest-toppings.png" alt="" /></figure>
+              <figure class="slide"><img src="/images/gallery-generated/gallery-realization-4-finished-cups.png" alt="" /></figure>
+            </div>
+          </div>
+          <div class="dots"></div>
+          <div class="nav"><button type="button" data-prev aria-label="Poprzedni">‹</button><button type="button" data-next aria-label="Następny">›</button></div>
+        </div>
+        <div class="tabs"><span>Świeżość</span><span>Proces</span><span>Interakcja</span><span>Efekt</span></div>
+      </section>
+
+      <section class="option option-2" id="option-2">
+        <span class="option-label">Option 2 · Grunt Product Tabs Hybrid</span>
+        <div class="section-heading">
+          <h2>Slider jak hero, opis jak karta produktu.</h2>
+          <p>
+            Łączy showcase Gruntu z kartowym opisem. Aktywny slajd ma zdjęcie i prawy panel z tekstem, boczne slajdy nadal wystają.
+          </p>
+        </div>
+        <div class="showcase" data-showcase>
+          <div class="viewport">
+            <div class="track">
+              <article class="slide"><figure><img src="/images/gallery-generated/gallery-realization-1-chocolate-pour.png" alt="" /></figure><div class="summary"><h3>Czekolada w ruchu</h3><p>Najbardziej apetyczny moment przygotowania deseru.</p></div></article>
+              <article class="slide"><figure><img src="/images/gallery-generated/gallery-realization-2-buffet-counter.png" alt="" /></figure><div class="summary"><h3>Elegancki setup</h3><p>Stoisko działa jak część oprawy wydarzenia.</p></div></article>
+              <article class="slide"><figure><img src="/images/gallery-generated/gallery-realization-3-guest-toppings.png" alt="" /></figure><div class="summary"><h3>Goście wybierają</h3><p>Interakcja i dodatki dają naturalny ruch przy stoisku.</p></div></article>
+              <article class="slide"><figure><img src="/images/gallery-generated/gallery-realization-4-finished-cups.png" alt="" /></figure><div class="summary"><h3>Gotowy deser</h3><p>Efekt końcowy wygląda dobrze na zdjęciach i przy odbiorze.</p></div></article>
+            </div>
+          </div>
+          <div class="dots"></div>
+          <div class="nav"><button type="button" data-prev aria-label="Poprzedni">‹</button><button type="button" data-next aria-label="Następny">›</button></div>
+        </div>
+        <div class="tabs"><span>Stoisko</span><span>Dodatki</span><span>Obsługa</span><span>Podanie</span></div>
+      </section>
+
+      <section class="option option-3" id="option-3">
+        <span class="option-label">Option 3 · Strawberry Premium Showcase</span>
+        <div class="section-heading">
+          <h2>Mechanika Gruntu, klimat Strawberry.</h2>
+          <p>
+            Ten wariant zachowuje peeking carousel z Gruntu, ale robi go ciemniejszym i bardziej premium,
+            żeby pasował do hero i kalkulatora.
+          </p>
+        </div>
+        <div class="showcase" data-showcase>
+          <div class="viewport">
+            <div class="track">
+              <figure class="slide"><img src="/images/gallery-generated/gallery-realization-1-chocolate-pour.png" alt="" /><figcaption class="caption"><h3>Świeża czekolada</h3><p>Rytuał przygotowania widoczny od pierwszego kadru.</p></figcaption></figure>
+              <figure class="slide"><img src="/images/gallery-generated/gallery-realization-2-buffet-counter.png" alt="" /><figcaption class="caption"><h3>Eventowy setup</h3><p>Blat, dodatki i światło tworzą oprawę premium.</p></figcaption></figure>
+              <figure class="slide"><img src="/images/gallery-generated/gallery-realization-3-guest-toppings.png" alt="" /><figcaption class="caption"><h3>Interakcja</h3><p>Gość wybiera dodatki, a stoisko staje się częścią wydarzenia.</p></figcaption></figure>
+              <figure class="slide"><img src="/images/gallery-generated/gallery-realization-4-finished-cups.png" alt="" /><figcaption class="caption"><h3>Gotowy efekt</h3><p>Deser wygląda dobrze przy wydaniu i na zdjęciach.</p></figcaption></figure>
+            </div>
+          </div>
+          <div class="dots"></div>
+          <div class="nav"><button type="button" data-prev aria-label="Poprzedni">‹</button><button type="button" data-next aria-label="Następny">›</button></div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      document.querySelectorAll("[data-showcase]").forEach((carousel) => {
+        const track = carousel.querySelector(".track");
+        const slides = Array.from(carousel.querySelectorAll(".slide"));
+        const dots = carousel.querySelector(".dots");
+        let active = 1;
+
+        slides.forEach((_, index) => {
+          const dot = document.createElement("button");
+          dot.className = "dot";
+          dot.type = "button";
+          dot.setAttribute("aria-label", `Slajd ${index + 1}`);
+          dot.addEventListener("click", () => setActive(index));
+          dots.append(dot);
+        });
+
+        function setActive(index) {
+          active = (index + slides.length) % slides.length;
+          slides.forEach((slide, slideIndex) => slide.classList.toggle("is-active", slideIndex === active));
+          Array.from(dots.children).forEach((dot, dotIndex) => dot.classList.toggle("is-active", dotIndex === active));
+
+          track.dataset.offset = "0";
+          track.style.setProperty("--offset", "0px");
+          requestAnimationFrame(() => {
+            const viewport = carousel.querySelector(".viewport").getBoundingClientRect();
+            const slide = slides[active].getBoundingClientRect();
+            const delta = viewport.left + viewport.width / 2 - (slide.left + slide.width / 2);
+            track.dataset.offset = String(delta);
+            track.style.setProperty("--offset", `${delta}px`);
+          });
+        }
+
+        carousel.querySelector("[data-prev]").addEventListener("click", () => setActive(active - 1));
+        carousel.querySelector("[data-next]").addEventListener("click", () => setActive(active + 1));
+        window.addEventListener("resize", () => setActive(active));
+        setActive(active);
+      });
+    </script>
+  </body>
+</html>

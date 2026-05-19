@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3UI Premium Header Regeneration - Strawberry Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --cream: #fff7ec;
+        --warm: #fdfbf6;
+        --ink: #211716;
+        --muted: #75665f;
+        --berry: #c93445;
+        --gold: #c69b52;
+        --dark-glass: rgba(19, 8, 7, 0.36);
+        --light-line: rgba(255, 247, 236, 0.22);
+        --image: url("/images/hero-strawberry-stand.png");
+        --logo: url("/brand/strawberry-group-premium-logo.svg");
+        font-family: Manrope, Arial, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        background: var(--warm);
+        color: var(--ink);
+        margin: 0;
+      }
+
+      .intro,
+      .label {
+        padding-inline: max(20px, calc((100vw - 1320px) / 2));
+      }
+
+      .intro {
+        border-bottom: 1px solid rgba(33, 23, 22, 0.12);
+        display: grid;
+        gap: 10px;
+        padding-bottom: 24px;
+        padding-top: 24px;
+      }
+
+      .intro strong,
+      .eyebrow {
+        color: var(--berry);
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      .intro h1 {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: clamp(2.7rem, 5vw, 5.2rem);
+        line-height: 0.92;
+        margin: 0;
+      }
+
+      .intro p {
+        color: var(--muted);
+        margin: 0;
+        max-width: 820px;
+      }
+
+      .label {
+        align-items: center;
+        background: var(--ink);
+        color: var(--cream);
+        display: flex;
+        gap: 24px;
+        justify-content: space-between;
+        padding-bottom: 14px;
+        padding-top: 14px;
+      }
+
+      .label strong {
+        text-transform: uppercase;
+      }
+
+      .label span {
+        color: rgba(255, 247, 236, 0.72);
+        font-size: 0.88rem;
+      }
+
+      .hero {
+        background-image:
+          linear-gradient(90deg, rgba(18, 6, 5, 0.92), rgba(18, 6, 5, 0.56) 40%, rgba(18, 6, 5, 0.14) 78%),
+          radial-gradient(circle at 18% 50%, rgba(201, 52, 69, 0.22), transparent 30rem),
+          var(--image);
+        background-position: center;
+        background-size: cover;
+        color: var(--cream);
+        min-height: 100svh;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .hero::after {
+        background: linear-gradient(180deg, transparent 74%, rgba(253, 251, 246, 0.96));
+        bottom: 0;
+        content: "";
+        height: 220px;
+        left: 0;
+        position: absolute;
+        right: 0;
+      }
+
+      .hero-content {
+        padding: 19svh max(20px, calc((100vw - 1320px) / 2)) 214px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .eyebrow {
+        color: #ffcbd1;
+        display: block;
+        margin-bottom: 14px;
+      }
+
+      .hero h2 {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: clamp(4.3rem, 8vw, 9.6rem);
+        line-height: 0.84;
+        margin: 0;
+        max-width: 10.6ch;
+      }
+
+      .hero p {
+        color: rgba(255, 247, 236, 0.86);
+        font-size: clamp(1rem, 1.18vw, 1.2rem);
+        line-height: 1.62;
+        margin: 22px 0 0;
+        max-width: 650px;
+      }
+
+      .actions,
+      .facts,
+      .nav,
+      .header {
+        align-items: center;
+        display: flex;
+      }
+
+      .actions {
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 28px;
+      }
+
+      .cta,
+      .ghost,
+      .nav a,
+      .phone,
+      .menu {
+        color: inherit;
+        font-size: 0.9rem;
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      .cta,
+      .ghost,
+      .menu {
+        border-radius: 999px;
+        justify-content: center;
+        min-height: 48px;
+        padding: 0 22px;
+      }
+
+      .cta {
+        align-items: center;
+        background: var(--berry);
+        box-shadow: 0 20px 46px rgba(120, 12, 24, 0.36);
+        color: white;
+        display: inline-flex;
+      }
+
+      .ghost {
+        align-items: center;
+        border: 1px solid rgba(255, 247, 236, 0.34);
+        display: inline-flex;
+      }
+
+      .menu {
+        background: var(--cream);
+        border: 0;
+        color: var(--ink);
+        display: none;
+        font: inherit;
+        font-weight: 800;
+      }
+
+      .facts {
+        gap: 0;
+        margin-top: 34px;
+      }
+
+      .facts div {
+        border-left: 1px solid rgba(255, 247, 236, 0.28);
+        padding: 0 22px;
+      }
+
+      .facts div:first-child {
+        border-left: 0;
+        padding-left: 0;
+      }
+
+      .facts strong {
+        display: block;
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 2.1rem;
+        line-height: 1;
+      }
+
+      .facts span {
+        color: rgba(255, 247, 236, 0.72);
+        display: block;
+        font-size: 0.84rem;
+        margin-top: 4px;
+        max-width: 120px;
+      }
+
+      .hint {
+        background: rgba(253, 251, 246, 0.96);
+        border-radius: 8px 8px 0 0;
+        bottom: 0;
+        color: var(--ink);
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        left: max(20px, calc((100vw - 1320px) / 2));
+        overflow: hidden;
+        position: absolute;
+        right: max(20px, calc((100vw - 1320px) / 2));
+        z-index: 3;
+      }
+
+      .hint div {
+        border-right: 1px solid rgba(33, 23, 22, 0.12);
+        padding: 18px 22px;
+      }
+
+      .hint div:last-child {
+        border-right: 0;
+      }
+
+      .hint strong {
+        color: var(--berry);
+        display: block;
+        font-size: 0.82rem;
+        text-transform: uppercase;
+      }
+
+      .hint span {
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+
+      .logo-img {
+        background-image: var(--logo);
+        background-position: left center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        display: block;
+        height: 64px;
+        width: 300px;
+      }
+
+      .header-one {
+        backdrop-filter: blur(22px);
+        background:
+          linear-gradient(90deg, rgba(255, 247, 236, 0.16), rgba(255, 247, 236, 0.08)),
+          rgba(17, 7, 6, 0.16);
+        border: 1px solid rgba(255, 247, 236, 0.26);
+        border-radius: 12px;
+        box-shadow: 0 28px 90px rgba(0, 0, 0, 0.26);
+        justify-content: space-between;
+        left: max(20px, calc((100vw - 1320px) / 2));
+        min-height: 92px;
+        padding: 12px 14px 12px 20px;
+        position: absolute;
+        right: max(20px, calc((100vw - 1320px) / 2));
+        top: 22px;
+        z-index: 4;
+      }
+
+      .header-one::before,
+      .header-one::after {
+        background: var(--gold);
+        content: "";
+        height: 1px;
+        left: 24px;
+        opacity: 0.7;
+        position: absolute;
+        right: 24px;
+      }
+
+      .header-one::before {
+        top: 9px;
+      }
+
+      .header-one::after {
+        bottom: 9px;
+      }
+
+      .header-one .nav {
+        gap: 24px;
+      }
+
+      .header-one .nav a,
+      .header-one .phone {
+        color: rgba(255, 247, 236, 0.78);
+      }
+
+      .header-two {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        left: max(20px, calc((100vw - 1320px) / 2));
+        position: absolute;
+        right: max(20px, calc((100vw - 1320px) / 2));
+        top: 24px;
+        z-index: 4;
+      }
+
+      .header-two .nav,
+      .header-two .right {
+        backdrop-filter: blur(18px);
+        background: var(--dark-glass);
+        border: 1px solid var(--light-line);
+        border-radius: 999px;
+        box-shadow: 0 24px 78px rgba(0, 0, 0, 0.2);
+        gap: 18px;
+        min-height: 56px;
+        padding: 0 18px;
+      }
+
+      .header-two .logo-img {
+        height: 82px;
+        justify-self: center;
+        width: 330px;
+      }
+
+      .header-two .right {
+        justify-self: end;
+      }
+
+      .header-three {
+        align-items: stretch;
+        display: grid;
+        grid-template-columns: 330px 1fr 210px;
+        left: max(20px, calc((100vw - 1320px) / 2));
+        min-height: 112px;
+        position: absolute;
+        right: max(20px, calc((100vw - 1320px) / 2));
+        top: 18px;
+        z-index: 4;
+      }
+
+      .header-three > * {
+        backdrop-filter: blur(20px);
+        background: rgba(255, 247, 236, 0.1);
+        border: 1px solid rgba(255, 247, 236, 0.22);
+      }
+
+      .header-three .brand-panel {
+        align-items: center;
+        border-radius: 12px 0 0 12px;
+        display: flex;
+        padding: 16px 22px;
+      }
+
+      .header-three .logo-img {
+        height: 78px;
+        width: 286px;
+      }
+
+      .header-three .nav {
+        border-left: 0;
+        border-radius: 0;
+        gap: 0;
+        justify-content: center;
+      }
+
+      .header-three .nav a {
+        align-items: center;
+        border-right: 1px solid rgba(255, 247, 236, 0.16);
+        display: flex;
+        height: 100%;
+        padding: 0 24px;
+      }
+
+      .header-three .command-panel {
+        align-items: center;
+        border-left: 0;
+        border-radius: 0 12px 12px 0;
+        display: grid;
+        justify-items: center;
+        padding: 14px;
+      }
+
+      .header-three .phone {
+        color: rgba(255, 247, 236, 0.76);
+        font-size: 0.82rem;
+      }
+
+      @media (max-width: 1080px) {
+        .nav,
+        .phone,
+        .header-two .right,
+        .header-three .command-panel {
+          display: none;
+        }
+
+        .menu {
+          display: inline-flex;
+        }
+
+        .header-one,
+        .header-two,
+        .header-three {
+          display: flex;
+          left: 14px;
+          right: 14px;
+          top: 14px;
+        }
+
+        .header-three {
+          min-height: 86px;
+        }
+
+        .header-three .brand-panel {
+          border-radius: 12px;
+          width: 100%;
+        }
+
+        .logo-img,
+        .header-two .logo-img,
+        .header-three .logo-img {
+          height: 58px;
+          width: 236px;
+        }
+
+        .hero-content {
+          padding: 130px 20px 230px;
+        }
+
+        .hero h2 {
+          font-size: clamp(3.2rem, 15vw, 6rem);
+        }
+
+        .facts {
+          align-items: stretch;
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        .facts div,
+        .facts div:first-child {
+          border-left: 1px solid rgba(255, 247, 236, 0.28);
+          padding-left: 14px;
+        }
+
+        .hint {
+          grid-template-columns: 1fr 1fr;
+          left: 14px;
+          right: 14px;
+        }
+
+        .hint div {
+          padding: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="intro">
+      <strong>3UI regeneration</strong>
+      <h1>Premium header + nowe logo SVG dla fullscreen hero.</h1>
+      <p>
+        Wszystkie trzy propozycje headera są nowe względem poprzedniego zestawu. Używają nowego
+        transparentnego SVG logo: <code>/brand/strawberry-group-premium-logo.svg</code>.
+      </p>
+    </section>
+
+    <div class="label">
+      <strong>Option 1 - Atelier Glass Masthead</strong>
+      <span>Najbardziej luksusowy klasyczny pasek: cienkie złote linie, duże logo, mocne CTA.</span>
+    </div>
+    <section class="hero">
+      <header class="header header-one">
+        <a class="logo-img" href="#" aria-label="Strawberry Group"></a>
+        <nav class="nav" aria-label="Główna nawigacja">
+          <a href="#">Oferta</a>
+          <a href="#">Pakiety</a>
+          <a href="#">Jak działamy</a>
+          <a href="#">Eventy</a>
+          <a href="#">Kontakt</a>
+          <a class="phone" href="#">+48 514 214 567</a>
+        </nav>
+        <a class="cta" href="#">Sprawdź termin</a>
+        <button class="menu" type="button">Menu</button>
+      </header>
+      <div class="hero-content">
+        <span class="eyebrow">Interaktywne stoisko deserowe</span>
+        <h2>Truskawki w czekoladzie jako atrakcja wydarzenia.</h2>
+        <p>Polskie truskawki, czekolada, dodatki i elegancka obsługa nawet do 1000 gości.</p>
+        <div class="actions">
+          <a class="cta" href="#">Sprawdź dostępność terminu</a>
+          <a class="ghost" href="#">Zobacz pakiety</a>
+        </div>
+        <div class="facts">
+          <div><strong>do 1000</strong><span>gości w krótkim czasie</span></div>
+          <div><strong>od 10 zł</strong><span>za osobę w pakietach</span></div>
+          <div><strong>2 osoby</strong><span>obsługi w każdym pakiecie</span></div>
+        </div>
+      </div>
+      <div class="hint">
+        <div><strong>Świeże owoce</strong><span>przygotowanie na miejscu</span></div>
+        <div><strong>Interakcja</strong><span>goście wybierają dodatki</span></div>
+        <div><strong>Skala</strong><span>proces dla dużych eventów</span></div>
+        <div><strong>Organizacja</strong><span>transport, montaż, obsługa</span></div>
+      </div>
+    </section>
+
+    <div class="label">
+      <strong>Option 2 - Centered Couture Crest</strong>
+      <span>Logo jako centrum kompozycji, nav i akcje w oddzielnych luksusowych dockach.</span>
+    </div>
+    <section class="hero">
+      <header class="header header-two">
+        <nav class="nav" aria-label="Główna nawigacja">
+          <a href="#">Oferta</a>
+          <a href="#">Pakiety</a>
+          <a href="#">Jak działamy</a>
+        </nav>
+        <a class="logo-img" href="#" aria-label="Strawberry Group"></a>
+        <div class="right">
+          <a href="#">Eventy</a>
+          <a href="#">Kontakt</a>
+          <a class="cta" href="#">Sprawdź termin</a>
+        </div>
+        <button class="menu" type="button">Menu</button>
+      </header>
+      <div class="hero-content">
+        <span class="eyebrow">Interaktywne stoisko deserowe</span>
+        <h2>Truskawki w czekoladzie jako atrakcja wydarzenia.</h2>
+        <p>Polskie truskawki, czekolada, dodatki i elegancka obsługa nawet do 1000 gości.</p>
+        <div class="actions">
+          <a class="cta" href="#">Sprawdź dostępność terminu</a>
+          <a class="ghost" href="#">Zobacz pakiety</a>
+        </div>
+        <div class="facts">
+          <div><strong>do 1000</strong><span>gości w krótkim czasie</span></div>
+          <div><strong>od 10 zł</strong><span>za osobę w pakietach</span></div>
+          <div><strong>2 osoby</strong><span>obsługi w każdym pakiecie</span></div>
+        </div>
+      </div>
+      <div class="hint">
+        <div><strong>Świeże owoce</strong><span>przygotowanie na miejscu</span></div>
+        <div><strong>Interakcja</strong><span>goście wybierają dodatki</span></div>
+        <div><strong>Skala</strong><span>proces dla dużych eventów</span></div>
+        <div><strong>Organizacja</strong><span>transport, montaż, obsługa</span></div>
+      </div>
+    </section>
+
+    <div class="label">
+      <strong>Option 3 - Private Event Console</strong>
+      <span>Najbardziej agencyjny: header jako segmentowana konsola, bardzo uporządkowany i drogi.</span>
+    </div>
+    <section class="hero">
+      <header class="header header-three">
+        <a class="brand-panel" href="#" aria-label="Strawberry Group">
+          <span class="logo-img"></span>
+        </a>
+        <nav class="nav" aria-label="Główna nawigacja">
+          <a href="#">Oferta</a>
+          <a href="#">Pakiety</a>
+          <a href="#">Jak działamy</a>
+          <a href="#">Eventy</a>
+          <a href="#">Kontakt</a>
+        </nav>
+        <div class="command-panel">
+          <a class="phone" href="#">+48 514 214 567</a>
+          <a class="cta" href="#">Sprawdź termin</a>
+        </div>
+        <button class="menu" type="button">Menu</button>
+      </header>
+      <div class="hero-content">
+        <span class="eyebrow">Interaktywne stoisko deserowe</span>
+        <h2>Truskawki w czekoladzie jako atrakcja wydarzenia.</h2>
+        <p>Polskie truskawki, czekolada, dodatki i elegancka obsługa nawet do 1000 gości.</p>
+        <div class="actions">
+          <a class="cta" href="#">Sprawdź dostępność terminu</a>
+          <a class="ghost" href="#">Zobacz pakiety</a>
+        </div>
+        <div class="facts">
+          <div><strong>do 1000</strong><span>gości w krótkim czasie</span></div>
+          <div><strong>od 10 zł</strong><span>za osobę w pakietach</span></div>
+          <div><strong>2 osoby</strong><span>obsługi w każdym pakiecie</span></div>
+        </div>
+      </div>
+      <div class="hint">
+        <div><strong>Świeże owoce</strong><span>przygotowanie na miejscu</span></div>
+        <div><strong>Interakcja</strong><span>goście wybierają dodatki</span></div>
+        <div><strong>Skala</strong><span>proces dla dużych eventów</span></div>
+        <div><strong>Organizacja</strong><span>transport, montaż, obsługa</span></div>
+      </div>
+    </section>
+  </body>
+</html>

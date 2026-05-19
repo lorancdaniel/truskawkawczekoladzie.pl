@@ -1,0 +1,215 @@
+{
+  "url": "http://127.0.0.1:5174/",
+  "result": [
+    {
+      "name": "desktop-default",
+      "metrics": {
+        "viewport": {
+          "w": 1920,
+          "h": 1080
+        },
+        "scrollY": 7838,
+        "horizontalOverflow": false,
+        "shell": {
+          "x": 61,
+          "y": 509,
+          "w": 1797,
+          "h": 1282
+        },
+        "panel": {
+          "x": 62,
+          "y": 510,
+          "w": 808,
+          "h": 1280
+        },
+        "form": {
+          "x": 870,
+          "y": 510,
+          "w": 987,
+          "h": 1280
+        },
+        "footer": {
+          "x": 0,
+          "y": 1917,
+          "w": 1920,
+          "h": 439
+        }
+      }
+    },
+    {
+      "name": "desktop-validation",
+      "metrics": {
+        "viewport": {
+          "w": 1920,
+          "h": 1080
+        },
+        "scrollY": 8165,
+        "horizontalOverflow": false,
+        "shell": {
+          "x": 61,
+          "y": 176,
+          "w": 1797,
+          "h": 1853
+        },
+        "panel": {
+          "x": 62,
+          "y": 177,
+          "w": 808,
+          "h": 1851
+        },
+        "form": {
+          "x": 870,
+          "y": 177,
+          "w": 987,
+          "h": 1851
+        },
+        "footer": {
+          "x": 0,
+          "y": 2161,
+          "w": 1920,
+          "h": 439
+        }
+      }
+    },
+    {
+      "name": "desktop-success",
+      "metrics": {
+        "viewport": {
+          "w": 1920,
+          "h": 1080
+        },
+        "scrollY": 8165,
+        "horizontalOverflow": false,
+        "shell": {
+          "x": 61,
+          "y": 176,
+          "w": 1797,
+          "h": 1117
+        },
+        "panel": {
+          "x": 62,
+          "y": 177,
+          "w": 808,
+          "h": 1115
+        },
+        "form": {
+          "x": 870,
+          "y": 177,
+          "w": 987,
+          "h": 1115
+        },
+        "footer": {
+          "x": 0,
+          "y": 1425,
+          "w": 1920,
+          "h": 439
+        }
+      }
+    },
+    {
+      "name": "mobile-top",
+      "metrics": {
+        "viewport": {
+          "w": 390,
+          "h": 844
+        },
+        "scrollY": 12083,
+        "horizontalOverflow": false,
+        "shell": {
+          "x": 14,
+          "y": 687,
+          "w": 362,
+          "h": 2483
+        },
+        "panel": {
+          "x": 15,
+          "y": 688,
+          "w": 360,
+          "h": 897
+        },
+        "form": {
+          "x": 15,
+          "y": 1585,
+          "w": 360,
+          "h": 1584
+        },
+        "footer": {
+          "x": 0,
+          "y": 3215,
+          "w": 390,
+          "h": 1149
+        }
+      }
+    },
+    {
+      "name": "mobile-form",
+      "metrics": {
+        "viewport": {
+          "w": 390,
+          "h": 844
+        },
+        "scrollY": 14624,
+        "horizontalOverflow": false,
+        "shell": {
+          "x": 14,
+          "y": -1872,
+          "w": 362,
+          "h": 2483
+        },
+        "panel": {
+          "x": 15,
+          "y": -1871,
+          "w": 360,
+          "h": 897
+        },
+        "form": {
+          "x": 15,
+          "y": -974,
+          "w": 360,
+          "h": 1584
+        },
+        "footer": {
+          "x": 0,
+          "y": 674,
+          "w": 390,
+          "h": 1149
+        }
+      }
+    },
+    {
+      "name": "mobile-validation",
+      "metrics": {
+        "viewport": {
+          "w": 390,
+          "h": 844
+        },
+        "scrollY": 13755,
+        "horizontalOverflow": false,
+        "shell": {
+          "x": 14,
+          "y": -1003,
+          "w": 362,
+          "h": 3062
+        },
+        "panel": {
+          "x": 15,
+          "y": -1002,
+          "w": 360,
+          "h": 897
+        },
+        "form": {
+          "x": 15,
+          "y": -105,
+          "w": 360,
+          "h": 2162
+        },
+        "footer": {
+          "x": 0,
+          "y": 2121,
+          "w": 390,
+          "h": 1149
+        }
+      }
+    }
+  ]
+}
