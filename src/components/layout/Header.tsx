@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { ArrowRight, Menu, PhoneCall, X } from 'lucide-react';
+import { type CSSProperties, useCallback, useEffect, useRef, useState } from 'react';
+import { ArrowRight, PhoneCall } from 'lucide-react';
 import { contact, navItems } from '../../data/siteContent';
 import { scrollToLeadForm } from '../../lib/dom';
 
@@ -200,6 +200,21 @@ export function Header() {
     return () => document.body.classList.remove('nav-open');
   }, [isOpen]);
 
+  useEffect(() => {
+    if (!isOpen) {
+      return undefined;
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen]);
+
   return (
     <>
       <header
@@ -221,20 +236,42 @@ export function Header() {
         </a>
 
         <button
-          className="menu-button"
+          className={`menu-button menu-button--magnetic ${isOpen ? 'is-open' : ''}`}
           type="button"
+          aria-label={isOpen ? 'Zamknij menu' : 'Otwórz menu'}
           aria-expanded={isOpen}
           aria-controls="site-navigation"
           onClick={() => setIsOpen((value) => !value)}
         >
-          {isOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
-          <span>{isOpen ? 'Zamknij' : 'Menu'}</span>
+          <span className="menu-button__magnet" aria-hidden="true">
+            <span className="menu-button__glyph">
+              <span className="menu-button__line menu-button__line--top" />
+              <span className="menu-button__line menu-button__line--middle" />
+              <span className="menu-button__line menu-button__line--bottom" />
+            </span>
+          </span>
+          <span className="menu-button__dots" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+          </span>
         </button>
 
-        <nav id="site-navigation" className={`site-nav ${isOpen ? 'is-open' : ''}`} aria-label="Główna nawigacja">
+        <nav
+          id="site-navigation"
+          className={`site-nav site-nav--glass ${isOpen ? 'is-open' : ''}`}
+          aria-label="Główna nawigacja"
+        >
+          <span className="site-nav__photo-lock" aria-hidden="true" />
+          <p className="site-nav__intro">Wybierz sekcję albo od razu sprawdź dostępność terminu.</p>
           <div className="site-nav__links">
-            {navItems.map((item) => (
-              <a key={item.href} href={item.href} onClick={() => setIsOpen(false)}>
+            {navItems.map((item, index) => (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={() => setIsOpen(false)}
+                style={{ '--nav-item-index': index } as CSSProperties}
+              >
                 {item.label}
               </a>
             ))}

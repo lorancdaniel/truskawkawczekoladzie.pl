@@ -1,0 +1,21 @@
+{
+  "scrollBeforeOpen": 0,
+  "metrics": {
+    "scrollY": 9935,
+    "bodyNavOpen": true,
+    "navClass": "site-nav site-nav--glass is-open",
+    "navRect": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 844
+    },
+    "navBackgroundImage": "linear-gradient(rgba(27, 16, 15, 0.93), rgba(27, 16, 15, 0.74)), linear-gradient(90deg, rgba(27, 16, 15, 0.78), rgba(27, 16, 15, 0.22)), url(\"http://localhost:5173/images/hero-strawberry-stand.png\")",
+    "photoLockDisplay": "block",
+    "photoLockPosition": "absolute",
+    "photoLockBackgroundImage": "linear-gradient(rgba(27, 16, 15, 0.93), rgba(27, 16, 15, 0.74)), linear-gradient(90deg, rgba(27, 16, 15, 0.78), rgba(27, 16, 15, 0.22)), url(\"http://localhost:5173/images/hero-strawberry-stand.png\")",
+    "photoLockBackgroundPosition": "50% 50%, 50% 50%, 50% 50%",
+    "overflowX": false
+  },
+  "screenshot": "/Users/danielloranc/Documents/truskawka/docs/reviews/3ui/mobile-navigation-proposals/implemented-option3-photo-lock-scrolled-mobile-390x844.png"
+}

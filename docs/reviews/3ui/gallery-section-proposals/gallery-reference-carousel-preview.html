@@ -1,0 +1,715 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>3UI Reference Carousel Regeneration</title>
+    <style>
+      :root {
+        --ink: #211615;
+        --cream: #fff8ef;
+        --cream-2: #f5eadc;
+        --cocoa: #1c0d0d;
+        --cocoa-2: #2b1011;
+        --red: #d83446;
+        --muted: #76665e;
+        --line: rgba(71, 40, 27, 0.16);
+        --light-line: rgba(255, 248, 239, 0.18);
+        --serif: "Cormorant Garamond", "Times New Roman", Georgia, serif;
+        --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--cream);
+        color: var(--ink);
+        font-family: var(--sans);
+      }
+
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .preview-nav {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 64px;
+        padding: 0 clamp(20px, 4vw, 56px);
+        background: rgba(28, 13, 13, 0.97);
+        color: var(--cream);
+        border-bottom: 1px solid rgba(197, 138, 53, 0.42);
+      }
+
+      .preview-nav strong {
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .preview-nav div {
+        display: flex;
+        gap: 8px;
+      }
+
+      .preview-nav a {
+        display: inline-flex;
+        align-items: center;
+        height: 34px;
+        padding: 0 14px;
+        border: 1px solid rgba(255, 248, 239, 0.18);
+        border-radius: 999px;
+        color: inherit;
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: 900;
+      }
+
+      .context-band {
+        min-height: 128px;
+        background:
+          radial-gradient(circle at 72% 20%, rgba(216, 52, 70, 0.2), transparent 34%),
+          linear-gradient(180deg, #1a0c0c, #280f10);
+      }
+
+      .option {
+        position: relative;
+        overflow: hidden;
+        min-height: 100vh;
+        padding: clamp(54px, 7vw, 104px) 0 clamp(64px, 7vw, 104px);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .option__tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0 clamp(24px, 4vw, 64px) 38px;
+        color: var(--red);
+        font-size: 12px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .option__tag b {
+        display: grid;
+        place-items: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 999px;
+        background: var(--red);
+        color: white;
+        letter-spacing: 0;
+      }
+
+      .eyebrow {
+        margin: 0 0 16px;
+        color: var(--red);
+        font-size: 12px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      h2,
+      h3 {
+        font-family: var(--serif);
+        letter-spacing: 0;
+      }
+
+      h2 {
+        font-size: clamp(58px, 6.6vw, 128px);
+        line-height: 0.88;
+      }
+
+      h3 {
+        font-size: clamp(42px, 4vw, 78px);
+        line-height: 0.9;
+      }
+
+      .lead {
+        color: var(--muted);
+        font-size: clamp(16px, 1.15vw, 20px);
+        line-height: 1.62;
+      }
+
+      .floating-cta {
+        position: fixed;
+        right: 30px;
+        bottom: 28px;
+        z-index: 40;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        height: 58px;
+        padding: 0 20px 0 12px;
+        border-radius: 999px;
+        background: #5d3034;
+        color: white;
+        border: 1px solid rgba(255, 248, 239, 0.2);
+        box-shadow: 0 18px 34px rgba(36, 10, 10, 0.28);
+        font-size: 14px;
+        font-weight: 900;
+      }
+
+      .floating-cta i {
+        display: grid;
+        place-items: center;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: rgba(255, 248, 239, 0.12);
+        font-style: normal;
+      }
+
+      .ref-header {
+        display: grid;
+        grid-template-columns: minmax(420px, 0.85fr) minmax(520px, 1fr);
+        gap: clamp(28px, 7vw, 126px);
+        align-items: end;
+        padding: 0 clamp(24px, 4vw, 64px);
+        margin-bottom: clamp(34px, 5vw, 72px);
+      }
+
+      .ref-header h2 {
+        max-width: 880px;
+      }
+
+      .ref-header .lead {
+        max-width: 640px;
+        padding-bottom: 8px;
+      }
+
+      .option-1 {
+        color: var(--cream);
+        background:
+          radial-gradient(circle at 50% 14%, rgba(216, 52, 70, 0.2), transparent 36rem),
+          linear-gradient(180deg, #1b0d0d 0%, #20112a 52%, #1b0d0d 100%);
+      }
+
+      .option-1 .lead {
+        color: rgba(255, 248, 239, 0.68);
+      }
+
+      .belt {
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .belt__track {
+        display: flex;
+        align-items: stretch;
+        gap: clamp(18px, 2.6vw, 38px);
+        width: max-content;
+        animation: beltLeft 30s linear infinite;
+      }
+
+      .belt:hover .belt__track {
+        animation-play-state: paused;
+      }
+
+      .belt-card {
+        flex: 0 0 clamp(760px, 62vw, 1120px);
+        display: grid;
+        grid-template-columns: 1.12fr 0.88fr;
+        min-height: clamp(430px, 38vw, 650px);
+        overflow: hidden;
+        border: 1px solid rgba(255, 248, 239, 0.16);
+        border-radius: 10px;
+        background: var(--cream);
+        color: var(--ink);
+      }
+
+      .belt-card__media {
+        min-width: 0;
+      }
+
+      .belt-card__body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-width: 0;
+        padding: clamp(36px, 4vw, 64px);
+      }
+
+      .belt-card__body p:not(.eyebrow) {
+        margin-top: 22px;
+        color: var(--muted);
+        font-size: 18px;
+        line-height: 1.5;
+      }
+
+      .belt-card__number {
+        display: block;
+        padding-top: 28px;
+        border-top: 1px solid var(--line);
+        color: var(--red);
+        font-family: var(--serif);
+        font-size: 78px;
+        line-height: 0.86;
+      }
+
+      @keyframes beltLeft {
+        from {
+          transform: translate3d(0, 0, 0);
+        }
+        to {
+          transform: translate3d(calc(-50% - 19px), 0, 0);
+        }
+      }
+
+      .option-2 {
+        background:
+          radial-gradient(circle at 76% 18%, rgba(216, 52, 70, 0.09), transparent 30rem),
+          linear-gradient(180deg, #fff8ef, #f6ecdf);
+      }
+
+      .snap-stage {
+        position: relative;
+        display: grid;
+        gap: 32px;
+      }
+
+      .snap-window {
+        overflow: hidden;
+      }
+
+      .snap-track {
+        display: flex;
+        align-items: stretch;
+        gap: clamp(20px, 2.6vw, 42px);
+        padding-inline: clamp(24px, 7vw, 138px);
+        transform: translateX(-18vw);
+      }
+
+      .snap-card {
+        flex: 0 0 min(74vw, 1180px);
+        display: grid;
+        grid-template-columns: 58% 42%;
+        min-height: clamp(460px, 42vw, 690px);
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #fffdf8;
+      }
+
+      .snap-card:not(.is-active) {
+        opacity: 0.45;
+        filter: saturate(0.76);
+      }
+
+      .snap-card__body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-width: 0;
+        padding: clamp(38px, 4.4vw, 72px);
+      }
+
+      .snap-card__body h3 {
+        max-width: 500px;
+      }
+
+      .snap-card__body .lead {
+        max-width: 430px;
+        margin-top: 24px;
+      }
+
+      .snap-card__bottom {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 20px;
+        padding-top: 30px;
+        border-top: 1px solid var(--line);
+      }
+
+      .snap-card__bottom strong {
+        color: var(--red);
+        font-family: var(--serif);
+        font-size: clamp(56px, 5vw, 96px);
+        line-height: 0.82;
+      }
+
+      .snap-card__bottom span {
+        max-width: 220px;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.45;
+      }
+
+      .snap-controls,
+      .picture-controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+      }
+
+      .round-btn {
+        display: grid;
+        place-items: center;
+        width: 52px;
+        height: 52px;
+        border: 1px solid var(--line);
+        border-radius: 50%;
+        background: var(--cocoa);
+        color: var(--cream);
+        font-size: 26px;
+      }
+
+      .progress-dots {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .progress-dots i {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: rgba(71, 40, 27, 0.18);
+      }
+
+      .progress-dots i:first-child {
+        width: 34px;
+        border-radius: 999px;
+        background: var(--red);
+      }
+
+      .option-3 {
+        background: #fff8ef;
+      }
+
+      .picture-belt {
+        overflow: hidden;
+      }
+
+      .picture-belt__track {
+        display: flex;
+        gap: clamp(18px, 2vw, 32px);
+        width: max-content;
+        animation: beltRight 34s linear infinite;
+      }
+
+      .picture-belt:hover .picture-belt__track {
+        animation-play-state: paused;
+      }
+
+      .picture-card {
+        flex: 0 0 clamp(520px, 44vw, 820px);
+        position: relative;
+        min-height: clamp(420px, 38vw, 620px);
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: var(--cream-2);
+      }
+
+      .picture-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, transparent 40%, rgba(28, 13, 13, 0.76));
+      }
+
+      .picture-card__copy {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 28px;
+        align-items: end;
+        padding: clamp(28px, 3.4vw, 54px);
+        color: var(--cream);
+      }
+
+      .picture-card__copy h3 {
+        max-width: 560px;
+      }
+
+      .picture-card__copy p {
+        max-width: 320px;
+        color: rgba(255, 248, 239, 0.78);
+        font-size: 15px;
+        line-height: 1.45;
+      }
+
+      .picture-card__num {
+        color: #ffd8dd;
+        font-family: var(--serif);
+        font-size: 72px;
+        line-height: 0.8;
+      }
+
+      .picture-controls {
+        margin-top: 34px;
+      }
+
+      @keyframes beltRight {
+        from {
+          transform: translate3d(calc(-50% - 16px), 0, 0);
+        }
+        to {
+          transform: translate3d(0, 0, 0);
+        }
+      }
+
+      .context-after {
+        min-height: 280px;
+        padding: 58px clamp(24px, 4vw, 64px);
+        background: var(--cream);
+      }
+
+      .context-after__box {
+        display: grid;
+        grid-template-columns: minmax(320px, 0.9fr) minmax(560px, 1.1fr);
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #fffdf8;
+      }
+
+      .context-after__box > div {
+        padding: 44px;
+      }
+
+      .context-after__box > div:first-child {
+        background: linear-gradient(135deg, #3b1114, #1b0d0d);
+        color: var(--cream);
+      }
+
+      .fake-form {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+      }
+
+      .fake-field {
+        min-height: 48px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+      }
+
+      .fake-field:last-child {
+        grid-column: 1 / -1;
+        min-height: 96px;
+      }
+
+      @media (max-width: 1100px) {
+        .ref-header,
+        .context-after__box {
+          grid-template-columns: 1fr;
+        }
+
+        .belt-card,
+        .snap-card {
+          grid-template-columns: 1fr;
+        }
+
+        .belt-card__media,
+        .snap-card__media {
+          height: 48vw;
+          min-height: 320px;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .preview-nav {
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 16px 20px;
+        }
+
+        .option__tag,
+        .ref-header {
+          margin-left: 20px;
+          margin-right: 20px;
+          padding-left: 0;
+          padding-right: 0;
+        }
+
+        h2 {
+          font-size: 52px;
+        }
+
+        .belt-card,
+        .snap-card,
+        .picture-card {
+          flex-basis: 86vw;
+        }
+
+        .picture-card__copy {
+          grid-template-columns: 1fr;
+        }
+
+        .floating-cta {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="preview-nav" aria-label="Nawigacja podglądu">
+      <strong>3UI regeneration: reference-style carousel</strong>
+      <div>
+        <a href="#option-1">Option 1</a>
+        <a href="#option-2">Option 2</a>
+        <a href="#option-3">Option 3</a>
+      </div>
+    </nav>
+
+    <div class="context-band"></div>
+
+    <section id="option-1" class="option option-1">
+      <div class="option__tag"><b>1</b> Infinite split belt</div>
+      <header class="ref-header">
+        <div>
+          <p class="eyebrow">Styl stoiska</p>
+          <h2>Pozioma karuzela jak ruch po barze.</h2>
+        </div>
+        <p class="lead">
+          Duże segmenty zdjęcie plus opis jadą w pętli. To najbardziej bezpośredni kierunek „grunt/kuflik”: szeroki pas, widoczne kolejne karty i zero statycznej planszy.
+        </p>
+      </header>
+
+      <div class="belt" aria-label="Infinite carousel">
+        <div class="belt__track">
+          <article class="belt-card">
+            <figure class="belt-card__media"><img src="/images/gallery-generated/gallery-realization-1-chocolate-pour.png" alt="Czekolada polewana na truskawki" /></figure>
+            <div class="belt-card__body"><div><p class="eyebrow">Proces</p><h3>Czekolada w ruchu</h3><p>Najbardziej apetyczny moment obsługi: deser powstaje na oczach gości.</p></div><strong class="belt-card__number">01</strong></div>
+          </article>
+          <article class="belt-card">
+            <figure class="belt-card__media"><img src="/images/gallery-generated/gallery-realization-2-buffet-counter.png" alt="Elegancki blat z dodatkami" /></figure>
+            <div class="belt-card__body"><div><p class="eyebrow">Stoisko</p><h3>Eventowy setup</h3><p>Blat, dodatki i światło pracują jak część oprawy wydarzenia.</p></div><strong class="belt-card__number">02</strong></div>
+          </article>
+          <article class="belt-card">
+            <figure class="belt-card__media"><img src="/images/gallery-generated/gallery-realization-3-guest-toppings.png" alt="Gość wybiera dodatki" /></figure>
+            <div class="belt-card__body"><div><p class="eyebrow">Interakcja</p><h3>Wybór dodatków</h3><p>Goście dobierają polewy i posypki bez zatrzymywania rytmu obsługi.</p></div><strong class="belt-card__number">03</strong></div>
+          </article>
+          <article class="belt-card">
+            <figure class="belt-card__media"><img src="/images/gallery-generated/gallery-realization-4-finished-cups.png" alt="Gotowe kubki deserowe" /></figure>
+            <div class="belt-card__body"><div><p class="eyebrow">Efekt</p><h3>Gotowe kubki</h3><p>Każdy deser jest prosty do wydania, fotogeniczny i wygodny dla gości.</p></div><strong class="belt-card__number">04</strong></div>
+          </article>
+          <article class="belt-card">
+            <figure class="belt-card__media"><img src="/images/gallery-generated/gallery-realization-1-chocolate-pour.png" alt="" /></figure>
+            <div class="belt-card__body"><div><p class="eyebrow">Proces</p><h3>Czekolada w ruchu</h3><p>Najbardziej apetyczny moment obsługi: deser powstaje na oczach gości.</p></div><strong class="belt-card__number">01</strong></div>
+          </article>
+          <article class="belt-card">
+            <figure class="belt-card__media"><img src="/images/gallery-generated/gallery-realization-2-buffet-counter.png" alt="" /></figure>
+            <div class="belt-card__body"><div><p class="eyebrow">Stoisko</p><h3>Eventowy setup</h3><p>Blat, dodatki i światło pracują jak część oprawy wydarzenia.</p></div><strong class="belt-card__number">02</strong></div>
+          </article>
+          <article class="belt-card">
+            <figure class="belt-card__media"><img src="/images/gallery-generated/gallery-realization-3-guest-toppings.png" alt="" /></figure>
+            <div class="belt-card__body"><div><p class="eyebrow">Interakcja</p><h3>Wybór dodatków</h3><p>Goście dobierają polewy i posypki bez zatrzymywania rytmu obsługi.</p></div><strong class="belt-card__number">03</strong></div>
+          </article>
+          <article class="belt-card">
+            <figure class="belt-card__media"><img src="/images/gallery-generated/gallery-realization-4-finished-cups.png" alt="" /></figure>
+            <div class="belt-card__body"><div><p class="eyebrow">Efekt</p><h3>Gotowe kubki</h3><p>Każdy deser jest prosty do wydania, fotogeniczny i wygodny dla gości.</p></div><strong class="belt-card__number">04</strong></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="option-2" class="option option-2">
+      <div class="option__tag"><b>2</b> Center snap carousel</div>
+      <header class="ref-header">
+        <div>
+          <p class="eyebrow">Styl stoiska</p>
+          <h2>Duży aktywny slajd i boczne zapowiedzi.</h2>
+        </div>
+        <p class="lead">
+          Klasyczna pozioma karuzela premium: aktywny slajd jest dominujący, poprzedni i następny są widoczne na krawędziach, a kontrolki siedzą centralnie pod torem.
+        </p>
+      </header>
+
+      <div class="snap-stage">
+        <div class="snap-window">
+          <div class="snap-track">
+            <article class="snap-card">
+              <figure class="snap-card__media"><img src="/images/gallery-generated/gallery-realization-4-finished-cups.png" alt="Gotowe kubki deserowe" /></figure>
+              <div class="snap-card__body"><div><p class="eyebrow">Efekt</p><h3>Gotowe kubki</h3><p class="lead">Finał obsługi widoczny jeszcze przed aktywnym slajdem.</p></div><div class="snap-card__bottom"><strong>04</strong><span>zapowiedź poprzedniego kadru</span></div></div>
+            </article>
+            <article class="snap-card is-active">
+              <figure class="snap-card__media"><img src="/images/gallery-generated/gallery-realization-1-chocolate-pour.png" alt="Czekolada polewana na truskawki" /></figure>
+              <div class="snap-card__body"><div><p class="eyebrow">Proces</p><h3>Czekolada w ruchu</h3><p class="lead">Opis ma własną kolumnę, więc nie ucina się przy wąskim desktopie i nie walczy ze zdjęciem.</p></div><div class="snap-card__bottom"><strong>01</strong><span>aktywny kadr karuzeli</span></div></div>
+            </article>
+            <article class="snap-card">
+              <figure class="snap-card__media"><img src="/images/gallery-generated/gallery-realization-2-buffet-counter.png" alt="Elegancki blat z dodatkami" /></figure>
+              <div class="snap-card__body"><div><p class="eyebrow">Stoisko</p><h3>Eventowy setup</h3><p class="lead">Następny slajd jest czytelny jako zachęta do przesunięcia.</p></div><div class="snap-card__bottom"><strong>02</strong><span>zapowiedź następnego kadru</span></div></div>
+            </article>
+          </div>
+        </div>
+        <div class="snap-controls">
+          <button class="round-btn" type="button" aria-label="Poprzedni">‹</button>
+          <div class="progress-dots" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          <button class="round-btn" type="button" aria-label="Następny">›</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="option-3" class="option option-3">
+      <div class="option__tag"><b>3</b> Full-bleed picture belt</div>
+      <header class="ref-header">
+        <div>
+          <p class="eyebrow">Styl stoiska</p>
+          <h2>Zdjęciowy pas z opisem w obrazie.</h2>
+        </div>
+        <p class="lead">
+          Najbardziej fotograficzna wersja: mniej paneli tekstowych, większy rytm obrazów i płynna pętla w przeciwnym kierunku. Dobra, jeśli chcemy mocniej „sprzedać” atmosferę.
+        </p>
+      </header>
+
+      <div class="picture-belt" aria-label="Photo carousel">
+        <div class="picture-belt__track">
+          <article class="picture-card"><img src="/images/gallery-generated/gallery-realization-1-chocolate-pour.png" alt="Czekolada polewana na deser" /><div class="picture-card__copy"><div><p class="eyebrow">Proces</p><h3>Świeża czekolada</h3></div><p>Najmocniejszy moment sensoryczny w dużym kadrze.</p><strong class="picture-card__num">01</strong></div></article>
+          <article class="picture-card"><img src="/images/gallery-generated/gallery-realization-2-buffet-counter.png" alt="Elegancki setup" /><div class="picture-card__copy"><div><p class="eyebrow">Stoisko</p><h3>Elegancki setup</h3></div><p>Blat i dodatki wyglądają jak element scenografii.</p><strong class="picture-card__num">02</strong></div></article>
+          <article class="picture-card"><img src="/images/gallery-generated/gallery-realization-3-guest-toppings.png" alt="Wybór dodatków" /><div class="picture-card__copy"><div><p class="eyebrow">Interakcja</p><h3>Wybór dodatków</h3></div><p>Gość widzi wybór bez konieczności czytania długiego opisu.</p><strong class="picture-card__num">03</strong></div></article>
+          <article class="picture-card"><img src="/images/gallery-generated/gallery-realization-4-finished-cups.png" alt="Gotowe kubki" /><div class="picture-card__copy"><div><p class="eyebrow">Efekt</p><h3>Gotowe kubki</h3></div><p>Fotogeniczny finał i jasny rezultat usługi.</p><strong class="picture-card__num">04</strong></div></article>
+          <article class="picture-card"><img src="/images/gallery-generated/gallery-realization-1-chocolate-pour.png" alt="" /><div class="picture-card__copy"><div><p class="eyebrow">Proces</p><h3>Świeża czekolada</h3></div><p>Najmocniejszy moment sensoryczny w dużym kadrze.</p><strong class="picture-card__num">01</strong></div></article>
+          <article class="picture-card"><img src="/images/gallery-generated/gallery-realization-2-buffet-counter.png" alt="" /><div class="picture-card__copy"><div><p class="eyebrow">Stoisko</p><h3>Elegancki setup</h3></div><p>Blat i dodatki wyglądają jak element scenografii.</p><strong class="picture-card__num">02</strong></div></article>
+          <article class="picture-card"><img src="/images/gallery-generated/gallery-realization-3-guest-toppings.png" alt="" /><div class="picture-card__copy"><div><p class="eyebrow">Interakcja</p><h3>Wybór dodatków</h3></div><p>Gość widzi wybór bez konieczności czytania długiego opisu.</p><strong class="picture-card__num">03</strong></div></article>
+          <article class="picture-card"><img src="/images/gallery-generated/gallery-realization-4-finished-cups.png" alt="" /><div class="picture-card__copy"><div><p class="eyebrow">Efekt</p><h3>Gotowe kubki</h3></div><p>Fotogeniczny finał i jasny rezultat usługi.</p><strong class="picture-card__num">04</strong></div></article>
+        </div>
+      </div>
+      <div class="picture-controls">
+        <button class="round-btn" type="button" aria-label="Poprzedni">‹</button>
+        <div class="progress-dots" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <button class="round-btn" type="button" aria-label="Następny">›</button>
+      </div>
+    </section>
+
+    <section class="context-after">
+      <div class="context-after__box">
+        <div><p class="eyebrow">Wycena</p><h3>Sprawdź dostępność terminu i orientacyjny koszt stoiska.</h3></div>
+        <div class="fake-form"><span class="fake-field"></span><span class="fake-field"></span><span class="fake-field"></span><span class="fake-field"></span><span class="fake-field"></span></div>
+      </div>
+    </section>
+
+    <div class="floating-cta" aria-hidden="true"><i>☎</i> Sprawdź termin →</div>
+  </body>
+</html>

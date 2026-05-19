@@ -1,0 +1,654 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3UI Hero CTA Spacing - Strawberry Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --cream: #fff7ec;
+        --warm: #fdfbf6;
+        --ink: #211716;
+        --cocoa: #1b100f;
+        --berry: #c93445;
+        --berry-soft: #c24a72;
+        --gold: #c59a52;
+        --muted: #75665f;
+        --hero-image: url("/images/hero-strawberry-stand.png");
+        --logo-image: url("/brand/strawberry-group-generated-logo.png");
+        color: var(--ink);
+        font-family: Manrope, ui-sans-serif, system-ui, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background:
+          linear-gradient(180deg, rgba(253, 251, 246, 0.98), rgba(255, 247, 236, 0.92)),
+          var(--hero-image);
+        background-attachment: fixed;
+        background-position: center;
+        background-size: cover;
+        margin: 0;
+      }
+
+      button,
+      a {
+        font: inherit;
+      }
+
+      .intro {
+        display: grid;
+        gap: 12px;
+        padding: 28px max(18px, calc((100vw - 1320px) / 2)) 24px;
+      }
+
+      .intro span {
+        color: var(--berry);
+        font-size: 0.76rem;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .intro h1 {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: clamp(2.45rem, 5.4vw, 5.2rem);
+        line-height: 0.9;
+        margin: 0;
+        max-width: 1020px;
+      }
+
+      .intro p {
+        color: var(--muted);
+        line-height: 1.62;
+        margin: 0;
+        max-width: 900px;
+      }
+
+      .scope {
+        background: var(--cocoa);
+        border-block: 1px solid rgba(197, 154, 82, 0.36);
+        color: var(--cream);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px 22px;
+        justify-content: space-between;
+        padding: 14px max(18px, calc((100vw - 1320px) / 2));
+      }
+
+      .scope strong {
+        font-size: 0.78rem;
+        text-transform: uppercase;
+      }
+
+      .scope em {
+        color: rgba(255, 247, 236, 0.72);
+        font-size: 0.86rem;
+        font-style: normal;
+      }
+
+      .options {
+        display: grid;
+        gap: 24px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        padding: 28px max(18px, calc((100vw - 1320px) / 2)) 44px;
+      }
+
+      .option {
+        background: rgba(253, 251, 246, 0.94);
+        border: 1px solid rgba(33, 23, 22, 0.12);
+        border-radius: 8px;
+        box-shadow: 0 18px 48px rgba(33, 23, 22, 0.1);
+        display: grid;
+        gap: 14px;
+        padding: 14px;
+        transition:
+          border-color 180ms ease,
+          box-shadow 180ms ease,
+          transform 180ms ease;
+      }
+
+      .option:target,
+      .option.is-selected {
+        border-color: var(--berry);
+        box-shadow: 0 22px 58px rgba(201, 52, 69, 0.2);
+        transform: translateY(-2px);
+      }
+
+      .option__head {
+        display: grid;
+        gap: 9px;
+      }
+
+      .option__meta {
+        align-items: center;
+        display: flex;
+        gap: 10px;
+        justify-content: space-between;
+      }
+
+      .option__number {
+        color: var(--berry);
+        font-size: 0.72rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .option h2 {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 1.72rem;
+        line-height: 0.98;
+        margin: 0;
+      }
+
+      .option p {
+        color: var(--muted);
+        font-size: 0.86rem;
+        line-height: 1.5;
+        margin: 0;
+      }
+
+      .choose {
+        background: var(--ink);
+        border: 0;
+        border-radius: 999px;
+        color: var(--cream);
+        cursor: pointer;
+        font-size: 0.78rem;
+        font-weight: 900;
+        min-height: 36px;
+        padding: 0 13px;
+        white-space: nowrap;
+      }
+
+      .option:target .choose,
+      .option.is-selected .choose {
+        background: var(--berry);
+      }
+
+      .phone {
+        background: #120909;
+        border: 1px solid rgba(33, 23, 22, 0.16);
+        border-radius: 10px;
+        box-shadow: 0 24px 62px rgba(33, 23, 22, 0.18);
+        height: 844px;
+        justify-self: center;
+        overflow: hidden;
+        position: relative;
+        width: min(100%, 390px);
+      }
+
+      .phone::before {
+        background:
+          linear-gradient(180deg, rgba(27, 16, 15, 0.34) 0%, rgba(27, 16, 15, 0.18) 35%, rgba(27, 16, 15, 0.56) 100%),
+          linear-gradient(90deg, rgba(27, 16, 15, 0.68), rgba(27, 16, 15, 0.12)),
+          var(--hero-image);
+        background-position: center;
+        background-size: cover;
+        content: "";
+        inset: 0;
+        position: absolute;
+      }
+
+      .phone::after {
+        background: linear-gradient(180deg, transparent 48%, rgba(18, 8, 7, 0.36) 100%);
+        content: "";
+        inset: 0;
+        pointer-events: none;
+        position: absolute;
+      }
+
+      .preview-header,
+      .hero-content,
+      .facts {
+        position: relative;
+        z-index: 1;
+      }
+
+      .preview-header {
+        align-items: center;
+        background: rgba(27, 16, 15, 0.96);
+        border-bottom: 1px solid rgba(197, 154, 82, 0.26);
+        display: flex;
+        height: 66px;
+        justify-content: space-between;
+        padding: 7px 16px;
+      }
+
+      .brand {
+        align-items: center;
+        display: flex;
+        gap: 9px;
+        min-width: 0;
+      }
+
+      .brand img {
+        display: block;
+        height: 48px;
+        width: auto;
+      }
+
+      .brand span {
+        color: var(--cream);
+        font-size: 0.76rem;
+        font-weight: 900;
+        line-height: 1.04;
+        max-width: 110px;
+      }
+
+      .menu-chip {
+        align-items: center;
+        background: rgba(255, 247, 236, 0.95);
+        border: 1px solid rgba(255, 247, 236, 0.72);
+        border-radius: 13px;
+        display: flex;
+        gap: 13px;
+        height: 52px;
+        justify-content: center;
+        padding: 0 11px;
+        width: 88px;
+      }
+
+      .menu-chip span:first-child {
+        background: var(--ink);
+        border-radius: 9px;
+        display: grid;
+        gap: 4px;
+        height: 38px;
+        padding: 10px 8px;
+        width: 38px;
+      }
+
+      .menu-chip i {
+        background: var(--cream);
+        border-radius: 999px;
+        display: block;
+        height: 2px;
+      }
+
+      .menu-chip span:last-child {
+        display: flex;
+        gap: 5px;
+      }
+
+      .menu-chip b {
+        background: var(--ink);
+        border-radius: 999px;
+        display: block;
+        height: 5px;
+        width: 5px;
+      }
+
+      .hero-content {
+        padding: 45px 16px 0;
+      }
+
+      .eyebrow {
+        color: rgba(255, 210, 215, 0.92);
+        font-size: 0.78rem;
+        font-weight: 900;
+        line-height: 1.25;
+        margin: 0 0 14px;
+        text-transform: uppercase;
+      }
+
+      .hero-title {
+        color: var(--cream);
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 3.12rem;
+        font-weight: 700;
+        line-height: 0.86;
+        margin: 0;
+        max-width: 7.1ch;
+      }
+
+      .lead {
+        color: rgba(255, 247, 236, 0.86);
+        font-size: 1rem;
+        font-weight: 600;
+        line-height: 1.6;
+        margin: 24px 0 0;
+        max-width: 330px;
+      }
+
+      .actions {
+        display: grid;
+        position: relative;
+      }
+
+      .primary,
+      .secondary {
+        align-items: center;
+        border: 0;
+        border-radius: 999px;
+        display: inline-flex;
+        font-weight: 900;
+        justify-content: center;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+
+      .primary {
+        background: linear-gradient(135deg, var(--berry), var(--berry-soft));
+        box-shadow: 0 16px 32px rgba(87, 9, 20, 0.2);
+        color: var(--warm);
+      }
+
+      .secondary {
+        color: var(--cream);
+      }
+
+      .arrow {
+        align-items: center;
+        display: inline-flex;
+        font-size: 1.08rem;
+        line-height: 1;
+        margin-left: 10px;
+      }
+
+      .actions--breathing {
+        gap: 13px;
+        margin-top: 34px;
+      }
+
+      .actions--breathing .primary {
+        min-height: 52px;
+        padding-inline: 18px;
+      }
+
+      .actions--breathing .secondary {
+        background: rgba(255, 247, 236, 0.08);
+        border: 1px solid rgba(255, 247, 236, 0.34);
+        min-height: 48px;
+        padding-inline: 18px;
+      }
+
+      .actions--rail {
+        gap: 17px;
+        margin-top: 36px;
+      }
+
+      .actions--rail .primary {
+        min-height: 54px;
+        padding-inline: 18px;
+      }
+
+      .actions--rail .secondary {
+        justify-self: start;
+        min-height: 42px;
+        padding: 0 4px;
+        position: relative;
+      }
+
+      .actions--rail .secondary::before {
+        background: rgba(255, 247, 236, 0.3);
+        content: "";
+        height: 1px;
+        left: 0;
+        position: absolute;
+        right: -42px;
+        top: -9px;
+      }
+
+      .actions--dock {
+        background: rgba(23, 11, 10, 0.34);
+        border: 1px solid rgba(255, 247, 236, 0.16);
+        border-radius: 24px;
+        gap: 12px;
+        margin-top: 32px;
+        padding: 8px;
+      }
+
+      .actions--dock .primary {
+        min-height: 50px;
+        padding-inline: 16px;
+      }
+
+      .actions--dock .secondary {
+        background: rgba(255, 247, 236, 0.09);
+        min-height: 44px;
+        padding-inline: 16px;
+      }
+
+      .facts {
+        display: grid;
+        gap: 13px;
+        margin-top: 34px;
+        padding: 0 16px;
+      }
+
+      .facts div {
+        border-left: 1px solid rgba(255, 247, 236, 0.3);
+        padding-left: 14px;
+      }
+
+      .facts strong {
+        color: var(--cream);
+        display: block;
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 2.02rem;
+        line-height: 0.95;
+      }
+
+      .facts span {
+        color: rgba(255, 247, 236, 0.76);
+        display: block;
+        font-size: 0.86rem;
+        font-weight: 600;
+        line-height: 1.32;
+        max-width: 12ch;
+      }
+
+      .note {
+        color: rgba(33, 23, 22, 0.68);
+        font-size: 0.78rem;
+        line-height: 1.5;
+      }
+
+      @media (max-width: 1280px) {
+        .options {
+          grid-template-columns: 1fr;
+        }
+
+        .option {
+          justify-items: center;
+        }
+
+        .option__head,
+        .note {
+          max-width: 390px;
+          width: 100%;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="intro">
+      <span>3UI proposal</span>
+      <h1>Hero CTA spacing, mobile viewport</h1>
+      <p>
+        Cel: poprawić oddech między głównym CTA i linkiem do pakietów bez zmiany intencji sekcji hero.
+        Każdy wariant pokazuje ten sam kontekst: header, tło, nagłówek, lead i fakty pod spodem.
+      </p>
+    </header>
+
+    <div class="scope" aria-label="Zakres podglądu">
+      <strong>Route: /#top · viewport: 390 × 844</strong>
+      <em>Target: .hero__actions · stan: default mobile</em>
+    </div>
+
+    <main class="options" aria-label="Warianty hero CTA">
+      <article class="option" id="option-1">
+        <div class="option__head">
+          <div class="option__meta">
+            <span class="option__number">Option 1</span>
+            <button class="choose" type="button" data-option="1">Wybierz opcję 1</button>
+          </div>
+          <h2>Breathing Stack</h2>
+          <p>
+            Najbliżej obecnego UI: większy odstęp po leadzie, równy pionowy rytm i dwa spokojne,
+            pełnoszerokie hit targety.
+          </p>
+        </div>
+
+        <div class="phone" aria-label="Podgląd opcji 1">
+          <div class="preview-header">
+            <div class="brand">
+              <img src="/brand/strawberry-group-generated-logo.png" alt="" />
+              <span>STRAWBERRY<br />GROUP S.C.</span>
+            </div>
+            <div class="menu-chip" aria-hidden="true">
+              <span><i></i><i></i><i></i></span>
+              <span><b></b><b></b><b></b></span>
+            </div>
+          </div>
+          <section class="hero-content">
+            <p class="eyebrow">Interaktywne stoisko deserowe</p>
+            <h3 class="hero-title">Truskawki w czekoladzie jako atrakcja wydarzenia.</h3>
+            <p class="lead">Polskie truskawki, czekolada, dodatki i elegancka obsługa nawet do 1000 gości.</p>
+            <div class="actions actions--breathing">
+              <a class="primary" href="#option-1">Sprawdź dostępność terminu <span class="arrow">→</span></a>
+              <a class="secondary" href="#option-1">Zobacz pakiety <span class="arrow">↓</span></a>
+            </div>
+          </section>
+          <div class="facts">
+            <div><strong>do 1000</strong><span>gości w krótkim czasie</span></div>
+            <div><strong>od 10 zł</strong><span>za osobę w pakietach</span></div>
+            <div><strong>2 osoby</strong><span>obsługi w każdym pakiecie</span></div>
+          </div>
+        </div>
+
+        <p class="note">
+          Impact: niski. Ryzyko minimalne, bo zostaje aktualna struktura: przycisk + ghost link.
+        </p>
+      </article>
+
+      <article class="option" id="option-2">
+        <div class="option__head">
+          <div class="option__meta">
+            <span class="option__number">Option 2</span>
+            <button class="choose" type="button" data-option="2">Wybierz opcję 2</button>
+          </div>
+          <h2>Primary + Text Rail</h2>
+          <p>
+            Mocniejsza hierarchia: tylko CTA jest pigułką, a pakiety stają się lżejszym linkiem z linią
+            prowadzącą wzrok.
+          </p>
+        </div>
+
+        <div class="phone" aria-label="Podgląd opcji 2">
+          <div class="preview-header">
+            <div class="brand">
+              <img src="/brand/strawberry-group-generated-logo.png" alt="" />
+              <span>STRAWBERRY<br />GROUP S.C.</span>
+            </div>
+            <div class="menu-chip" aria-hidden="true">
+              <span><i></i><i></i><i></i></span>
+              <span><b></b><b></b><b></b></span>
+            </div>
+          </div>
+          <section class="hero-content">
+            <p class="eyebrow">Interaktywne stoisko deserowe</p>
+            <h3 class="hero-title">Truskawki w czekoladzie jako atrakcja wydarzenia.</h3>
+            <p class="lead">Polskie truskawki, czekolada, dodatki i elegancka obsługa nawet do 1000 gości.</p>
+            <div class="actions actions--rail">
+              <a class="primary" href="#option-2">Sprawdź dostępność terminu <span class="arrow">→</span></a>
+              <a class="secondary" href="#option-2">Zobacz pakiety <span class="arrow">↓</span></a>
+            </div>
+          </section>
+          <div class="facts">
+            <div><strong>do 1000</strong><span>gości w krótkim czasie</span></div>
+            <div><strong>od 10 zł</strong><span>za osobę w pakietach</span></div>
+            <div><strong>2 osoby</strong><span>obsługi w każdym pakiecie</span></div>
+          </div>
+        </div>
+
+        <p class="note">
+          Impact: średni. Najbardziej minimalistyczny kierunek, ale zmienia wagę wizualną drugiego działania.
+        </p>
+      </article>
+
+      <article class="option" id="option-3">
+        <div class="option__head">
+          <div class="option__meta">
+            <span class="option__number">Option 3</span>
+            <button class="choose" type="button" data-option="3">Wybierz opcję 3</button>
+          </div>
+          <h2>Glass Command Dock</h2>
+          <p>
+            Bardziej premium: oba działania są w jednym lekkim module, ale każdy element ma własny odstęp,
+            wysokość i wyraźną rolę.
+          </p>
+        </div>
+
+        <div class="phone" aria-label="Podgląd opcji 3">
+          <div class="preview-header">
+            <div class="brand">
+              <img src="/brand/strawberry-group-generated-logo.png" alt="" />
+              <span>STRAWBERRY<br />GROUP S.C.</span>
+            </div>
+            <div class="menu-chip" aria-hidden="true">
+              <span><i></i><i></i><i></i></span>
+              <span><b></b><b></b><b></b></span>
+            </div>
+          </div>
+          <section class="hero-content">
+            <p class="eyebrow">Interaktywne stoisko deserowe</p>
+            <h3 class="hero-title">Truskawki w czekoladzie jako atrakcja wydarzenia.</h3>
+            <p class="lead">Polskie truskawki, czekolada, dodatki i elegancka obsługa nawet do 1000 gości.</p>
+            <div class="actions actions--dock">
+              <a class="primary" href="#option-3">Sprawdź dostępność terminu <span class="arrow">→</span></a>
+              <a class="secondary" href="#option-3">Zobacz pakiety <span class="arrow">↓</span></a>
+            </div>
+          </section>
+          <div class="facts">
+            <div><strong>do 1000</strong><span>gości w krótkim czasie</span></div>
+            <div><strong>od 10 zł</strong><span>za osobę w pakietach</span></div>
+            <div><strong>2 osoby</strong><span>obsługi w każdym pakiecie</span></div>
+          </div>
+        </div>
+
+        <p class="note">
+          Impact: średni. Najbardziej widoczna zmiana, dobry wybór jeśli CTA ma wyglądać bardziej intencjonalnie.
+        </p>
+      </article>
+    </main>
+
+    <script>
+      const options = Array.from(document.querySelectorAll(".option"));
+      const selectOption = (id) => {
+        options.forEach((option) => option.classList.toggle("is-selected", option.id === `option-${id}`));
+        history.replaceState(null, "", `#option-${id}`);
+      };
+
+      document.querySelectorAll(".choose").forEach((button) => {
+        button.addEventListener("click", () => selectOption(button.dataset.option));
+      });
+
+      const initial = location.hash.match(/option-(\d)/)?.[1];
+      if (initial) selectOption(initial);
+    </script>
+  </body>
+</html>

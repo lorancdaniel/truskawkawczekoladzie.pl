@@ -1,0 +1,178 @@
+[
+  {
+    "label": "00-before-04",
+    "activeText": "Gotowy efekt",
+    "transform": "matrix(1, 0, 0, 1, -2522.5, 0)",
+    "viewport": {
+      "x": 0,
+      "width": 1552
+    },
+    "active": {
+      "x": 423.375,
+      "width": 705.140625
+    },
+    "img": {
+      "x": 424.375,
+      "y": 351.234375,
+      "width": 703.140625,
+      "height": 389.75
+    },
+    "activeCount": 1,
+    "activeOpacity": "1",
+    "inactiveOpacity": "0.36"
+  },
+  {
+    "label": "01-after-click",
+    "activeText": "Świeża czekolada",
+    "transform": "matrix(1, 0, 0, 1, -2522.5, 0)",
+    "viewport": {
+      "x": 0,
+      "width": 1552
+    },
+    "active": {
+      "x": 1188.04931640625,
+      "width": 648.7294921875
+    },
+    "img": {
+      "x": 1188.96923828125,
+      "y": 366.8243713378906,
+      "width": 646.8896484375,
+      "height": 358.5700378417969
+    },
+    "activeCount": 1,
+    "activeOpacity": "0.36",
+    "inactiveOpacity": "0.36"
+  },
+  {
+    "label": "02-180ms",
+    "activeText": "Świeża czekolada",
+    "transform": "matrix(1, 0, 0, 1, -3228.51, 0)",
+    "viewport": {
+      "x": 0,
+      "width": 1552
+    },
+    "active": {
+      "x": 454.060546875,
+      "width": 704.681884765625
+    },
+    "img": {
+      "x": 455.059814453125,
+      "y": 351.36114501953125,
+      "width": 702.68359375,
+      "height": 389.4964599609375
+    },
+    "activeCount": 1,
+    "activeOpacity": "0.994796",
+    "inactiveOpacity": "0.36"
+  },
+  {
+    "label": "03-360ms",
+    "activeText": "Świeża czekolada",
+    "transform": "matrix(1, 0, 0, 1, -312.5, 0)",
+    "viewport": {
+      "x": 0,
+      "width": 1552
+    },
+    "active": {
+      "x": 431.3486328125,
+      "width": 690.380859375
+    },
+    "img": {
+      "x": 432.32769775390625,
+      "y": 355.31341552734375,
+      "width": 688.4227905273438,
+      "height": 381.5919189453125
+    },
+    "activeCount": 1,
+    "activeOpacity": "0.832547",
+    "inactiveOpacity": "0.36"
+  },
+  {
+    "label": "04-540ms",
+    "activeText": "Świeża czekolada",
+    "transform": "matrix(1, 0, 0, 1, -312.5, 0)",
+    "viewport": {
+      "x": 0,
+      "width": 1552
+    },
+    "active": {
+      "x": 423.986083984375,
+      "width": 705.10595703125
+    },
+    "img": {
+      "x": 424.98602294921875,
+      "y": 351.2439270019531,
+      "width": 703.1060180664062,
+      "height": 389.7308654785156
+    },
+    "activeCount": 1,
+    "activeOpacity": "0.999607",
+    "inactiveOpacity": "0.36"
+  },
+  {
+    "label": "05-720ms",
+    "activeText": "Świeża czekolada",
+    "transform": "matrix(1, 0, 0, 1, -312.5, 0)",
+    "viewport": {
+      "x": 0,
+      "width": 1552
+    },
+    "active": {
+      "x": 423.96875,
+      "width": 705.140625
+    },
+    "img": {
+      "x": 424.96875,
+      "y": 351.234375,
+      "width": 703.140625,
+      "height": 389.75
+    },
+    "activeCount": 1,
+    "activeOpacity": "1",
+    "inactiveOpacity": "0.36"
+  },
+  {
+    "label": "06-920ms",
+    "activeText": "Świeża czekolada",
+    "transform": "matrix(1, 0, 0, 1, -312.5, 0)",
+    "viewport": {
+      "x": 0,
+      "width": 1552
+    },
+    "active": {
+      "x": 423.96875,
+      "width": 705.140625
+    },
+    "img": {
+      "x": 424.96875,
+      "y": 351.234375,
+      "width": 703.140625,
+      "height": 389.75
+    },
+    "activeCount": 1,
+    "activeOpacity": "1",
+    "inactiveOpacity": "0.36"
+  },
+  {
+    "label": "07-1120ms",
+    "activeText": "Świeża czekolada",
+    "transform": "matrix(1, 0, 0, 1, -312.5, 0)",
+    "viewport": {
+      "x": 0,
+      "width": 1552
+    },
+    "active": {
+      "x": 423.96875,
+      "width": 705.140625
+    },
+    "img": {
+      "x": 424.96875,
+      "y": 351.234375,
+      "width": 703.140625,
+      "height": 389.75
+    },
+    "activeCount": 1,
+    "activeOpacity": "1",
+    "inactiveOpacity": "0.36"
+  }
+]

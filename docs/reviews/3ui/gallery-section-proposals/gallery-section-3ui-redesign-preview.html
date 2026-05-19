@@ -1,0 +1,924 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>3UI Gallery Section Redesign Preview</title>
+    <style>
+      :root {
+        --ink: #1d1210;
+        --muted: #72625a;
+        --cream: #fff8ef;
+        --cream-2: #f6ecdf;
+        --cocoa: #1c0d0d;
+        --cocoa-2: #321112;
+        --navy: #1c2a43;
+        --red: #d83346;
+        --rose: #bf4a67;
+        --gold: #c58a35;
+        --line: rgba(71, 40, 27, 0.14);
+        --line-light: rgba(255, 248, 239, 0.18);
+        --radius: 8px;
+        --serif: "Cormorant Garamond", "Times New Roman", Georgia, serif;
+        --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--cream);
+        color: var(--ink);
+        font-family: var(--sans);
+      }
+
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .preview-nav {
+        position: sticky;
+        top: 0;
+        z-index: 30;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        min-height: 64px;
+        padding: 0 32px;
+        background: rgba(28, 13, 13, 0.96);
+        color: var(--cream);
+        border-bottom: 1px solid rgba(197, 138, 53, 0.42);
+      }
+
+      .preview-nav strong {
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .preview-nav__links {
+        display: flex;
+        gap: 8px;
+      }
+
+      .preview-nav__links a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 36px;
+        padding: 0 14px;
+        border: 1px solid rgba(255, 248, 239, 0.18);
+        border-radius: 999px;
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+
+      .context-before {
+        min-height: 132px;
+        background:
+          radial-gradient(circle at 74% 22%, rgba(216, 51, 70, 0.22), transparent 32%),
+          linear-gradient(180deg, #1b0d0d 0%, #270f11 100%);
+        border-bottom: 1px solid rgba(255, 248, 239, 0.08);
+      }
+
+      .context-before span {
+        display: inline-flex;
+        margin: 44px 0 0 64px;
+        color: rgba(255, 248, 239, 0.62);
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .option {
+        min-height: 100vh;
+        padding: 74px clamp(28px, 4vw, 64px) 82px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .option__label {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 34px;
+        color: var(--red);
+        font-size: 12px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .option__label span {
+        display: inline-grid;
+        place-items: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: var(--red);
+        color: white;
+        letter-spacing: 0;
+      }
+
+      .eyebrow {
+        margin: 0 0 18px;
+        color: var(--red);
+        font-size: 12px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      h2 {
+        font-family: var(--serif);
+        font-size: clamp(56px, 6.2vw, 116px);
+        line-height: 0.88;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        font-family: var(--serif);
+        font-size: clamp(32px, 3.2vw, 64px);
+        line-height: 0.94;
+      }
+
+      .lead {
+        color: var(--muted);
+        font-size: clamp(16px, 1.15vw, 20px);
+        line-height: 1.6;
+      }
+
+      .floating-cta {
+        position: fixed;
+        right: 32px;
+        bottom: 30px;
+        z-index: 20;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        height: 58px;
+        padding: 0 20px 0 12px;
+        border-radius: 999px;
+        background: #5b2c31;
+        color: white;
+        border: 1px solid rgba(255, 248, 239, 0.2);
+        box-shadow: 0 18px 38px rgba(47, 14, 14, 0.24);
+        font-size: 14px;
+        font-weight: 900;
+      }
+
+      .floating-cta i {
+        display: grid;
+        place-items: center;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: rgba(255, 248, 239, 0.12);
+        font-style: normal;
+      }
+
+      .option-1 {
+        background:
+          linear-gradient(180deg, rgba(255, 248, 239, 0.93), rgba(255, 248, 239, 0.98)),
+          radial-gradient(circle at 85% 12%, rgba(216, 51, 70, 0.08), transparent 28%);
+      }
+
+      .proof-editorial {
+        display: grid;
+        grid-template-columns: minmax(320px, 0.82fr) minmax(620px, 1.62fr);
+        gap: clamp(28px, 4vw, 72px);
+        align-items: stretch;
+      }
+
+      .proof-editorial__copy {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 672px;
+        padding: 36px 0 10px;
+      }
+
+      .proof-editorial__copy h2 {
+        max-width: 740px;
+      }
+
+      .proof-editorial__copy .lead {
+        max-width: 480px;
+        margin-top: 28px;
+      }
+
+      .proof-index {
+        border-top: 1px solid var(--line);
+      }
+
+      .proof-index button {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 42px 1fr auto;
+        align-items: center;
+        min-height: 62px;
+        padding: 0;
+        border: 0;
+        border-bottom: 1px solid var(--line);
+        background: transparent;
+        color: var(--ink);
+        font: inherit;
+        text-align: left;
+      }
+
+      .proof-index strong {
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .proof-index b {
+        font-size: 15px;
+      }
+
+      .proof-index em {
+        color: var(--red);
+        font-style: normal;
+        font-weight: 900;
+      }
+
+      .proof-stage {
+        display: grid;
+        grid-template-columns: 1.3fr 0.74fr;
+        min-height: 672px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: #fffaf2;
+      }
+
+      .proof-stage__image {
+        position: relative;
+        min-height: 672px;
+      }
+
+      .proof-stage__image::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, transparent 40%, rgba(28, 13, 13, 0.48));
+      }
+
+      .proof-stage__caption {
+        position: absolute;
+        left: 34px;
+        right: 34px;
+        bottom: 30px;
+        z-index: 1;
+        color: var(--cream);
+      }
+
+      .proof-stage__caption h3 {
+        max-width: 520px;
+      }
+
+      .proof-stage__caption p {
+        max-width: 480px;
+        margin-top: 12px;
+        color: rgba(255, 248, 239, 0.78);
+        font-size: 17px;
+        line-height: 1.45;
+      }
+
+      .proof-panel {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: clamp(32px, 4vw, 56px);
+        border-left: 1px solid var(--line);
+      }
+
+      .proof-panel__top {
+        display: grid;
+        gap: 22px;
+      }
+
+      .proof-panel__number {
+        font-family: var(--serif);
+        color: var(--red);
+        font-size: 88px;
+        line-height: 0.86;
+      }
+
+      .proof-panel ul {
+        display: grid;
+        gap: 16px;
+        padding: 28px 0 0;
+        margin: 0;
+        border-top: 1px solid var(--line);
+        list-style: none;
+      }
+
+      .proof-panel li {
+        display: grid;
+        grid-template-columns: 10px 1fr;
+        gap: 12px;
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.45;
+      }
+
+      .proof-panel li::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        margin-top: 7px;
+        border-radius: 50%;
+        background: var(--red);
+      }
+
+      .option-2 {
+        background:
+          linear-gradient(180deg, #fffaf2 0%, #f7ecdf 100%),
+          radial-gradient(circle at 50% 0%, rgba(197, 138, 53, 0.08), transparent 30%);
+      }
+
+      .contact-sheet {
+        display: grid;
+        grid-template-columns: minmax(420px, 0.9fr) minmax(720px, 1.5fr);
+        gap: clamp(36px, 5vw, 84px);
+        align-items: start;
+      }
+
+      .contact-sheet__copy {
+        position: sticky;
+        top: 96px;
+      }
+
+      .contact-sheet__copy h2 {
+        max-width: 760px;
+      }
+
+      .contact-sheet__copy .lead {
+        max-width: 500px;
+        margin-top: 26px;
+      }
+
+      .sheet-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        margin-top: 46px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--line);
+      }
+
+      .sheet-stats div {
+        padding: 20px;
+        background: rgba(255, 248, 239, 0.76);
+      }
+
+      .sheet-stats strong {
+        display: block;
+        color: var(--red);
+        font-family: var(--serif);
+        font-size: 34px;
+        line-height: 1;
+      }
+
+      .sheet-stats span {
+        display: block;
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.35;
+      }
+
+      .contact-board {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 14px;
+      }
+
+      .board-card {
+        position: relative;
+        min-height: 270px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: #fffaf2;
+      }
+
+      .board-card--large {
+        grid-row: span 2;
+        min-height: 584px;
+      }
+
+      .board-card__caption {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 18px;
+        padding: 24px;
+        color: var(--cream);
+        background: linear-gradient(180deg, transparent, rgba(28, 13, 13, 0.74));
+      }
+
+      .board-card__caption h3 {
+        font-size: clamp(30px, 2.4vw, 48px);
+      }
+
+      .board-card__caption p {
+        max-width: 260px;
+        color: rgba(255, 248, 239, 0.78);
+        font-size: 13px;
+        line-height: 1.45;
+      }
+
+      .board-card__tag {
+        position: absolute;
+        top: 18px;
+        left: 18px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(255, 248, 239, 0.92);
+        color: var(--red);
+        font-size: 11px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .option-3 {
+        color: var(--cream);
+        background:
+          radial-gradient(circle at 72% 18%, rgba(216, 51, 70, 0.22), transparent 28%),
+          linear-gradient(180deg, #1b0d0d 0%, #1c0d0d 52%, #281012 100%);
+      }
+
+      .option-3 .lead {
+        color: rgba(255, 248, 239, 0.68);
+      }
+
+      .cinema {
+        display: grid;
+        gap: 42px;
+      }
+
+      .cinema__header {
+        display: grid;
+        grid-template-columns: minmax(420px, 0.86fr) minmax(620px, 1.14fr);
+        gap: clamp(34px, 7vw, 120px);
+        align-items: end;
+      }
+
+      .cinema__header h2 {
+        max-width: 880px;
+      }
+
+      .cinema__header .lead {
+        max-width: 620px;
+        padding-bottom: 10px;
+      }
+
+      .cinema__rail {
+        display: grid;
+        grid-template-columns: 92px minmax(720px, 1fr) 92px;
+        gap: 20px;
+        align-items: stretch;
+      }
+
+      .cinema__peek {
+        min-height: 560px;
+        overflow: hidden;
+        border: 1px solid var(--line-light);
+        border-radius: var(--radius);
+        opacity: 0.44;
+      }
+
+      .cinema-card {
+        display: grid;
+        grid-template-columns: minmax(580px, 1.32fr) minmax(360px, 0.68fr);
+        min-height: 560px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 248, 239, 0.18);
+        border-radius: var(--radius);
+        background: #fffaf2;
+        color: var(--ink);
+      }
+
+      .cinema-card__image {
+        position: relative;
+        min-height: 560px;
+      }
+
+      .cinema-card__image::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, rgba(28, 13, 13, 0), rgba(28, 13, 13, 0.16));
+      }
+
+      .cinema-card__body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-width: 0;
+        padding: clamp(34px, 4vw, 62px);
+      }
+
+      .cinema-card__body h3 {
+        max-width: 420px;
+      }
+
+      .cinema-card__body p {
+        max-width: 390px;
+        margin-top: 24px;
+        color: var(--muted);
+        font-size: 18px;
+        line-height: 1.5;
+      }
+
+      .cinema-card__footer {
+        display: grid;
+        gap: 22px;
+        padding-top: 30px;
+        border-top: 1px solid var(--line);
+      }
+
+      .cinema-card__number {
+        color: var(--red);
+        font-family: var(--serif);
+        font-size: 72px;
+        line-height: 0.85;
+      }
+
+      .cinema__controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        color: var(--cream);
+      }
+
+      .cinema__controls button {
+        display: grid;
+        place-items: center;
+        width: 48px;
+        height: 48px;
+        border: 1px solid rgba(255, 248, 239, 0.18);
+        border-radius: 50%;
+        background: rgba(255, 248, 239, 0.06);
+        color: var(--cream);
+        font-size: 20px;
+      }
+
+      .cinema__progress {
+        width: 210px;
+        height: 4px;
+        overflow: hidden;
+        border-radius: 999px;
+        background: rgba(255, 248, 239, 0.12);
+      }
+
+      .cinema__progress span {
+        display: block;
+        width: 38%;
+        height: 100%;
+        border-radius: inherit;
+        background: var(--red);
+        animation: progressSweep 4.5s ease-in-out infinite alternate;
+      }
+
+      @keyframes progressSweep {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(164%);
+        }
+      }
+
+      .context-after {
+        min-height: 320px;
+        padding: 72px clamp(28px, 4vw, 64px);
+        background: var(--cream);
+      }
+
+      .context-after__box {
+        display: grid;
+        grid-template-columns: minmax(320px, 0.8fr) minmax(560px, 1.2fr);
+        gap: 36px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: #fffaf2;
+      }
+
+      .context-after__dark {
+        padding: 48px;
+        background: linear-gradient(135deg, #3a1114, #1b0d0d);
+        color: var(--cream);
+      }
+
+      .context-after__dark h3 {
+        max-width: 520px;
+      }
+
+      .context-after__form {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+        padding: 48px;
+      }
+
+      .fake-field {
+        min-height: 52px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: rgba(255, 248, 239, 0.72);
+      }
+
+      .fake-field--wide {
+        grid-column: 1 / -1;
+        min-height: 108px;
+      }
+
+      @media (max-width: 1180px) {
+        .proof-editorial,
+        .contact-sheet,
+        .cinema__header,
+        .context-after__box {
+          grid-template-columns: 1fr;
+        }
+
+        .proof-editorial__copy,
+        .proof-stage,
+        .proof-stage__image,
+        .cinema-card,
+        .cinema-card__image {
+          min-height: auto;
+        }
+
+        .proof-stage,
+        .cinema-card {
+          grid-template-columns: 1fr;
+        }
+
+        .proof-stage__image,
+        .cinema-card__image {
+          height: 52vw;
+          min-height: 360px;
+        }
+
+        .contact-sheet__copy {
+          position: static;
+        }
+
+        .cinema__rail {
+          grid-template-columns: 1fr;
+        }
+
+        .cinema__peek {
+          display: none;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .preview-nav {
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 16px 20px;
+        }
+
+        .preview-nav__links {
+          width: 100%;
+          overflow-x: auto;
+        }
+
+        .option {
+          padding: 50px 20px 64px;
+        }
+
+        h2 {
+          font-size: 54px;
+        }
+
+        .proof-index,
+        .sheet-stats,
+        .floating-cta {
+          display: none;
+        }
+
+        .contact-board {
+          grid-template-columns: 1fr;
+        }
+
+        .board-card--large,
+        .board-card {
+          min-height: 360px;
+        }
+
+        .context-before span {
+          margin-left: 20px;
+        }
+
+        .context-after__form {
+          grid-template-columns: 1fr;
+          padding: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="preview-nav" aria-label="Nawigacja podglądu">
+      <strong>3UI preview: sekcja Styl stoiska</strong>
+      <div class="preview-nav__links">
+        <a href="#option-1">Option 1</a>
+        <a href="#option-2">Option 2</a>
+        <a href="#option-3">Option 3</a>
+      </div>
+    </nav>
+
+    <div class="context-before">
+      <span>Kontekst: poprzednia ciemna sekcja kalkulatora</span>
+    </div>
+
+    <section id="option-1" class="option option-1">
+      <div class="option__label"><span>1</span> Editorial Proof Rail</div>
+      <div class="proof-editorial">
+        <div class="proof-editorial__copy">
+          <div>
+            <p class="eyebrow">Styl stoiska</p>
+            <h2>Wizualny dowód bez udawania realizacji.</h2>
+            <p class="lead">
+              Galeria działa jak spokojny argument sprzedażowy: duży kadr, krótki opis i szybkie przełączenie między momentami obsługi.
+            </p>
+          </div>
+          <div class="proof-index" aria-label="Indeks kadrów">
+            <button type="button"><strong>01</strong><b>Świeża czekolada</b><em>aktywny</em></button>
+            <button type="button"><strong>02</strong><b>Eventowy setup</b><em>detal</em></button>
+            <button type="button"><strong>03</strong><b>Interakcja gości</b><em>wybór</em></button>
+            <button type="button"><strong>04</strong><b>Gotowy efekt</b><em>wydanie</em></button>
+          </div>
+        </div>
+
+        <article class="proof-stage">
+          <figure class="proof-stage__image">
+            <img src="/images/gallery-generated/gallery-realization-1-chocolate-pour.png" alt="Czekolada polewana na truskawki w kubku" />
+            <figcaption class="proof-stage__caption">
+              <h3>Świeża czekolada</h3>
+              <p>Rytuał przygotowania widoczny od pierwszego kadru, bez wrażenia stockowej dekoracji.</p>
+            </figcaption>
+          </figure>
+          <div class="proof-panel">
+            <div class="proof-panel__top">
+              <p class="eyebrow">Kadr aktywny</p>
+              <div class="proof-panel__number">01</div>
+              <ul>
+                <li>Większa fotografia buduje zaufanie i tłumaczy doświadczenie bez dodatkowego tekstu.</li>
+                <li>Indeks po lewej utrzymuje ruch karuzeli pod kontrolą i nie zjada miejsca na zdjęcie.</li>
+                <li>Ciepły jasny panel łagodniej łączy sekcję z formularzem poniżej.</li>
+              </ul>
+            </div>
+            <p class="lead">Najbliżej obecnej narracji, ale bardziej premium i czytelnie.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="option-2" class="option option-2">
+      <div class="option__label"><span>2</span> Atelier Contact Sheet</div>
+      <div class="contact-sheet">
+        <div class="contact-sheet__copy">
+          <p class="eyebrow">Styl stoiska</p>
+          <h2>Jedna sekcja jak mini portfolio realizacji.</h2>
+          <p class="lead">
+            Zamiast klasycznej karuzeli: plansza zdjęć z mocnym pierwszym kadrem. Działa lepiej, jeśli sekcja ma od razu pokazać zakres i uniknąć wrażenia pustki.
+          </p>
+          <div class="sheet-stats" aria-label="Cechy układu">
+            <div><strong>4</strong><span>momenty obsługi w jednym widoku</span></div>
+            <div><strong>0</strong><span>ukrytych informacji za pierwszym kliknięciem</span></div>
+            <div><strong>1</strong><span>spójna historia od składników do efektu</span></div>
+          </div>
+        </div>
+
+        <div class="contact-board">
+          <article class="board-card board-card--large">
+            <span class="board-card__tag">Proces</span>
+            <img src="/images/gallery-generated/gallery-realization-1-chocolate-pour.png" alt="Polewanie truskawek czekoladą" />
+            <div class="board-card__caption">
+              <h3>Czekolada w ruchu</h3>
+              <p>Moment, który goście widzą na żywo przy stoisku.</p>
+            </div>
+          </article>
+          <article class="board-card">
+            <span class="board-card__tag">Stoisko</span>
+            <img src="/images/gallery-generated/gallery-realization-2-buffet-counter.png" alt="Elegancki blat z truskawkami i dodatkami" />
+            <div class="board-card__caption">
+              <h3>Setup premium</h3>
+              <p>Blat wygląda jak część oprawy wydarzenia.</p>
+            </div>
+          </article>
+          <article class="board-card">
+            <span class="board-card__tag">Interakcja</span>
+            <img src="/images/gallery-generated/gallery-realization-3-guest-toppings.png" alt="Gość dekoruje deser przy stoisku" />
+            <div class="board-card__caption">
+              <h3>Wybór dodatków</h3>
+              <p>Gość ma wpływ na swój deser bez zatrzymywania obsługi.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="option-3" class="option option-3">
+      <div class="option__label"><span>3</span> Cinema Story Carousel</div>
+      <div class="cinema">
+        <div class="cinema__header">
+          <div>
+            <p class="eyebrow">Styl stoiska</p>
+            <h2>Karuzela jak sekwencja eventowa.</h2>
+          </div>
+          <p class="lead">
+            Najbardziej ekspresyjna wersja: jeden aktywny slajd w centrum, boczne kadry jako zapowiedź oraz sterowanie, które może dostać płynny ruch GSAP.
+          </p>
+        </div>
+
+        <div class="cinema__rail">
+          <div class="cinema__peek">
+            <img src="/images/gallery-generated/gallery-realization-4-finished-cups.png" alt="Gotowe kubki z deserami" />
+          </div>
+          <article class="cinema-card">
+            <figure class="cinema-card__image">
+              <img src="/images/gallery-generated/gallery-realization-2-buffet-counter.png" alt="Elegancki setup stoiska deserowego" />
+            </figure>
+            <div class="cinema-card__body">
+              <div>
+                <p class="eyebrow">Stoisko</p>
+                <h3>Elegancki setup</h3>
+                <p>
+                  Czysty podział zdjęcie plus tekst usuwa przypadkowe przycięcia i daje opisowi stałe miejsce niezależnie od viewportu.
+                </p>
+              </div>
+              <div class="cinema-card__footer">
+                <span class="cinema-card__number">02</span>
+                <p>Dobry kierunek, jeśli chcemy zachować poziome przewijanie, ale mocniej opanować kompozycję.</p>
+              </div>
+            </div>
+          </article>
+          <div class="cinema__peek">
+            <img src="/images/gallery-generated/gallery-realization-3-guest-toppings.png" alt="Interakcja przy dodatkach" />
+          </div>
+        </div>
+
+        <div class="cinema__controls" aria-label="Sterowanie karuzeli">
+          <button type="button" aria-label="Poprzedni">‹</button>
+          <div class="cinema__progress"><span></span></div>
+          <button type="button" aria-label="Następny">›</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="context-after" aria-label="Kontekst kolejnej sekcji">
+      <div class="context-after__box">
+        <div class="context-after__dark">
+          <p class="eyebrow">Wycena</p>
+          <h3>Sprawdź dostępność terminu i orientacyjny koszt stoiska.</h3>
+        </div>
+        <div class="context-after__form">
+          <div class="fake-field"></div>
+          <div class="fake-field"></div>
+          <div class="fake-field"></div>
+          <div class="fake-field"></div>
+          <div class="fake-field fake-field--wide"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="floating-cta" aria-hidden="true"><i>☎</i> Sprawdź termin →</div>
+  </body>
+</html>

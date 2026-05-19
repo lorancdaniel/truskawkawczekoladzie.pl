@@ -1,0 +1,695 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3UI Modern Animated Mobile Menu Button - Strawberry Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --cream: #fff7ec;
+        --warm: #fdfbf6;
+        --ink: #211716;
+        --cocoa: #1b100f;
+        --berry: #c93445;
+        --gold: #c59a52;
+        --muted: #75665f;
+        --hero-image: url("/images/hero-strawberry-stand.png");
+        --logo-image: url("/brand/strawberry-group-generated-logo.png");
+        color: var(--ink);
+        font-family: Manrope, ui-sans-serif, system-ui, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        background:
+          linear-gradient(180deg, rgba(253, 251, 246, 0.96), rgba(255, 247, 236, 0.91)),
+          var(--hero-image);
+        background-attachment: fixed;
+        background-position: center;
+        background-size: cover;
+        margin: 0;
+        scrollbar-gutter: stable;
+      }
+
+      button,
+      a {
+        font: inherit;
+      }
+
+      .intro {
+        display: grid;
+        gap: 12px;
+        padding: 28px max(18px, calc((100vw - 1320px) / 2)) 24px;
+      }
+
+      .intro span {
+        color: var(--berry);
+        font-size: 0.76rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .intro h1 {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: clamp(2.55rem, 5.6vw, 5.4rem);
+        line-height: 0.88;
+        margin: 0;
+        max-width: 1040px;
+      }
+
+      .intro p {
+        color: var(--muted);
+        line-height: 1.62;
+        margin: 0;
+        max-width: 920px;
+      }
+
+      .scope {
+        background: var(--cocoa);
+        border-block: 1px solid rgba(197, 154, 82, 0.36);
+        color: var(--cream);
+        display: flex;
+        gap: 18px;
+        justify-content: space-between;
+        padding: 14px max(18px, calc((100vw - 1320px) / 2));
+      }
+
+      .scope strong {
+        font-size: 0.78rem;
+        text-transform: uppercase;
+      }
+
+      .scope em {
+        color: rgba(255, 247, 236, 0.72);
+        font-size: 0.86rem;
+        font-style: normal;
+      }
+
+      .options {
+        display: grid;
+        gap: 28px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        padding: 28px max(18px, calc((100vw - 1320px) / 2)) 44px;
+      }
+
+      .option {
+        background: rgba(253, 251, 246, 0.92);
+        border: 1px solid rgba(33, 23, 22, 0.12);
+        border-radius: 8px;
+        box-shadow: 0 18px 48px rgba(33, 23, 22, 0.1);
+        display: grid;
+        gap: 15px;
+        padding: 14px;
+        transition:
+          border-color 180ms ease,
+          box-shadow 180ms ease,
+          transform 180ms ease;
+      }
+
+      .option:target,
+      .option.is-selected {
+        border-color: var(--berry);
+        box-shadow: 0 24px 70px rgba(201, 52, 69, 0.18);
+        transform: translateY(-2px);
+      }
+
+      .option__copy {
+        display: grid;
+        gap: 8px;
+      }
+
+      .option__copy strong {
+        color: var(--berry);
+        font-size: 0.76rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .option__copy h2 {
+        font-size: 1.14rem;
+        line-height: 1.16;
+        margin: 0;
+      }
+
+      .option__copy p {
+        color: var(--muted);
+        font-size: 0.88rem;
+        line-height: 1.52;
+        margin: 0;
+      }
+
+      .phone {
+        aspect-ratio: 390 / 844;
+        background:
+          linear-gradient(180deg, rgba(18, 6, 5, 0.76), rgba(18, 6, 5, 0.34) 38%, rgba(18, 6, 5, 0.68)),
+          var(--hero-image);
+        background-position: center;
+        background-size: cover;
+        border-radius: 8px;
+        box-shadow: 0 30px 88px rgba(33, 23, 22, 0.24);
+        color: var(--cream);
+        contain: layout paint;
+        margin-inline: auto;
+        max-height: 844px;
+        max-width: 390px;
+        min-height: 660px;
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+      }
+
+      .topbar {
+        align-items: center;
+        background: rgba(27, 16, 15, 0.86);
+        border-top: 4px solid var(--gold);
+        display: flex;
+        gap: 10px;
+        justify-content: space-between;
+        min-height: 66px;
+        padding: 0 8px 0 14px;
+        position: relative;
+        z-index: 4;
+      }
+
+      .brand {
+        align-items: center;
+        display: flex;
+        gap: 10px;
+        min-width: 0;
+      }
+
+      .brand::before {
+        background-image: var(--logo-image);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        content: "";
+        flex: 0 0 46px;
+        height: 46px;
+      }
+
+      .brand span {
+        border-left: 1px solid rgba(197, 154, 82, 0.42);
+        color: var(--cream);
+        display: block;
+        font-size: 0.72rem;
+        font-weight: 900;
+        line-height: 1.05;
+        padding-left: 10px;
+        text-transform: uppercase;
+      }
+
+      .menu-button {
+        align-items: center;
+        border: 0;
+        color: var(--ink);
+        cursor: default;
+        display: inline-flex;
+        justify-content: center;
+        min-height: 48px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .menu-button span {
+        position: relative;
+        z-index: 2;
+      }
+
+      .glass-menu {
+        background:
+          linear-gradient(180deg, rgba(27, 16, 15, 0.93), rgba(27, 16, 15, 0.74)),
+          linear-gradient(90deg, rgba(27, 16, 15, 0.78), rgba(27, 16, 15, 0.22)),
+          var(--hero-image);
+        background-position: center;
+        background-size: cover;
+        inset: 0;
+        padding: 118px 24px 24px;
+        position: absolute;
+        z-index: 2;
+      }
+
+      .glass-menu p {
+        color: rgba(255, 247, 236, 0.78);
+        line-height: 1.5;
+        margin: 0 0 64px;
+        max-width: 28ch;
+      }
+
+      .glass-menu a {
+        align-items: center;
+        border-bottom: 1px solid rgba(255, 247, 236, 0.18);
+        color: var(--cream);
+        display: flex;
+        font-size: 1.34rem;
+        font-weight: 900;
+        justify-content: space-between;
+        min-height: 64px;
+        text-decoration: none;
+      }
+
+      .glass-menu a::after {
+        background: var(--gold);
+        content: "";
+        height: 1px;
+        width: 22px;
+      }
+
+      .choose {
+        align-items: center;
+        background: var(--ink);
+        border-radius: 999px;
+        color: var(--cream);
+        display: inline-flex;
+        font-weight: 900;
+        justify-content: center;
+        min-height: 48px;
+        text-decoration: none;
+        width: 100%;
+      }
+
+      .option:target .choose,
+      .option.is-selected .choose {
+        background: var(--berry);
+      }
+
+      .notes {
+        color: var(--muted);
+        display: grid;
+        font-size: 0.82rem;
+        gap: 6px;
+        line-height: 1.42;
+        margin: 0;
+      }
+
+      .notes dt {
+        color: var(--ink);
+        font-weight: 900;
+      }
+
+      .notes dd {
+        margin: 0;
+      }
+
+      .rail .menu-button {
+        background: rgba(255, 247, 236, 0.94);
+        border-radius: 999px;
+        box-shadow: 0 14px 34px rgba(12, 6, 5, 0.2);
+        gap: 8px;
+        padding: 0 6px 0 12px;
+        width: 122px;
+      }
+
+      .rail .menu-button::before {
+        background: var(--berry);
+        border-radius: 999px;
+        content: "";
+        height: 36px;
+        position: absolute;
+        right: 6px;
+        top: 6px;
+        width: 36px;
+        z-index: 1;
+      }
+
+      .rail .label {
+        font-size: 0.82rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .rail .mark {
+        color: white;
+        height: 20px;
+        margin-left: auto;
+        width: 20px;
+      }
+
+      .rail .mark i,
+      .rail .mark::before,
+      .rail .mark::after {
+        background: currentColor;
+        border-radius: 999px;
+        content: "";
+        height: 2px;
+        left: 1px;
+        position: absolute;
+        width: 18px;
+      }
+
+      .rail .mark {
+        position: relative;
+      }
+
+      .rail .mark::before {
+        animation: rail-a 2.6s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+        top: 4px;
+      }
+
+      .rail .mark i {
+        animation: rail-b 2.6s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+        top: 9px;
+      }
+
+      .rail .mark::after {
+        animation: rail-c 2.6s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+        top: 14px;
+      }
+
+      .scan .menu-button {
+        background: rgba(255, 247, 236, 0.1);
+        border: 1px solid rgba(255, 247, 236, 0.24);
+        border-radius: 16px;
+        color: var(--cream);
+        height: 52px;
+        width: 64px;
+      }
+
+      .scan .menu-button::before {
+        background: linear-gradient(90deg, transparent, rgba(255, 247, 236, 0.38), transparent);
+        content: "";
+        height: 100%;
+        left: -70%;
+        position: absolute;
+        top: 0;
+        transform: skewX(-18deg);
+        width: 55%;
+        animation: scan-light 2.8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+      }
+
+      .scan .grid {
+        display: grid;
+        gap: 5px;
+        grid-template-columns: repeat(2, 8px);
+        position: relative;
+        z-index: 1;
+      }
+
+      .scan .grid i {
+        background: currentColor;
+        border-radius: 3px;
+        height: 8px;
+        opacity: 0.9;
+        transform: scale(1);
+        width: 8px;
+      }
+
+      .scan .grid i:nth-child(1) {
+        animation: tile-one 2.5s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+      }
+
+      .scan .grid i:nth-child(2) {
+        animation: tile-two 2.5s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+      }
+
+      .scan .grid i:nth-child(3) {
+        animation: tile-three 2.5s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+      }
+
+      .scan .grid i:nth-child(4) {
+        animation: tile-four 2.5s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+      }
+
+      .magnetic .menu-button {
+        background: var(--cream);
+        border-radius: 14px;
+        box-shadow: 0 14px 34px rgba(12, 6, 5, 0.2);
+        color: var(--ink);
+        height: 52px;
+        padding: 0;
+        width: 88px;
+      }
+
+      .magnetic .menu-button::before {
+        background: var(--ink);
+        border-radius: 10px;
+        content: "";
+        height: 38px;
+        left: 7px;
+        position: absolute;
+        top: 7px;
+        width: 38px;
+        animation: magnet-slide 2.8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+        z-index: 1;
+      }
+
+      .magnetic .xmark {
+        color: var(--cream);
+        height: 18px;
+        left: 17px;
+        position: absolute;
+        top: 17px;
+        width: 18px;
+        z-index: 2;
+      }
+
+      .magnetic .xmark::before,
+      .magnetic .xmark::after {
+        background: currentColor;
+        border-radius: 999px;
+        content: "";
+        height: 2px;
+        left: 0;
+        position: absolute;
+        top: 8px;
+        width: 18px;
+      }
+
+      .magnetic .xmark::before {
+        animation: x-a 2.8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+      }
+
+      .magnetic .xmark::after {
+        animation: x-b 2.8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+      }
+
+      .magnetic .dots {
+        display: flex;
+        gap: 4px;
+        position: absolute;
+        right: 13px;
+        z-index: 2;
+      }
+
+      .magnetic .dots i {
+        background: var(--ink);
+        border-radius: 999px;
+        height: 5px;
+        width: 5px;
+      }
+
+      @keyframes rail-a {
+        0%, 34% { top: 4px; transform: rotate(0deg); }
+        56%, 100% { top: 9px; transform: rotate(45deg); }
+      }
+
+      @keyframes rail-b {
+        0%, 34% { opacity: 1; transform: scaleX(1); }
+        56%, 100% { opacity: 0; transform: scaleX(0); }
+      }
+
+      @keyframes rail-c {
+        0%, 34% { top: 14px; transform: rotate(0deg); }
+        56%, 100% { top: 9px; transform: rotate(-45deg); }
+      }
+
+      @keyframes scan-light {
+        0%, 24% { left: -70%; opacity: 0; }
+        42%, 100% { left: 120%; opacity: 1; }
+      }
+
+      @keyframes tile-one {
+        0%, 35% { border-radius: 3px; transform: translate(0, 0) scale(1); }
+        58%, 100% { border-radius: 999px; transform: translate(3px, 3px) scale(0.75); }
+      }
+
+      @keyframes tile-two {
+        0%, 35% { border-radius: 3px; transform: translate(0, 0) scale(1); }
+        58%, 100% { border-radius: 999px; transform: translate(-3px, 3px) scale(0.75); }
+      }
+
+      @keyframes tile-three {
+        0%, 35% { border-radius: 3px; transform: translate(0, 0) scale(1); }
+        58%, 100% { border-radius: 999px; transform: translate(3px, -3px) scale(0.75); }
+      }
+
+      @keyframes tile-four {
+        0%, 35% { border-radius: 3px; transform: translate(0, 0) scale(1); }
+        58%, 100% { border-radius: 999px; transform: translate(-3px, -3px) scale(0.75); }
+      }
+
+      @keyframes magnet-slide {
+        0%, 34% { transform: translateX(0); }
+        56%, 100% { transform: translateX(36px); }
+      }
+
+      @keyframes x-a {
+        0%, 34% { transform: rotate(0deg); }
+        56%, 100% { transform: translateX(36px) rotate(45deg); }
+      }
+
+      @keyframes x-b {
+        0%, 34% { transform: rotate(90deg); }
+        56%, 100% { transform: translateX(36px) rotate(-45deg); }
+      }
+
+      @media (max-width: 1120px) {
+        .options {
+          grid-template-columns: 1fr;
+        }
+
+        .option {
+          grid-template-columns: minmax(0, 390px) minmax(0, 1fr);
+        }
+      }
+
+      @media (max-width: 760px) {
+        .scope {
+          flex-direction: column;
+        }
+
+        .option {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="intro">
+      <span>3UI regeneration</span>
+      <h1>Nowocze&#347;niejszy animowany przycisk menu</h1>
+      <p>
+        Trzy nowe kierunki, bardziej odmienne od klasycznej pigu&#322;y. Ka&#380;dy ma sta&#322;y wymiar,
+        wi&#281;c po klikni&#281;ciu nie powinien zmienia&#263; szeroko&#347;ci headera; w implementacji trzeba dodatkowo
+        utrzyma&#263; stabilny scrollbar gutter.
+      </p>
+    </header>
+
+    <div class="scope">
+      <strong>Kontekst: /, mobile 390x844</strong>
+      <em>Target: tylko przycisk menu; glass fullscreen overlay zostaje bez zmiany.</em>
+    </div>
+
+    <main class="options" aria-label="Trzy nowoczesne warianty animowanego przycisku menu">
+      <article class="option rail" id="option-1">
+        <div class="option__copy">
+          <strong>Option 1</strong>
+          <h2>Action Rail</h2>
+          <p>
+            Nowoczesny chip z czerwonym rail-em akcji po prawej. Tekst zostaje, ale ca&#322;y control ma sta&#322;e 122 px.
+          </p>
+        </div>
+        <div class="phone">
+          <div class="glass-menu">
+            <p>Wybierz sekcj&#281; albo od razu sprawd&#378; dost&#281;pno&#347;&#263; terminu.</p>
+            <a href="#option-1">Oferta</a>
+            <a href="#option-1">Pakiety</a>
+            <a href="#option-1">Jak dzia&#322;amy</a>
+            <a href="#option-1">Eventy</a>
+          </div>
+          <div class="topbar">
+            <div class="brand"><span>Strawberry<br />Group S.C.</span></div>
+            <button class="menu-button" type="button">
+              <span class="label">Menu</span>
+              <span class="mark"><i></i></span>
+            </button>
+          </div>
+        </div>
+        <a class="choose" href="#option-1">Wybierz opcj&#281; 1</a>
+        <dl class="notes">
+          <dt>Impact</dt>
+          <dd>&#346;redni. Nadal czytelny tekst, ale forma jest bardziej wsp&#243;&#322;czesna i mniej “defaultowa”.</dd>
+          <dt>Tradeoff</dt>
+          <dd>Najbardziej u&#380;ytkowy, mniej radykalny od opcji ikonowych.</dd>
+        </dl>
+      </article>
+
+      <article class="option scan" id="option-2">
+        <div class="option__copy">
+          <strong>Option 2</strong>
+          <h2>Glass Grid Toggle</h2>
+          <p>
+            Ikonowy, szklany kafel: grid czterech punkt&#243;w sk&#322;ada si&#281; w stan zamkni&#281;cia. Bardziej app-like.
+          </p>
+        </div>
+        <div class="phone">
+          <div class="glass-menu">
+            <p>Wybierz sekcj&#281; albo od razu sprawd&#378; dost&#281;pno&#347;&#263; terminu.</p>
+            <a href="#option-2">Oferta</a>
+            <a href="#option-2">Pakiety</a>
+            <a href="#option-2">Jak dzia&#322;amy</a>
+            <a href="#option-2">Eventy</a>
+          </div>
+          <div class="topbar">
+            <div class="brand"><span>Strawberry<br />Group S.C.</span></div>
+            <button class="menu-button" type="button" aria-label="Menu">
+              <span class="grid"><i></i><i></i><i></i><i></i></span>
+            </button>
+          </div>
+        </div>
+        <a class="choose" href="#option-2">Wybierz opcj&#281; 2</a>
+        <dl class="notes">
+          <dt>Impact</dt>
+          <dd>&#346;redni. Najbardziej nowoczesny “control surface”, z mocnym focus na ikonografii.</dd>
+          <dt>Tradeoff</dt>
+          <dd>Brak widocznego tekstu wymaga solidnego `aria-label` i dopracowanego focus state.</dd>
+        </dl>
+      </article>
+
+      <article class="option magnetic" id="option-3">
+        <div class="option__copy">
+          <strong>Option 3</strong>
+          <h2>Magnetic Switch</h2>
+          <p>
+            Najbardziej inny: mini prze&#322;&#261;cznik z ciemnym modu&#322;em, kt&#243;ry przeskakuje na drug&#261; stron&#281;.
+            Sta&#322;e 88 px, bez tekstowego skoku.
+          </p>
+        </div>
+        <div class="phone">
+          <div class="glass-menu">
+            <p>Wybierz sekcj&#281; albo od razu sprawd&#378; dost&#281;pno&#347;&#263; terminu.</p>
+            <a href="#option-3">Oferta</a>
+            <a href="#option-3">Pakiety</a>
+            <a href="#option-3">Jak dzia&#322;amy</a>
+            <a href="#option-3">Eventy</a>
+          </div>
+          <div class="topbar">
+            <div class="brand"><span>Strawberry<br />Group S.C.</span></div>
+            <button class="menu-button" type="button" aria-label="Menu">
+              <span class="xmark"></span>
+              <span class="dots"><i></i><i></i><i></i></span>
+            </button>
+          </div>
+        </div>
+        <a class="choose" href="#option-3">Wybierz opcj&#281; 3</a>
+        <dl class="notes">
+          <dt>Impact</dt>
+          <dd>Wy&#380;szy. Najbardziej charakterystyczny i najmniej podobny do standardowego burgera.</dd>
+          <dt>Tradeoff</dt>
+          <dd>Najbardziej “produktowy” w tonie; mo&#380;e by&#263; zbyt techniczny, je&#347;li marka ma zosta&#263; bardzo klasyczna.</dd>
+        </dl>
+      </article>
+    </main>
+
+    <script>
+      const options = Array.from(document.querySelectorAll(".option"));
+
+      function syncChoice() {
+        const hash = window.location.hash;
+        options.forEach((option) => option.classList.toggle("is-selected", `#${option.id}` === hash));
+      }
+
+      window.addEventListener("hashchange", syncChoice);
+      syncChoice();
+    </script>
+  </body>
+</html>

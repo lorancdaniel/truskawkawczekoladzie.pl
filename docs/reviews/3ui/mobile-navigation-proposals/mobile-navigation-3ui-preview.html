@@ -1,0 +1,826 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3UI Mobile Navigation - Strawberry Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --cream: #fff7ec;
+        --warm: #fdfbf6;
+        --ink: #211716;
+        --cocoa: #3a1f19;
+        --cocoa-soft: #5a3026;
+        --berry: #c93445;
+        --berry-bright: #d7374c;
+        --blush: #ffcbd1;
+        --gold: #c59a52;
+        --muted: #75665f;
+        --line: rgba(255, 247, 236, 0.18);
+        --shadow: 0 30px 90px rgba(33, 23, 22, 0.24);
+        --hero-image: url("/images/hero-strawberry-stand.png");
+        --logo-image: url("/brand/strawberry-group-generated-logo.png");
+        color: var(--ink);
+        font-family: Manrope, ui-sans-serif, system-ui, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        background:
+          linear-gradient(180deg, rgba(255, 247, 236, 0.94), rgba(253, 251, 246, 0.98)),
+          var(--hero-image);
+        background-attachment: fixed;
+        background-position: center;
+        background-size: cover;
+        margin: 0;
+      }
+
+      button,
+      a {
+        font: inherit;
+      }
+
+      .page-intro {
+        display: grid;
+        gap: 12px;
+        padding: 28px max(18px, calc((100vw - 1320px) / 2)) 22px;
+      }
+
+      .page-intro__kicker {
+        color: var(--berry);
+        font-size: 0.76rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .page-intro h1 {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: clamp(2.6rem, 6vw, 5.8rem);
+        line-height: 0.88;
+        margin: 0;
+        max-width: 880px;
+      }
+
+      .page-intro p {
+        color: var(--muted);
+        line-height: 1.62;
+        margin: 0;
+        max-width: 860px;
+      }
+
+      .context-bar {
+        align-items: center;
+        background: #1b100f;
+        border-block: 1px solid rgba(197, 154, 82, 0.38);
+        color: var(--cream);
+        display: flex;
+        gap: 18px;
+        justify-content: space-between;
+        padding: 14px max(18px, calc((100vw - 1320px) / 2));
+      }
+
+      .context-bar strong {
+        font-size: 0.78rem;
+        text-transform: uppercase;
+      }
+
+      .context-bar span {
+        color: rgba(255, 247, 236, 0.7);
+        font-size: 0.86rem;
+      }
+
+      .options {
+        display: grid;
+        gap: 28px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        padding: 28px max(18px, calc((100vw - 1320px) / 2)) 44px;
+      }
+
+      .option {
+        background: rgba(253, 251, 246, 0.86);
+        border: 1px solid rgba(33, 23, 22, 0.12);
+        border-radius: 8px;
+        box-shadow: 0 18px 48px rgba(33, 23, 22, 0.1);
+        display: grid;
+        gap: 16px;
+        padding: 14px;
+        transition:
+          border-color 180ms ease,
+          box-shadow 180ms ease,
+          transform 180ms ease;
+      }
+
+      .option:target,
+      .option.is-selected {
+        border-color: var(--berry);
+        box-shadow: 0 24px 70px rgba(201, 52, 69, 0.18);
+        transform: translateY(-2px);
+      }
+
+      .option__header {
+        display: grid;
+        gap: 8px;
+      }
+
+      .option__header strong {
+        color: var(--berry);
+        font-size: 0.76rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .option__header h2 {
+        font-size: 1.14rem;
+        line-height: 1.15;
+        margin: 0;
+      }
+
+      .option__header p {
+        color: var(--muted);
+        font-size: 0.88rem;
+        line-height: 1.52;
+        margin: 0;
+      }
+
+      .phone {
+        aspect-ratio: 390 / 844;
+        background:
+          linear-gradient(180deg, rgba(18, 6, 5, 0.82), rgba(18, 6, 5, 0.48) 44%, rgba(18, 6, 5, 0.76)),
+          var(--hero-image);
+        background-position: center;
+        background-size: cover;
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+        color: var(--cream);
+        contain: layout paint;
+        margin-inline: auto;
+        max-height: 844px;
+        max-width: 390px;
+        min-height: 660px;
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+      }
+
+      .brand-row {
+        align-items: center;
+        background: #1b100f;
+        border-top: 4px solid var(--gold);
+        border-bottom: 1px solid rgba(197, 154, 82, 0.42);
+        display: flex;
+        gap: 11px;
+        justify-content: space-between;
+        min-height: 66px;
+        padding: 8px 14px;
+        position: relative;
+        z-index: 5;
+      }
+
+      .brand {
+        align-items: center;
+        display: flex;
+        gap: 10px;
+        min-width: 0;
+      }
+
+      .brand::before {
+        background-image: var(--logo-image);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        content: "";
+        flex: 0 0 48px;
+        height: 48px;
+      }
+
+      .brand span {
+        border-left: 1px solid rgba(197, 154, 82, 0.48);
+        color: var(--cream);
+        display: block;
+        font-size: 0.74rem;
+        font-weight: 900;
+        line-height: 1.05;
+        padding-left: 10px;
+        text-transform: uppercase;
+      }
+
+      .menu-control {
+        align-items: center;
+        border: 0;
+        border-radius: 999px;
+        cursor: default;
+        display: inline-flex;
+        flex: 0 0 auto;
+        font-weight: 800;
+        gap: 8px;
+        justify-content: center;
+        min-height: 44px;
+        padding: 0 14px;
+        white-space: nowrap;
+      }
+
+      .icon-bars,
+      .icon-x {
+        display: inline-grid;
+        height: 20px;
+        place-items: center;
+        position: relative;
+        width: 20px;
+      }
+
+      .icon-bars::before,
+      .icon-bars::after,
+      .icon-bars span {
+        background: currentColor;
+        border-radius: 999px;
+        content: "";
+        height: 2px;
+        position: absolute;
+        width: 18px;
+      }
+
+      .icon-bars::before {
+        transform: translateY(-6px);
+      }
+
+      .icon-bars::after {
+        transform: translateY(6px);
+      }
+
+      .icon-x::before,
+      .icon-x::after {
+        background: currentColor;
+        border-radius: 999px;
+        content: "";
+        height: 2px;
+        position: absolute;
+        width: 20px;
+      }
+
+      .icon-x::before {
+        transform: rotate(45deg);
+      }
+
+      .icon-x::after {
+        transform: rotate(-45deg);
+      }
+
+      .hero-copy {
+        bottom: 36px;
+        display: grid;
+        gap: 14px;
+        left: 24px;
+        position: absolute;
+        right: 24px;
+        z-index: 1;
+      }
+
+      .hero-copy span {
+        color: var(--blush);
+        font-size: 0.72rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .hero-copy h3 {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 4.1rem;
+        line-height: 0.85;
+        margin: 0;
+        max-width: 6.7ch;
+      }
+
+      .hero-copy p {
+        color: rgba(255, 247, 236, 0.86);
+        line-height: 1.45;
+        margin: 0;
+      }
+
+      .choose {
+        align-items: center;
+        background: var(--ink);
+        border: 0;
+        border-radius: 999px;
+        color: var(--cream);
+        cursor: pointer;
+        display: inline-flex;
+        font-size: 0.88rem;
+        font-weight: 900;
+        justify-content: center;
+        min-height: 46px;
+        text-decoration: none;
+        width: 100%;
+      }
+
+      .option:target .choose,
+      .option.is-selected .choose {
+        background: var(--berry);
+        color: white;
+      }
+
+      .option-notes {
+        color: var(--muted);
+        display: grid;
+        font-size: 0.82rem;
+        gap: 6px;
+        line-height: 1.42;
+        margin: 0;
+      }
+
+      .option-notes dt {
+        color: var(--ink);
+        font-weight: 900;
+      }
+
+      .option-notes dd {
+        margin: 0;
+      }
+
+      .compact .menu-control {
+        background: var(--cream);
+        box-shadow: 0 12px 26px rgba(12, 6, 5, 0.18);
+        color: var(--ink);
+        min-width: 118px;
+      }
+
+      .compact .sheet {
+        background: rgba(255, 247, 236, 0.98);
+        border: 1px solid rgba(33, 23, 22, 0.1);
+        border-radius: 8px;
+        box-shadow: 0 24px 62px rgba(33, 23, 22, 0.25);
+        color: var(--ink);
+        display: grid;
+        gap: 0;
+        left: 14px;
+        overflow: hidden;
+        padding: 8px;
+        position: absolute;
+        right: 14px;
+        top: 78px;
+        z-index: 4;
+      }
+
+      .compact .nav-link {
+        align-items: center;
+        border-bottom: 1px solid rgba(33, 23, 22, 0.1);
+        color: var(--ink);
+        display: flex;
+        font-weight: 900;
+        justify-content: space-between;
+        min-height: 54px;
+        padding-inline: 12px;
+        text-decoration: none;
+      }
+
+      .compact .nav-link:last-of-type {
+        border-bottom: 0;
+      }
+
+      .compact .nav-link::after {
+        color: var(--gold);
+        content: ">";
+        font-weight: 900;
+      }
+
+      .compact .actions {
+        background: rgba(58, 31, 25, 0.08);
+        border-top: 1px solid rgba(33, 23, 22, 0.1);
+        display: grid;
+        gap: 10px;
+        margin-top: 6px;
+        padding: 12px;
+      }
+
+      .phone-chip,
+      .primary-cta,
+      .outline-cta {
+        align-items: center;
+        border-radius: 999px;
+        display: inline-flex;
+        font-weight: 900;
+        justify-content: center;
+        min-height: 48px;
+        text-decoration: none;
+      }
+
+      .phone-chip {
+        background: white;
+        border: 1px solid rgba(33, 23, 22, 0.14);
+        color: var(--ink);
+      }
+
+      .phone-chip span {
+        color: var(--muted);
+        font-size: 0.66rem;
+        font-weight: 900;
+        margin-right: 8px;
+        text-transform: uppercase;
+      }
+
+      .primary-cta {
+        background: var(--berry);
+        box-shadow: 0 18px 38px rgba(201, 52, 69, 0.24);
+        color: white;
+      }
+
+      .drawer .menu-control {
+        background: var(--cream);
+        color: var(--ink);
+        min-width: 118px;
+      }
+
+      .drawer .overlay {
+        background: rgba(12, 6, 5, 0.46);
+        inset: 66px 0 0;
+        position: absolute;
+        z-index: 2;
+      }
+
+      .drawer .panel {
+        background:
+          linear-gradient(180deg, rgba(197, 154, 82, 0.1), transparent 34%),
+          #1b100f;
+        border-left: 1px solid rgba(197, 154, 82, 0.42);
+        box-shadow: -26px 0 70px rgba(0, 0, 0, 0.3);
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        inset: 66px 0 0 auto;
+        padding: 18px;
+        position: absolute;
+        width: 88%;
+        z-index: 4;
+      }
+
+      .drawer .panel-top {
+        align-items: center;
+        border-bottom: 1px solid rgba(255, 247, 236, 0.12);
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 16px;
+      }
+
+      .drawer .panel-top strong {
+        color: var(--cream);
+        font-size: 0.76rem;
+        text-transform: uppercase;
+      }
+
+      .drawer .close-pill {
+        align-items: center;
+        background: rgba(255, 247, 236, 0.1);
+        border: 1px solid rgba(255, 247, 236, 0.18);
+        border-radius: 999px;
+        color: var(--cream);
+        display: inline-flex;
+        gap: 8px;
+        min-height: 42px;
+        padding-inline: 14px;
+      }
+
+      .drawer .nav-stack {
+        display: grid;
+        gap: 0;
+        margin-top: 18px;
+      }
+
+      .drawer .nav-stack a {
+        align-items: center;
+        border-bottom: 1px solid rgba(197, 154, 82, 0.24);
+        color: var(--cream);
+        display: flex;
+        font-size: 1.18rem;
+        font-weight: 900;
+        justify-content: space-between;
+        min-height: 66px;
+        text-decoration: none;
+      }
+
+      .drawer .nav-stack a::after {
+        color: var(--gold);
+        content: ">";
+        font-size: 0.86rem;
+      }
+
+      .drawer .drawer-actions {
+        background: rgba(255, 247, 236, 0.08);
+        border: 1px solid rgba(255, 247, 236, 0.12);
+        border-radius: 8px;
+        display: grid;
+        gap: 10px;
+        padding: 12px;
+      }
+
+      .drawer .drawer-actions p {
+        color: rgba(255, 247, 236, 0.66);
+        font-size: 0.72rem;
+        font-weight: 900;
+        margin: 0;
+        text-transform: uppercase;
+      }
+
+      .drawer .drawer-actions strong {
+        color: var(--cream);
+        font-size: 1.24rem;
+      }
+
+      .rail .menu-control {
+        background: var(--cream);
+        color: var(--ink);
+        min-width: 116px;
+      }
+
+      .rail .rail-sheet {
+        background:
+          linear-gradient(180deg, rgba(27, 16, 15, 0.96), rgba(27, 16, 15, 0.82)),
+          linear-gradient(90deg, rgba(197, 154, 82, 0.12), transparent);
+        border-bottom: 1px solid rgba(197, 154, 82, 0.32);
+        border-top: 1px solid rgba(197, 154, 82, 0.2);
+        box-shadow: 0 28px 72px rgba(0, 0, 0, 0.26);
+        left: 0;
+        padding: 26px 22px 20px;
+        position: absolute;
+        right: 0;
+        top: 66px;
+        z-index: 4;
+      }
+
+      .rail .rail-list {
+        display: grid;
+        gap: 0;
+        list-style: none;
+        margin: 0;
+        padding: 0 0 0 44px;
+        position: relative;
+      }
+
+      .rail .rail-list::before {
+        background: linear-gradient(180deg, rgba(197, 154, 82, 0), var(--gold), rgba(197, 154, 82, 0));
+        bottom: 8px;
+        content: "";
+        left: 12px;
+        position: absolute;
+        top: 8px;
+        width: 1px;
+      }
+
+      .rail .rail-list a {
+        align-items: center;
+        color: var(--cream);
+        display: grid;
+        grid-template-columns: 38px minmax(0, 1fr);
+        min-height: 58px;
+        text-decoration: none;
+      }
+
+      .rail .rail-list a::before {
+        color: rgba(197, 154, 82, 0.92);
+        content: attr(data-index);
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 1.42rem;
+        line-height: 1;
+      }
+
+      .rail .rail-list span {
+        font-size: 1.15rem;
+        font-weight: 900;
+      }
+
+      .rail .rail-list li:first-child span {
+        color: #ffcbd1;
+      }
+
+      .rail .rail-actions {
+        display: grid;
+        gap: 10px;
+        margin-top: 22px;
+      }
+
+      .outline-cta {
+        border: 1px solid rgba(255, 247, 236, 0.36);
+        color: var(--cream);
+      }
+
+      @media (max-width: 1120px) {
+        .options {
+          grid-template-columns: 1fr;
+        }
+
+        .option {
+          grid-template-columns: minmax(0, 390px) minmax(0, 1fr);
+        }
+
+        .option__header,
+        .choose,
+        .option-notes {
+          align-self: start;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .context-bar {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .option {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 430px) {
+        .page-intro {
+          padding-top: 22px;
+        }
+
+        .options {
+          padding-inline: 10px;
+        }
+
+        .option {
+          border-radius: 0;
+          padding-inline: 10px;
+        }
+
+        .phone {
+          min-height: 760px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="page-intro">
+      <span class="page-intro__kicker">3UI proposal mode</span>
+      <h1>Nowa profesjonalna nawigacja mobilna</h1>
+      <p>
+        Trzy warianty dla mobilnego headera Strawberry Group, pokazane w kontek&#347;cie hero. Podgl&#261;d
+        nie zmienia kodu produkcyjnego. Klikni&#281;cie przycisku wyboru ustawia zaznaczon&#261; opcj&#281; w adresie.
+      </p>
+    </header>
+
+    <div class="context-bar">
+      <strong>Kontekst widoku: /, mobile 390x844</strong>
+      <span>Cel: l&#380;ejsza, bardziej premium nawigacja bez zas&#322;aniania g&#322;&#243;wnego przekazu hero.</span>
+    </div>
+
+    <main class="options" aria-label="Trzy warianty mobilnej nawigacji">
+      <article class="option compact" id="option-1">
+        <div class="option__header">
+          <strong>Option 1</strong>
+          <h2>Compact Cream Sheet</h2>
+          <p>
+            Najbezpieczniejsza ewolucja: zostawia kremowy przycisk menu, ale zmienia otwarty stan w jasny,
+            uporz&#261;dkowany sheet z prostymi wierszami zamiast ci&#281;&#380;kich kart.
+          </p>
+        </div>
+
+        <div class="phone" aria-label="Option 1 preview">
+          <div class="brand-row">
+            <div class="brand"><span>Strawberry<br />Group S.C.</span></div>
+            <button class="menu-control" type="button"><i class="icon-x"></i>Zamknij</button>
+          </div>
+          <nav class="sheet" aria-label="Glowna nawigacja">
+            <a class="nav-link" href="#option-1">Oferta</a>
+            <a class="nav-link" href="#option-1">Pakiety</a>
+            <a class="nav-link" href="#option-1">Jak dzia&#322;amy</a>
+            <a class="nav-link" href="#option-1">Eventy</a>
+            <a class="nav-link" href="#option-1">Kontakt</a>
+            <div class="actions">
+              <a class="phone-chip" href="#option-1"><span>Telefon</span>+48 514 214 567</a>
+              <a class="primary-cta" href="#option-1">Sprawd&#378; termin</a>
+            </div>
+          </nav>
+          <section class="hero-copy">
+            <span>Interaktywne stoisko deserowe</span>
+            <h3>Truskawki w czekoladzie</h3>
+            <p>Polskie truskawki, czekolada, dodatki i elegancka obs&#322;uga nawet do 1000 go&#347;ci.</p>
+          </section>
+        </div>
+
+        <a class="choose" href="#option-1" data-choice="1">Wybierz opcj&#281; 1</a>
+        <dl class="option-notes">
+          <dt>Impact</dt>
+          <dd>Niski. G&#322;&#243;wnie CSS i drobne uporz&#261;dkowanie markup.</dd>
+          <dt>Ryzyko</dt>
+          <dd>Mo&#380;e by&#263; najbli&#380;sza obecnemu wygl&#261;dowi, wi&#281;c mniej odwa&#380;na.</dd>
+        </dl>
+      </article>
+
+      <article class="option drawer" id="option-2">
+        <div class="option__header">
+          <strong>Option 2</strong>
+          <h2>Velvet Cocoa Drawer</h2>
+          <p>
+            Bardziej aplikacyjny i premium wariant: prawy drawer na ciemnej powierzchni, lekko przyciemnione hero
+            w tle i wyra&#378;na akcja rezerwacyjna zakotwiczona na dole.
+          </p>
+        </div>
+
+        <div class="phone" aria-label="Option 2 preview">
+          <div class="brand-row">
+            <div class="brand"><span>Strawberry<br />Group S.C.</span></div>
+            <button class="menu-control" type="button"><i class="icon-bars"><span></span></i>Menu</button>
+          </div>
+          <div class="overlay"></div>
+          <aside class="panel" aria-label="Wysuwana nawigacja">
+            <div class="panel-top">
+              <strong>Menu</strong>
+              <span class="close-pill"><i class="icon-x"></i>Zamknij</span>
+            </div>
+            <nav class="nav-stack" aria-label="Glowna nawigacja">
+              <a href="#option-2">Oferta</a>
+              <a href="#option-2">Pakiety</a>
+              <a href="#option-2">Jak dzia&#322;amy</a>
+              <a href="#option-2">Eventy</a>
+              <a href="#option-2">Kontakt</a>
+            </nav>
+            <div class="drawer-actions">
+              <p>Kontakt bezpo&#347;redni</p>
+              <strong>+48 514 214 567</strong>
+              <a class="primary-cta" href="#option-2">Sprawd&#378; termin</a>
+            </div>
+          </aside>
+          <section class="hero-copy">
+            <span>Interaktywne stoisko deserowe</span>
+            <h3>Truskawki w czekoladzie</h3>
+            <p>Polskie truskawki, czekolada, dodatki i elegancka obs&#322;uga nawet do 1000 go&#347;ci.</p>
+          </section>
+        </div>
+
+        <a class="choose" href="#option-2" data-choice="2">Wybierz opcj&#281; 2</a>
+        <dl class="option-notes">
+          <dt>Impact</dt>
+          <dd>&#346;redni do wysokiego. Warto doda&#263; focus trap i przewidywalny powr&#243;t fokusu.</dd>
+          <dt>Ryzyko</dt>
+          <dd>Drawer wymaga wi&#281;cej logiki dost&#281;pno&#347;ci i test&#243;w zachowania na mobile.</dd>
+        </dl>
+      </article>
+
+      <article class="option rail" id="option-3">
+        <div class="option__header">
+          <strong>Option 3</strong>
+          <h2>Gold Rail Editorial</h2>
+          <p>
+            Najbardziej charakterystyczny kierunek: ciemny sheet pod headerem, z&#322;ota pionowa o&#347;,
+            numerowane pozycje i akcje jako czyste pigu&#322;y. Mniej kart, wi&#281;cej marki.
+          </p>
+        </div>
+
+        <div class="phone" aria-label="Option 3 preview">
+          <div class="brand-row">
+            <div class="brand"><span>Strawberry<br />Group S.C.</span></div>
+            <button class="menu-control" type="button"><i class="icon-x"></i>Zamknij</button>
+          </div>
+          <nav class="rail-sheet" aria-label="Glowna nawigacja">
+            <ol class="rail-list">
+              <li><a href="#option-3" data-index="01"><span>Oferta</span></a></li>
+              <li><a href="#option-3" data-index="02"><span>Pakiety</span></a></li>
+              <li><a href="#option-3" data-index="03"><span>Jak dzia&#322;amy</span></a></li>
+              <li><a href="#option-3" data-index="04"><span>Eventy</span></a></li>
+              <li><a href="#option-3" data-index="05"><span>Kontakt</span></a></li>
+            </ol>
+            <div class="rail-actions">
+              <a class="outline-cta" href="#option-3">+48 514 214 567</a>
+              <a class="primary-cta" href="#option-3">Sprawd&#378; termin</a>
+            </div>
+          </nav>
+          <section class="hero-copy">
+            <span>Interaktywne stoisko deserowe</span>
+            <h3>Truskawki w czekoladzie</h3>
+            <p>Polskie truskawki, czekolada, dodatki i elegancka obs&#322;uga nawet do 1000 go&#347;ci.</p>
+          </section>
+        </div>
+
+        <a class="choose" href="#option-3" data-choice="3">Wybierz opcj&#281; 3</a>
+        <dl class="option-notes">
+          <dt>Impact</dt>
+          <dd>&#346;redni. Da si&#281; wdro&#380;y&#263; bez zmiany danych, ale wymaga nowego uk&#322;adu listy.</dd>
+          <dt>Ryzyko</dt>
+          <dd>Trzeba pilnowa&#263;, aby numeracja by&#322;a dekoracyjna i nie pogarsza&#322;a czytelno&#347;ci.</dd>
+        </dl>
+      </article>
+    </main>
+
+    <script>
+      const options = Array.from(document.querySelectorAll(".option"));
+
+      function syncChoice() {
+        const hash = window.location.hash;
+        options.forEach((option) => {
+          option.classList.toggle("is-selected", `#${option.id}` === hash);
+        });
+      }
+
+      window.addEventListener("hashchange", syncChoice);
+      syncChoice();
+    </script>
+  </body>
+</html>

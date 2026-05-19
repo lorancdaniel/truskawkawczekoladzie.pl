@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3UI Animated Mobile Menu Button - Strawberry Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --cream: #fff7ec;
+        --warm: #fdfbf6;
+        --ink: #211716;
+        --cocoa: #1b100f;
+        --berry: #c93445;
+        --gold: #c59a52;
+        --muted: #75665f;
+        --hero-image: url("/images/hero-strawberry-stand.png");
+        --logo-image: url("/brand/strawberry-group-generated-logo.png");
+        color: var(--ink);
+        font-family: Manrope, ui-sans-serif, system-ui, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        background:
+          linear-gradient(180deg, rgba(253, 251, 246, 0.96), rgba(255, 247, 236, 0.9)),
+          var(--hero-image);
+        background-attachment: fixed;
+        background-position: center;
+        background-size: cover;
+        margin: 0;
+      }
+
+      button,
+      a {
+        font: inherit;
+      }
+
+      .intro {
+        display: grid;
+        gap: 12px;
+        padding: 28px max(18px, calc((100vw - 1320px) / 2)) 24px;
+      }
+
+      .intro span {
+        color: var(--berry);
+        font-size: 0.76rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .intro h1 {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: clamp(2.55rem, 5.6vw, 5.4rem);
+        line-height: 0.88;
+        margin: 0;
+        max-width: 980px;
+      }
+
+      .intro p {
+        color: var(--muted);
+        line-height: 1.62;
+        margin: 0;
+        max-width: 900px;
+      }
+
+      .scope {
+        background: var(--cocoa);
+        border-block: 1px solid rgba(197, 154, 82, 0.36);
+        color: var(--cream);
+        display: flex;
+        gap: 18px;
+        justify-content: space-between;
+        padding: 14px max(18px, calc((100vw - 1320px) / 2));
+      }
+
+      .scope strong {
+        font-size: 0.78rem;
+        text-transform: uppercase;
+      }
+
+      .scope em {
+        color: rgba(255, 247, 236, 0.72);
+        font-size: 0.86rem;
+        font-style: normal;
+      }
+
+      .options {
+        display: grid;
+        gap: 28px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        padding: 28px max(18px, calc((100vw - 1320px) / 2)) 44px;
+      }
+
+      .option {
+        background: rgba(253, 251, 246, 0.92);
+        border: 1px solid rgba(33, 23, 22, 0.12);
+        border-radius: 8px;
+        box-shadow: 0 18px 48px rgba(33, 23, 22, 0.1);
+        display: grid;
+        gap: 15px;
+        padding: 14px;
+        transition:
+          border-color 180ms ease,
+          box-shadow 180ms ease,
+          transform 180ms ease;
+      }
+
+      .option:target,
+      .option.is-selected {
+        border-color: var(--berry);
+        box-shadow: 0 24px 70px rgba(201, 52, 69, 0.18);
+        transform: translateY(-2px);
+      }
+
+      .option__copy {
+        display: grid;
+        gap: 8px;
+      }
+
+      .option__copy strong {
+        color: var(--berry);
+        font-size: 0.76rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .option__copy h2 {
+        font-size: 1.14rem;
+        line-height: 1.16;
+        margin: 0;
+      }
+
+      .option__copy p {
+        color: var(--muted);
+        font-size: 0.88rem;
+        line-height: 1.52;
+        margin: 0;
+      }
+
+      .phone {
+        aspect-ratio: 390 / 844;
+        background:
+          linear-gradient(180deg, rgba(18, 6, 5, 0.76), rgba(18, 6, 5, 0.34) 38%, rgba(18, 6, 5, 0.68)),
+          var(--hero-image);
+        background-position: center;
+        background-size: cover;
+        border-radius: 8px;
+        box-shadow: 0 30px 88px rgba(33, 23, 22, 0.24);
+        color: var(--cream);
+        contain: layout paint;
+        margin-inline: auto;
+        max-height: 844px;
+        max-width: 390px;
+        min-height: 660px;
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+      }
+
+      .topbar {
+        align-items: center;
+        background: rgba(27, 16, 15, 0.86);
+        border-top: 4px solid var(--gold);
+        display: flex;
+        gap: 10px;
+        justify-content: space-between;
+        min-height: 66px;
+        padding: 0 8px 0 14px;
+        position: relative;
+        z-index: 4;
+      }
+
+      .brand {
+        align-items: center;
+        display: flex;
+        gap: 10px;
+        min-width: 0;
+      }
+
+      .brand::before {
+        background-image: var(--logo-image);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        content: "";
+        flex: 0 0 46px;
+        height: 46px;
+      }
+
+      .brand span {
+        border-left: 1px solid rgba(197, 154, 82, 0.42);
+        color: var(--cream);
+        display: block;
+        font-size: 0.72rem;
+        font-weight: 900;
+        line-height: 1.05;
+        padding-left: 10px;
+        text-transform: uppercase;
+      }
+
+      .button-stage {
+        display: grid;
+        gap: 12px;
+        justify-items: end;
+      }
+
+      .button-label {
+        color: rgba(255, 247, 236, 0.56);
+        font-size: 0.62rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .menu-btn {
+        align-items: center;
+        border: 0;
+        border-radius: 999px;
+        color: var(--ink);
+        display: inline-flex;
+        font-weight: 900;
+        justify-content: center;
+        min-height: 46px;
+        overflow: hidden;
+        position: relative;
+        white-space: nowrap;
+      }
+
+      .menu-btn svg,
+      .hamburger {
+        flex: 0 0 auto;
+      }
+
+      .hamburger {
+        display: inline-block;
+        height: 18px;
+        position: relative;
+        width: 20px;
+      }
+
+      .hamburger::before,
+      .hamburger::after,
+      .hamburger span {
+        background: currentColor;
+        border-radius: 999px;
+        content: "";
+        height: 2px;
+        left: 1px;
+        position: absolute;
+        width: 18px;
+      }
+
+      .hamburger::before {
+        top: 2px;
+      }
+
+      .hamburger span {
+        top: 8px;
+      }
+
+      .hamburger::after {
+        top: 14px;
+      }
+
+      .glass-menu {
+        background:
+          linear-gradient(180deg, rgba(27, 16, 15, 0.93), rgba(27, 16, 15, 0.74)),
+          linear-gradient(90deg, rgba(27, 16, 15, 0.78), rgba(27, 16, 15, 0.22)),
+          var(--hero-image);
+        background-position: center;
+        background-size: cover;
+        inset: 0;
+        padding: 118px 24px 24px;
+        position: absolute;
+        z-index: 2;
+      }
+
+      .glass-menu p {
+        color: rgba(255, 247, 236, 0.78);
+        line-height: 1.5;
+        margin: 0 0 64px;
+        max-width: 28ch;
+      }
+
+      .glass-menu a {
+        align-items: center;
+        border-bottom: 1px solid rgba(255, 247, 236, 0.18);
+        color: var(--cream);
+        display: flex;
+        font-size: 1.34rem;
+        font-weight: 900;
+        justify-content: space-between;
+        min-height: 64px;
+        text-decoration: none;
+      }
+
+      .glass-menu a::after {
+        background: var(--gold);
+        content: "";
+        height: 1px;
+        width: 22px;
+      }
+
+      .hero-copy {
+        bottom: 34px;
+        display: grid;
+        gap: 14px;
+        left: 24px;
+        position: absolute;
+        right: 24px;
+        z-index: 1;
+      }
+
+      .hero-copy span {
+        color: #ffcbd1;
+        font-size: 0.72rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .hero-copy h3 {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 4rem;
+        line-height: 0.85;
+        margin: 0;
+        max-width: 6.8ch;
+      }
+
+      .choose {
+        align-items: center;
+        background: var(--ink);
+        border-radius: 999px;
+        color: var(--cream);
+        display: inline-flex;
+        font-weight: 900;
+        justify-content: center;
+        min-height: 48px;
+        text-decoration: none;
+        width: 100%;
+      }
+
+      .option:target .choose,
+      .option.is-selected .choose {
+        background: var(--berry);
+      }
+
+      .notes {
+        color: var(--muted);
+        display: grid;
+        font-size: 0.82rem;
+        gap: 6px;
+        line-height: 1.42;
+        margin: 0;
+      }
+
+      .notes dt {
+        color: var(--ink);
+        font-weight: 900;
+      }
+
+      .notes dd {
+        margin: 0;
+      }
+
+      .morph .menu-btn {
+        background: var(--cream);
+        box-shadow: 0 12px 30px rgba(12, 6, 5, 0.18);
+        gap: 8px;
+        padding: 0 14px;
+        width: 118px;
+      }
+
+      .morph .menu-btn .hamburger::before {
+        animation: morph-top 2.4s var(--ease, cubic-bezier(0.16, 1, 0.3, 1)) infinite;
+      }
+
+      .morph .menu-btn .hamburger span {
+        animation: morph-mid 2.4s var(--ease, cubic-bezier(0.16, 1, 0.3, 1)) infinite;
+      }
+
+      .morph .menu-btn .hamburger::after {
+        animation: morph-bottom 2.4s var(--ease, cubic-bezier(0.16, 1, 0.3, 1)) infinite;
+      }
+
+      .morph .menu-btn strong {
+        animation: label-pulse 2.4s var(--ease, cubic-bezier(0.16, 1, 0.3, 1)) infinite;
+      }
+
+      .command .menu-btn {
+        background: rgba(255, 247, 236, 0.96);
+        box-shadow: 0 12px 30px rgba(12, 6, 5, 0.18);
+        gap: 9px;
+        padding: 4px 12px 4px 5px;
+        width: 112px;
+      }
+
+      .command .menu-btn::before {
+        background: var(--berry);
+        border-radius: 999px;
+        content: "";
+        height: 38px;
+        left: 4px;
+        opacity: 0.14;
+        position: absolute;
+        top: 4px;
+        transform: translateX(0);
+        width: 38px;
+      }
+
+      .command .hamburger {
+        background: var(--ink);
+        border-radius: 999px;
+        color: var(--cream);
+        height: 38px;
+        width: 38px;
+      }
+
+      .command .hamburger::before,
+      .command .hamburger::after,
+      .command .hamburger span {
+        left: 10px;
+        width: 18px;
+      }
+
+      .command .hamburger::before {
+        animation: command-top 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+        top: 12px;
+      }
+
+      .command .hamburger span {
+        animation: command-mid 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+        top: 18px;
+      }
+
+      .command .hamburger::after {
+        animation: command-bottom 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+        top: 24px;
+      }
+
+      .seal .menu-btn {
+        background: var(--cream);
+        box-shadow: 0 14px 32px rgba(12, 6, 5, 0.22);
+        height: 52px;
+        padding: 0;
+        width: 52px;
+      }
+
+      .seal .menu-btn::after {
+        border: 1px solid rgba(197, 154, 82, 0.62);
+        border-radius: inherit;
+        content: "";
+        inset: 6px;
+        opacity: 0.55;
+        position: absolute;
+        transform: rotate(0deg);
+        animation: seal-ring 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+      }
+
+      .seal .hamburger::before {
+        animation: morph-top 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+      }
+
+      .seal .hamburger span {
+        animation: morph-mid 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+      }
+
+      .seal .hamburger::after {
+        animation: morph-bottom 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+      }
+
+      @keyframes morph-top {
+        0%, 35% { top: 2px; transform: rotate(0deg); }
+        55%, 100% { top: 8px; transform: rotate(45deg); }
+      }
+
+      @keyframes morph-mid {
+        0%, 35% { opacity: 1; transform: scaleX(1); }
+        55%, 100% { opacity: 0; transform: scaleX(0); }
+      }
+
+      @keyframes morph-bottom {
+        0%, 35% { top: 14px; transform: rotate(0deg); }
+        55%, 100% { top: 8px; transform: rotate(-45deg); }
+      }
+
+      @keyframes command-top {
+        0%, 35% { top: 12px; transform: rotate(0deg); }
+        55%, 100% { top: 18px; transform: rotate(45deg); }
+      }
+
+      @keyframes command-mid {
+        0%, 35% { opacity: 1; transform: scaleX(1); }
+        55%, 100% { opacity: 0; transform: scaleX(0); }
+      }
+
+      @keyframes command-bottom {
+        0%, 35% { top: 24px; transform: rotate(0deg); }
+        55%, 100% { top: 18px; transform: rotate(-45deg); }
+      }
+
+      @keyframes label-pulse {
+        0%, 35% { opacity: 1; transform: translateX(0); }
+        55%, 100% { opacity: 0.88; transform: translateX(-1px); }
+      }
+
+      @keyframes seal-ring {
+        0%, 35% { opacity: 0.5; transform: rotate(0deg) scale(1); }
+        55%, 100% { opacity: 0.82; transform: rotate(90deg) scale(0.92); }
+      }
+
+      @media (max-width: 1120px) {
+        .options {
+          grid-template-columns: 1fr;
+        }
+
+        .option {
+          grid-template-columns: minmax(0, 390px) minmax(0, 1fr);
+        }
+      }
+
+      @media (max-width: 760px) {
+        .scope {
+          flex-direction: column;
+        }
+
+        .option {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="intro">
+      <span>3UI proposal mode</span>
+      <h1>Animowany przycisk menu w mobilnym headerze</h1>
+      <p>
+        Trzy warianty dla samego przycisku w obecnym wariancie Glass Fullscreen. Ka&#380;dy ma sta&#322;e wymiary
+        po klikni&#281;ciu i zak&#322;ada napraw&#281; skoku szeroko&#347;ci przez stabilny scrollbar gutter.
+      </p>
+    </header>
+
+    <div class="scope">
+      <strong>Kontekst: /, mobile 390x844</strong>
+      <em>Target: tylko przycisk menu w headerze; pe&#322;noekranowe menu option 3 zostaje.</em>
+    </div>
+
+    <main class="options" aria-label="Trzy warianty animowanego przycisku menu">
+      <article class="option morph" id="option-1">
+        <div class="option__copy">
+          <strong>Option 1</strong>
+          <h2>Stable Morph Pill</h2>
+          <p>
+            Najbli&#380;ej obecnego UI: sta&#322;a pigu&#322;a 118 px, hamburger p&#322;ynnie morfuje w X, a tekst
+            nie zmienia szeroko&#347;ci przycisku.
+          </p>
+        </div>
+        <div class="phone">
+          <div class="glass-menu">
+            <p>Wybierz sekcj&#281; albo od razu sprawd&#378; dost&#281;pno&#347;&#263; terminu.</p>
+            <a href="#option-1">Oferta</a>
+            <a href="#option-1">Pakiety</a>
+            <a href="#option-1">Jak dzia&#322;amy</a>
+            <a href="#option-1">Eventy</a>
+            <a href="#option-1">Kontakt</a>
+          </div>
+          <div class="topbar">
+            <div class="brand"><span>Strawberry<br />Group S.C.</span></div>
+            <div class="button-stage">
+              <button class="menu-btn" type="button"><i class="hamburger"><span></span></i><strong>Zamknij</strong></button>
+            </div>
+          </div>
+        </div>
+        <a class="choose" href="#option-1">Wybierz opcj&#281; 1</a>
+        <dl class="notes">
+          <dt>Impact</dt>
+          <dd>Niski. Najmniejsza zmiana, dobry kompromis mi&#281;dzy czytelno&#347;ci&#261; i animacj&#261;.</dd>
+          <dt>Tradeoff</dt>
+          <dd>Najmniej odwa&#380;ny wizualnie, ale najmniej ryzykowny.</dd>
+        </dl>
+      </article>
+
+      <article class="option command" id="option-2">
+        <div class="option__copy">
+          <strong>Option 2</strong>
+          <h2>Command Capsule</h2>
+          <p>
+            Bardziej dopracowany, premium control: ikona siedzi w ciemnym kr&#261;&#380;ku, a kremowa kapsu&#322;a
+            zachowuje sta&#322;&#261; szeroko&#347;&#263; i wyra&#378;ny hit target.
+          </p>
+        </div>
+        <div class="phone">
+          <div class="glass-menu">
+            <p>Wybierz sekcj&#281; albo od razu sprawd&#378; dost&#281;pno&#347;&#263; terminu.</p>
+            <a href="#option-2">Oferta</a>
+            <a href="#option-2">Pakiety</a>
+            <a href="#option-2">Jak dzia&#322;amy</a>
+            <a href="#option-2">Eventy</a>
+            <a href="#option-2">Kontakt</a>
+          </div>
+          <div class="topbar">
+            <div class="brand"><span>Strawberry<br />Group S.C.</span></div>
+            <div class="button-stage">
+              <button class="menu-btn" type="button"><i class="hamburger"><span></span></i><strong>Zamknij</strong></button>
+            </div>
+          </div>
+        </div>
+        <a class="choose" href="#option-2">Wybierz opcj&#281; 2</a>
+        <dl class="notes">
+          <dt>Impact</dt>
+          <dd>&#346;redni. Wymaga delikatnej zmiany struktury ikonografii, ale nadal bez nowych zale&#380;no&#347;ci.</dd>
+          <dt>Tradeoff</dt>
+          <dd>Ma mocniejszy charakter i mo&#380;e wygl&#261;da&#263; bardziej aplikacyjnie.</dd>
+        </dl>
+      </article>
+
+      <article class="option seal" id="option-3">
+        <div class="option__copy">
+          <strong>Option 3</strong>
+          <h2>Minimal Icon Seal</h2>
+          <p>
+            Najbardziej minimalistyczny kierunek: okr&#261;g&#322;y sta&#322;y przycisk 52 px, animowany X i subtelny
+            z&#322;oty ring. Bez zmiany szeroko&#347;ci po klikni&#281;ciu.
+          </p>
+        </div>
+        <div class="phone">
+          <div class="glass-menu">
+            <p>Wybierz sekcj&#281; albo od razu sprawd&#378; dost&#281;pno&#347;&#263; terminu.</p>
+            <a href="#option-3">Oferta</a>
+            <a href="#option-3">Pakiety</a>
+            <a href="#option-3">Jak dzia&#322;amy</a>
+            <a href="#option-3">Eventy</a>
+            <a href="#option-3">Kontakt</a>
+          </div>
+          <div class="topbar">
+            <div class="brand"><span>Strawberry<br />Group S.C.</span></div>
+            <div class="button-stage">
+              <button class="menu-btn" type="button" aria-label="Zamknij menu"><i class="hamburger"><span></span></i></button>
+            </div>
+          </div>
+        </div>
+        <a class="choose" href="#option-3">Wybierz opcj&#281; 3</a>
+        <dl class="notes">
+          <dt>Impact</dt>
+          <dd>&#346;redni. Najczystszy wizualnie, najlepszy przeciw skokowi szeroko&#347;ci.</dd>
+          <dt>Tradeoff</dt>
+          <dd>Widoczny tekst znika, wi&#281;c trzeba bardzo dobrze ustawi&#263; `aria-label` i focus state.</dd>
+        </dl>
+      </article>
+    </main>
+
+    <script>
+      const options = Array.from(document.querySelectorAll(".option"));
+
+      function syncChoice() {
+        const hash = window.location.hash;
+        options.forEach((option) => option.classList.toggle("is-selected", `#${option.id}` === hash));
+      }
+
+      window.addEventListener("hashchange", syncChoice);
+      syncChoice();
+    </script>
+  </body>
+</html>

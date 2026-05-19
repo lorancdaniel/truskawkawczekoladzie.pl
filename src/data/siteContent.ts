@@ -100,15 +100,27 @@ export const logistics = [
 
 export const galleryItems = [
   {
-    title: 'Świeże składniki',
-    text: 'Owoc, czekolada i dodatki eksponowane jak w nowoczesnym food atelier.',
+    image: '/images/gallery-generated/gallery-realization-1-chocolate-pour.png',
+    kicker: 'Proces',
+    title: 'Świeża czekolada',
+    text: 'Rytuał przygotowania widoczny od pierwszego kadru.',
   },
   {
-    title: 'Przygotowanie na miejscu',
-    text: 'Goście widzą proces, a deser nie jest anonimową przekąską z zaplecza.',
+    image: '/images/gallery-generated/gallery-realization-2-buffet-counter.png',
+    kicker: 'Stoisko',
+    title: 'Eventowy setup',
+    text: 'Blat, dodatki i światło tworzą oprawę premium.',
   },
   {
-    title: 'Personalizacja',
-    text: 'Warianty dodatków, polew i oprawy dopasowane do wydarzenia.',
+    image: '/images/gallery-generated/gallery-realization-3-guest-toppings.png',
+    kicker: 'Interakcja',
+    title: 'Interakcja',
+    text: 'Gość wybiera dodatki, a stoisko staje się częścią wydarzenia.',
+  },
+  {
+    image: '/images/gallery-generated/gallery-realization-4-finished-cups.png',
+    kicker: 'Efekt',
+    title: 'Gotowy efekt',
+    text: 'Deser wygląda dobrze przy wydaniu i na zdjęciach.',
   },
 ];
