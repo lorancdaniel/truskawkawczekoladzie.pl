@@ -1,4 +1,4 @@
-import type { PropsWithChildren, HTMLAttributes } from 'react';
+import { createElement, type CSSProperties, type HTMLAttributes, type PropsWithChildren } from 'react';
 import { useInView } from '../../hooks/useInView';
 
 type RevealProps = PropsWithChildren<{
@@ -26,19 +26,20 @@ export function Reveal({
     ...(delay !== undefined ? { '--reveal-delay': `${delay}ms` } : {}),
     ...(duration !== undefined ? { '--reveal-duration': `${duration}ms` } : {}),
     ...rest.style,
-  } as React.CSSProperties;
+  } as CSSProperties;
 
   const animationClass = `reveal--${animationType}`;
 
-  return (
-    <Component
-      ref={ref as any}
-      id={id}
-      style={style}
-      className={`${className} reveal ${animationClass} ${canAnimate ? 'reveal--ready' : ''} ${isVisible ? 'is-visible' : ''}`.trim()}
-      {...rest}
-    >
-      {children}
-    </Component>
+  return createElement(
+    Component,
+    {
+      ...rest,
+      ref,
+      id,
+      style,
+      className:
+        `${className} reveal ${animationClass} ${canAnimate ? 'reveal--ready' : ''} ${isVisible ? 'is-visible' : ''}`.trim(),
+    },
+    children,
   );
 }

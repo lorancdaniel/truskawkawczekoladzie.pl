@@ -29,6 +29,15 @@ describe('LeadForm', () => {
     expect(screen.getByLabelText(/zgadzam się/i)).toBeInTheDocument();
   });
 
+  it('keeps field validation messages hidden before submit', () => {
+    const { container } = render(<LeadForm />);
+
+    expect(screen.queryByText(/popraw pola formularza/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/miejsce na komunikat pola/i)).not.toBeInTheDocument();
+    expect(container.querySelector('.field__error-placeholder')).not.toBeInTheDocument();
+    expect(container.querySelector('[id$="-error"]')).not.toBeInTheDocument();
+  });
+
   it('focuses an error summary after an empty submit', async () => {
     const user = userEvent.setup();
     render(<LeadForm />);
@@ -38,6 +47,19 @@ describe('LeadForm', () => {
     const summary = await screen.findByRole('alert');
     expect(summary).toHaveFocus();
     expect(summary).toHaveTextContent('Popraw pola formularza');
+  });
+
+  it('keeps remaining validation visible while a field is corrected', async () => {
+    const user = userEvent.setup();
+    render(<LeadForm />);
+
+    await user.click(screen.getByRole('button', { name: /wyślij zapytanie/i }));
+    await user.type(screen.getByLabelText(/imię i nazwisko/i), 'Anna Kowalska');
+
+    const summary = await screen.findByRole('alert');
+    expect(summary).toHaveTextContent(/email/i);
+    expect(summary).not.toHaveTextContent(/imię i nazwisko/i);
+    expect(summary).not.toHaveTextContent('undefined');
   });
 
   it('shows loading and then success for a valid submit', async () => {
@@ -59,13 +81,13 @@ describe('LeadForm', () => {
     await user.click(await screen.findByRole('button', { name: /Dziś/i }));
     
     await user.click(screen.getByLabelText(/typ wydarzenia/i));
-    await user.click(await screen.findByRole('button', { name: /Wesele \/ poprawiny/i }));
+    await user.click(await screen.findByRole('option', { name: /Wesele \/ poprawiny/i }));
     
     await user.type(screen.getByLabelText(/miasto/i), 'Warszawa');
     await user.type(screen.getByLabelText(/liczba gości/i), '240');
     
     await user.click(screen.getByLabelText(/preferowany pakiet/i));
-    await user.click(await screen.findByRole('button', { name: /Gold/i }));
+    await user.click(await screen.findByRole('option', { name: /Gold/i }));
     
     await user.type(screen.getByLabelText(/informacje dodatkowe/i), 'Proszę o wycenę pakietu Gold.');
     await user.click(screen.getByLabelText(/zgadzam się/i));
@@ -93,13 +115,13 @@ describe('LeadForm', () => {
     await user.click(await screen.findByRole('button', { name: /Dziś/i }));
     
     await user.click(screen.getByLabelText(/typ wydarzenia/i));
-    await user.click(await screen.findByRole('button', { name: /Wesele \/ poprawiny/i }));
+    await user.click(await screen.findByRole('option', { name: /Wesele \/ poprawiny/i }));
     
     await user.type(screen.getByLabelText(/miasto/i), 'Warszawa');
     await user.type(screen.getByLabelText(/liczba gości/i), '240');
     
     await user.click(screen.getByLabelText(/preferowany pakiet/i));
-    await user.click(await screen.findByRole('button', { name: /Gold/i }));
+    await user.click(await screen.findByRole('option', { name: /Gold/i }));
     
     await user.type(screen.getByLabelText(/informacje dodatkowe/i), 'Proszę o wycenę pakietu Gold.');
     await user.click(screen.getByLabelText(/zgadzam się/i));

@@ -7,7 +7,7 @@ export function EventTypes() {
       <div className="events-stage">
         <div className="events-stage__copy">
           <p className="eyebrow">Dla jakich wydarzeń</p>
-          <h2>Jedna mapa zastosowań, sześć gotowych kontekstów.</h2>
+          <h2>Gotowe konteksty dla sześciu typów wydarzeń.</h2>
           <p>
             Od wesel po eventy firmowe: stoisko działa tam, gdzie liczy się rytm obsługi,
             dobra ekspozycja i lekka interakcja z gośćmi.

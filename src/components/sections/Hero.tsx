@@ -15,28 +15,45 @@ export function Hero() {
     if (!root || prefersReducedMotion) return undefined;
 
     const ctx = gsap.context(() => {
-      const isMobile = window.innerWidth <= 768;
+      const isMobile = window.matchMedia('(max-width: 780px)').matches;
 
-      // Wydłużone budżety czasowe dla luksusowego, spowolnionego efektu
-      const d = isMobile ? 0.6 : 0.8;
-      const lineD = isMobile ? 0.8 : 1.1;
-      
+      const d = isMobile ? 0.55 : 0.8;
+      const lineD = isMobile ? 0.72 : 1.1;
+
       const timeline = gsap.timeline({
         defaults: { ease: 'power4.out' },
       });
 
       timeline
-        .from('.hero .eyebrow', { opacity: 0, y: 16, duration: d })
-        .from('.hero .hero-line-inner', { yPercent: 105, stagger: 0.14, duration: lineD }, isMobile ? 0.15 : 0.2)
-        .from('.hero__lead', { opacity: 0, y: 20, duration: isMobile ? 0.7 : 0.9 }, isMobile ? 0.35 : 0.45)
-        .from('.hero__actions > *', { opacity: 0, stagger: 0.1, y: 15, duration: d }, isMobile ? 0.55 : 0.65)
-        .from('.hero__facts div', { opacity: 0, stagger: 0.08, y: 12, duration: d }, isMobile ? 0.7 : 0.8)
-        .from('.hero__hint div', { opacity: 0, stagger: 0.08, y: 12, duration: d }, isMobile ? 0.7 : 0.8);
+        .from('.hero .eyebrow', { opacity: 0, y: isMobile ? 12 : 16, duration: d })
+        .from('.hero .hero-line-inner', { yPercent: 105, stagger: 0.12, duration: lineD }, isMobile ? 0.12 : 0.2)
+        .from('.hero__lead', { opacity: 0, y: isMobile ? 16 : 20, duration: isMobile ? 0.62 : 0.9 }, isMobile ? 0.3 : 0.45)
+        .from(
+          '.hero__actions > *',
+          { clearProps: 'opacity,transform', opacity: 0, stagger: 0.09, y: isMobile ? 12 : 15, duration: d },
+          isMobile ? 0.48 : 0.65,
+        )
+        .from('.hero__facts div', { opacity: 0, stagger: 0.07, y: isMobile ? 10 : 12, duration: d }, isMobile ? 0.62 : 0.8)
+        .from('.hero__hint div', { opacity: 0, stagger: 0.07, y: isMobile ? 10 : 12, duration: d }, isMobile ? 0.62 : 0.8);
+
+      if (isMobile) {
+        timeline.from(
+          '.hero__motion-line',
+          { opacity: 0, y: -10, scale: 0.96, duration: 1.1, ease: 'power3.out' },
+          0.18,
+        );
+      }
 
       gsap.fromTo(
         '.hero__motion-path',
         { opacity: 0, strokeDashoffset: 760 },
-        { opacity: 0.56, strokeDashoffset: 0, duration: 2.2, ease: 'power3.out', delay: 0.3 },
+        {
+          opacity: isMobile ? 0.28 : 0.42,
+          strokeDashoffset: 0,
+          duration: isMobile ? 1.35 : 1.9,
+          ease: 'power3.out',
+          delay: isMobile ? 0.28 : 0.42,
+        },
       );
     }, root);
 

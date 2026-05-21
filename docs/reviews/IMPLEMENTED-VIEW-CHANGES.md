@@ -1,5 +1,74 @@
 # Implemented View Changes
 
+## 2026-05-20 - Mobile/Tablet Audit Repairs And Cookie Consent
+
+Implemented the mobile/tablet audit repair pass and added the requested cookie policy consent surface.
+
+### Files / Technical Changes
+
+- Added `CookieConsent` and rendered it at the app shell level with a compact cookies policy, details disclosure, and acceptance button.
+- Tightened lead-form validation behavior so field-level messages stay hidden until submit, the error summary filters cleared errors, links to the right custom controls, and remains visible while remaining fields are corrected.
+- Improved modal semantics for custom select/date fields with listbox/option and calendar grid metadata.
+- Reduced fragile modal overflow for date/package choices and calculator/package flows on tablet/mobile.
+- Stabilized the gallery carousel logic for rapid clicks, loop transitions, touch swipes, active state, and image fill.
+- Removed lint issues in `Reveal` by avoiding the previous `any` ref cast.
+
+### States Verified
+
+- IAB live route `http://localhost:3000/`: cookie banner appears, policy copy is visible, and `Akceptuję` hides the banner.
+- IAB live route `http://localhost:3000/#kontakt`: validation summary is hidden before submit, appears after empty submit, receives focus, does not show `undefined`, and keeps remaining errors visible after one field is corrected.
+- IAB live route `http://localhost:3000/#kontakt`: date modal opens with no internal scroll (`scrollHeight === clientHeight`) and package choice modal opens without extra scroll height.
+- IAB live route `http://localhost:3000/#kalkulator`: calculator modal opens and closes from the close button.
+- IAB gallery check: rapid `Następne zdjęcie` clicks stay on valid gallery state, and the `04 → 01` loop returns the active state to slide `01`.
+
+### Checks Run
+
+- `npm run typecheck`
+- `npm test`
+- `npx eslint src --max-warnings=0`
+- `npm run build`
+- `git diff --check`
+
+### Known Follow-Ups
+
+- Full `npm run lint` was intentionally not used for this pass because the repository currently contains temporary/generated review assets; source lint was run directly against `src`.
+
+## 2026-05-19 - Mobile Pixel-Perfect Landing Pass
+
+Completed the full mobile polish pass requested for `http://localhost:5173/` using GPT Pro Review and local screenshot verification.
+
+### Files / Technical Changes
+
+- Tightened the mobile gallery carousel so the active card clips cleanly without asymmetric left-edge bleed.
+- Added required-field signaling to the lead form with CSS-generated asterisks and a concise form note, while preserving exact accessible label text.
+- Marked all fields required by validation, including message and consent.
+- Cleaned mobile benefit/detail separators so they use horizontal rules only, with no residual right-side hairline.
+- Reduced the gallery-to-contact transition gap and preserved the footer as the closing brand/contact area.
+- Improved supporting accessibility behavior already in this pass: nav/dialog focus handling, hash scrolling, summary link focus, nested modal Escape handling, and mobile modal safe-area behavior.
+
+### States Verified
+
+- Mobile `390x844`: full default scroll coverage, gallery, contact default, validation errors, footer, nav open, package modal, calculator step 2, nested select, event type modal, and direct `/#kontakt` load.
+- Mobile width checks: `360`, `375`, `390`, `414`, and `430` all reported `scrollWidth === clientWidth` and no duplicate IDs.
+- GPT Pro Review static pass: no P0/P1 after current full-scroll review; P2 gallery/form issues identified and then fixed.
+- GPT Pro Review targeted v2 pass: production signoff reasonable, no P0/P1/P2.
+- GPT Pro Review v3 hairline recheck: previous residual P3 right-side hairline closed, no new visible regressions.
+
+### Checks Run
+
+- `npm run typecheck`
+- targeted ESLint on changed TypeScript/TSX files
+- `npm test`
+- `npm run build`
+- `git diff --check`
+- Playwright screenshot captures for mobile full scroll and targeted interaction states.
+- GPT Pro Review conversations: `https://chatgpt.com/c/6a0ce022-051c-83eb-8e1c-61441d064024`, `https://chatgpt.com/c/6a0ce80b-ee30-83eb-b7a3-e812a20add3c`, and `https://chatgpt.com/c/6a0cea7f-4cc8-83eb-9a6e-cb016ecfaaac`.
+
+### Known Follow-Ups
+
+- No remaining P0/P1/P2/P3 visual findings from GPT Pro Review after the v3 recheck.
+- Review screenshots and prompts are kept in `docs/reviews/assets/2026-05-19-mobile-pixel-perfect-current-v2/` as evidence for the completed GPT Pro Review gate.
+
 ## 2026-05-18 - Value Section Estimator Modal
 
 Implemented the selected 3UI value-section direction, Option 3 / Premium Estimator Board, with the right calculator headline expanded to full card width.

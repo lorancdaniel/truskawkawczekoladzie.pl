@@ -98,7 +98,6 @@ export function LeadForm() {
       const detail = (event as CustomEvent<DesiredPackage>).detail;
       setValues((current) => ({ ...current, desiredPackage: detail }));
       setErrors((current) => ({ ...current, desiredPackage: undefined }));
-      setShowValidation(false);
     };
     section?.addEventListener('package-request', onPackageRequest);
     return () => section?.removeEventListener('package-request', onPackageRequest);
@@ -113,7 +112,6 @@ export function LeadForm() {
   function updateField<Key extends keyof LeadFormValues>(field: Key, value: LeadFormValues[Key]) {
     setValues((current) => ({ ...current, [field]: value }));
     setErrors((current) => ({ ...current, [field]: undefined }));
-    setShowValidation(false);
     if (status !== 'idle') setStatus('idle');
   }
 
@@ -160,6 +158,9 @@ export function LeadForm() {
             <span>Formularz</span>
             <h3>Szczegóły wydarzenia</h3>
             <p>Najważniejsze informacje wystarczą do pierwszej wyceny i sprawdzenia terminu.</p>
+            <p className="lead-form__required-note">
+              Pola wymagane oznaczone<strong aria-hidden="true">*</strong>.
+            </p>
           </div>
 
           <ErrorSummary ref={summaryRef} errors={visibleErrors} />
@@ -170,6 +171,7 @@ export function LeadForm() {
               id="fullName"
               label="Imię i nazwisko"
               autoComplete="name"
+              required
               value={values.fullName}
               error={visibleErrors.fullName}
               onChange={(event) => updateField('fullName', event.target.value)}
@@ -179,6 +181,7 @@ export function LeadForm() {
               label="Email"
               type="email"
               autoComplete="email"
+              required
               value={values.email}
               error={visibleErrors.email}
               onChange={(event) => updateField('email', event.target.value)}
@@ -188,6 +191,7 @@ export function LeadForm() {
               label="Telefon"
               type="tel"
               autoComplete="tel"
+              required
               value={values.phone}
               error={visibleErrors.phone}
               onChange={(event) => updateField('phone', event.target.value)}
@@ -195,6 +199,7 @@ export function LeadForm() {
             <DateModalField
               id="eventDate"
               label="Data wydarzenia"
+              required
               value={values.eventDate}
               error={visibleErrors.eventDate}
               onChange={(value) => updateField('eventDate', value)}
@@ -204,6 +209,7 @@ export function LeadForm() {
             <ModalSelectField
               id="eventType"
               label="Typ wydarzenia"
+              required
               value={values.eventType}
               error={visibleErrors.eventType}
               placeholder="Wybierz typ"
@@ -213,6 +219,7 @@ export function LeadForm() {
             <TextField
               id="eventLocation"
               label="Miasto / lokalizacja wydarzenia"
+              required
               value={values.eventLocation}
               error={visibleErrors.eventLocation}
               onChange={(event) => updateField('eventLocation', event.target.value)}
@@ -221,6 +228,7 @@ export function LeadForm() {
               id="guestCount"
               label="Szacowana liczba gości"
               inputMode="numeric"
+              required
               value={values.guestCount}
               error={visibleErrors.guestCount}
               onChange={(event) => updateField('guestCount', event.target.value)}
@@ -228,6 +236,7 @@ export function LeadForm() {
             <ModalSelectField
               id="desiredPackage"
               label="Preferowany pakiet"
+              required
               value={values.desiredPackage}
               error={visibleErrors.desiredPackage}
               placeholder="Wybierz pakiet"
@@ -239,6 +248,7 @@ export function LeadForm() {
             <TextareaField
               id="message"
               label="Informacje dodatkowe"
+              required
               rows={4}
               value={values.message}
               error={visibleErrors.message}
@@ -247,6 +257,7 @@ export function LeadForm() {
             <CheckboxField
               id="consent"
               label="Zgadzam się na kontakt telefoniczny lub mailowy w sprawie wyceny i dostępności terminu. Dane zostaną użyte wyłącznie do obsługi tego zapytania."
+              required
               checked={values.consent}
               error={visibleErrors.consent}
               onChange={(event) => updateField('consent', event.target.checked)}

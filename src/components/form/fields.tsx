@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { CalendarDays, Check, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { ChangeEvent, InputHTMLAttributes, ReactNode, TextareaHTMLAttributes } from 'react';
@@ -7,25 +7,41 @@ type BaseFieldProps = {
   id: string;
   label: string;
   error?: string;
+  required?: boolean;
 };
 
 function describedBy(id: string, error?: string) {
   return error ? `${id}-error` : undefined;
 }
 
+function FieldError({ id, error }: { id: string; error?: string }) {
+  if (!error) return null;
+
+  return (
+    <p id={`${id}-error`}>
+      {error}
+    </p>
+  );
+}
+
+function FieldLabel({ htmlFor, label, required }: { htmlFor: string; label: string; required?: boolean }) {
+  return (
+    <label htmlFor={htmlFor} data-required={required ? 'true' : undefined}>{label}</label>
+  );
+}
+
 export function TextField({
   id,
   label,
   error,
+  required,
   ...props
 }: BaseFieldProps & InputHTMLAttributes<HTMLInputElement>) {
   return (
     <div className="field">
-      <label htmlFor={id}>{label}</label>
-      <input id={id} aria-invalid={Boolean(error)} aria-describedby={describedBy(id, error)} {...props} />
-      <p id={`${id}-error`} className={!error ? 'field__error-placeholder' : undefined} aria-hidden={!error}>
-        {error || 'Miejsce na komunikat pola'}
-      </p>
+      <FieldLabel htmlFor={id} label={label} required={required} />
+      <input id={id} aria-invalid={Boolean(error)} aria-describedby={describedBy(id, error)} required={required} {...props} />
+      <FieldError id={id} error={error} />
     </div>
   );
 }
@@ -63,6 +79,15 @@ function displayDate(value: string) {
   }).format(date);
 }
 
+function fullDateLabel(date: Date) {
+  return new Intl.DateTimeFormat('pl-PL', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  }).format(date);
+}
+
 type DialogShellProps = {
   children: ReactNode;
   panelClassName?: string;
@@ -71,9 +96,51 @@ type DialogShellProps = {
 };
 
 function DialogShell({ children, panelClassName, titleId, onClose }: DialogShellProps) {
+  const panelRef = useRef<HTMLDivElement | null>(null);
+  const previouslyFocusedRef = useRef<HTMLElement | null>(null);
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') onClose();
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        event.stopPropagation();
+        onClose();
+        return;
+      }
+
+      if (event.key !== 'Tab') {
+        return;
+      }
+
+      const panel = panelRef.current;
+      if (!panel) {
+        return;
+      }
+
+      const focusable = Array.from(
+        panel.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), input, textarea, [tabindex]:not([tabindex="-1"])'),
+      ).filter((item) => {
+        const style = window.getComputedStyle(item);
+        return style.display !== 'none' && style.visibility !== 'hidden';
+      });
+
+      if (!focusable.length) {
+        return;
+      }
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+        return;
+      }
+
+      if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
@@ -82,13 +149,23 @@ function DialogShell({ children, panelClassName, titleId, onClose }: DialogShell
   useEffect(() => {
     const previousBodyOverflow = document.body.style.overflow;
     const previousHtmlOverflow = document.documentElement.style.overflow;
+    previouslyFocusedRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
 
     document.body.style.overflow = 'hidden';
     document.documentElement.style.overflow = 'hidden';
+    document.body.classList.add('modal-open');
+
+    const focusFrame = window.requestAnimationFrame(() => {
+      const initialFocus = panelRef.current?.querySelector<HTMLElement>('button, [href], input, textarea');
+      initialFocus?.focus({ preventScroll: true });
+    });
 
     return () => {
+      window.cancelAnimationFrame(focusFrame);
       document.body.style.overflow = previousBodyOverflow;
       document.documentElement.style.overflow = previousHtmlOverflow;
+      document.body.classList.remove('modal-open');
+      previouslyFocusedRef.current?.focus({ preventScroll: true });
     };
   }, []);
 
@@ -101,6 +178,7 @@ function DialogShell({ children, panelClassName, titleId, onClose }: DialogShell
         aria-modal="true"
         className={`choice-modal__panel ${panelClassName ?? ''}`.trim()}
         role="dialog"
+        ref={panelRef}
         onMouseDown={(event) => event.stopPropagation()}
       >
         {children}
@@ -114,6 +192,7 @@ export function ModalSelectField<Value extends string>({
   id,
   label,
   error,
+  required,
   value,
   placeholder,
   options,
@@ -130,13 +209,14 @@ export function ModalSelectField<Value extends string>({
 
   return (
     <div className="field">
-      <label htmlFor={`${id}-trigger`}>{label}</label>
+      <FieldLabel htmlFor={`${id}-trigger`} label={label} required={required} />
       <button
         id={`${id}-trigger`}
         aria-describedby={describedBy(id, error)}
         aria-expanded={isOpen}
         aria-haspopup="dialog"
         aria-invalid={Boolean(error)}
+        aria-required={required ? 'true' : undefined}
         className={`modal-field__trigger ${!selected ? 'is-placeholder' : ''}`}
         onClick={() => setIsOpen(true)}
         type="button"
@@ -144,9 +224,7 @@ export function ModalSelectField<Value extends string>({
         <span>{selected?.label ?? placeholder}</span>
         <span aria-hidden="true">▾</span>
       </button>
-      <p id={`${id}-error`} className={!error ? 'field__error-placeholder' : undefined} aria-hidden={!error}>
-        {error || 'Miejsce na komunikat pola'}
-      </p>
+      {error ? <p id={`${id}-error`}>{error}</p> : null}
       {isOpen ? (
         <DialogShell titleId={dialogTitleId} onClose={() => setIsOpen(false)}>
           <div className="choice-modal__header">
@@ -156,15 +234,17 @@ export function ModalSelectField<Value extends string>({
               ×
             </button>
           </div>
-          <div className="choice-modal__list">
+          <div className="choice-modal__list" role="listbox" aria-labelledby={dialogTitleId}>
             {options.map((option) => (
               <button
+                aria-selected={option.value === value}
                 className={`choice-option ${option.value === value ? 'is-selected' : ''}`}
                 key={option.value}
                 onClick={() => {
                   onChange(option.value);
                   setIsOpen(false);
                 }}
+                role="option"
                 type="button"
               >
                 <span>
@@ -185,6 +265,7 @@ export function DateModalField({
   id,
   label,
   error,
+  required,
   value,
   onChange,
 }: BaseFieldProps & {
@@ -218,13 +299,14 @@ export function DateModalField({
 
   return (
     <div className="field">
-      <label htmlFor={`${id}-trigger`}>{label}</label>
+      <FieldLabel htmlFor={`${id}-trigger`} label={label} required={required} />
       <button
         id={`${id}-trigger`}
         aria-describedby={describedBy(id, error)}
         aria-expanded={isOpen}
         aria-haspopup="dialog"
         aria-invalid={Boolean(error)}
+        aria-required={required ? 'true' : undefined}
         className={`modal-field__trigger ${!value ? 'is-placeholder' : ''}`}
         onClick={() => {
           const base = selectedDate ?? new Date();
@@ -236,9 +318,7 @@ export function DateModalField({
         <span>{value ? displayDate(value) : 'Wybierz datę'}</span>
         <CalendarDays aria-hidden="true" size={18} />
       </button>
-      <p id={`${id}-error`} className={!error ? 'field__error-placeholder' : undefined} aria-hidden={!error}>
-        {error || 'Miejsce na komunikat pola'}
-      </p>
+      {error ? <p id={`${id}-error`}>{error}</p> : null}
       {isOpen ? (
         <DialogShell
           panelClassName="choice-modal__panel--date"
@@ -271,12 +351,14 @@ export function DateModalField({
               <span>Sb</span>
               <span>Nd</span>
             </div>
-            <div className="date-picker__grid">
+            <div className="date-picker__grid" role="grid" aria-label={monthLabel(visibleMonth)}>
               {days.map((date, index) => {
                 if (!date) return <span className="date-picker__empty" key={`empty-${index}`} />;
                 const dateValue = formatDateInputValue(date);
                 return (
                   <button
+                    aria-current={dateValue === todayValue ? 'date' : undefined}
+                    aria-label={fullDateLabel(date)}
                     aria-pressed={dateValue === value}
                     className={dateValue === value ? 'is-selected' : undefined}
                     key={dateValue}
@@ -313,15 +395,14 @@ export function TextareaField({
   id,
   label,
   error,
+  required,
   ...props
 }: BaseFieldProps & TextareaHTMLAttributes<HTMLTextAreaElement>) {
   return (
     <div className="field field--wide">
-      <label htmlFor={id}>{label}</label>
-      <textarea id={id} aria-invalid={Boolean(error)} aria-describedby={describedBy(id, error)} {...props} />
-      <p id={`${id}-error`} className={!error ? 'field__error-placeholder' : undefined} aria-hidden={!error}>
-        {error || 'Miejsce na komunikat pola'}
-      </p>
+      <FieldLabel htmlFor={id} label={label} required={required} />
+      <textarea id={id} aria-invalid={Boolean(error)} aria-describedby={describedBy(id, error)} required={required} {...props} />
+      <FieldError id={id} error={error} />
     </div>
   );
 }
@@ -330,6 +411,7 @@ export function CheckboxField({
   id,
   label,
   error,
+  required,
   checked,
   onChange,
 }: BaseFieldProps & {
@@ -338,25 +420,26 @@ export function CheckboxField({
 }) {
   return (
     <div className="field field--checkbox field--wide">
-      <div className="checkbox-wrapper">
-        <input
-          id={id}
-          type="checkbox"
-          checked={checked}
-          onChange={onChange}
-          aria-invalid={Boolean(error)}
-          aria-describedby={describedBy(id, error)}
-        />
-        <div className="checkbox-box" aria-hidden="true">
-          <svg viewBox="0 0 24 24" className="checkbox-svg" fill="none" stroke="currentColor">
-            <polyline points="20 6 9 17 4 12" />
-          </svg>
-        </div>
-      </div>
-      <label htmlFor={id}>{label}</label>
-      <p id={`${id}-error`} className={!error ? 'field__error-placeholder' : undefined} aria-hidden={!error}>
-        {error || 'Miejsce na komunikat pola'}
-      </p>
+      <label className="checkbox-click-target" htmlFor={id}>
+        <span className="checkbox-wrapper">
+          <input
+            id={id}
+            type="checkbox"
+            checked={checked}
+            onChange={onChange}
+            aria-invalid={Boolean(error)}
+            aria-describedby={describedBy(id, error)}
+            required={required}
+          />
+          <span className="checkbox-box" aria-hidden="true">
+            <svg viewBox="0 0 24 24" className="checkbox-svg" fill="none" stroke="currentColor">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+          </span>
+        </span>
+        <span className="checkbox-label-text" data-required={required ? 'true' : undefined}>{label}</span>
+      </label>
+      <FieldError id={id} error={error} />
     </div>
   );
 }

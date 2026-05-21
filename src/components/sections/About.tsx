@@ -30,7 +30,7 @@ export function About() {
         />
         <Reveal as="aside" className="about-quality-mark" animationType="fade-in-up" delay={200} duration={1200}>
           <strong>Świeżość. Jakość. Doświadczenie.</strong>
-          <p>Krótki podpis marki wzmacnia zaufanie bez budowania osobnej, pustej karty.</p>
+          <p>Świeże owoce, sprawny proces i obsługa, która trzyma rytm wydarzenia od montażu po zamknięcie stoiska.</p>
         </Reveal>
       </div>
       <div className="about-board" aria-label="Jak wypełniamy obsługę atrakcji">

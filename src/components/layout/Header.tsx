@@ -15,11 +15,32 @@ export function Header() {
   const floatingSafeHiddenRef = useRef(false);
   const headerCommandRef = useRef<HTMLDivElement | null>(null);
   const floatingActionsRef = useRef<HTMLDivElement | null>(null);
+  const menuButtonRef = useRef<HTMLButtonElement | null>(null);
+  const navRef = useRef<HTMLElement | null>(null);
+  const lastNavFocusRef = useRef<HTMLElement | null>(null);
   const floatingFrameRef = useRef<number | null>(null);
   const floatingSecondFrameRef = useRef<number | null>(null);
   const handleLeadFormClick = () => {
     setIsOpen(false);
     scrollToLeadForm();
+  };
+
+  const closeNavAndFocusTarget = (href: string) => {
+    setIsOpen(false);
+    window.setTimeout(() => {
+      const id = href.startsWith('#') ? href.slice(1) : '';
+      const target = id ? document.getElementById(id) : null;
+
+      if (target) {
+        if (!target.hasAttribute('tabindex')) {
+          target.setAttribute('tabindex', '-1');
+        }
+        target.focus({ preventScroll: true });
+        return;
+      }
+
+      menuButtonRef.current?.focus({ preventScroll: true });
+    }, 0);
   };
 
   const clearFloatingMotion = useCallback(() => {
@@ -122,6 +143,7 @@ export function Header() {
 
   useEffect(() => {
     let initialFrame: number | null = null;
+    let scrollFrame: number | null = null;
 
     const syncScrolledState = (nextScrolled: boolean) => {
       if (scrolledRef.current === nextScrolled) {
@@ -160,12 +182,21 @@ export function Header() {
       }
     };
 
-    const onScroll = () => {
+    const syncScrollState = () => {
+      scrollFrame = null;
       const scrollY = window.scrollY;
       const nextScrolled = scrolledRef.current ? scrollY > 24 : scrollY > 96;
       updateFloatingOrigin(nextScrolled ? 'launch' : 'dock');
       syncScrolledState(nextScrolled);
       syncFloatingSafeZone();
+    };
+
+    const onScroll = () => {
+      if (scrollFrame !== null) {
+        return;
+      }
+
+      scrollFrame = window.requestAnimationFrame(syncScrollState);
     };
 
     initialFrame = window.requestAnimationFrame(onScroll);
@@ -182,6 +213,9 @@ export function Header() {
     return () => {
       if (initialFrame !== null) {
         window.cancelAnimationFrame(initialFrame);
+      }
+      if (scrollFrame !== null) {
+        window.cancelAnimationFrame(scrollFrame);
       }
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
@@ -205,14 +239,66 @@ export function Header() {
       return undefined;
     }
 
+    lastNavFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+
+    const focusFrame = window.requestAnimationFrame(() => {
+      const firstLink = navRef.current?.querySelector<HTMLElement>('a, button');
+      firstLink?.focus({ preventScroll: true });
+    });
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
+        event.preventDefault();
         setIsOpen(false);
+        window.requestAnimationFrame(() => {
+          (lastNavFocusRef.current ?? menuButtonRef.current)?.focus({ preventScroll: true });
+        });
+        return;
+      }
+
+      if (event.key !== 'Tab') {
+        return;
+      }
+
+      const focusable = [
+        menuButtonRef.current,
+        ...(navRef.current
+          ? Array.from(
+              navRef.current.querySelectorAll<HTMLElement>(
+                'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+              ),
+            )
+          : []),
+      ].filter((item): item is HTMLElement => {
+        if (!item) return false;
+        const style = window.getComputedStyle(item);
+        return style.display !== 'none' && style.visibility !== 'hidden';
+      });
+
+      if (!focusable.length) {
+        return;
+      }
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+        return;
+      }
+
+      if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
       }
     };
 
     document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
+    return () => {
+      window.cancelAnimationFrame(focusFrame);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
   }, [isOpen]);
 
   return (
@@ -242,6 +328,7 @@ export function Header() {
           aria-expanded={isOpen}
           aria-controls="site-navigation"
           onClick={() => setIsOpen((value) => !value)}
+          ref={menuButtonRef}
         >
           <span className="menu-button__magnet" aria-hidden="true">
             <span className="menu-button__glyph">
@@ -261,6 +348,7 @@ export function Header() {
           id="site-navigation"
           className={`site-nav site-nav--glass ${isOpen ? 'is-open' : ''}`}
           aria-label="Główna nawigacja"
+          ref={navRef}
         >
           <span className="site-nav__photo-lock" aria-hidden="true" />
           <p className="site-nav__intro">Wybierz sekcję albo od razu sprawdź dostępność terminu.</p>
@@ -269,7 +357,7 @@ export function Header() {
               <a
                 key={item.href}
                 href={item.href}
-                onClick={() => setIsOpen(false)}
+                onClick={() => closeNavAndFocusTarget(item.href)}
                 style={{ '--nav-item-index': index } as CSSProperties}
               >
                 {item.label}

@@ -53,7 +53,7 @@ export function ContactSection() {
         </Reveal>
         <Reveal
           as="div"
-          className="contact-form-wrapper"
+          className="contact-form-wrapper contact-form-wrapper--motion"
           animationType="fade-in-up"
           delay={250}
           duration={1300}

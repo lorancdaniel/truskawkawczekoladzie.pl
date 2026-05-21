@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { dessertPackages } from '../../data/packages';
+import { useMatchMedia } from '../../hooks/useMatchMedia';
 import { scrollToLeadForm } from '../../lib/dom';
 import type { DesiredPackage } from '../../types/lead';
 import { Button } from '../ui/Button';
@@ -7,14 +8,12 @@ import { Reveal } from '../ui/Reveal';
 
 export function Packages() {
   const sectionRef = useRef<HTMLDivElement | null>(null);
+  const isMobileLayout = useMatchMedia('(max-width: 1100px)');
   const [activePackageId, setActivePackageId] = useState<Exclude<DesiredPackage, 'nie_wiem'>>('silver');
 
   useEffect(() => {
     const section = sectionRef.current;
     if (!section || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
-
-    // Wyłączamy śledzenie na mobile, gdzie boczna belka postępu jest ukryta
-    if (window.innerWidth <= 1100) return undefined;
 
     const cards = Array.from(section.querySelectorAll<HTMLElement>('[data-package-card]'));
     let timeoutId: number | null = null;
@@ -25,15 +24,17 @@ export function Packages() {
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
         const packageId = visible?.target.getAttribute('data-package-card') as Exclude<DesiredPackage, 'nie_wiem'> | null;
-        
+
         if (packageId && packageId !== activePackageId) {
           if (timeoutId !== null) window.clearTimeout(timeoutId);
           timeoutId = window.setTimeout(() => {
             setActivePackageId(packageId);
-          }, 80);
+          }, isMobileLayout ? 60 : 80);
         }
       },
-      { threshold: [0.38, 0.58, 0.76], rootMargin: '-18% 0px -28% 0px' },
+      isMobileLayout
+        ? { threshold: [0.32, 0.52, 0.72], rootMargin: '-10% 0px -18% 0px' }
+        : { threshold: [0.38, 0.58, 0.76], rootMargin: '-18% 0px -28% 0px' },
     );
 
     cards.forEach((card) => observer.observe(card));
@@ -41,7 +42,7 @@ export function Packages() {
       observer.disconnect();
       if (timeoutId !== null) window.clearTimeout(timeoutId);
     };
-  }, [activePackageId]);
+  }, [activePackageId, isMobileLayout]);
 
   return (
     <Reveal className="packages-section packages-section--scroll" id="pakiety">
@@ -70,9 +71,9 @@ export function Packages() {
             <Reveal
               as="article"
               key={pkg.id}
-              delay={index * 160}
-              duration={1400}
-              animationType="reveal-3d"
+              delay={isMobileLayout ? index * 120 : index * 160}
+              duration={isMobileLayout ? 880 : 1400}
+              animationType={isMobileLayout ? 'fade-in-up' : 'reveal-3d'}
               data-package-card={pkg.id}
               className={`package-card ${pkg.highlighted ? 'package-card--featured' : ''} ${
                 activePackageId === pkg.id ? 'is-active' : ''

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Header } from './components/layout/Header';
 import { Footer } from './components/layout/Footer';
 import { About } from './components/sections/About';
@@ -10,8 +11,36 @@ import { Logistics } from './components/sections/Logistics';
 import { Packages } from './components/sections/Packages';
 import { Process } from './components/sections/Process';
 import { ValueSection } from './components/sections/ValueSection';
+import { CookieConsent } from './components/ui/CookieConsent';
+import { scrollToElement } from './lib/dom';
 
 export function App() {
+  useEffect(() => {
+    const scrollHashIntoView = () => {
+      const rawHash = window.location.hash.replace(/^#/, '');
+      let hash = '';
+      try {
+        hash = rawHash ? decodeURIComponent(rawHash) : '';
+      } catch {
+        hash = rawHash;
+      }
+      if (!hash) return;
+      const target = document.getElementById(hash);
+      if (target) scrollToElement(target, 'auto');
+    };
+
+    let timeout: number | undefined;
+    const frame = window.requestAnimationFrame(() => {
+      scrollHashIntoView();
+      timeout = window.setTimeout(scrollHashIntoView, 350);
+    });
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      if (timeout) window.clearTimeout(timeout);
+    };
+  }, []);
+
   return (
     <>
       <Header />
@@ -28,6 +57,7 @@ export function App() {
         <ContactSection />
       </main>
       <Footer />
+      <CookieConsent />
     </>
   );
 }

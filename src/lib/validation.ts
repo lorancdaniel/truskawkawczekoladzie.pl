@@ -61,5 +61,5 @@ export function validateLeadForm(values: LeadFormValues): LeadFormErrors {
 }
 
 export function hasErrors(errors: LeadFormErrors): boolean {
-  return Object.keys(errors).length > 0;
+  return Object.values(errors).some(Boolean);
 }

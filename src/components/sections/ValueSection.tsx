@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
+import { eventTypeOptions } from '../../data/formOptions';
 import { dessertPackages } from '../../data/packages';
 import { scrollToLeadForm } from '../../lib/dom';
 import type { DesiredPackage } from '../../types/lead';
@@ -8,7 +9,7 @@ import { ModalSelectField } from '../form/fields';
 import { Button } from '../ui/Button';
 import { Reveal } from '../ui/Reveal';
 
-const eventTypes = ['Wesele', 'Event firmowy', 'Gala / bankiet', 'Plener', 'Strefa VIP'];
+const calculatorEventTypes = eventTypeOptions.map((option) => option.label);
 
 function formatCurrency(value: number) {
   return new Intl.NumberFormat('pl-PL', {
@@ -24,7 +25,7 @@ export function ValueSection() {
   const [step, setStep] = useState(1);
   const [selectedPackageId, setSelectedPackageId] = useState<Exclude<DesiredPackage, 'nie_wiem'>>('gold');
   const [guestCountInput, setGuestCountInput] = useState('500');
-  const [eventType, setEventType] = useState(eventTypes[0]);
+  const [eventType, setEventType] = useState(calculatorEventTypes[0]);
   const [city, setCity] = useState('');
 
   const selectedPackage = useMemo(
@@ -39,7 +40,11 @@ export function ValueSection() {
   const typicalMax = guestCount * 35;
 
   const calculatorRef = useRef<HTMLDivElement | null>(null);
+  const calculatorBodyRef = useRef<HTMLDivElement | null>(null);
   const packagesRef = useRef<HTMLDivElement | null>(null);
+  const calculatorTriggerRef = useRef<HTMLButtonElement | null>(null);
+  const packagesTriggerRef = useRef<HTMLButtonElement | null>(null);
+  const lastModalTriggerRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     document.body.classList.toggle('calculator-open', isCalculatorOpen || isPackagesOpen);
@@ -53,9 +58,16 @@ export function ValueSection() {
 
     const modalEl = isCalculatorOpen ? calculatorRef.current : isPackagesOpen ? packagesRef.current : null;
     const handleKeyDown = (event: KeyboardEvent) => {
+      if (document.querySelector('.choice-modal')) {
+        return;
+      }
+
       if (event.key === 'Escape') {
+        event.preventDefault();
         setIsCalculatorOpen(false);
         setIsPackagesOpen(false);
+        window.requestAnimationFrame(() => lastModalTriggerRef.current?.focus({ preventScroll: true }));
+        return;
       }
 
       if (event.key === 'Tab' && modalEl) {
@@ -64,6 +76,11 @@ export function ValueSection() {
         if (focusable.length > 0) {
           const first = focusable[0];
           const last = focusable[focusable.length - 1];
+          if (!modalEl.contains(document.activeElement)) {
+            first.focus();
+            event.preventDefault();
+            return;
+          }
           if (event.shiftKey) {
             if (document.activeElement === first) {
               last.focus();
@@ -93,13 +110,36 @@ export function ValueSection() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isCalculatorOpen, isPackagesOpen]);
 
+  useEffect(() => {
+    if (!isCalculatorOpen) return undefined;
+    const frame = window.requestAnimationFrame(() => {
+      const focusTarget = calculatorBodyRef.current?.querySelector<HTMLElement>('[data-step-focus]');
+      focusTarget?.focus({ preventScroll: true });
+      calculatorBodyRef.current?.scrollTo({ top: 0, behavior: 'auto' });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [isCalculatorOpen, step]);
+
   const openCalculator = () => {
+    lastModalTriggerRef.current = calculatorTriggerRef.current;
     setStep(1);
     setIsCalculatorOpen(true);
   };
 
-  const closeCalculator = () => setIsCalculatorOpen(false);
-  const closePackages = () => setIsPackagesOpen(false);
+  const closeCalculator = () => {
+    setIsCalculatorOpen(false);
+    window.requestAnimationFrame(() => lastModalTriggerRef.current?.focus({ preventScroll: true }));
+  };
+
+  const openPackages = () => {
+    lastModalTriggerRef.current = packagesTriggerRef.current;
+    setIsPackagesOpen(true);
+  };
+
+  const closePackages = () => {
+    setIsPackagesOpen(false);
+    window.requestAnimationFrame(() => lastModalTriggerRef.current?.focus({ preventScroll: true }));
+  };
 
   const choosePackageAndCalculate = (packageId: Exclude<DesiredPackage, 'nie_wiem'>) => {
     setSelectedPackageId(packageId);
@@ -123,14 +163,13 @@ export function ValueSection() {
           <p className="eyebrow">Dlaczego to się opłaca</p>
           <h2>Policz zakres zanim zapytasz o termin.</h2>
           <p className="lead">
-            Mniej pustki, mocniejszy rytm i jeden jasny cel: otworzyć kalkulator, wybrać pakiet, podać
-            podstawowe dane i dostać orientacyjny koszt.
+            Wybierz pakiet, podaj skalę wydarzenia i sprawdź orientacyjny zakres kosztu przed rozmową o terminie.
           </p>
           <div className="value-section__actions">
-            <Button type="button" onClick={openCalculator}>
-              Otwórz kalkulator wydarzenia
+            <Button type="button" onClick={openCalculator} ref={calculatorTriggerRef}>
+              Otwórz kalkulator
             </Button>
-            <Button type="button" variant="secondary" onClick={() => setIsPackagesOpen(true)}>
+            <Button type="button" variant="secondary" onClick={openPackages} ref={packagesTriggerRef}>
               Zobacz pakiety
             </Button>
           </div>
@@ -240,21 +279,23 @@ export function ValueSection() {
                 Po kalkulacji przejdziesz do formularza z wybranym pakietem, skalą wydarzenia i kontekstem rozmowy.
               </p>
             </aside>
-            <div className="calculator-modal__body">
+            <div className="calculator-modal__body" ref={calculatorBodyRef}>
               <button aria-label="Zamknij kalkulator" className="calculator-close" onClick={closeCalculator} type="button">
                 <X aria-hidden="true" size={18} />
               </button>
               {step === 1 ? (
                 <div className="calculator-step">
-                  <h3>Co pasuje do wydarzenia?</h3>
+                  <h3 tabIndex={-1} data-step-focus>Co pasuje do wydarzenia?</h3>
                   <p>Wybierz punkt startowy, a wynik dopasuje się do skali i charakteru obsługi.</p>
-                  <div className="calculator-packages">
+                  <div className="calculator-packages" role="listbox" aria-label="Pakiety kalkulatora">
                     {dessertPackages.map((pkg) => (
                       <button
-                        aria-pressed={pkg.id === selectedPackageId}
+                        aria-label={`${pkg.name}, ${pkg.priceFrom800}–${pkg.priceUpTo800} zł za osobę${pkg.id === selectedPackageId ? ', wybrany' : ''}`}
+                        aria-selected={pkg.id === selectedPackageId}
                         className={`calculator-package ${pkg.id === selectedPackageId ? 'is-selected' : ''}`}
                         key={pkg.id}
                         onClick={() => setSelectedPackageId(pkg.id)}
+                        role="option"
                         type="button"
                       >
                         <span>{pkg.badge}</span>
@@ -262,6 +303,7 @@ export function ValueSection() {
                         <small>
                           {pkg.priceFrom800}–{pkg.priceUpTo800} zł/os.
                         </small>
+                        {pkg.id === selectedPackageId ? <em>Wybrany</em> : null}
                         <p>{pkg.tagline}</p>
                       </button>
                     ))}
@@ -276,6 +318,7 @@ export function ValueSection() {
                     <label>
                       Liczba gości
                       <input
+                        data-step-focus
                         inputMode="numeric"
                         onChange={(event) => setGuestCountInput(event.target.value.replace(/\D/g, ''))}
                         placeholder="np. 100"
@@ -288,7 +331,7 @@ export function ValueSection() {
                       label="Typ wydarzenia"
                       value={eventType}
                       placeholder="Wybierz typ"
-                      options={eventTypes.map((type) => ({ value: type, label: type }))}
+                      options={calculatorEventTypes.map((type) => ({ value: type, label: type }))}
                       onChange={(value) => setEventType(value)}
                     />
                     <label className="calculator-field--wide">
@@ -300,7 +343,7 @@ export function ValueSection() {
               ) : null}
               {step === 3 ? (
                 <div className="calculator-step">
-                  <h3>Zakres orientacyjny</h3>
+                  <h3 tabIndex={-1} data-step-focus>Zakres orientacyjny</h3>
                   <div className="calculator-result">
                     <p>
                       Rekomendacja: {selectedPackage.name}, {guestCount} gości, {eventType}
