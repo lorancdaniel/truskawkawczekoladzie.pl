@@ -1,4 +1,5 @@
 import { useLayoutEffect, useRef } from 'react';
+import gsap from 'gsap';
 import { ArrowDown } from 'lucide-react';
 import { quickFacts } from '../../data/siteContent';
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
@@ -13,104 +14,89 @@ export function Hero() {
     const root = heroRef.current;
     if (!root || prefersReducedMotion) return undefined;
 
-    let ctx: { revert: () => void } | undefined;
-    let cancelled = false;
+    const ctx = gsap.context(() => {
+      const isMobile = window.matchMedia('(max-width: 780px)').matches;
 
-    void import('gsap').then(({ gsap }) => {
-      if (cancelled || !root) return;
+      const timeline = gsap.timeline({
+        defaults: { ease: 'power3.out' },
+      });
 
-      ctx = gsap.context(() => {
-        const isMobile = window.matchMedia('(max-width: 780px)').matches;
-
-        const timeline = gsap.timeline({
-          defaults: { ease: 'power3.out' },
-        });
-
-        timeline
-          .from('.hero .eyebrow', {
-            opacity: 0,
-            letterSpacing: '0.16em',
-            duration: isMobile ? 0.75 : 0.9,
-          })
-          .fromTo(
-            '.hero .hero-line-mask',
-            { clipPath: 'inset(0 0 100% 0)' },
-            {
-              clipPath: 'inset(0 0 0% 0)',
-              duration: isMobile ? 0.95 : 1.15,
-              stagger: 0.13,
-              ease: 'power4.inOut',
-            },
-            isMobile ? 0.1 : 0.14,
-          )
-          .from(
-            '.hero .hero__lead',
-            {
-              opacity: 0,
-              filter: 'blur(10px)',
-              duration: isMobile ? 0.72 : 0.88,
-            },
-            isMobile ? 0.28 : 0.38,
-          )
-          .to(
-            '.hero__actions > *',
-            {
-              autoAlpha: 1,
-              scale: 1,
-              stagger: 0.08,
-              duration: isMobile ? 0.62 : 0.72,
-              ease: 'power2.out',
-            },
-            isMobile ? 0.44 : 0.54,
-          )
-          .from(
-            '.hero__facts div',
-            {
-              opacity: 0,
-              x: isMobile ? 18 : 26,
-              stagger: 0.07,
-              duration: isMobile ? 0.58 : 0.68,
-            },
-            isMobile ? 0.56 : 0.66,
-          )
-          .from(
-            '.hero__hint div',
-            {
-              opacity: 0,
-              y: isMobile ? 14 : 18,
-              stagger: 0.06,
-              duration: isMobile ? 0.55 : 0.65,
-            },
-            isMobile ? 0.66 : 0.76,
-          );
-
-        gsap.fromTo(
-          '.hero__motion-path',
-          { opacity: 0 },
+      timeline
+        .to('.hero .eyebrow', {
+          opacity: 1,
+          letterSpacing: '0.06em',
+          duration: isMobile ? 0.75 : 0.9,
+        })
+        .to(
+          '.hero .hero-line-mask',
           {
-            opacity: isMobile ? 0.28 : 0.42,
-            duration: isMobile ? 1.2 : 1.55,
-            ease: 'power2.inOut',
-            delay: isMobile ? 0.35 : 0.48,
+            clipPath: 'inset(0 0 0% 0)',
+            duration: isMobile ? 0.95 : 1.15,
+            stagger: 0.13,
+            ease: 'power4.inOut',
           },
+          isMobile ? 0.1 : 0.14,
+        )
+        .to(
+          '.hero .hero__lead',
+          {
+            opacity: 1,
+            filter: 'blur(0px)',
+            duration: isMobile ? 0.72 : 0.88,
+          },
+          isMobile ? 0.28 : 0.38,
+        )
+        .to(
+          '.hero__actions > *',
+          {
+            autoAlpha: 1,
+            scale: 1,
+            stagger: 0.08,
+            duration: isMobile ? 0.62 : 0.72,
+            ease: 'power2.out',
+          },
+          isMobile ? 0.44 : 0.54,
+        )
+        .to(
+          '.hero__facts div',
+          {
+            opacity: 1,
+            x: 0,
+            stagger: 0.07,
+            duration: isMobile ? 0.58 : 0.68,
+          },
+          isMobile ? 0.56 : 0.66,
+        )
+        .to(
+          '.hero__hint div',
+          {
+            opacity: 1,
+            y: 0,
+            stagger: 0.06,
+            duration: isMobile ? 0.55 : 0.65,
+          },
+          isMobile ? 0.66 : 0.76,
         );
 
-        if (isMobile) {
-          gsap.from('.hero__motion-line', {
-            opacity: 0,
-            scale: 0.985,
-            duration: 1.25,
-            ease: 'power2.out',
-            delay: 0.32,
-          });
-        }
-      }, root);
-    });
+      gsap.to('.hero__motion-path', {
+        opacity: isMobile ? 0.28 : 0.42,
+        duration: isMobile ? 1.2 : 1.55,
+        ease: 'power2.inOut',
+        delay: isMobile ? 0.35 : 0.48,
+      });
 
-    return () => {
-      cancelled = true;
-      ctx?.revert();
-    };
+      if (isMobile) {
+        gsap.to('.hero__motion-line', {
+          opacity: 0.38,
+          scale: 1,
+          duration: 1.25,
+          ease: 'power2.out',
+          delay: 0.32,
+        });
+      }
+    }, root);
+
+    return () => ctx.revert();
   }, [prefersReducedMotion]);
 
   return (
