@@ -53,8 +53,8 @@ export function FaqSection() {
     <Reveal
       className="faq-section faq-section--motion"
       id="faq"
-      animationType="fade-in-up"
-      duration={1200}
+      animationType="fade-in"
+      duration={1}
     >
       <div className="faq-layout">
         <div className="faq-rail">

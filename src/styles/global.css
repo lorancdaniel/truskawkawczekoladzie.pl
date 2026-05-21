@@ -962,6 +962,18 @@ h1 {
   padding-bottom: 0.18em;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .hero .hero-line-mask {
+    clip-path: inset(0 0 100% 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero .hero-line-mask {
+    clip-path: none;
+  }
+}
+
 .hero-line-inner {
   display: block;
 }
@@ -993,13 +1005,13 @@ h3 {
 @media (prefers-reduced-motion: no-preference) {
   .hero__actions > * {
     opacity: 0;
-    transform: translate3d(0, 15px, 0);
+    transform: scale(0.94);
   }
 }
 
 @media (prefers-reduced-motion: no-preference) and (max-width: 780px) {
   .hero__actions > * {
-    transform: translate3d(0, 12px, 0);
+    transform: scale(0.96);
   }
 }
 
@@ -3165,6 +3177,15 @@ h3 {
   }
 }
 
+/* Parent Reveal is only a visibility gate — children handle motion. */
+.faq-section--motion.reveal--ready,
+.faq-section--motion.reveal--ready:not(.is-visible),
+.faq-section--motion.reveal--ready.is-visible {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
 .faq-section--motion.reveal--ready:not(.is-visible) .faq-rail > *,
 .faq-section--motion.reveal--ready:not(.is-visible) .faq-manifest,
 .faq-section--motion.reveal--ready:not(.is-visible) .faq-row {
@@ -3186,39 +3207,42 @@ h3 {
   animation-delay: 190ms;
 }
 
-.faq-section--motion.reveal--ready.is-visible .faq-manifest {
-  animation: faq-slide-in 900ms var(--ease-out-expo) both;
-  animation-delay: 220ms;
-}
-
 .faq-section--motion.reveal--ready.is-visible .faq-row:nth-child(1) {
   animation: faq-rise-in 680ms var(--ease-out-expo) both;
-  animation-delay: 320ms;
+  animation-delay: 260ms;
 }
 
 .faq-section--motion.reveal--ready.is-visible .faq-row:nth-child(2) {
   animation: faq-rise-in 680ms var(--ease-out-expo) both;
-  animation-delay: 390ms;
+  animation-delay: 330ms;
 }
 
 .faq-section--motion.reveal--ready.is-visible .faq-row:nth-child(3) {
   animation: faq-rise-in 680ms var(--ease-out-expo) both;
-  animation-delay: 460ms;
+  animation-delay: 400ms;
 }
 
 .faq-section--motion.reveal--ready.is-visible .faq-row:nth-child(4) {
   animation: faq-rise-in 680ms var(--ease-out-expo) both;
-  animation-delay: 530ms;
+  animation-delay: 470ms;
 }
 
 .faq-section--motion.reveal--ready.is-visible .faq-row:nth-child(5) {
   animation: faq-rise-in 680ms var(--ease-out-expo) both;
-  animation-delay: 600ms;
+  animation-delay: 540ms;
 }
 
 .faq-section--motion.reveal--ready.is-visible .faq-row:nth-child(6) {
   animation: faq-rise-in 680ms var(--ease-out-expo) both;
-  animation-delay: 670ms;
+  animation-delay: 610ms;
+}
+
+@media (min-width: 861px) {
+  .faq-section--motion.reveal--ready.is-visible .faq-manifest {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @media (max-width: 860px) {
@@ -3227,7 +3251,14 @@ h3 {
   }
 
   .faq-section--motion.reveal--ready.is-visible .faq-manifest {
-    animation-name: faq-rise-in;
+    animation: faq-rise-in 760ms var(--ease-out-expo) both;
+    animation-delay: 220ms;
+  }
+
+  .faq-section--motion.reveal--ready.is-visible .faq-row:nth-child(n) {
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
 }
 
