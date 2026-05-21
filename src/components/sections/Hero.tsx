@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ArrowDown } from 'lucide-react';
 import { quickFacts } from '../../data/siteContent';
@@ -10,7 +10,7 @@ export function Hero() {
   const heroRef = useRef<HTMLElement | null>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const root = heroRef.current;
     if (!root || prefersReducedMotion) return undefined;
 
@@ -28,9 +28,9 @@ export function Hero() {
         .from('.hero .eyebrow', { opacity: 0, y: isMobile ? 12 : 16, duration: d })
         .from('.hero .hero-line-inner', { yPercent: 105, stagger: 0.12, duration: lineD }, isMobile ? 0.12 : 0.2)
         .from('.hero__lead', { opacity: 0, y: isMobile ? 16 : 20, duration: isMobile ? 0.62 : 0.9 }, isMobile ? 0.3 : 0.45)
-        .from(
+        .to(
           '.hero__actions > *',
-          { clearProps: 'opacity,transform', opacity: 0, stagger: 0.09, y: isMobile ? 12 : 15, duration: d },
+          { autoAlpha: 1, y: 0, stagger: 0.09, duration: d },
           isMobile ? 0.48 : 0.65,
         )
         .from('.hero__facts div', { opacity: 0, stagger: 0.07, y: isMobile ? 10 : 12, duration: d }, isMobile ? 0.62 : 0.8)

@@ -28,4 +28,20 @@ describe('CookieConsent', () => {
     expect(screen.queryByRole('region', { name: /polityka cookies/i })).not.toBeInTheDocument();
     expect(window.localStorage.getItem('strawberry-group-cookie-consent')).toBe('accepted');
   });
+
+  it('toggles cookie policy details with accessible expand control', async () => {
+    const user = userEvent.setup();
+    render(<CookieConsent />);
+
+    const toggle = screen.getByRole('button', { name: /polityka cookies/i });
+
+    expect(toggle).toHaveAttribute('aria-expanded', 'false');
+
+    await user.click(toggle);
+    expect(toggle).toHaveAttribute('aria-expanded', 'true');
+    expect(screen.getByText(/pliki cookies lub podobne mechanizmy/i)).toBeVisible();
+
+    await user.click(toggle);
+    expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  });
 });

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useId, useState } from 'react';
 
 const CONSENT_KEY = 'strawberry-group-cookie-consent';
 
@@ -12,6 +12,8 @@ function shouldShowConsent() {
 
 export function CookieConsent() {
   const [isVisible, setIsVisible] = useState(shouldShowConsent);
+  const [isPolicyOpen, setIsPolicyOpen] = useState(false);
+  const policyPanelId = useId();
 
   const acceptPolicy = () => {
     try {
@@ -33,14 +35,30 @@ export function CookieConsent() {
           Strona używa wyłącznie niezbędnych technologii do działania interfejsu i zapamiętania tej zgody.
           Nie zapisujemy danych z formularza w cookies.
         </p>
-        <details>
-          <summary>Polityka cookies</summary>
-          <p>
-            Pliki cookies lub podobne mechanizmy mogą obsługiwać podstawowe funkcje strony, bezpieczeństwo,
-            preferencje użytkownika oraz stabilność formularza. Zgodę możesz wycofać, usuwając dane strony
-            w ustawieniach przeglądarki.
-          </p>
-        </details>
+        <div className={`cookie-consent__details${isPolicyOpen ? ' is-open' : ''}`}>
+          <button
+            type="button"
+            className="cookie-consent__summary"
+            aria-expanded={isPolicyOpen}
+            aria-controls={policyPanelId}
+            onClick={() => setIsPolicyOpen((open) => !open)}
+          >
+            Polityka cookies
+          </button>
+          <div
+            id={policyPanelId}
+            className="cookie-consent__policy-panel"
+            aria-hidden={!isPolicyOpen}
+          >
+            <div className="cookie-consent__policy-panel-inner">
+              <p>
+                Pliki cookies lub podobne mechanizmy mogą obsługiwać podstawowe funkcje strony, bezpieczeństwo,
+                preferencje użytkownika oraz stabilność formularza. Zgodę możesz wycofać, usuwając dane strony
+                w ustawieniach przeglądarki.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
       <button type="button" onClick={acceptPolicy}>
         Akceptuję
