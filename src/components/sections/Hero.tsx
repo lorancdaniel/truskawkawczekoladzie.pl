@@ -96,11 +96,13 @@ export function Hero() {
         );
 
         if (isMobile) {
-          gsap.from(
-            '.hero__motion-line',
-            { opacity: 0, scale: 0.985, duration: 1.25, ease: 'power2.out' },
-            0.32,
-          );
+          gsap.from('.hero__motion-line', {
+            opacity: 0,
+            scale: 0.985,
+            duration: 1.25,
+            ease: 'power2.out',
+            delay: 0.32,
+          });
         }
       }, root);
     });
