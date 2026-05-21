@@ -307,14 +307,18 @@ export function Header() {
         className={`site-header ${scrolled ? 'site-header--scrolled' : ''} ${headerCtaDetached ? 'site-header--cta-detached' : ''} ${isOpen ? 'site-header--open' : ''}`}
       >
         <a className="brand" href="#top" aria-label="Strawberry Group">
-          <img
-            className="brand__logo"
-            src="/brand/strawberry-group-generated-logo.png"
-            alt=""
-            width="637"
-            height="918"
-            decoding="async"
-          />
+          <picture>
+            <source srcSet="/brand/strawberry-group-generated-logo.webp" type="image/webp" />
+            <img
+              className="brand__logo"
+              src="/brand/strawberry-group-generated-logo.png"
+              alt=""
+              width="637"
+              height="918"
+              decoding="async"
+              fetchPriority="high"
+            />
+          </picture>
           <span className="brand__wordmark">
             <span>Strawberry</span>
             <span>Group S.C.</span>

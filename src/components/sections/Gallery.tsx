@@ -6,6 +6,10 @@ import { useMatchMedia } from '../../hooks/useMatchMedia';
 import { Reveal } from '../ui/Reveal';
 
 const LOOP_COPIES = 15;
+const GALLERY_IMAGE_WIDTH = 724;
+const GALLERY_IMAGE_HEIGHT = 543;
+
+const toWebpSrc = (pngSrc: string) => pngSrc.replace(/\.png$/, '.webp');
 const SWIPE_THRESHOLD = 42;
 const DRAG_ACTIVATION = 8;
 
@@ -300,12 +304,17 @@ export function Gallery() {
                       if (isInActiveWindow) setPosition(position);
                     }}
                   >
-                    <img
-                      src={item.image}
-                      alt={isInActiveWindow ? item.title : ''}
-                      loading={Math.abs(position - currentPosition) <= 2 ? 'eager' : 'lazy'}
-                      decoding="async"
-                    />
+                    <picture>
+                      <source srcSet={toWebpSrc(item.image)} type="image/webp" />
+                      <img
+                        src={item.image}
+                        alt={isInActiveWindow ? item.title : ''}
+                        width={GALLERY_IMAGE_WIDTH}
+                        height={GALLERY_IMAGE_HEIGHT}
+                        loading={Math.abs(position - currentPosition) <= 2 ? 'eager' : 'lazy'}
+                        decoding="async"
+                      />
+                    </picture>
                     <div className="gallery-slide-caption">
                       <div>
                         <p className="eyebrow">{item.kicker}</p>

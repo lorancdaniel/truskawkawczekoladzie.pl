@@ -12,7 +12,7 @@ export function Footer() {
       <div className="site-footer__grid">
         <section className="site-footer__intro" aria-label="Strawberry Group">
           <div className="site-footer__brand">
-            <img src="/brand/strawberry-group-logo.svg" alt="" />
+            <img src="/brand/strawberry-group-logo.svg" alt="Logo Strawberry Group S.C." />
             <div>
               <p className="footer-brand">Strawberry Group S.C.</p>
               <p>Świeżość. Jakość. Doświadczenie.</p>
